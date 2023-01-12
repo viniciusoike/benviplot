@@ -1,0 +1,23 @@
+Package: benviplot
+Title: Colors and color scales for Benvi
+Version: 0.0.0.9000
+Authors@R: 
+    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: This package is a ggplot2 extension that helps create quality graphics that follow color conventions from the Creative team in the Marketing department.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends: 
+    R (>= 2.10)
+Imports: 
+    dplyr,
+    forcats,
+    ggplot2,
+    graphics,
+    scales,
+    showtext
+Suggests: 
+    sysfonts
+LazyData: true
