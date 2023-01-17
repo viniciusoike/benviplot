@@ -74,14 +74,14 @@ spo_qual <- c(spo_seq, "Floresta", "Primavera", "Capri", "Areia", "Blush", "Cinz
 
 rio_seq <- c("Musgo", "Primavera")
 rio_div <- c("Musgo", "CinzaQuente")
-rio_qual <- c(rio_seq, "Ocre", "Manteiga", "Topázio", "Orquidea", "Quartzo", "CinzaQuente")
+rio_qual <- c(rio_seq, "Ocre", "Manteiga", "Topazio", "Orquidea", "Quartzo", "CinzaQuente")
 
 bhe_seq <- c("Cereja", "Rosa")
 bhe_div <- c("Cereja", "CinzaQuente")
 bhe_qual <- bhe_seq
 
 qual5 <- c("Floresta", "Primavera", "Violeta", "Quartzo", "Cafe", "Amendoim", "Oliva", "Lima")
-qual6 <- c("Petróleo", "Lirio", "Orquídea", "Lavanda", "Areia")
+qual6 <- c("Petroleo", "Lirio", "Orquidea", "Lavanda", "Areia")
 qual7 <- c("Violeta", "Quartzo", "Lirio", "Floresta", "Primavera")
 qual8 <- c("Topazio", "Pessego", "Musgo", "Violeta", "Terracota")
 qual9 <- c("AzulQuinto", "Manteiga", "Floresta", "Violeta", "Blush")
