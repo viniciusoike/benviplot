@@ -1,7 +1,11 @@
 #' Column plot with text labels
 #' @inheritParams plot_column
+#' @param label Text label to mapped onto the column. Defaults to y variable.
+#' @param fill_guide Optional indicating if fill guide should be supressed.
+#'
 #'
 #' @importFrom ggplot2 ggplot aes waiver geom_col geom_text coord_flip theme position_stack
+#' @importFrom ggfittext geom_bar_text
 #' @return A ggplot2 plot
 #' @export
 #'
@@ -16,47 +20,77 @@ plot_column_label <- function(
     data,
     x,
     y,
+    label = y,
     fill,
+    variable,
+    zero = TRUE,
+    flip = TRUE,
+    fill_guide = "none",
     pal,
-    digits = 1,
     text_color = "white",
     text_family = "Roboto",
     text_size = 4,
     scale_name = "",
-    scale_label = waiver(),
-    zero = TRUE
-    ) {
+    scale_label = waiver()
+) {
 
-  p <- ggplot(data, aes(x = {{ x }}, y = {{ y }})) +
-    geom_col(fill = fill) +
-    geom_text(
-      aes(label = {{ x }}),
-      position = position_stack(vjust = 0.05),
-      hjust = 0,
-      color = text_color,
-      family = text_family,
-      size = text_size
-    ) +
-    geom_text(
-      aes(label = pretty_number({{ y }}, digits = digits)),
-      position = position_stack(vjust = 0.9),
-      hjust = 0,
-      color = text_color,
-      family = text_family,
-      size = text_size
-    )
+  if (missing(variable)) {
+    if (missing(fill)) {
+      fill <- benvi_palette("Basic", 1)
+    }
+
+    p <- ggplot(data, aes(x = {{ x }}, y = {{ y }}), label = {{ y }}) +
+      geom_col(fill = fill)
+
+  } else {
+
+    p <- ggplot(data, aes(x = {{ x }}, y = {{ y }}), label = {{ y }}) +
+      geom_col(aes(fill = {{ variable }})) +
+      scale_fill_benvi_d(
+        pal_name = pal,
+        name = scale_name,
+        label = scale_label
+      )
+
+    if (guide_fill == "none") {
+      p <- p + guides(fill = "none")
+    }
+
+  }
 
   if (isTRUE(zero)) {
     p <- p + geom_hline(yintercept = 0)
   }
 
+
+  if (isTRUE(flip)) {
+
+    p <- p +
+      coord_flip() +
+      ggfittext::geom_bar_text(
+        min.size = text_size,
+        family = text_family,
+        color = text_color,
+        place = "right",
+        padding.x = grid::unit(5, "mm")
+      )
+
+  } else {
+
+    p <- p +
+      ggfittext::geom_bar_text(
+        min.size = text_size,
+        family = text_family,
+        color = text_color,
+        place = "top",
+        padding.y = grid::unit(5, "mm")
+      )
+  }
+
   p <- p +
-    coord_flip() +
     theme_benvi() +
     theme(
       axis.title.y = element_blank(),
-      axis.text.y = element_blank(),
-      axis.ticks.y = element_blank(),
       panel.grid.major.y = element_blank()
     )
 

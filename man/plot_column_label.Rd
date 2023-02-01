@@ -8,15 +8,18 @@ plot_column_label(
   data,
   x,
   y,
+  label = y,
   fill,
+  variable,
+  zero = TRUE,
+  flip = TRUE,
+  fill_guide = "none",
   pal,
-  digits = 1,
   text_color = "white",
   text_family = "Roboto",
   text_size = 4,
   scale_name = "",
-  scale_label = waiver(),
-  zero = TRUE
+  scale_label = waiver()
 )
 }
 \arguments{
@@ -26,12 +29,22 @@ plot_column_label(
 
 \item{y}{Variable to be mapped in the y-axis.}
 
+\item{label}{Text label to mapped onto the column. Defaults to y variable.}
+
 \item{fill}{Color for the columns. Should only be used if \code{variable}
 is missing.}
 
-\item{pal}{String indicating the name of which palette to use.}
+\item{variable}{Variable to be used as grouping for the color groups. Should
+only be used if \code{fill} is missing.}
 
-\item{digits}{Number of digits to show in text labels.}
+\item{zero}{Logical indicating whether a horizontal line crossing the y = 0
+axis should be plotted.}
+
+\item{flip}{Logical indicating if plot should be flipped}
+
+\item{fill_guide}{Optional indicating if fill guide should be supressed.}
+
+\item{pal}{String indicating the name of which palette to use.}
 
 \item{text_color}{Color of the text label. Default is \code{"gray20"}.}
 
@@ -42,9 +55,6 @@ is missing.}
 \item{scale_name}{String indicating fill legend title.}
 
 \item{scale_label}{String indicating fill legend labels.}
-
-\item{zero}{Logical indicating whether a horizontal line crossing the y = 0
-axis should be plotted.}
 }
 \value{
 A ggplot2 plot
