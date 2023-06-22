@@ -12,7 +12,13 @@ get_colors <- function(x) {
 
   } else {
 
-    return(x)
+    out <- list(
+      hex = structure(x, class = "colors"),
+      names = paste0("color_", 1:length(x)),
+      n = seq(1, length(x))
+      )
+
+    return(out)
 
     }
 
@@ -86,6 +92,14 @@ qual7 <- c("Violeta", "Quartzo", "Lirio", "Floresta", "Primavera")
 qual8 <- c("Topazio", "Pessego", "Musgo", "Violeta", "Terracota")
 qual9 <- c("AzulQuinto", "Manteiga", "Floresta", "Violeta", "Blush")
 
+index_blue <- c(
+  "#021841", "#192C50", "#2F405F", "#46546E", "#5D687D", "#737C8C", "#8A919C",
+  "#A0A5AB", "#B7B9BA", "#CECDC9")
+index_prpl <- c(
+  "#441835", "#552C45", "#654055", "#765466", "#876876", "#977C86", "#A89196",
+  "#B8A5A6", "#C9B9B6", "#DACDC7"
+)
+
 sets <- list(
   Set0 = set0,
   Set1 = set1,
@@ -120,7 +134,10 @@ sets <- list(
   rio_qual = rio_qual,
   bhe_seq = bhe_seq,
   bhe_div = bhe_div,
-  Basic = basic)
+  index_blue = index_blue,
+  index_prpl = index_prpl,
+  Basic = basic
+  )
 
 palette_benvi <- lapply(sets, get_colors)
 readr::write_rds(palette_benvi, here::here("inst/extdata/benvi_palette.rds"))
