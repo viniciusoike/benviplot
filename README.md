@@ -10,6 +10,17 @@ QuintoAndar Group. The umbrella company name Benvi was announced
 officially in the second semester of 2022 and provides a much better
 name for the functions.
 
+To install the package use
+
+``` r
+# Should have the remotes or devtools package installed
+require(remotes)
+# Install from GitHub
+remotes::install_github("viniciusoike/benviplot")
+# or if you need to force the package to update for some reason
+remotes::install_github("viniciusoike/benviplot", force = TRUE)
+```
+
 Since `benviplot` uses `ggplot2` functions it is always advisable to
 load both packages.
 
@@ -26,13 +37,13 @@ Color palettes can be visualized using `benvi_palette`.
 benvi_palette("rio_qual")
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.svg" width="80%" />
+<img src="man/figures/README-unnamed-chunk-4-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ``` r
 benvi_palette("Qual2")
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.svg" width="80%" />
+<img src="man/figures/README-unnamed-chunk-5-1.svg" width="80%" style="display: block; margin: auto;" />
 
 Although the console prints a palette the hex values can be used
 directly.
@@ -71,7 +82,7 @@ ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
 #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.svg" width="80%" />
+<img src="man/figures/README-unnamed-chunk-7-1.svg" width="80%" style="display: block; margin: auto;" />
 
 When using a continuous scale the colors are interpolated.
 
@@ -88,7 +99,7 @@ ggplot(housing, aes(x = date, y = city, fill = median)) +
     )
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.svg" width="80%" />
+<img src="man/figures/README-unnamed-chunk-8-1.svg" width="80%" style="display: block; margin: auto;" />
 
 I also created some `plot_` functions that help to create some standard
 plots. These functions aim to save typing when performing data
@@ -98,7 +109,7 @@ exploration and can be used in reports.
 plot_line(economics, x = date, y = uempmed)
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.svg" width="80%" />
+<img src="man/figures/README-unnamed-chunk-9-1.svg" width="80%" style="display: block; margin: auto;" />
 
 These functions usually include simple helper arguments like `text` in
 the case of `plot_column` that plots its value above the column.
@@ -112,7 +123,7 @@ sales <- data.frame(
 plot_column(sales, x = x, y = y, text = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.svg" width="80%" />
+<img src="man/figures/README-unnamed-chunk-10-1.svg" width="80%" style="display: block; margin: auto;" />
 
 Making good plots, however, will still usually require lots of typing.
 The final example shows the variable argument which replaces the
@@ -135,4 +146,4 @@ plot_scatter(
 #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.svg" width="80%" />
+<img src="man/figures/README-unnamed-chunk-11-1.svg" width="80%" style="display: block; margin: auto;" />
