@@ -1,26 +1,35 @@
 Package: benviplot
-Title: Colors and color scales for Benvi
-Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: This package is a ggplot2 extension that helps create quality graphics that follow color conventions from the Creative team in the Marketing department.
+Title: Color Palettes and ggplot2 Extensions for Data Visualization
+Version: 1.0.0
+Authors@R:
+    person("Vinicius", "Oike", , "viniciusoike@gmail.com", role = c("aut", "cre"))
+Description: Provides color palettes and ggplot2 extensions for creating quality
+    graphics. This package uses color schemes from the discontinued Benvi brand
+    (2024) for data visualization purposes. This is an unofficial, independent
+    project not affiliated with QuintoAndar. See DISCLAIMER.md for details.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
-Depends: 
-    R (>= 2.10)
-Imports: 
-    dplyr,
+RoxygenNote: 7.3.2
+Depends:
+    R (>= 4.1.0)
+Imports:
+    cli,
+    dplyr (>= 1.1.0),
     forcats,
     ggfittext,
-    ggplot2,
+    ggplot2 (>= 4.0.0),
     graphics,
+    rlang (>= 1.1.0),
     scales,
     showtext
-Suggests: 
-    sysfonts
+Suggests:
+    knitr,
+    rmarkdown,
+    sysfonts,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 LazyData: true
-URL: https://github.com/viniciusoike/benviplot
+VignetteBuilder: knitr
+URL: https://github.com/viniciusoike/benviplot, https://viniciusoike.github.io/benviplot/
 BugReports: https://github.com/viniciusoike/benviplot/issues

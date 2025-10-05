@@ -1,28 +1,51 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Benviplot
+# benviplot
 
-The `benviplot` package is the new extension of the previous
-`quinto_andar_` functions. Theses are `ggplot2` wrappers and helper
-functions to create standardized plots that follow the colors of
-QuintoAndar Group. The umbrella company name Benvi was announced
-officially in the second semester of 2022 and provides a much better
-name for the functions.
+<!-- badges: start -->
 
-To install the package use
+[![R-CMD-check](https://github.com/viniciusoike/benviplot/workflows/R-CMD-check/badge.svg)](https://github.com/viniciusoike/benviplot/actions)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+<!-- badges: end -->
+
+> **DISCLAIMER**: This is an unofficial, independent project created by
+> Vinicius Oike and is **NOT** affiliated with, endorsed by, or
+> connected to QuintoAndar in any way. Benvi was a former brand of
+> QuintoAndar that was discontinued in 2024. This package uses publicly
+> available color schemes from that period for data visualization
+> purposes. See [DISCLAIMER.md](DISCLAIMER.md) for details.
+
+## Overview
+
+`benviplot` provides color palettes and ggplot2 extensions for creating
+quality graphics. The package includes:
+
+- **Color Palettes**: Curated color schemes (Set, Qualitative,
+  Sequential palettes)
+- **ggplot2 Scales**: Discrete and continuous scales for seamless
+  ggplot2 integration
+- **Plot Helpers**: Wrapper functions for common visualizations
+- **Custom Theme**: Clean, professional theme with Poppins font support
+
+## Installation
+
+You can install benviplot from GitHub:
 
 ``` r
-# Should have the remotes or devtools package installed
-require(remotes)
-# Install from GitHub
+# Install remotes if needed
+# install.packages("remotes")
+
+# Install benviplot from GitHub
 remotes::install_github("viniciusoike/benviplot")
-# or if you need to force the package to update for some reason
-remotes::install_github("viniciusoike/benviplot", force = TRUE)
 ```
 
-Since `benviplot` uses `ggplot2` functions it is always advisable to
-load both packages.
+## Usage
+
+Load the package along with ggplot2:
 
 ``` r
 library(ggplot2)
@@ -147,3 +170,64 @@ plot_scatter(
 ```
 
 <img src="man/figures/README-unnamed-chunk-11-1.svg" width="80%" style="display: block; margin: auto;" />
+
+## Available Palettes
+
+The package includes several palette families:
+
+- **Set Palettes** (Set0-Set7): 4-color palettes for basic
+  visualizations
+- **Qualitative Palettes** (Qual1-Qual9): 8-color palettes for
+  categorical data
+- **Sequential Palettes** (Seq0-Seq7): 9-color gradients for continuous
+  data
+- **City-specific**: Special palettes for São Paulo, Rio, and Belo
+  Horizonte
+- **Index Colors**: Specialized color scales (index_blue, index_prpl)
+
+View all available palettes by calling `benvi_palette()` with different
+palette names.
+
+## Requirements
+
+### Fonts
+
+The package uses the **Poppins** font from Google Fonts. On first use,
+the package will automatically download the font. An internet connection
+is required for initial setup.
+
+If you encounter font issues, manually import fonts:
+
+``` r
+benviplot::import_fonts()
+```
+
+### Dependencies
+
+- R \>= 4.1.0
+- ggplot2 \>= 4.0.0
+- dplyr \>= 1.1.0
+
+See `DESCRIPTION` for complete dependency list.
+
+## Getting Help
+
+- **Documentation**: Access via `?benviplot` or visit
+  <https://viniciusoike.github.io/benviplot/>
+- **Issues**: Report bugs at
+  <https://github.com/viniciusoike/benviplot/issues>
+- **Questions**: Open a discussion on GitHub
+
+## License
+
+MIT License. See [LICENSE.md](LICENSE.md) for details.
+
+## Author
+
+**Vinicius Oike** Email: <viniciusoike@gmail.com> GitHub:
+[@viniciusoike](https://github.com/viniciusoike)
+
+## Acknowledgments
+
+This package uses color schemes inspired by the discontinued Benvi
+brand. This is an independent project not affiliated with QuintoAndar.
