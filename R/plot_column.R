@@ -66,8 +66,6 @@ plot_column <- function(
 
   } else {
 
-    if (missing(pal)) { pal <- "Qual9" }
-
     p <-
       ggplot(
         data = data,

@@ -30,8 +30,7 @@ scale_colour_benvi_d <- function(pal_name, direction = 1, ...) {
 
   ggplot2::discrete_scale(
     "colour",
-    scale_name = pal_name,
-    pal_pal(pal_name = pal_name, direction = direction),
+    palette = pal_pal(pal_name = pal_name, direction = direction),
     ...)
 
 }
@@ -58,8 +57,7 @@ scale_fill_benvi_d <- function(pal_name, direction = 1, ...) {
 
   ggplot2::discrete_scale(
     "fill",
-    scale_name = pal_name,
-    pal_pal(pal_name = pal_name, direction = direction),
+    palette = pal_pal(pal_name = pal_name, direction = direction),
     ...)
 
 }

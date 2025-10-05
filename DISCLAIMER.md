@@ -4,7 +4,7 @@
 
 ## Background
 
-Benvi was a former brand name of QuintoAndar that was discontinued in 2024. This R package (`benviplot`) uses publicly available color schemes from that period for data visualization purposes.
+Benvi was a former brand name of QuintoAndar that was discontinued in 2024. Benvi was a brand used by QuintoAndar (2022-2024, primarily in Mexico before being rebranded). This R package (`benviplot`) uses publicly available color schemes from that period for data visualization purposes.
 
 ## Independence
 
