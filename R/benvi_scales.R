@@ -18,10 +18,14 @@
 #'
 #' @export
 #' @importFrom ggplot2 discrete_scale
+#' @importFrom cli cli_abort
 scale_colour_benvi_d <- function(pal_name, direction = 1, ...) {
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
-    stop('ggplot2 is required for this functionality', call. = FALSE)
+    cli::cli_abort(c(
+      "Package {.pkg ggplot2} is required.",
+      "i" = "Install with: {.code install.packages('ggplot2')}"
+    ))
   }
 
   ggplot2::discrete_scale(
@@ -42,10 +46,14 @@ scale_color_benvi_d <- scale_colour_benvi_d
 #' @rdname ggplot2-scales-discrete
 #' @export
 #' @importFrom ggplot2 discrete_scale
+#' @importFrom cli cli_abort
 scale_fill_benvi_d <- function(pal_name, direction = 1, ...) {
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
-    stop('ggplot2 is required for this functionality', call. = FALSE)
+    cli::cli_abort(c(
+      "Package {.pkg ggplot2} is required.",
+      "i" = "Install with: {.code install.packages('ggplot2')}"
+    ))
   }
 
   ggplot2::discrete_scale(
@@ -82,10 +90,14 @@ scale_fill_benvi_d <- function(pal_name, direction = 1, ...) {
 #'
 #' @export
 #' @importFrom ggplot2 scale_colour_gradientn
+#' @importFrom cli cli_abort
 scale_colour_benvi_c <- function(pal_name, direction = 1, ...) {
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
-    stop('ggplot2 is required for this functionality', call. = FALSE)
+    cli::cli_abort(c(
+      "Package {.pkg ggplot2} is required.",
+      "i" = "Install with: {.code install.packages('ggplot2')}"
+    ))
   }
 
   ggplot2::scale_colour_gradientn(
@@ -104,10 +116,14 @@ scale_color_benvi_c <- scale_colour_benvi_c
 #' @rdname ggplot2-scales-continuous
 #' @export
 #' @importFrom ggplot2 scale_fill_gradientn
+#' @importFrom cli cli_abort
 scale_fill_benvi_c <- function(pal_name, direction = 1, ...) {
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
-    stop('ggplot2 is required for this functionality', call. = FALSE)
+    cli::cli_abort(c(
+      "Package {.pkg ggplot2} is required.",
+      "i" = "Install with: {.code install.packages('ggplot2')}"
+    ))
   }
 
   ggplot2::scale_fill_gradientn(

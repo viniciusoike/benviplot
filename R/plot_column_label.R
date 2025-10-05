@@ -1,10 +1,10 @@
 #' Column plot with text labels
 #' @inheritParams plot_column
-#' @param label Text label to mapped onto the column. Defaults to y variable.
+#' @param label <[`data-masked`][ggplot2::aes_eval]> Text label to mapped onto the column. Defaults to y variable.
 #' @param fill_guide Optional indicating if fill guide should be supressed.
 #'
 #'
-#' @importFrom ggplot2 ggplot aes waiver geom_col geom_text coord_flip theme position_stack
+#' @importFrom ggplot2 ggplot aes waiver geom_col geom_text coord_flip theme position_stack guides
 #' @importFrom ggfittext geom_bar_text
 #' @return A ggplot2 plot
 #' @export
@@ -20,13 +20,13 @@ plot_column_label <- function(
     data,
     x,
     y,
-    label = y,
+    label,
     fill,
     variable,
     zero = TRUE,
     flip = TRUE,
     fill_guide = "none",
-    pal,
+    palette = "Qual9",
     text_color = "white",
     text_family = "Roboto",
     text_size = 4,
@@ -39,20 +39,35 @@ plot_column_label <- function(
       fill <- benvi_palette("Basic", 1)
     }
 
-    p <- ggplot(data, aes(x = {{ x }}, y = {{ y }}), label = {{ y }}) +
-      geom_col(fill = fill)
+    if (missing(label)) {
+      p <- ggplot(data, aes(x = {{ x }}, y = {{ y }}, label = {{ y }})) +
+        geom_col(fill = fill)
+    } else {
+      p <- ggplot(data, aes(x = {{ x }}, y = {{ y }}, label = {{ label }})) +
+        geom_col(fill = fill)
+    }
 
   } else {
 
-    p <- ggplot(data, aes(x = {{ x }}, y = {{ y }}), label = {{ y }}) +
-      geom_col(aes(fill = {{ variable }})) +
-      scale_fill_benvi_d(
-        pal_name = pal,
-        name = scale_name,
-        label = scale_label
-      )
+    if (missing(label)) {
+      p <- ggplot(data, aes(x = {{ x }}, y = {{ y }}, label = {{ y }})) +
+        geom_col(aes(fill = {{ variable }})) +
+        scale_fill_benvi_d(
+          pal_name = palette,
+          name = scale_name,
+          labels = scale_label
+        )
+    } else {
+      p <- ggplot(data, aes(x = {{ x }}, y = {{ y }}, label = {{ label }})) +
+        geom_col(aes(fill = {{ variable }})) +
+        scale_fill_benvi_d(
+          pal_name = palette,
+          name = scale_name,
+          labels = scale_label
+        )
+    }
 
-    if (guide_fill == "none") {
+    if (fill_guide == "none") {
       p <- p + guides(fill = "none")
     }
 

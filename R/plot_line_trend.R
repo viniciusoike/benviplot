@@ -24,7 +24,7 @@ plot_line_trend <- function(
       geom_hline(yintercept = 0)
   }
 
-  p +
+  p <- p +
     geom_line(
       data = dplyr::filter(data, series_id == name_series),
       aes(x = {{ x }}, y = {{ y }}),
@@ -32,11 +32,13 @@ plot_line_trend <- function(
       alpha = 0.5) +
     geom_line(
       data = dplyr::filter(data, series_id == name_trend),
-      aes(x = {{ x }}, y = {{ y }}, color = series_id),
+      aes(x = {{ x }}, y = {{ y }}),
       color = color,
-      size = 1) +
+      linewidth = 1) +
     scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
     scale_y_continuous(labels = scales::label_number(big.mark = ".")) +
     theme_benvi()
+
+  return(p)
 
 }

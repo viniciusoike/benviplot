@@ -2,6 +2,16 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+# How to perform tasks
+
+When asked to perform tasks related to this repository, please follow these guidelines:
+
+- Make step-by-step detailed plans before writing code.
+- Go through each task methodically, don't skip steps, don't cut corners.
+- When writing code, remember to check claude/coding_guidelines.md for best practices.
+- When writing code, remember to consider all other necessary changes: function documentation, examples, tests, vignettes, README, etc.
+- After making changes, run devtools::check() to ensure everything works. If there are errors, fix them. If everything is OK, commit and push to GitHub.
+
 ## Overview
 
 `benviplot` is an R package that provides ggplot2 extensions with standardized color palettes and plotting functions for Benvi (QuintoAndar Group). It includes custom color palettes, themes, and helper plot functions.

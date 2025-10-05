@@ -13,7 +13,7 @@ plot_column(
   zero = TRUE,
   flip = FALSE,
   text = FALSE,
-  pal = "Qual9",
+  palette = "Qual9",
   scale_name = "",
   scale_label = ggplot2::waiver(),
   digits = 0,
@@ -29,14 +29,14 @@ plot_column(
 \arguments{
 \item{data}{A data.frame type object}
 
-\item{x}{Variable to be mapped in the x-axis.}
+\item{x}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped in the x-axis.}
 
-\item{y}{Variable to be mapped in the y-axis.}
+\item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped in the y-axis.}
 
 \item{fill}{Color for the columns. Should only be used if \code{variable}
 is missing.}
 
-\item{variable}{Variable to be used as grouping for the color groups. Should
+\item{variable}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be used as grouping for the color groups. Should
 only be used if \code{fill} is missing.}
 
 \item{zero}{Logical indicating whether a horizontal line crossing the y = 0
@@ -47,7 +47,7 @@ axis should be plotted.}
 \item{text}{Logical indicating if text labels should be plotted above column
 bars}
 
-\item{pal}{String indicating the name of which palette to use.}
+\item{palette}{String indicating the name of which palette to use.}
 
 \item{scale_name}{String indicating fill legend title.}
 

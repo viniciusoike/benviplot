@@ -1,7 +1,7 @@
 #' Plot a histogram chart
 #'
 #' @param data A data.frame type object
-#' @param x Indicates the numeric variable to be mapped
+#' @param x <[`data-masked`][ggplot2::aes_eval]> Indicates the numeric variable to be mapped
 #' @param color Color of the line of column.
 #' @param fill Color of the inner part of the column.
 #' @param zero Logical indicating if a horizontal (y = 0) line should be drawn
@@ -10,12 +10,13 @@
 #' @param method Character indicating an algorithm to compute optimal number of
 #' bins. See details. Overriden by bins. Defaults to `method = "fd"`.
 #' @param density Logical indicating if density should be plotted on y-axis.
-#' @param facet Optional variable to facet the graphics.
+#' @param facet <[`data-masked`][ggplot2::aes_eval]> Optional variable to facet the graphics.
 #' @param ... Additional parameters to `facet_wrap()`
 #'
 #' @return A ggplot2 object
 #' @export
 #' @importFrom ggplot2 ggplot aes geom_histogram facet_wrap after_stat vars
+#' @importFrom cli cli_abort
 #'
 #' @examples
 #' set.seed(5)
@@ -77,10 +78,12 @@ plot_histogram <- function(
 
     if (is.character(method)) {
 
-      stopifnot(
-        "Argument method must be one of: FD, Rice, Scott, Sturges, or sqrt." =
-          any(method %in% histBinsMethods)
-      )
+      if (!method %in% histBinsMethods) {
+        cli::cli_abort(c(
+          "{.arg method} must be one of: {.or {histBinsMethods}}.",
+          "x" = "You provided: {.val {method}}"
+        ))
+      }
 
       if(isFALSE(density)) {
 
@@ -137,28 +140,26 @@ plot_histogram <- function(
 #' @importFrom stats IQR sd
 get_hist_bw <- function(x, type = "FD") {
 
-  if (type == "FD" | type == "fd") {
-    h = 2 * IQR(x) / length(x)^(1/3)
-  }
+  # Normalize type to uppercase for switch
+  type <- toupper(type)
 
-  if (type == "Scott") {
-    h = 3 * sd(x) / length(x)^(1/3)
-  }
-
-  if (type == "Rice") {
-    k = ceiling(2 * length(x)^(1/3))
-    h = ceiling((max(x) - min(x)) / k)
-  }
-
-  if (type == "sqrt") {
-    k = ceiling(sqrt(length(x)))
-    h = ceiling((max(x) - min(x)) / k)
-  }
-
-  if (type == "Sturges") {
-    k = ceiling(log(length(x), base = 2))
-    h = ceiling((max(x) - min(x)) / k)
-  }
+  h <- switch(
+    type,
+    FD = 2 * IQR(x) / length(x)^(1/3),
+    SCOTT = 3 * sd(x) / length(x)^(1/3),
+    RICE = {
+      k <- ceiling(2 * length(x)^(1/3))
+      ceiling((max(x) - min(x)) / k)
+    },
+    SQRT = {
+      k <- ceiling(sqrt(length(x)))
+      ceiling((max(x) - min(x)) / k)
+    },
+    STURGES = {
+      k <- ceiling(log(length(x), base = 2))
+      ceiling((max(x) - min(x)) / k)
+    }
+  )
 
   return(h)
 

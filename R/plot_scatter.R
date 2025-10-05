@@ -14,6 +14,7 @@
 #' `"none"` (default).
 #' @param ... Further arguments to `geom_point`
 #' @importFrom ggplot2 ggplot aes waiver geom_point geom_smooth
+#' @importFrom cli cli_abort
 #' @return A ggplot2 plot.
 #' @export
 plot_scatter <- function(
@@ -28,13 +29,17 @@ plot_scatter <- function(
     fit_formula = NULL,
     fit_ci = FALSE,
     zero = "none",
-    pal = "Qual9",
+    palette = "Qual9",
     scale_name = "",
     scale_label = ggplot2::waiver(),
     ...) {
 
-  stopifnot("Argument zero must be one of: none, x, y, or both." =
-              any(zero %in% c("none", "x", "y", "both")))
+  if (!zero %in% c("none", "x", "y", "both")) {
+    cli::cli_abort(c(
+      "{.arg zero} must be one of: {.val none}, {.val x}, {.val y}, or {.val both}.",
+      "x" = "You provided: {.val {zero}}"
+    ))
+  }
 
 
   if (missing(variable)) {
@@ -59,7 +64,7 @@ plot_scatter <- function(
     p <- plot_add_xy(p, type = zero)
     p <- p + geom_point(...)
     p <- p + scale_color_benvi_d(
-      pal_name = pal,
+      pal_name = palette,
       name = scale_name,
       labels = scale_label
     )
@@ -91,21 +96,13 @@ plot_scatter <- function(
 #' @importFrom ggplot2 geom_hline geom_vline
 plot_add_xy <- function(plot, type = "both") {
 
-  if (type == "none") {
-    plot <- plot
-  }
-
-  if (type == "x") {
-    plot <- plot + geom_hline(yintercept = 0)
-  }
-
-  if (type == "y") {
-    plot <- plot + geom_vline(xintercept = 0)
-  }
-
-  if (type == "both") {
-    plot <- plot + geom_hline(yintercept = 0) + geom_vline(xintercept = 0)
-  }
+  plot <- switch(
+    type,
+    none = plot,
+    x = plot + geom_hline(yintercept = 0),
+    y = plot + geom_vline(xintercept = 0),
+    both = plot + geom_hline(yintercept = 0) + geom_vline(xintercept = 0)
+  )
 
   return(plot)
 }

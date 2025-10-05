@@ -18,7 +18,7 @@ plot_area <- function(
     variable,
     zero = TRUE,
     order = TRUE,
-    pal = "Qual9",
+    palette = "Qual9",
     scale_name = "",
     scale_label = ggplot2::waiver(),
     text = FALSE,
@@ -81,9 +81,9 @@ plot_area <- function(
 
     p <- p +
       scale_fill_benvi_d(
-        pal_name = pal,
+        pal_name = palette,
         name = scale_name,
-        label = scale_label
+        labels = scale_label
       )
 
   }

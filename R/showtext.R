@@ -1,20 +1,34 @@
 .onLoad <- function(libname, pkgname) {
 
-  # import_pop <- sysfonts::font_add(
-  #   "Poppins",
-  #   regular = "Poppins-Regular.ttf",
-  #   bold = "Poppins-Bold.ttf",
-  #   italic = "Poppins-Italic.ttf")
-  #
-  # sysfonts::font_add(
-  #   "Roboto",
-  #   regular = "Roboto-Regular.ttf",
-  #   bold = "Roboto-Bold.ttf",
-  #   italic = "Roboto-Italic.ttf")
+  # Silently attempt to load fonts if packages are available
+  if (requireNamespace("sysfonts", quietly = TRUE) &&
+      requireNamespace("showtext", quietly = TRUE)) {
 
-  sysfonts::font_add_google("Poppins", family = "Poppins")
-  sysfonts::font_add_google("Roboto", family = "Roboto")
+    # Try to load Google fonts silently
+    tryCatch(
+      {
+        sysfonts::font_add_google("Poppins", family = "Poppins")
+        sysfonts::font_add_google("Roboto", family = "Roboto")
+        showtext::showtext_auto()
+      },
+      error = function(e) {
+        # Silent failure - will notify in .onAttach if needed
+        invisible(NULL)
+      }
+    )
+  }
 
-  showtext::showtext_auto()
+}
+
+.onAttach <- function(libname, pkgname) {
+
+  # Check if font packages are missing
+  if (!requireNamespace("sysfonts", quietly = TRUE) ||
+      !requireNamespace("showtext", quietly = TRUE)) {
+    packageStartupMessage(
+      "Note: Packages 'sysfonts' and 'showtext' are recommended for custom fonts.\n",
+      "Install with: install.packages(c('sysfonts', 'showtext'))"
+    )
+  }
 
 }

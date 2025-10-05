@@ -1,18 +1,18 @@
 #' Plot a column chart
 #'
 #' @param data A data.frame type object
-#' @param x Variable to be mapped in the x-axis.
-#' @param y Variable to be mapped in the y-axis.
+#' @param x <[`data-masked`][ggplot2::aes_eval]> Variable to be mapped in the x-axis.
+#' @param y <[`data-masked`][ggplot2::aes_eval]> Variable to be mapped in the y-axis.
 #' @param fill Color for the columns. Should only be used if `variable`
 #' is missing.
-#' @param variable Variable to be used as grouping for the color groups. Should
+#' @param variable <[`data-masked`][ggplot2::aes_eval]> Variable to be used as grouping for the color groups. Should
 #' only be used if `fill` is missing.
 #' @param zero Logical indicating whether a horizontal line crossing the y = 0
 #' axis should be plotted.
 #' @param flip Logical indicating if plot should be flipped
 #' @param text Logical indicating if text labels should be plotted above column
 #' bars
-#' @param pal String indicating the name of which palette to use.
+#' @param palette String indicating the name of which palette to use.
 #' @param scale_name String indicating fill legend title.
 #' @param scale_label String indicating fill legend labels.
 #' @param digits Number of digits to show in text labels.
@@ -43,7 +43,7 @@ plot_column <- function(
     zero = TRUE,
     flip = FALSE,
     text = FALSE,
-    pal = "Qual9",
+    palette = "Qual9",
     scale_name = "",
     scale_label = ggplot2::waiver(),
     digits = 0,
@@ -74,7 +74,7 @@ plot_column <- function(
         aes(x = {{ x }}, y = {{ y }}, fill = {{ variable }})) +
       geom_col(position = position_col, ...) +
       scale_fill_benvi_d(
-        pal = pal,
+        pal_name = palette,
         name = scale_name,
         labels = scale_label)
 
@@ -90,7 +90,7 @@ plot_column <- function(
 
   if (isTRUE(text)) {
 
-    yjust <- max(data |> dplyr::pull({{ y }}), na.rm = T) * 0.05
+    yjust <- max(data |> dplyr::pull({{ y }}), na.rm = TRUE) * 0.05
     dflabel <- data |>
       dplyr::mutate(
         ytext = ifelse({{y}} > 0, {{y}} + yjust, {{y}} - yjust),

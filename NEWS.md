@@ -80,11 +80,75 @@
 
 * `iqa` - QuintoAndar rent index sample data (public aggregate data)
 
+## Major Changes - Phase 2 Complete ✓
+
+### Critical Bug Fixes
+
+* **Fixed** `plot_line_trend()`: Updated deprecated `size` → `linewidth` for ggplot2 4.0.0 compatibility
+* **Fixed** `plot_line_trend()`: Corrected return value assignment bug
+* **Fixed** `plot_column_label()`: Corrected `guide_fill` → `fill_guide` typo
+* **Fixed** `plot_area()`: Corrected `label` → `labels` in scale call
+* **Fixed** `plot_column()`: Replaced `T` with `TRUE` for proper logical constant
+
+### Breaking Changes
+
+* **BREAKING**: Renamed parameter `pal` → `palette` in all plot functions:
+  - `plot_area()`
+  - `plot_column()`
+  - `plot_column_label()`
+  - `plot_scatter()`
+  - All other plotting functions now use consistent `palette` parameter
+
+### Error Handling Modernization
+
+* Replaced all `stop()` with informative `cli::cli_abort()` messages:
+  - `benvi_palette()`: Direction validation, palette existence, color count limits
+  - `scale_*_benvi_*()`: Package dependency checks (4 functions)
+  - `plot_scatter()`: Zero parameter validation
+  - `plot_histogram()`: Method parameter validation
+* Added input validation to `pretty_number()`:
+  - Type checking for x (numeric), digits (numeric), percent (logical)
+  - Informative error messages for invalid inputs
+* Enhanced `import_fonts()`:
+  - Package availability checks
+  - Network error handling with informative messages
+  - Progress feedback with `cli::cli_alert_*()`
+* Added robust error handling to `.onLoad()`:
+  - Package availability checks
+  - Graceful font loading failure handling
+
+### Code Quality Improvements
+
+* Refactored `plot_add_xy()` to use `switch()` instead of multiple if statements
+* Refactored `get_hist_bw()`:
+  - Replaced multiple if statements with `switch()`
+  - Fixed assignment operators: `=` → `<-`
+  - Case-insensitive method matching via `toupper()`
+
+### Documentation
+
+* Added `<[data-masked][ggplot2::aes_eval]>` tags to all tidy evaluation parameters:
+  - `plot_column()`: x, y, variable
+  - `plot_line()`: x, y, variable
+  - `plot_histogram()`: x, facet
+  - `plot_column_label()`: x, y, variable, label
+  - Inherited by all functions using `@inheritParams`
+* Updated RoxygenNote: 7.3.2 → 7.3.3
+* Regenerated all .Rd documentation files
+
+### R CMD Check Fixes
+
+* **Fixed** `plot_column_label()`: Corrected label aesthetic handling for tidy evaluation
+* **Fixed** Global variable bindings: Declared all data-masking variables in `R/utils-globals.R`
+* **Fixed** `.onLoad()` / `.onAttach()` pattern: Moved user messages to `.onAttach()` per R best practices
+* **Removed** unused `rlang` dependency from DESCRIPTION
+* **Added** `.claude/`, `claude/`, `temp/`, `CLAUDE.md`, `DISCLAIMER.md` to `.Rbuildignore`
+* **Verified**: Package passes `R CMD check` with 0 errors, 0 warnings, 0 notes ✓
+
 ## Coming in Future Versions
 
 See `claude/release_plan_v1.0.0.md` for planned improvements:
 
-* Phase 2: Code modernization (native pipe |>, modern tidyverse patterns)
 * Phase 3: Testing infrastructure (comprehensive test suite)
 * Phase 4: Vignettes (getting started, color palettes, plot functions, themes)
 * Phase 5: pkgdown website
@@ -101,3 +165,4 @@ See `claude/release_plan_v1.0.0.md` for planned improvements:
 ---
 
 *Phase 1 completed: October 5, 2025*
+*Phase 2 completed: October 5, 2025*

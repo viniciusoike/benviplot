@@ -21,14 +21,14 @@ plot_line(
 \arguments{
 \item{data}{A data.frame type object.}
 
-\item{x}{Variable to be mapped on the x-axis.}
+\item{x}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped on the x-axis.}
 
-\item{y}{Variable to be mapped on the y-axis.}
+\item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped on the y-axis.}
 
 \item{color}{Indicates the color of the line. Should only be used in the
 absence of \code{variable}.}
 
-\item{variable}{Indicates the grouping variable for color groups.}
+\item{variable}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Indicates the grouping variable for color groups.}
 
 \item{zero}{Logical indicating if a horizontal line (y = 0) should be drawn
 on the plot.}

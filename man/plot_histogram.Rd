@@ -20,7 +20,7 @@ plot_histogram(
 \arguments{
 \item{data}{A data.frame type object}
 
-\item{x}{Indicates the numeric variable to be mapped}
+\item{x}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Indicates the numeric variable to be mapped}
 
 \item{color}{Color of the line of column.}
 
@@ -36,7 +36,7 @@ bins. See details. Overriden by bins. Defaults to \code{method = "fd"}.}
 
 \item{density}{Logical indicating if density should be plotted on y-axis.}
 
-\item{facet}{Optional variable to facet the graphics.}
+\item{facet}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Optional variable to facet the graphics.}
 
 \item{...}{Additional parameters to \code{facet_wrap()}}
 }

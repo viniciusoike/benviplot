@@ -16,7 +16,7 @@ plot_scatter(
   fit_formula = NULL,
   fit_ci = FALSE,
   zero = "none",
-  pal = "Qual9",
+  palette = "Qual9",
   scale_name = "",
   scale_label = ggplot2::waiver(),
   ...
@@ -25,13 +25,13 @@ plot_scatter(
 \arguments{
 \item{data}{A data.frame type object}
 
-\item{x}{Variable to be mapped in the x-axis.}
+\item{x}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped in the x-axis.}
 
-\item{y}{Variable to be mapped in the y-axis.}
+\item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped in the y-axis.}
 
 \item{color}{Color of the points}
 
-\item{variable}{Variable to be used as grouping for the color groups. Should
+\item{variable}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be used as grouping for the color groups. Should
 only be used if \code{fill} is missing.}
 
 \item{fit}{Logical indicating if a regression line should be plotted on top
@@ -51,7 +51,7 @@ Defaults to \code{FALSE} for less cluttered visualization.}
 \item{zero}{Draws axis lines. Must be one of \code{"x"}, \code{"y"}, \code{"both"}, or
 \code{"none"} (default).}
 
-\item{pal}{String indicating the name of which palette to use.}
+\item{palette}{String indicating the name of which palette to use.}
 
 \item{scale_name}{String indicating fill legend title.}
 

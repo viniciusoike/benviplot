@@ -13,5 +13,7 @@ Import fonts from google to use in charts
 This function requires an internet connection.
 }
 \examples{
+\dontrun{
 import_fonts()
+}
 }

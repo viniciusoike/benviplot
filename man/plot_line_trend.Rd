@@ -17,9 +17,9 @@ plot_line_trend(
 \arguments{
 \item{data}{A data.frame type object.}
 
-\item{x}{Variable to be mapped on the x-axis.}
+\item{x}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped on the x-axis.}
 
-\item{y}{Variable to be mapped on the y-axis.}
+\item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped on the y-axis.}
 
 \item{name_series}{String indicating the name of the original series}
 

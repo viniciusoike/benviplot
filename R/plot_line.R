@@ -1,11 +1,11 @@
 #' Title
 #'
 #' @param data A data.frame type object.
-#' @param x Variable to be mapped on the x-axis.
-#' @param y Variable to be mapped on the y-axis.
+#' @param x <[`data-masked`][ggplot2::aes_eval]> Variable to be mapped on the x-axis.
+#' @param y <[`data-masked`][ggplot2::aes_eval]> Variable to be mapped on the y-axis.
 #' @param color Indicates the color of the line. Should only be used in the
 #' absence of `variable`.
-#' @param variable Indicates the grouping variable for color groups.
+#' @param variable <[`data-masked`][ggplot2::aes_eval]> Indicates the grouping variable for color groups.
 #' @param zero Logical indicating if a horizontal line (y = 0) should be drawn
 #' on the plot.
 #' @param point Logical indicating if points should be drawn on top of line.

@@ -11,6 +11,7 @@
 #' @return A vector of characters with color attribute
 #' @export
 #' @importFrom grDevices colorRampPalette rgb
+#' @importFrom cli cli_abort
 #' @examples
 #' benvi_palette("Set3")
 #' benvi_palette("Set3", n = 20, type = "continuous")
@@ -22,12 +23,19 @@ benvi_palette <- function(
     type = c("discrete", "continuous")) {
 
   if (abs(direction) != 1) {
-    stop("direction must be 1 or -1")
+    cli::cli_abort(c(
+      "{.arg direction} must be 1 or -1.",
+      "x" = "You provided: {direction}"
+    ))
   }
 
   pal <- palette[[pal_name]]$hex
   if (is.null(pal)) {
-    stop("Palette not found.")
+    available_pals <- paste(names(palette), collapse = ", ")
+    cli::cli_abort(c(
+      "Palette {.val {pal_name}} not found.",
+      "i" = "Available palettes: {available_pals}"
+    ))
   }
 
   if (missing(n)) {
@@ -37,10 +45,12 @@ benvi_palette <- function(
   type <- match.arg(type)
 
   if (type == "discrete" && n > length(pal)) {
-    stop(
-      paste0("Number of requested colors greater than what palette can offer, which is ",
-      length(pal),
-      "."))
+    cli::cli_abort(c(
+      "Too many colors requested from palette {.val {pal_name}}.",
+      "x" = "You requested {n} {cli::qty(n)}color{?s}.",
+      "i" = "This palette only has {length(pal)} {cli::qty(length(pal))}color{?s}.",
+      "i" = "Use {.code type = 'continuous'} to interpolate more colors."
+    ))
   }
 
   out <- switch(

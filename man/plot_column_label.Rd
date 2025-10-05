@@ -8,13 +8,13 @@ plot_column_label(
   data,
   x,
   y,
-  label = y,
+  label,
   fill,
   variable,
   zero = TRUE,
   flip = TRUE,
   fill_guide = "none",
-  pal,
+  palette = "Qual9",
   text_color = "white",
   text_family = "Roboto",
   text_size = 4,
@@ -25,16 +25,16 @@ plot_column_label(
 \arguments{
 \item{data}{A data.frame type object}
 
-\item{x}{Variable to be mapped in the x-axis.}
+\item{x}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped in the x-axis.}
 
-\item{y}{Variable to be mapped in the y-axis.}
+\item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped in the y-axis.}
 
-\item{label}{Text label to mapped onto the column. Defaults to y variable.}
+\item{label}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Text label to mapped onto the column. Defaults to y variable.}
 
 \item{fill}{Color for the columns. Should only be used if \code{variable}
 is missing.}
 
-\item{variable}{Variable to be used as grouping for the color groups. Should
+\item{variable}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be used as grouping for the color groups. Should
 only be used if \code{fill} is missing.}
 
 \item{zero}{Logical indicating whether a horizontal line crossing the y = 0
@@ -44,7 +44,7 @@ axis should be plotted.}
 
 \item{fill_guide}{Optional indicating if fill guide should be supressed.}
 
-\item{pal}{String indicating the name of which palette to use.}
+\item{palette}{String indicating the name of which palette to use.}
 
 \item{text_color}{Color of the text label. Default is \code{"gray20"}.}
 
