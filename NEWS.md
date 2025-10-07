@@ -1,168 +1,182 @@
-# benviplot 1.0.0 (Development)
+# benviplot (development)
 
-## Major Changes - Phase 1 Complete ✓
+## benviplot 0.9.4 (2025-10-07)
 
-### Data Cleanup & Legal Compliance
+### New Features
 
-* **BREAKING**: Removed `iqa_region` dataset (contained sensitive internal data)
-* Added comprehensive DISCLAIMER.md clarifying package independence from QuintoAndar
-* Updated all package metadata with proper author information
-* Added legal notices throughout documentation
-
-### Package Metadata
-
-* Updated DESCRIPTION with complete author details (Vinicius Oike)
-* Bumped version to 1.0.0 for initial public release
-* Updated dependencies:
-  - R >= 4.1.0 (was >= 2.10)
-  - ggplot2 >= 4.0.0 (updated for compatibility with ggplot2 4.0.0 S7 migration)
-  - dplyr >= 1.1.0 (modern tidyverse)
-  - Added: cli, rlang >= 1.1.0
-  - Added to Suggests: testthat >= 3.0.0, knitr, rmarkdown
-* Updated RoxygenNote: 7.2.3 → 7.3.2
-
-### Documentation
-
-* Completely rewrote README with:
-  - Prominent disclaimer at top
-  - Professional badges
-  - Clear installation instructions
-  - Comprehensive feature overview
-  - Updated examples
-  - Author and license information
-* Updated CLAUDE.md to remove iqa_region references
-* Added pkgdown website URL: https://viniciusoike.github.io/benviplot/
-
-### Infrastructure
-
-* Created .github/ folder structure for future GitHub Actions
-* Prepared for pkgdown website deployment
-* Set up for testthat testing framework (Config/testthat/edition: 3)
-* Added VignetteBuilder: knitr for future vignettes
-
-## Existing Features (Carried Forward)
-
-### Color Palettes
-
-* 8 Set palettes (4 colors each): Set0-Set7
-* 9 Qualitative palettes (8 colors each): Qual1-Qual9
-* 8 Sequential palettes (9 colors each): Seq0-Seq7
-* City-specific palettes: spo_*, rio_*, bhe_*
-* Index color scales: index_blue, index_prpl
-
-### ggplot2 Scales
-
-* `scale_color_benvi_d()` / `scale_fill_benvi_d()` - Discrete scales
-* `scale_color_benvi_c()` / `scale_fill_benvi_c()` - Continuous scales
-* British/American spelling variants supported
-
-### Plot Helper Functions
-
-* `plot_line()` - Line charts
-* `plot_column()` - Column/bar charts with optional text labels
-* `plot_scatter()` - Scatter plots with optional regression lines
-* `plot_area()` - Area charts
-* `plot_histogram()` - Histograms
-* `plot_line_trend()` - Line charts with trend indicators
-* `plot_column_label()` - Specialized column charts with labels
-* `plot_add_xy()` - Helper for adding axis lines
-
-### Themes
-
-* `theme_benvi()` - Custom ggplot2 theme with Poppins font
-
-### Utilities
-
-* `import_fonts()` - Download and setup Google Fonts
-* `pretty_number()` - Format numbers for Brazilian locale
-
-### Data
-
-* `iqa` - QuintoAndar rent index sample data (public aggregate data)
-
-## Major Changes - Phase 2 Complete ✓
-
-### Critical Bug Fixes
-
-* **Fixed** `plot_line_trend()`: Updated deprecated `size` → `linewidth` for ggplot2 4.0.0 compatibility
-* **Fixed** `plot_line_trend()`: Corrected return value assignment bug
-* **Fixed** `plot_column_label()`: Corrected `guide_fill` → `fill_guide` typo
-* **Fixed** `plot_area()`: Corrected `label` → `labels` in scale call
-* **Fixed** `plot_column()`: Replaced `T` with `TRUE` for proper logical constant
-
-### Breaking Changes
-
-* **BREAKING**: Renamed parameter `pal` → `palette` in all plot functions:
-  - `plot_area()`
-  - `plot_column()`
-  - `plot_column_label()`
-  - `plot_scatter()`
-  - All other plotting functions now use consistent `palette` parameter
-
-### Error Handling Modernization
-
-* Replaced all `stop()` with informative `cli::cli_abort()` messages:
-  - `benvi_palette()`: Direction validation, palette existence, color count limits
-  - `scale_*_benvi_*()`: Package dependency checks (4 functions)
-  - `plot_scatter()`: Zero parameter validation
-  - `plot_histogram()`: Method parameter validation
-* Added input validation to `pretty_number()`:
-  - Type checking for x (numeric), digits (numeric), percent (logical)
-  - Informative error messages for invalid inputs
-* Enhanced `import_fonts()`:
-  - Package availability checks
-  - Network error handling with informative messages
-  - Progress feedback with `cli::cli_alert_*()`
-* Added robust error handling to `.onLoad()`:
-  - Package availability checks
-  - Graceful font loading failure handling
-
-### Code Quality Improvements
-
-* Refactored `plot_add_xy()` to use `switch()` instead of multiple if statements
-* Refactored `get_hist_bw()`:
-  - Replaced multiple if statements with `switch()`
-  - Fixed assignment operators: `=` → `<-`
-  - Case-insensitive method matching via `toupper()`
-
-### Documentation
-
-* Added `<[data-masked][ggplot2::aes_eval]>` tags to all tidy evaluation parameters:
-  - `plot_column()`: x, y, variable
-  - `plot_line()`: x, y, variable
-  - `plot_histogram()`: x, facet
-  - `plot_column_label()`: x, y, variable, label
-  - Inherited by all functions using `@inheritParams`
-* Updated RoxygenNote: 7.3.2 → 7.3.3
-* Regenerated all .Rd documentation files
-
-### R CMD Check Fixes
-
-* **Fixed** `plot_column_label()`: Corrected label aesthetic handling for tidy evaluation
-* **Fixed** Global variable bindings: Declared all data-masking variables in `R/utils-globals.R`
-* **Fixed** `.onLoad()` / `.onAttach()` pattern: Moved user messages to `.onAttach()` per R best practices
-* **Removed** unused `rlang` dependency from DESCRIPTION
-* **Added** `.claude/`, `claude/`, `temp/`, `CLAUDE.md`, `DISCLAIMER.md` to `.Rbuildignore`
-* **Verified**: Package passes `R CMD check` with 0 errors, 0 warnings, 0 notes ✓
-
-## Coming in Future Versions
-
-See `claude/release_plan_v1.0.0.md` for planned improvements:
-
-* Phase 3: Testing infrastructure (comprehensive test suite)
-* Phase 4: Vignettes (getting started, color palettes, plot functions, themes)
-* Phase 5: pkgdown website
-* Phase 6: GitHub Actions CI/CD
-* Phase 7: Final quality checks and release
-
-## Notes
-
-* This is a complete repackaging and modernization of the original internal functions
-* All code is original work by the package author
-* Uses publicly available color schemes for visualization purposes
-* Not affiliated with QuintoAndar in any way
+* Added `iqaiw` dataset: QuintoAndar ImovelWeb Rental Index for 6 Brazilian cities
+  * Hedonic double imputed rental price index (2023 onwards)
+  * Variables: date, city, index, monthly/annual changes, price per m²
+  * Comprehensive documentation with methodology details
+  * Data processing script with validation in `data-raw/iqaiw.R`
 
 ---
 
-*Phase 1 completed: October 5, 2025*
-*Phase 2 completed: October 5, 2025*
+## benviplot 0.9.3 (2025-10-07) - Phase 4 Complete
+
+### Documentation
+
+* Added four comprehensive vignettes:
+  * `getting-started`: Installation, setup, and basic usage
+  * `color-palettes`: Complete palette gallery (36 palettes) with usage guide
+  * `plot-functions`: Detailed documentation of all 7 plot helper functions
+  * `themes-and-styling`: Theme customization and publication-ready plots
+* All vignettes build successfully and pass R CMD check
+
+---
+
+## benviplot 0.9.2 (2025-10-05) - Phase 3 Complete
+
+### Testing
+
+* Added comprehensive test suite with 196 tests (100% passing):
+  * `test-benvi_palette.R`: 14 tests for palette functionality
+  * `test-benvi_scales.R`: 16 tests for ggplot2 scales
+  * `test-plot_functions.R`: 31 tests for plot helpers
+  * `test-theme.R`: 13 tests for theme functionality
+  * `test-utils.R`: 22 tests for utility functions
+* Verified ggplot2 4.0.0 compatibility across all functions
+
+---
+
+## benviplot 0.9.1 (2025-10-05) - Phase 2 Complete
+
+### Breaking Changes
+
+* Renamed parameter `pal` → `palette` in all plot functions for consistency
+
+### Bug Fixes
+
+* Fixed `plot_line_trend()`: Updated deprecated `size` → `linewidth` for ggplot2 4.0.0
+* Fixed `plot_line_trend()`: Corrected return value assignment
+* Fixed `plot_column_label()`: Corrected `guide_fill` → `fill_guide` typo
+* Fixed `plot_column_label()`: Fixed label aesthetic for tidy evaluation
+* Fixed `plot_area()`: Corrected `label` → `labels` in scale call
+* Fixed `plot_column()`: Replaced `T` with `TRUE`
+
+### Improvements
+
+* Modernized error handling: Replaced `stop()` with informative `cli::cli_abort()` messages
+* Enhanced `import_fonts()` with robust error handling and progress feedback
+* Improved `pretty_number()` with input validation
+* Refactored `plot_add_xy()` and `get_hist_bw()` to use `switch()` statements
+* Added case-insensitive method matching in `get_hist_bw()`
+
+### Documentation
+
+* Added `<[data-masked][ggplot2::aes_eval]>` tags to all tidy eval parameters
+* Updated RoxygenNote: 7.3.2 → 7.3.3
+* Fixed global variable bindings (created `R/utils-globals.R`)
+
+### Internal
+
+* Removed unused `rlang` dependency
+* Added development files to `.Rbuildignore`
+* Fixed `.onLoad()` / `.onAttach()` pattern per R best practices
+* Package passes R CMD check: 0 errors, 0 warnings, 0 notes ✓
+
+---
+
+## benviplot 0.9.0 (2025-10-05) - Phase 1 Complete
+
+### Breaking Changes
+
+* **REMOVED** `iqa_region` dataset (contained sensitive internal data)
+
+### Legal & Compliance
+
+* Added comprehensive `DISCLAIMER.md` clarifying independence from QuintoAndar
+* Updated all documentation with legal disclaimers
+* Added proper author information and license details
+
+### Package Metadata
+
+* Updated dependencies:
+  * R >= 4.1.0 (was >= 2.10)
+  * ggplot2 >= 4.0.0 (for S7 compatibility)
+  * dplyr >= 1.1.0 (modern tidyverse)
+  * Added: cli, scales
+  * Added to Suggests: testthat (>= 3.0.0), knitr, rmarkdown
+* Set up infrastructure for testing and vignettes
+
+### Documentation
+
+* Completely rewrote README with disclaimer, badges, and clear examples
+* Added pkgdown website URL
+* Created `.github/` folder structure for future CI/CD
+
+---
+
+## benviplot 0.4.0 (2023-06-22)
+
+### Features
+
+* Updated index color palettes
+* Improved README with better examples
+* Enhanced documentation
+
+---
+
+## benviplot 0.3.0 (2023-02-01)
+
+### Features
+
+* Added `ggfittext` integration for better text fitting in plots
+
+---
+
+## benviplot 0.2.0 (2023-01-16)
+
+### Features
+
+* Implemented automatic Google Fonts download on package load
+* Added `import_fonts()` function for manual font management
+* Updated palette handling to remove accents
+
+---
+
+## benviplot 0.1.0 (2023-01-12)
+
+### Initial Release
+
+* Core color palette system with 36 palettes:
+  * 8 Set palettes (4 colors each)
+  * 9 Qualitative palettes (8 colors each)
+  * 8 Sequential palettes (9 colors each)
+  * City-specific palettes (spo, rio, bhe)
+  * Index color scales
+* ggplot2 scale functions:
+  * `scale_color_benvi_d()` / `scale_fill_benvi_d()` (discrete)
+  * `scale_color_benvi_c()` / `scale_fill_benvi_c()` (continuous)
+* Plot helper functions:
+  * `plot_line()`, `plot_column()`, `plot_scatter()`
+  * `plot_area()`, `plot_histogram()`
+  * `plot_line_trend()`, `plot_column_label()`
+* Custom theme: `theme_benvi()` with Poppins font
+* Utility functions: `pretty_number()`, `import_fonts()`
+* Sample data: `iqa` (QuintoAndar rent index)
+
+---
+
+## Roadmap to v1.0.0
+
+### Still To Do
+
+* **Phase 5**: pkgdown website
+  * Create `_pkgdown.yml` configuration
+  * Build and deploy documentation site
+* **Phase 6**: GitHub Actions CI/CD
+  * R CMD check workflow
+  * Test coverage workflow
+  * pkgdown deployment automation
+* **Phase 7**: Final checks and release
+  * Run comprehensive quality checks
+  * Final documentation review
+  * Official v1.0.0 release 🎉
+
+### Project Information
+
+* **Author**: Vinicius Oike (viniciusoike@gmail.com)
+* **License**: MIT
+* **Disclaimer**: This is an unofficial, independent project not affiliated with QuintoAndar
+* **Repository**: https://github.com/viniciusoike/benviplot
