@@ -1,0 +1,401 @@
+---
+title: "Getting Started with benviplot"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with benviplot}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5,
+  fig.align = "center",
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+## Introduction
+
+Welcome to `benviplot`! This package provides a comprehensive set of tools for creating beautiful, publication-ready visualizations in R using ggplot2.
+
+### What is benviplot?
+
+`benviplot` offers:
+
+- **Curated Color Palettes**: Professional color schemes optimized for data visualization
+- **ggplot2 Integration**: Seamless scales for both discrete and continuous data
+- **Plot Helpers**: Convenience functions for common chart types
+- **Custom Theme**: Clean, modern theme with professional typography
+
+### Disclaimer
+
+**IMPORTANT**: This is an unofficial, independent project created by Vinicius Oike and is **NOT** affiliated with, endorsed by, or connected to QuintoAndar in any way. Benvi was a former brand of QuintoAndar that was discontinued in 2024. This package uses publicly available color schemes from that period for data visualization purposes.
+
+## Installation
+
+Install `benviplot` from GitHub:
+
+```{r, eval = FALSE}
+# Install remotes if needed
+if (!requireNamespace("remotes", quietly = TRUE)) {
+  install.packages("remotes")
+}
+
+# Install benviplot
+remotes::install_github("viniciusoike/benviplot")
+```
+
+### System Requirements
+
+- **R**: Version 4.1.0 or higher
+- **ggplot2**: Version 4.0.0 or higher
+- **Internet connection**: Required for initial font download
+
+## Font Setup
+
+`benviplot` uses the **Poppins** font family from Google Fonts to create professional-looking plots. The package will attempt to download and configure this font automatically on first use.
+
+### Automatic Font Import
+
+Simply load the package - fonts will be set up automatically:
+
+```{r, eval = FALSE}
+library(benviplot)
+#> Importing Poppins font from Google Fonts...
+#> ✔ Font imported successfully
+```
+
+### Manual Font Import
+
+If you encounter font issues, manually import fonts:
+
+```{r, eval = FALSE}
+benviplot::import_fonts()
+```
+
+### Troubleshooting Font Issues
+
+If fonts don't display correctly:
+
+1. **Check internet connection**: Font download requires internet access
+2. **Restart R session**: Sometimes fonts need a fresh session to load
+3. **Use system fonts as fallback**: Modify theme to use system fonts
+
+```{r, eval = FALSE}
+# Example: Override with system font
+theme_benvi(base_family = "sans")
+```
+
+## Quick Start
+
+Let's create your first plot with benviplot!
+
+```{r setup}
+library(ggplot2)
+library(benviplot)
+
+# Use built-in mtcars dataset
+head(mtcars)
+```
+
+### A Simple Scatter Plot
+
+```{r quick-scatter}
+ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
+  geom_point(size = 3) +
+  scale_color_benvi_d(pal_name = "Qual2", name = "Cylinders") +
+  labs(
+    title = "Fuel Efficiency vs. Weight",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon"
+  ) +
+  theme_benvi()
+```
+
+That's it! Just three key components:
+
+1. `scale_color_benvi_d()`: Applies benvi discrete color palette
+2. `theme_benvi()`: Applies benvi visual theme
+3. `palette = "Qual2"`: Selects specific color palette
+
+## Viewing Color Palettes
+
+Before using a palette, you can preview it:
+
+```{r view-palettes}
+# View a qualitative palette
+benvi_palette("Qual2")
+
+# View a sequential palette
+benvi_palette("Seq3")
+
+# View a set palette
+benvi_palette("Set5")
+```
+
+### Getting Hex Color Values
+
+Extract hex codes for use outside ggplot2:
+
+```{r hex-colors}
+# Get hex codes as character vector
+colors <- as.character(benvi_palette("Qual2"))
+colors
+
+# Use specific colors
+my_blue <- benvi_palette("Qual2")[1]
+my_blue
+```
+
+## Basic Examples
+
+### Bar Chart with Discrete Colors
+
+```{r bar-chart}
+# Sample data
+sales <- data.frame(
+  product = c("A", "B", "C", "D", "E"),
+  revenue = c(120, 200, 150, 180, 220)
+)
+
+ggplot(sales, aes(x = product, y = revenue, fill = product)) +
+  geom_col(show.legend = FALSE) +
+  scale_fill_benvi_d(pal_name = "Set3") +
+  labs(
+    title = "Revenue by Product",
+    x = "Product",
+    y = "Revenue ($1000s)"
+  ) +
+  theme_benvi()
+```
+
+### Line Chart with Groups
+
+```{r line-chart}
+# Use built-in economics dataset
+ggplot(economics, aes(x = date, y = unemploy / 1000)) +
+  geom_line(color = benvi_palette("Set5")[1], linewidth = 1) +
+  labs(
+    title = "US Unemployment Over Time",
+    x = "Year",
+    y = "Unemployed (millions)"
+  ) +
+  theme_benvi()
+```
+
+### Heatmap with Continuous Colors
+
+```{r heatmap}
+# Sample data - Texas housing
+housing <- subset(txhousing, city %in% c("Austin", "Houston", "Dallas"))
+
+ggplot(housing, aes(x = date, y = city, fill = median)) +
+  geom_tile() +
+  scale_fill_benvi_c(pal_name = "Seq5", name = "Median\nPrice ($)") +
+  labs(
+    title = "Median House Prices in Texas Cities",
+    x = "Year",
+    y = NULL
+  ) +
+  theme_benvi()
+```
+
+## Using Plot Helper Functions
+
+`benviplot` includes convenience functions for common plot types. These save typing during exploratory data analysis.
+
+### Simple Line Plot
+
+```{r helper-line}
+plot_line(economics, x = date, y = uempmed)
+```
+
+### Column Plot with Labels
+
+```{r helper-column}
+plot_column(sales, x = product, y = revenue, text = TRUE)
+```
+
+### Scatter Plot with Grouping
+
+```{r helper-scatter}
+plot_scatter(
+  mtcars,
+  x = wt,
+  y = mpg,
+  variable = as.factor(cyl),
+  palette = "Qual5",
+  scale_name = "Cylinders"
+)
+```
+
+### Adding Trend Lines
+
+```{r scatter-trend}
+plot_scatter(
+  mtcars,
+  x = wt,
+  y = mpg,
+  variable = as.factor(cyl),
+  fit = TRUE,
+  fit_method = "lm",
+  palette = "Qual5",
+  scale_name = "Cylinders"
+) +
+  labs(
+    title = "Fuel Efficiency by Weight and Cylinders",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon"
+  )
+```
+
+## Customizing Your Plots
+
+Helper functions return ggplot2 objects, so you can add layers:
+
+```{r customization}
+plot_line(economics, x = date, y = unemploy / 1000) +
+  geom_smooth(se = FALSE, color = benvi_palette("Set1")[2]) +
+  labs(
+    title = "US Unemployment with Smoothed Trend",
+    subtitle = "Unemployment figures in millions",
+    x = "Year",
+    y = "Unemployed (millions)",
+    caption = "Data: economics dataset"
+  ) +
+  theme_benvi()
+```
+
+## Understanding Palette Types
+
+`benviplot` organizes palettes by use case:
+
+### Qualitative Palettes (Qual1-Qual9)
+
+**Use for**: Categorical data without inherent order (e.g., product types, regions)
+
+- 8 distinct colors
+- Optimized for visual differentiation
+- Examples: `Qual1`, `Qual2`, ..., `Qual9`
+
+```{r qual-example, eval = FALSE}
+benvi_palette("Qual3")
+```
+
+### Sequential Palettes (Seq0-Seq7)
+
+**Use for**: Continuous data with ordered progression (e.g., temperature, percentages)
+
+- 9-color gradients
+- Light to dark progression
+- Examples: `Seq0`, `Seq1`, ..., `Seq7`
+
+```{r seq-example, eval = FALSE}
+benvi_palette("Seq2")
+```
+
+### Set Palettes (Set0-Set7)
+
+**Use for**: Small categorical datasets (2-4 categories)
+
+- 4 carefully chosen colors
+- Good contrast and balance
+- Examples: `Set0`, `Set1`, ..., `Set7`
+
+```{r set-example, eval = FALSE}
+benvi_palette("Set4")
+```
+
+### City-Specific Palettes
+
+Themed palettes for Brazilian cities:
+
+- `spo_qual`, `spo_seq`, `spo_div`: São Paulo
+- `rio_qual`, `rio_seq`, `rio_div`: Rio de Janeiro
+- `bhe_qual`, `bhe_seq`, `bhe_div`: Belo Horizonte
+
+```{r city-example, eval = FALSE}
+benvi_palette("rio_qual")
+```
+
+## Next Steps
+
+Now that you're familiar with the basics:
+
+1. **Explore all palettes**: See `vignette("color-palettes")` for complete gallery
+2. **Learn plot functions**: Check `vignette("plot-functions")` for detailed examples
+3. **Customize themes**: Read `vignette("themes-and-styling")` for advanced styling
+
+## Common Questions
+
+### How do I choose the right palette?
+
+- **Categorical data** (no order): Use `Qual*` palettes
+- **Continuous/ordered data**: Use `Seq*` palettes
+- **Small categories (≤4)**: Use `Set*` palettes
+- **Geographic data**: Consider city-specific palettes
+
+### Can I reverse a palette?
+
+Yes! Use `direction = -1`:
+
+```{r reverse-palette}
+# Normal direction
+benvi_palette("Seq3")
+
+# Reversed
+benvi_palette("Seq3", direction = -1)
+```
+
+### How do I use fewer colors than available?
+
+Specify the number with `n`:
+
+```{r subset-colors}
+# Get only 3 colors from an 8-color palette
+benvi_palette("Qual5", n = 3)
+```
+
+### Can I use benvi colors in base R plots?
+
+Yes! Get hex codes and use them:
+
+```{r base-plot}
+colors <- as.character(benvi_palette("Set5"))
+
+plot(
+  mtcars$wt,
+  mtcars$mpg,
+  col = colors[mtcars$cyl / 2 - 1],
+  pch = 19,
+  cex = 1.5,
+  xlab = "Weight",
+  ylab = "MPG",
+  main = "Using benvi colors in base R"
+)
+```
+
+## Getting Help
+
+- **Function documentation**: `?benvi_palette`, `?scale_color_benvi_d`, etc.
+- **Package website**: https://viniciusoike.github.io/benviplot/
+- **Report issues**: https://github.com/viniciusoike/benviplot/issues
+- **Ask questions**: Open a GitHub discussion
+
+## Summary
+
+In this vignette you learned how to:
+
+- ✓ Install and set up benviplot
+- ✓ Configure Poppins fonts
+- ✓ View and select color palettes
+- ✓ Create plots with benvi scales and themes
+- ✓ Use plot helper functions
+- ✓ Choose appropriate palettes for your data
+
+Happy plotting!

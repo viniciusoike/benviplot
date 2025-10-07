@@ -8,3 +8,5 @@
 ^claude$
 ^\.claude$
 ^temp$
+^doc$
+^Meta$
