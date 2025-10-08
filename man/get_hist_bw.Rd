@@ -17,3 +17,4 @@ An integer
 \description{
 Get width of histogram interval
 }
+\keyword{internal}

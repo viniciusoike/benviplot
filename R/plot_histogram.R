@@ -135,6 +135,7 @@ plot_histogram <- function(
 #'
 #' @param x A numeric vector
 #' @param type Type of formula used
+#' @keywords internal
 #'
 #' @return An integer
 #' @importFrom stats IQR sd

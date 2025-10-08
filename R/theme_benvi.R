@@ -4,6 +4,7 @@
 #' `theme_benvi`.
 #'
 #' @param ... Further arguments to `theme_minimal`
+#' @keywords internal
 #'
 #' @importFrom ggplot2 %+replace% theme_minimal theme element_blank element_rect
 #' element_text margin

@@ -1,0 +1,100 @@
+url: https://viniciusoike.github.io/benviplot/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+  bslib:
+    primary: "#009850"
+    base_font: {google: "Poppins"}
+
+home:
+  title: benviplot • Color Palettes for Data Visualization
+  description: >
+    ggplot2 extensions and color palettes for creating quality graphics.
+    Uses color schemes from the discontinued Benvi brand.
+
+navbar:
+  structure:
+    left:  [home, reference, articles, news]
+    right: [search, github]
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    articles:
+      text: Articles
+      menu:
+      - text: Getting Started
+        href: articles/getting-started.html
+      - text: Color Palettes
+        href: articles/color-palettes.html
+      - text: Plot Functions
+        href: articles/plot-functions.html
+      - text: Themes and Styling
+        href: articles/themes-and-styling.html
+    news:
+      text: Changelog
+      href: news/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/viniciusoike/benviplot
+
+reference:
+  - title: Color Palettes
+    desc: Access and customize color palettes
+    contents:
+    - benvi_palette
+
+  - title: ggplot2 Scales
+    desc: Color and fill scales for ggplot2
+    contents:
+    - starts_with("scale_")
+
+  - title: Plot Helper Functions
+    desc: Wrapper functions for common plot types
+    contents:
+    - plot_line
+    - plot_line_trend
+    - plot_column
+    - plot_column_label
+    - plot_scatter
+    - plot_area
+    - plot_histogram
+    - plot_add_xy
+
+  - title: Themes
+    desc: Custom ggplot2 themes
+    contents:
+    - theme_benvi
+
+  - title: Utilities
+    desc: Helper and utility functions
+    contents:
+    - import_fonts
+    - pretty_number
+
+  - title: Data
+    desc: Example datasets
+    contents:
+    - starts_with("iqa")
+
+articles:
+- title: Getting Started
+  navbar: ~
+  contents:
+  - getting-started
+
+- title: Guides
+  desc: Detailed guides for using benviplot
+  contents:
+  - color-palettes
+  - plot-functions
+  - themes-and-styling
+
+footer:
+  structure:
+    left: developed_by
+    right: built_with

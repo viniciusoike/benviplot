@@ -25,6 +25,7 @@ Imports:
 Suggests:
     curl,
     knitr,
+    pkgdown,
     rmarkdown,
     sysfonts,
     testthat (>= 3.0.0)

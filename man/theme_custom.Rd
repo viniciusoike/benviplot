@@ -13,3 +13,4 @@ theme_custom(...)
 A base theme for ggplot plots in a Benvi style. Called by
 \code{theme_benvi}.
 }
+\keyword{internal}
