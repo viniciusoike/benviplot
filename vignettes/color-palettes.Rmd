@@ -457,5 +457,4 @@ In this vignette you learned:
 For more on color theory and data visualization:
 
 - [Colorbrewer](https://colorbrewer2.org/) - Color advice for cartography
-- [Viz Palette](https://projects.susielu.com/viz-palette) - Test color palettes
 - [Adobe Color](https://color.adobe.com/) - Color wheel and palette tools

@@ -1,5 +1,56 @@
 # benviplot (development)
 
+## benviplot 0.9.5 (2025-10-08) - Phases 5-6 Complete
+
+**Pre-release version preparing for v1.0.0**
+
+### Infrastructure
+
+* **Phase 5: pkgdown Website**
+  * Created comprehensive documentation website at https://viniciusoike.github.io/benviplot/
+  * Added `_pkgdown.yml` configuration with Bootstrap 5 theme and Poppins font
+  * Organized function reference by category (Palettes, Scales, Plot Helpers, Themes, Utilities, Data)
+  * All 4 vignettes accessible as articles
+  * Custom navigation with home, reference, articles, news, and GitHub links
+  * Search functionality enabled
+
+* **Phase 6: GitHub Actions CI/CD**
+  * Automated R CMD check on 5 platform/version combinations:
+    - macOS (R release)
+    - Windows (R release)
+    - Ubuntu (R devel, release, oldrel-1)
+  * Automated pkgdown deployment to GitHub Pages
+  * Test coverage tracking with Codecov integration
+  * All workflows use r-lib/actions@v2 for R package CI/CD best practices
+
+### Documentation
+
+* Added CI/CD status badges to README (R-CMD-check, Codecov, pkgdown)
+* Repository made public for community access
+* GitHub Pages enabled and deployed
+* Fixed broken URL in color-palettes vignette
+
+### Quality Assurance
+
+* Package passes R CMD check on all platforms: 0 errors, 0 warnings, 0 notes ✓
+* All 196 tests passing (100% success rate)
+* Test coverage tracked and reported
+* Documentation site building automatically on every commit
+
+### What's New for Users
+
+* Professional documentation website with searchable reference
+* Comprehensive vignettes with examples
+* Automated quality checks ensure reliability
+* Package tested across multiple platforms and R versions
+
+### Next Steps
+
+This is a pre-release version. After thorough manual review and testing,
+version 1.0.0 will be the official stable release.
+
+---
+
 ## benviplot 0.9.4 (2025-10-07)
 
 ### New Features
