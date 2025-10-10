@@ -42,7 +42,7 @@ axis should be plotted.}
 
 \item{flip}{Logical indicating if plot should be flipped}
 
-\item{fill_guide}{Optional indicating if fill guide should be supressed.}
+\item{fill_guide}{Optional indicating if fill guide should be suppressed.}
 
 \item{palette}{String indicating the name of which palette to use.}
 

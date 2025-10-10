@@ -8,7 +8,7 @@
 #' on the plot.
 #' @param bins Number of bins.
 #' @param method Character indicating an algorithm to compute optimal number of
-#' bins. See details. Overriden by bins. Defaults to `method = "fd"`.
+#' bins. See details. Overridden by bins. Defaults to `method = "fd"`.
 #' @param density Logical indicating if density should be plotted on y-axis.
 #' @param facet <[`data-masked`][ggplot2::aes_eval]> Optional variable to facet the graphics.
 #' @param ... Additional parameters to `facet_wrap()`

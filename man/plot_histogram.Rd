@@ -32,7 +32,7 @@ on the plot.}
 \item{bins}{Number of bins.}
 
 \item{method}{Character indicating an algorithm to compute optimal number of
-bins. See details. Overriden by bins. Defaults to \code{method = "fd"}.}
+bins. See details. Overridden by bins. Defaults to \code{method = "fd"}.}
 
 \item{density}{Logical indicating if density should be plotted on y-axis.}
 

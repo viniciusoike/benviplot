@@ -11,7 +11,7 @@
 #'   \item{wrent_m2}{Weighted observed median rent}
 #'   \item{wgt_inc}{Income weight}
 #'   \item{chg}{Monthly percent variation of the index}
-#'   \item{acum12m}{12-month acummulated variation of the index}
+#'   \item{acum12m}{12-month accumulated variation of the index}
 #'   }
 #' @source Benvi
 "iqa"

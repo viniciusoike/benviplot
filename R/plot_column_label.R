@@ -1,7 +1,7 @@
 #' Column plot with text labels
 #' @inheritParams plot_column
 #' @param label <[`data-masked`][ggplot2::aes_eval]> Text label to mapped onto the column. Defaults to y variable.
-#' @param fill_guide Optional indicating if fill guide should be supressed.
+#' @param fill_guide Optional indicating if fill guide should be suppressed.
 #'
 #'
 #' @importFrom ggplot2 ggplot aes waiver geom_col geom_text coord_flip theme position_stack guides
