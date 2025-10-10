@@ -12,6 +12,7 @@
 <url><loc>https://viniciusoike.github.io/benviplot/authors.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/index.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/news/index.html</loc></url>
+<url><loc>https://viniciusoike.github.io/benviplot/reference/benvi_colors.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/benvi_palette.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/get_hist_bw.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-continuous.html</loc></url>
@@ -20,6 +21,8 @@
 <url><loc>https://viniciusoike.github.io/benviplot/reference/index.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/iqa.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/iqaiw.html</loc></url>
+<url><loc>https://viniciusoike.github.io/benviplot/reference/list_colors.html</loc></url>
+<url><loc>https://viniciusoike.github.io/benviplot/reference/list_palettes.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/plot_add_xy.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/plot_area.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/plot_column.html</loc></url>
@@ -29,6 +32,7 @@
 <url><loc>https://viniciusoike.github.io/benviplot/reference/plot_line_trend.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/plot_scatter.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/pretty_number.html</loc></url>
+<url><loc>https://viniciusoike.github.io/benviplot/reference/show_palettes.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/theme_benvi.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/theme_custom.html</loc></url>
 </urlset>

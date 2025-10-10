@@ -64,7 +64,7 @@
       <h1>Color Palettes in benviplot</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/viniciusoike/benviplot/blob/v0.9.5/vignettes/color-palettes.Rmd" class="external-link"><code>vignettes/color-palettes.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/viniciusoike/benviplot/blob/master/vignettes/color-palettes.Rmd" class="external-link"><code>vignettes/color-palettes.Rmd</code></a></small>
       <div class="d-none name"><code>color-palettes.Rmd</code></div>
     </div>
 
@@ -113,7 +113,7 @@ scales</li>
 <p>Three fundamental palettes with 3 colors each:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Basic palette (3 colors)</span></span>
-<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"Basic"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"basic"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="color-palettes_files/figure-html/basic-palettes-1.png" width="672" style="display: block; margin: auto;"></p>
 <p><strong>When to use</strong>: Simple visualizations with 2-3
 categories.</p>
@@ -126,7 +126,7 @@ categories.</p>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">category</span>, y <span class="op">=</span> <span class="va">value</span>, fill <span class="op">=</span> <span class="va">category</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_fill_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"Basic"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_fill_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"basic"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Using Basic Palette"</span>, x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="color-palettes_files/figure-html/basic-example-1.png" width="672" style="display: block; margin: auto;"></p>
@@ -137,10 +137,10 @@ categories.</p>
 <p>Eight themed palettes, each with 4 carefully selected colors. Ideal
 for small categorical datasets.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Display all Set palettes</span></span>
-<span><span class="va">set_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Set"</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Display all theme palettes</span></span>
+<span><span class="va">theme_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"grays"</span>, <span class="st">"browns"</span>, <span class="st">"yellows"</span>, <span class="st">"greens"</span>, <span class="st">"blues"</span>, <span class="st">"purples"</span>, <span class="st">"pinks"</span>, <span class="st">"oranges"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">pal_name</span> <span class="kw">in</span> <span class="va">set_names</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">pal_name</span> <span class="kw">in</span> <span class="va">theme_names</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="va">pal_name</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p><img src="color-palettes_files/figure-html/set-palettes-display-1.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-2.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-3.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-4.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-5.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-6.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-7.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-8.png" width="672" style="display: block; margin: auto;"></p>
@@ -157,7 +157,7 @@ presentations</p>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">regions</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">region</span>, y <span class="op">=</span> <span class="va">sales</span>, fill <span class="op">=</span> <span class="va">region</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_fill_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"Set5"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_fill_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"purples"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Regional Sales"</span>, x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Sales ($1000s)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="color-palettes_files/figure-html/set-example-1.png" width="672" style="display: block; margin: auto;"></p>
@@ -169,7 +169,7 @@ presentations</p>
 categorical datasets where you need many distinguishable colors.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display all Qualitative palettes</span></span>
-<span><span class="va">qual_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Qual"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span></span>
+<span><span class="va">qual_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"qual_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">pal_name</span> <span class="kw">in</span> <span class="va">qual_names</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="va">pal_name</span><span class="op">)</span><span class="op">)</span></span>
@@ -183,7 +183,7 @@ multi-series charts</p>
 <code class="sourceCode R"><span><span class="co"># Use mtcars with multiple groups</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">wt</span>, y <span class="op">=</span> <span class="va">mpg</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">carb</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_color_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"Qual3"</span>, name <span class="op">=</span> <span class="st">"Carburetors"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_color_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"qual_3"</span>, name <span class="op">=</span> <span class="st">"Carburetors"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"MPG vs Weight by Carburetor Count"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Weight (1000 lbs)"</span>,</span>
@@ -199,7 +199,7 @@ multi-series charts</p>
 to dark. Perfect for continuous or ordered data.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display all Sequential palettes</span></span>
-<span><span class="va">seq_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Seq"</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span>
+<span><span class="va">seq_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seq_grays"</span>, <span class="st">"seq_browns"</span>, <span class="st">"seq_yellows"</span>, <span class="st">"seq_greens"</span>, <span class="st">"seq_blues"</span>, <span class="st">"seq_purples"</span>, <span class="st">"seq_pinks"</span>, <span class="st">"seq_oranges"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">pal_name</span> <span class="kw">in</span> <span class="va">seq_names</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="va">pal_name</span><span class="op">)</span><span class="op">)</span></span>
@@ -220,7 +220,7 @@ Data where progression/intensity matters</p>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">heatmap_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, fill <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/ggplot2-scales-continuous.html">scale_fill_benvi_c</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"Seq3"</span>, name <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggplot2-scales-continuous.html">scale_fill_benvi_c</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"seq_greens"</span>, name <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Heatmap with Sequential Palette"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
@@ -299,12 +299,12 @@ location-themed aesthetics</p>
 <p>Specialized single-color gradients for index visualizations.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Blue index</span></span>
-<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"index_blue"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"benvi_blue"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="color-palettes_files/figure-html/index-palettes-1.png" width="672" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Purple index</span></span>
-<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"index_prpl"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"benvi_purple"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="color-palettes_files/figure-html/index-palettes-2.png" width="672" style="display: block; margin: auto;"></p>
 <p><strong>When to use</strong>: - Financial indices and time series -
 Single-metric dashboards - When you want monochromatic emphasis</p>
@@ -317,8 +317,8 @@ Single-metric dashboards - When you want monochromatic emphasis</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">index_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">index</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"index_blue"</span><span class="op">)</span><span class="op">[</span><span class="fl">7</span><span class="op">]</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html" class="external-link">geom_area</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"index_blue"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"benvi_blue"</span><span class="op">)</span><span class="op">[</span><span class="fl">7</span><span class="op">]</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html" class="external-link">geom_area</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"benvi_blue"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Market Index Over Time"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Date"</span>,</span>
@@ -336,19 +336,19 @@ Single-metric dashboards - When you want monochromatic emphasis</p>
 <p>Any palette can be reversed using <code>direction = -1</code>:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Original</span></span>
-<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"Seq5"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"seq_purples"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="color-palettes_files/figure-html/reverse-1.png" width="672" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Reversed</span></span>
-<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"Seq5"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"seq_purples"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="color-palettes_files/figure-html/reverse-2.png" width="672" style="display: block; margin: auto;"></p>
 <p>This is useful when you want dark-to-light instead of
 light-to-dark:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">heatmap_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, fill <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/ggplot2-scales-continuous.html">scale_fill_benvi_c</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"Seq5"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, name <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggplot2-scales-continuous.html">scale_fill_benvi_c</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"seq_purples"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, name <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Reversed Sequential Palette"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
@@ -363,7 +363,7 @@ light-to-dark:</p>
 <p>Get individual colors from a palette:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the 3rd color from Qual5</span></span>
-<span><span class="va">my_color</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"Qual5"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="va">my_color</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_5"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span>
 <span><span class="va">my_color</span></span>
 <span><span class="co">#&gt; [1] "#9A75B4"</span></span>
 <span></span>
@@ -380,12 +380,12 @@ light-to-dark:</p>
 <p>For discrete palettes, request fewer colors:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get only 4 colors from an 8-color palette</span></span>
-<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"Qual7"</span>, n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_7"</span>, n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <p><img src="color-palettes_files/figure-html/custom-n-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>For continuous palettes, interpolate any number:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Interpolate to get 15 colors</span></span>
-<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"Seq2"</span>, n <span class="op">=</span> <span class="fl">15</span>, type <span class="op">=</span> <span class="st">"continuous"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"seq_yellows"</span>, n <span class="op">=</span> <span class="fl">15</span>, type <span class="op">=</span> <span class="st">"continuous"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="color-palettes_files/figure-html/interpolate-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
@@ -395,10 +395,10 @@ light-to-dark:</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create custom palette from multiple sources</span></span>
 <span><span class="va">custom_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"Set3"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
-<span>  <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"Qual5"</span><span class="op">)</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>,</span>
+<span>  <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"greens"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>  <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_5"</span><span class="op">)</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>,</span>
 <span>  <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"rio_qual"</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
-<span>  <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"Seq7"</span><span class="op">)</span><span class="op">[</span><span class="fl">8</span><span class="op">]</span></span>
+<span>  <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"seq_oranges"</span><span class="op">)</span><span class="op">[</span><span class="fl">8</span><span class="op">]</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Use in plot</span></span>
@@ -451,7 +451,7 @@ information</li>
 <code class="sourceCode R"><span><span class="co"># Example with both color and shape</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">wt</span>, y <span class="op">=</span> <span class="va">mpg</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_color_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"Set5"</span>, name <span class="op">=</span> <span class="st">"Cylinders"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_color_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"purples"</span>, name <span class="op">=</span> <span class="st">"Cylinders"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_shape_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">15</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"Cylinders"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Using Color AND Shape for Accessibility"</span>,</span>
@@ -467,6 +467,12 @@ information</li>
 </h2>
 <p>Quick reference for choosing the right palette:</p>
 <table class="table">
+<colgroup>
+<col width="23%">
+<col width="27%">
+<col width="21%">
+<col width="27%">
+</colgroup>
 <thead><tr class="header">
 <th>Data Type</th>
 <th>Palette Type</th>
@@ -477,25 +483,25 @@ information</li>
 <tr class="odd">
 <td>2-3 categories</td>
 <td>Basic</td>
-<td>Basic1, Basic2, Basic3</td>
+<td>basic</td>
 <td>3</td>
 </tr>
 <tr class="even">
 <td>2-4 categories</td>
-<td>Set</td>
-<td>Set0-Set7</td>
+<td>Theme</td>
+<td>grays, browns, yellows, etc.</td>
 <td>4</td>
 </tr>
 <tr class="odd">
 <td>5-8 categories</td>
 <td>Qualitative</td>
-<td>Qual1-Qual9</td>
+<td>qual_1, qual_2, …, qual_9</td>
 <td>8</td>
 </tr>
 <tr class="even">
 <td>Continuous data</td>
 <td>Sequential</td>
-<td>Seq0-Seq7</td>
+<td>seq_grays, seq_blues, etc.</td>
 <td>9 (interpolated)</td>
 </tr>
 <tr class="odd">
@@ -506,8 +512,8 @@ information</li>
 </tr>
 <tr class="even">
 <td>Single metric</td>
-<td>Index</td>
-<td>index_blue, index_prpl</td>
+<td>Brand</td>
+<td>benvi_blue, benvi_purple</td>
 <td>9</td>
 </tr>
 </tbody>
@@ -544,16 +550,16 @@ information</li>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span><span class="va">title</span>, outer <span class="op">=</span> <span class="cn">TRUE</span>, line <span class="op">=</span> <span class="op">-</span><span class="fl">2</span>, cex <span class="op">=</span> <span class="fl">1.5</span>, font <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="co"># Display Set palettes</span></span>
-<span><span class="fu">show_palette_grid</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Set"</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>, <span class="st">"Set Palettes"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># Display theme palettes</span></span>
+<span><span class="fu">show_palette_grid</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"grays"</span>, <span class="st">"browns"</span>, <span class="st">"yellows"</span>, <span class="st">"greens"</span>, <span class="st">"blues"</span>, <span class="st">"purples"</span>, <span class="st">"pinks"</span>, <span class="st">"oranges"</span><span class="op">)</span>, <span class="st">"Theme Palettes"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="color-palettes_files/figure-html/gallery-1.png" width="672" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display Qualitative palettes</span></span>
-<span><span class="fu">show_palette_grid</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Qual"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="st">"Qualitative Palettes"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">show_palette_grid</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"qual_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="st">"Qualitative Palettes"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="color-palettes_files/figure-html/gallery-qual-1.png" width="672" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display Sequential palettes</span></span>
-<span><span class="fu">show_palette_grid</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Seq"</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>, <span class="st">"Sequential Palettes"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">show_palette_grid</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seq_grays"</span>, <span class="st">"seq_browns"</span>, <span class="st">"seq_yellows"</span>, <span class="st">"seq_greens"</span>, <span class="st">"seq_blues"</span>, <span class="st">"seq_purples"</span>, <span class="st">"seq_pinks"</span>, <span class="st">"seq_oranges"</span><span class="op">)</span>, <span class="st">"Sequential Palettes"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="color-palettes_files/figure-html/gallery-seq-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
