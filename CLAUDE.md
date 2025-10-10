@@ -54,11 +54,11 @@ The package uses a centralized color palette system stored in `inst/extdata/`:
 **Palette Generation** (`data-raw/cols_to_palette.R`):
 - Converts named colors to hex values via `get_colors()` and `get_hex()` functions
 - Creates palette sets organized by type:
-  - **Sets (Set0-Set7)**: 4-color themed collections
-  - **Quals (Qual1-Qual9)**: 8-color qualitative palettes for categorical data
-  - **Sequential (Seq0-Seq7)**: 9-color gradients via interpolation
-  - **City-specific**: spo_*, rio_*, bhe_* palettes
-  - **Index colors**: index_blue, index_prpl
+  - **Theme palettes** (4 colors): grays, browns, yellows, greens, blues, purples, pinks, oranges
+  - **Qualitative palettes** (8 colors): qual_1, qual_2, qual_3, qual_4, qual_5, qual_6, qual_7, qual_8, qual_9
+  - **Sequential palettes** (9 colors): seq_grays, seq_browns, seq_yellows, seq_greens, seq_blues, seq_purples, seq_pinks, seq_oranges
+  - **City-specific palettes**: spo_seq, spo_div, spo_qual, rio_seq, rio_div, rio_qual, bhe_seq, bhe_div
+  - **Brand palettes**: benvi_blue, benvi_purple, basic
 
 ### Core Functions
 
@@ -69,6 +69,12 @@ The package uses a centralized color palette system stored in `inst/extdata/`:
   - Can reverse palettes with `direction = -1`
 - `pal_pal()`: Factory function for creating palette generators
 - `print.palette()`: S3 method for visualizing palettes
+
+**R/palette_utils.R**:
+- `benvi_colors(color_names)`: Get hex codes for individual named colors or list all color names
+- `list_palettes(type)`: List available palette names, filterable by type ("all", "theme", "sequential", "qualitative", "city", "brand")
+- `list_colors()`: List all 36 available Benvi color names
+- `show_palettes(type, n)`: Visual display of all palettes (like RColorBrewer::display.brewer.all())
 
 **R/benvi_scales.R**:
 - Discrete scales: `scale_color_benvi_d()`, `scale_fill_benvi_d()`

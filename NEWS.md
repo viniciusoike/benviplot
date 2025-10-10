@@ -1,5 +1,48 @@
 # benviplot (development)
 
+## benviplot 0.9.6 (2025-01-10) - Breaking Changes for v1.0
+
+**Pre-release version with breaking palette renaming**
+
+### BREAKING CHANGES
+
+* **Palette Renaming** - All 36 palettes renamed with intuitive, descriptive names:
+  * Theme palettes: `Set0-7` → `grays, browns, yellows, greens, blues, purples, pinks, oranges`
+  * Sequential palettes: `Seq0-7` → `seq_grays, seq_browns, seq_yellows, seq_greens, seq_blues, seq_purples, seq_pinks, seq_oranges`
+  * Qualitative palettes: `Qual1-9` → `qual_1, qual_2, qual_3, qual_4, qual_5, qual_6, qual_7, qual_8, qual_9`
+  * Brand palettes: `index_blue` → `benvi_blue`, `index_prpl` → `benvi_purple`
+  * Basic palette: `Basic` → `basic`
+  * **Migration guide**: Replace old palette names with new ones in your code
+
+### New Features
+
+* Added utility functions for palette discovery and exploration:
+  * `benvi_colors()`: Get hex codes for individual named colors or list all color names
+  * `list_palettes(type)`: List available palette names (filterable by type: "theme", "sequential", "qualitative", "city", "brand")
+  * `list_colors()`: List all 36 available Benvi color names
+  * `show_palettes(type, n)`: Visual display of all palettes (similar to RColorBrewer::display.brewer.all())
+
+### Bug Fixes
+
+* Fixed `print.palette()` S3 method to remove white horizontal line in palette visualization
+* Fixed internal naming conflict between `benvi_colors()` function and `benvi_colors` data object
+
+### Updated
+
+* All plot function defaults updated to use new palette names
+* All documentation and roxygen examples updated
+* All 4 vignettes updated with new palette names throughout
+* All 250 tests passing (added 54 new tests for utility functions)
+* Updated palette data structures in `inst/extdata/` and `R/sysdata.rda`
+
+### Quality Assurance
+
+* Package passes R CMD check: 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+* All vignettes build successfully
+* Test coverage maintained
+
+---
+
 ## benviplot 0.9.5 (2025-10-08) - Phases 5-6 Complete
 
 **Pre-release version preparing for v1.0.0**
