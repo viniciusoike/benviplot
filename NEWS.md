@@ -1,4 +1,88 @@
-# benviplot (development)
+# benviplot 1.0.0 (2025-01-10) - Official Stable Release
+
+**First official stable release** 🎉
+
+benviplot provides color palettes and ggplot2 extensions for creating quality graphics with a professional, consistent visual style.
+
+## Overview
+
+This package offers:
+- **36 curated color palettes** organized by purpose (theme, sequential, qualitative, city-specific, brand)
+- **ggplot2 integration** with discrete and continuous scale functions
+- **Plot helper functions** for common visualizations
+- **Custom theme** with Poppins font support
+- **Comprehensive documentation** including 4 detailed vignettes and pkgdown website
+
+## What's New in 1.0.0
+
+### Major Changes from Pre-Release Versions
+
+**Breaking Changes** (from v0.9.6):
+- All 36 palettes renamed with intuitive, descriptive names
+- Old names like `Set0-7`, `Qual1-9`, `Seq0-7` replaced with `grays`, `qual_1`, `seq_grays`, etc.
+- Brand palettes: `index_blue` → `benvi_blue`, `index_prpl` → `benvi_purple`, `Basic` → `basic`
+
+**New Utility Functions**:
+- `benvi_colors()`: Get hex codes for individual colors or list all color names
+- `list_palettes(type)`: List available palettes filtered by type
+- `list_colors()`: List all color names
+- `show_palettes(type, n)`: Visual display of palettes (like RColorBrewer)
+
+### Quality & Infrastructure
+
+- **Testing**: 250 tests with 100% pass rate, 72% code coverage
+- **Documentation**:
+  - 4 comprehensive vignettes (getting-started, color-palettes, plot-functions, themes-and-styling)
+  - Professional pkgdown website at https://viniciusoike.github.io/benviplot/
+  - All functions fully documented with examples
+- **CI/CD**: GitHub Actions for automated testing, coverage tracking, and documentation deployment
+- **Quality checks**:
+  - R CMD check: 0 errors, 0 warnings, 0 notes ✓
+  - Spelling check: Clean ✓
+  - URL validation: All links verified ✓
+  - Compatible with ggplot2 >= 4.0.0
+
+### Installation
+
+```r
+# Install from GitHub
+remotes::install_github("viniciusoike/benviplot")
+```
+
+### Quick Start
+
+```r
+library(ggplot2)
+library(benviplot)
+
+# View a palette
+benvi_palette("qual_2")
+
+# Use in a plot
+ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
+  geom_point() +
+  scale_color_benvi_d(pal_name = "qual_2", name = "Cylinders") +
+  theme_benvi()
+```
+
+### Migration from Pre-Release Versions
+
+If upgrading from v0.9.5 or earlier, update palette names:
+
+```r
+# OLD → NEW
+benvi_palette("Set0") → benvi_palette("grays")
+benvi_palette("Seq3") → benvi_palette("seq_greens")
+benvi_palette("Qual5") → benvi_palette("qual_5")
+benvi_palette("index_blue") → benvi_palette("benvi_blue")
+benvi_palette("Basic") → benvi_palette("basic")
+```
+
+### Legal
+
+**DISCLAIMER**: This is an unofficial, independent project created by Vinicius Oike and is NOT affiliated with, endorsed by, or connected to QuintoAndar in any way. Benvi was a former brand of QuintoAndar that was discontinued in 2024. This package uses publicly available color schemes from that period for data visualization purposes.
+
+---
 
 ## benviplot 0.9.6 (2025-01-10) - Breaking Changes for v1.0
 
