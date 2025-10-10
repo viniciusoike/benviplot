@@ -66,7 +66,7 @@ benvi_palette("rio_qual")
 <img src="man/figures/README-unnamed-chunk-4-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ``` r
-benvi_palette("Qual2")
+benvi_palette("qual_2")
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.svg" width="80%" style="display: block; margin: auto;" />
@@ -75,7 +75,7 @@ Although the console prints a palette the hex values can be used
 directly.
 
 ``` r
-as.character(benvi_palette("Qual2"))
+as.character(benvi_palette("qual_2"))
 #> [1] "#C5C9BA" "#816242" "#F2C037" "#009850" "#466795" "#9A75B4" "#EA4E58"
 #> [8] "#C64729"
 ```
@@ -95,8 +95,8 @@ below shows a simple use case.
 ``` r
 ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
   geom_point() +
-  geom_smooth(color = benvi_palette("Qual9")[5], se = FALSE) + 
-  scale_color_benvi_d(pal_name = "Qual9", name = "Cylinders") +
+  geom_smooth(color = benvi_palette("qual_9")[5], se = FALSE) +
+  scale_color_benvi_d(pal_name = "qual_9", name = "Cylinders") +
   labs(
     title = "A Benvi styled plot",
     subtitle = "Fontface is defined as Poppins using showtext",
@@ -117,7 +117,7 @@ housing <- subset(txhousing, city %in% c("Austin", "Houston", "Dallas"))
 
 ggplot(housing, aes(x = date, y = city, fill = median)) +
   geom_tile(height = 0.8) +
-  scale_fill_benvi_c(pal_name = "Set3", name = "Median House\nPrice ($)") +
+  scale_fill_benvi_c(pal_name = "greens", name = "Median House\nPrice ($)") +
   theme_benvi() +
   theme(
     legend.key.size = unit(1, "cm"),
@@ -178,18 +178,19 @@ plot_scatter(
 
 The package includes several palette families:
 
-- **Set Palettes** (Set0-Set7): 4-color palettes for basic
-  visualizations
-- **Qualitative Palettes** (Qual1-Qual9): 8-color palettes for
+- **Theme Palettes** (grays, browns, yellows, greens, blues, purples,
+  pinks, oranges): 4-color palettes for basic visualizations
+- **Qualitative Palettes** (qual_1 through qual_9): 8-color palettes for
   categorical data
-- **Sequential Palettes** (Seq0-Seq7): 9-color gradients for continuous
-  data
+- **Sequential Palettes** (seq_grays, seq_browns, etc.): 9-color
+  gradients for continuous data
 - **City-specific**: Special palettes for São Paulo, Rio, and Belo
-  Horizonte
-- **Index Colors**: Specialized color scales (index_blue, index_prpl)
+  Horizonte (spo\_*, rio\_*, bhe\_\*)
+- **Brand Colors**: Specialized color scales (benvi_blue, benvi_purple,
+  basic)
 
 View all available palettes by calling `benvi_palette()` with different
-palette names.
+palette names, or use `list_palettes()` to see all options.
 
 ## Requirements
 
