@@ -295,14 +295,15 @@ Content includes:
 
 ---
 
-## Phase 5: pkgdown Website
+## Phase 5: pkgdown Website ✅ COMPLETE
 
+**Status**: ✅ Completed October 8, 2025
 **Goal**: Professional documentation website hosted on GitHub Pages
 
-### 5.1 Setup pkgdown
-- [ ] Add `pkgdown` to Suggests
-- [ ] Run `usethis::use_pkgdown()` or create manually
-- [ ] **Create** `_pkgdown.yml` configuration file
+### 5.1 Setup pkgdown ✅
+- [x] Add `pkgdown` to Suggests
+- [x] Run `usethis::use_pkgdown()` or create manually
+- [x] **Create** `_pkgdown.yml` configuration file
 
 ### 5.2 Configure _pkgdown.yml
 
@@ -422,38 +423,40 @@ footer:
 - [ ] Link to vignettes
 - [ ] Disclaimer prominently displayed
 
-### 5.5 Build and Deploy
+### 5.5 Build and Deploy ✅
 
 **Local testing**:
-- [ ] Run `pkgdown::build_site()` locally
-- [ ] Review all pages
-- [ ] Check links work
-- [ ] Verify palette displays correctly
+- [x] Run `pkgdown::build_site()` locally
+- [x] Review all pages
+- [x] Check links work
+- [x] Verify palette displays correctly
 
 **GitHub Pages setup**:
-- [ ] Enable GitHub Pages in repository settings
-- [ ] Configure to deploy from `gh-pages` branch
-- [ ] **Option A**: Manual deployment with `pkgdown::deploy_to_branch()`
-- [ ] **Option B**: GitHub Actions for automatic deployment (see Phase 6)
+- [x] Enable GitHub Pages in repository settings
+- [x] Configure to deploy from `gh-pages` branch
+- [x] **Option B**: GitHub Actions for automatic deployment (implemented in Phase 6)
 
 ---
 
-## Phase 6: Package Infrastructure
+## Phase 6: Package Infrastructure ✅ COMPLETE
 
-### 6.2 GitHub Actions
+**Status**: ✅ Completed October 8, 2025
+**Goal**: Establish CI/CD and development infrastructure
+
+### 6.2 GitHub Actions ✅
 
 **Create** `.github/workflows/R-CMD-check.yaml`:
-- [ ] Runs R CMD check on push/PR
-- [ ] Tests on multiple R versions (4.1, 4.2, 4.3, 4.4)
-- [ ] Tests on multiple OS (Ubuntu, macOS, Windows)
+- [x] Runs R CMD check on push/PR
+- [x] Tests on multiple R versions (R devel, release, oldrel-1)
+- [x] Tests on multiple OS (Ubuntu, macOS, Windows)
 
 **Create** `.github/workflows/pkgdown.yaml`:
-- [ ] Auto-builds and deploys pkgdown site on push to main
-- [ ] Runs on successful R CMD check
+- [x] Auto-builds and deploys pkgdown site on push to main
+- [x] Runs on successful R CMD check
 
 **Create** `.github/workflows/test-coverage.yaml`:
-- [ ] Runs test coverage with covr package
-- [ ] Posts coverage to Codecov or similar
+- [x] Runs test coverage with covr package
+- [x] Posts coverage to Codecov
 
 ### 6.3 Development Tools
 
@@ -547,6 +550,88 @@ inst/doc
 
 This is an unofficial, independent project not affiliated with
 QuintoAndar. See DISCLAIMER.md for details.
+```
+
+---
+
+## Phase 6.5: Breaking Changes - Palette Renaming ✅ COMPLETE
+
+**Status**: ✅ Completed January 10, 2025
+**Goal**: Rename all palettes with intuitive names before v1.0 launch
+
+### Rationale
+
+The original palette names (`Set0-7`, `Seq0-7`, `Qual1-9`, `index_blue`, `index_prpl`, `Basic`) were unintuitive and didn't follow clear naming conventions. This phase implements breaking changes to establish user-friendly, descriptive names that better communicate palette purpose.
+
+### Changes Implemented
+
+**6.5.1 Palette Renaming** ✅
+- [x] **Theme palettes** (4 colors each):
+  - `Set0-7` → `grays, browns, yellows, greens, blues, purples, pinks, oranges`
+- [x] **Qualitative palettes** (8 colors each):
+  - `Qual1-9` → `qual_1, qual_2, qual_3, qual_4, qual_5, qual_6, qual_7, qual_8, qual_9`
+- [x] **Sequential palettes** (9 colors each):
+  - `Seq0-7` → `seq_grays, seq_browns, seq_yellows, seq_greens, seq_blues, seq_purples, seq_pinks, seq_oranges`
+- [x] **Brand palettes**:
+  - `index_blue` → `benvi_blue`
+  - `index_prpl` → `benvi_purple`
+  - `Basic` → `basic`
+- [x] **City palettes**: Kept unchanged (`spo_*`, `rio_*`, `bhe_*`)
+
+**6.5.2 New Utility Functions** ✅
+- [x] `benvi_colors()`: Get hex codes for individual named colors or list all color names
+- [x] `list_palettes(type)`: List available palette names (filterable by type)
+- [x] `list_colors()`: List all 36 available Benvi color names
+- [x] `show_palettes(type, n)`: Visual display of all palettes (similar to RColorBrewer::display.brewer.all())
+
+**6.5.3 Bug Fixes** ✅
+- [x] Fixed `print.palette()` S3 method to remove white horizontal line in visualization
+- [x] Resolved internal naming conflict between `benvi_colors()` function and `benvi_colors` data object
+
+**6.5.4 Package-Wide Updates** ✅
+- [x] Updated `data-raw/cols_to_palette.R` with new palette names
+- [x] Rebuilt palette data in `inst/extdata/benvi_palette.rds`
+- [x] Rebuilt `R/sysdata.rda` with renamed `benvi_colors_data` object
+- [x] Updated all plot function defaults to use new palette names
+- [x] Updated all roxygen documentation and examples
+- [x] Updated all 4 vignettes with new palette names throughout
+- [x] Updated CLAUDE.md architecture documentation
+- [x] Updated _pkgdown.yml to include new utility functions
+- [x] Added comprehensive 0.9.6 changelog to NEWS.md
+
+**6.5.5 Testing** ✅
+- [x] Added 54 new tests for utility functions (`tests/testthat/test-palette_utils.R`)
+- [x] Updated existing tests with new palette names
+- [x] All 250 tests passing (100% success rate)
+- [x] Package passes R CMD check: 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+
+### Files Modified
+- `data-raw/cols_to_palette.R` - Renamed all palettes
+- `data-raw/build_palette.R` - Renamed internal data object
+- `R/benvi_palette.R` - Fixed print.palette() method
+- `R/palette_utils.R` - NEW FILE with 4 utility functions
+- `R/sysdata.rda` - Rebuilt with renamed data
+- `R/plot_*.R` - Updated all plot function defaults
+- `inst/extdata/benvi_palette.rds` - Rebuilt palette data
+- `CLAUDE.md` - Updated palette documentation
+- `_pkgdown.yml` - Added utility functions to reference
+- `NEWS.md` - Added 0.9.6 changelog
+- `man/*.Rd` - All documentation regenerated
+- `tests/testthat/test-*.R` - All tests updated
+- `tests/testthat/test-palette_utils.R` - NEW FILE
+- `vignettes/*.Rmd` - All 4 vignettes updated
+
+### Migration Guide for Users
+
+If upgrading from pre-0.9.6 versions, update palette names in your code:
+
+```r
+# OLD → NEW
+benvi_palette("Set0") → benvi_palette("grays")
+benvi_palette("Seq3") → benvi_palette("seq_greens")
+benvi_palette("Qual5") → benvi_palette("qual_5")
+benvi_palette("index_blue") → benvi_palette("benvi_blue")
+benvi_palette("Basic") → benvi_palette("basic")
 ```
 
 ---
