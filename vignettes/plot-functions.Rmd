@@ -44,7 +44,7 @@ Most plot functions share these parameters:
 | `x` | Variable for x-axis | Required |
 | `y` | Variable for y-axis | Required |
 | `variable` | Grouping variable for colors | Optional |
-| `palette` | Palette name (e.g., "Qual5") | Function-specific |
+| `palette` | Palette name (e.g., "qual_5") | Function-specific |
 | `scale_name` | Legend title | `""` |
 | `scale_label` | Legend labels | `waiver()` |
 | `color` | Single color (when no grouping) | Auto |
@@ -73,7 +73,7 @@ plot_line(
   x = date,
   y = sales,
   variable = city,
-  palette = "Set5",
+  palette = "purples",
   scale_name = "City"
 )
 ```
@@ -134,7 +134,7 @@ plot_column(
   x = quarter,
   y = revenue,
   variable = region,
-  palette = "Set3",
+  palette = "greens",
   scale_name = "Region"
 )
 ```
@@ -163,7 +163,7 @@ plot_scatter(
   x = wt,
   y = mpg,
   variable = as.factor(cyl),
-  palette = "Qual5",
+  palette = "qual_5",
   scale_name = "Cylinders"
 )
 ```
@@ -191,7 +191,7 @@ plot_scatter(
   fit = TRUE,
   fit_variable = TRUE,
   fit_method = "lm",
-  palette = "Set7",
+  palette = "oranges",
   scale_name = "Cylinders"
 )
 ```
@@ -247,7 +247,7 @@ plot_area(
   x = year,
   y = value,
   variable = category,
-  palette = "Seq3",
+  palette = "seq_greens",
   scale_name = "Product"
 )
 ```
@@ -280,7 +280,7 @@ plot_histogram(
   mtcars,
   x = mpg,
   variable = as.factor(cyl),
-  palette = "Set5",
+  palette = "purples",
   scale_name = "Cylinders"
 )
 ```
@@ -311,7 +311,7 @@ plot_line(economics, x = date, y = unemploy / 1000) +
   geom_smooth(
     method = "loess",
     se = FALSE,
-    color = benvi_palette("Set1")[2],
+    color = benvi_palette("browns")[2],
     linewidth = 1.5
   ) +
   labs(
@@ -330,7 +330,7 @@ plot_scatter(
   x = wt,
   y = mpg,
   variable = as.factor(cyl),
-  palette = "Qual7",
+  palette = "qual_7",
   scale_name = "Cylinders",
   size = 4,  # Passed to geom_point via ...
   alpha = 0.7
@@ -414,7 +414,7 @@ plot_scatter(
   x = wt,
   y = mpg,
   variable = as.factor(cyl),
-  palette = "Set5",
+  palette = "purples",
   scale_name = "Number of\nCylinders",
   scale_label = c("Four", "Six", "Eight")
 ) +
@@ -450,7 +450,7 @@ When using `variable`, keep groups ≤ 7 for readability:
 ```{r tips-colors}
 # Good: 3 groups
 housing_few <- housing_subset |> filter(city %in% c("Austin", "Houston"))
-plot_line(housing_few, x = date, y = sales, variable = city, palette = "Set2")
+plot_line(housing_few, x = date, y = sales, variable = city, palette = "yellows")
 ```
 
 ### 3. Use Appropriate Palettes
@@ -509,7 +509,7 @@ plot_scatter(
   x = wt,
   y = mpg,
   variable = as.factor(cyl),  # Convert to factor!
-  palette = "Qual3"
+  palette = "qual_3"
 )
 ```
 
@@ -519,7 +519,7 @@ Check that palette exists and has enough colors:
 
 ```{r, eval = FALSE}
 # View available colors
-benvi_palette("Qual5")
+benvi_palette("qual_5")
 
 # Ensure you don't exceed available colors for discrete palettes
 ```

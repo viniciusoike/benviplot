@@ -29,7 +29,7 @@ plot_scatter <- function(
     fit_formula = NULL,
     fit_ci = FALSE,
     zero = "none",
-    palette = "Qual9",
+    palette = "qual_9",
     scale_name = "",
     scale_label = ggplot2::waiver(),
     ...) {
@@ -46,7 +46,7 @@ plot_scatter <- function(
 
     if (missing(color)) {
 
-      color <- benvi_palette("Basic", 1)
+      color <- benvi_palette("basic", 1)
 
     }
 

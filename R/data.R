@@ -58,7 +58,7 @@
 #' library(ggplot2)
 #' ggplot(iqaiw, aes(x = date, y = index, color = name_muni)) +
 #'   geom_line() +
-#'   scale_color_benvi_d(pal_name = "Qual6", name = "City") +
+#'   scale_color_benvi_d(pal_name = "qual_6", name = "City") +
 #'   labs(
 #'     title = "IQAIW: Rental Price Index",
 #'     x = "Date",

@@ -45,7 +45,7 @@ Three fundamental palettes with 3 colors each:
 
 ```{r basic-palettes}
 # Basic palette (3 colors)
-benvi_palette("Basic")
+benvi_palette("basic")
 ```
 
 **When to use**: Simple visualizations with 2-3 categories.
@@ -60,7 +60,7 @@ data <- data.frame(
 
 ggplot(data, aes(x = category, y = value, fill = category)) +
   geom_col(show.legend = FALSE) +
-  scale_fill_benvi_d(pal_name = "Basic") +
+  scale_fill_benvi_d(pal_name = "basic") +
   labs(title = "Using Basic Palette", x = NULL, y = "Value") +
   theme_benvi()
 ```
@@ -70,10 +70,10 @@ ggplot(data, aes(x = category, y = value, fill = category)) +
 Eight themed palettes, each with 4 carefully selected colors. Ideal for small categorical datasets.
 
 ```{r set-palettes-display}
-# Display all Set palettes
-set_names <- paste0("Set", 0:7)
+# Display all theme palettes
+theme_names <- c("grays", "browns", "yellows", "greens", "blues", "purples", "pinks", "oranges")
 
-for (pal_name in set_names) {
+for (pal_name in theme_names) {
   print(benvi_palette(pal_name))
 }
 ```
@@ -94,7 +94,7 @@ regions <- data.frame(
 
 ggplot(regions, aes(x = region, y = sales, fill = region)) +
   geom_col(show.legend = FALSE) +
-  scale_fill_benvi_d(pal_name = "Set5") +
+  scale_fill_benvi_d(pal_name = "purples") +
   labs(title = "Regional Sales", x = NULL, y = "Sales ($1000s)") +
   theme_benvi()
 ```
@@ -105,7 +105,7 @@ Nine palettes with 8 distinct colors each. Designed for larger categorical datas
 
 ```{r qual-palettes-display}
 # Display all Qualitative palettes
-qual_names <- paste0("Qual", 1:9)
+qual_names <- paste0("qual_", 1:9)
 
 for (pal_name in qual_names) {
   print(benvi_palette(pal_name))
@@ -123,7 +123,7 @@ for (pal_name in qual_names) {
 # Use mtcars with multiple groups
 ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(carb))) +
   geom_point(size = 3) +
-  scale_color_benvi_d(pal_name = "Qual3", name = "Carburetors") +
+  scale_color_benvi_d(pal_name = "qual_3", name = "Carburetors") +
   labs(
     title = "MPG vs Weight by Carburetor Count",
     x = "Weight (1000 lbs)",
@@ -138,7 +138,7 @@ Eight gradient palettes with 9 colors each, transitioning from light to dark. Pe
 
 ```{r seq-palettes-display}
 # Display all Sequential palettes
-seq_names <- paste0("Seq", 0:7)
+seq_names <- c("seq_grays", "seq_browns", "seq_yellows", "seq_greens", "seq_blues", "seq_purples", "seq_pinks", "seq_oranges")
 
 for (pal_name in seq_names) {
   print(benvi_palette(pal_name))
@@ -164,7 +164,7 @@ heatmap_data$value <- with(heatmap_data, x * y + rnorm(100, 0, 5))
 
 ggplot(heatmap_data, aes(x = x, y = y, fill = value)) +
   geom_tile() +
-  scale_fill_benvi_c(pal_name = "Seq3", name = "Value") +
+  scale_fill_benvi_c(pal_name = "seq_greens", name = "Value") +
   labs(title = "Heatmap with Sequential Palette") +
   theme_benvi() +
   theme(
@@ -232,10 +232,10 @@ Specialized single-color gradients for index visualizations.
 
 ```{r index-palettes}
 # Blue index
-benvi_palette("index_blue")
+benvi_palette("benvi_blue")
 
 # Purple index
-benvi_palette("index_prpl")
+benvi_palette("benvi_purple")
 ```
 
 **When to use**:
@@ -253,8 +253,8 @@ index_data <- data.frame(
 )
 
 ggplot(index_data, aes(x = date, y = index)) +
-  geom_line(color = benvi_palette("index_blue")[7], linewidth = 1) +
-  geom_area(fill = benvi_palette("index_blue")[3], alpha = 0.3) +
+  geom_line(color = benvi_palette("benvi_blue")[7], linewidth = 1) +
+  geom_area(fill = benvi_palette("benvi_blue")[3], alpha = 0.3) +
   labs(
     title = "Market Index Over Time",
     x = "Date",
@@ -271,10 +271,10 @@ Any palette can be reversed using `direction = -1`:
 
 ```{r reverse}
 # Original
-benvi_palette("Seq5")
+benvi_palette("seq_purples")
 
 # Reversed
-benvi_palette("Seq5", direction = -1)
+benvi_palette("seq_purples", direction = -1)
 ```
 
 This is useful when you want dark-to-light instead of light-to-dark:
@@ -282,7 +282,7 @@ This is useful when you want dark-to-light instead of light-to-dark:
 ```{r reverse-example}
 ggplot(heatmap_data, aes(x = x, y = y, fill = value)) +
   geom_tile() +
-  scale_fill_benvi_c(pal_name = "Seq5", direction = -1, name = "Value") +
+  scale_fill_benvi_c(pal_name = "seq_purples", direction = -1, name = "Value") +
   labs(title = "Reversed Sequential Palette") +
   theme_benvi() +
   theme(
@@ -297,7 +297,7 @@ Get individual colors from a palette:
 
 ```{r extract-colors}
 # Get the 3rd color from Qual5
-my_color <- benvi_palette("Qual5")[3]
+my_color <- benvi_palette("qual_5")[3]
 my_color
 
 # Use in a plot
@@ -313,14 +313,14 @@ For discrete palettes, request fewer colors:
 
 ```{r custom-n}
 # Get only 4 colors from an 8-color palette
-benvi_palette("Qual7", n = 4)
+benvi_palette("qual_7", n = 4)
 ```
 
 For continuous palettes, interpolate any number:
 
 ```{r interpolate}
 # Interpolate to get 15 colors
-benvi_palette("Seq2", n = 15, type = "continuous")
+benvi_palette("seq_yellows", n = 15, type = "continuous")
 ```
 
 ### Combining Palettes
@@ -330,10 +330,10 @@ Mix colors from different palettes for custom schemes:
 ```{r combine}
 # Create custom palette from multiple sources
 custom_colors <- c(
-  benvi_palette("Set3")[1],
-  benvi_palette("Qual5")[4],
+  benvi_palette("greens")[1],
+  benvi_palette("qual_5")[4],
   benvi_palette("rio_qual")[2],
-  benvi_palette("Seq7")[8]
+  benvi_palette("seq_oranges")[8]
 )
 
 # Use in plot
@@ -368,7 +368,7 @@ When choosing palettes, consider:
 # Example with both color and shape
 ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl), shape = as.factor(cyl))) +
   geom_point(size = 3) +
-  scale_color_benvi_d(pal_name = "Set5", name = "Cylinders") +
+  scale_color_benvi_d(pal_name = "purples", name = "Cylinders") +
   scale_shape_manual(values = c(16, 17, 15), name = "Cylinders") +
   labs(
     title = "Using Color AND Shape for Accessibility",
@@ -384,12 +384,12 @@ Quick reference for choosing the right palette:
 
 | Data Type | Palette Type | Examples | Color Count |
 |-----------|-------------|----------|-------------|
-| 2-3 categories | Basic | Basic1, Basic2, Basic3 | 3 |
-| 2-4 categories | Set | Set0-Set7 | 4 |
-| 5-8 categories | Qualitative | Qual1-Qual9 | 8 |
-| Continuous data | Sequential | Seq0-Seq7 | 9 (interpolated) |
+| 2-3 categories | Basic | basic | 3 |
+| 2-4 categories | Theme | grays, browns, yellows, etc. | 4 |
+| 5-8 categories | Qualitative | qual_1, qual_2, ..., qual_9 | 8 |
+| Continuous data | Sequential | seq_grays, seq_blues, etc. | 9 (interpolated) |
 | Geographic (cities) | City-specific | spo_*, rio_*, bhe_* | 4-8 |
-| Single metric | Index | index_blue, index_prpl | 9 |
+| Single metric | Brand | benvi_blue, benvi_purple | 9 |
 
 ## Complete Palette Gallery
 
@@ -422,18 +422,18 @@ show_palette_grid <- function(palette_names, title) {
   mtext(title, outer = TRUE, line = -2, cex = 1.5, font = 2)
 }
 
-# Display Set palettes
-show_palette_grid(paste0("Set", 0:7), "Set Palettes")
+# Display theme palettes
+show_palette_grid(c("grays", "browns", "yellows", "greens", "blues", "purples", "pinks", "oranges"), "Theme Palettes")
 ```
 
 ```{r gallery-qual, fig.height=12}
 # Display Qualitative palettes
-show_palette_grid(paste0("Qual", 1:9), "Qualitative Palettes")
+show_palette_grid(paste0("qual_", 1:9), "Qualitative Palettes")
 ```
 
 ```{r gallery-seq, fig.height=12}
 # Display Sequential palettes
-show_palette_grid(paste0("Seq", 0:7), "Sequential Palettes")
+show_palette_grid(c("seq_grays", "seq_browns", "seq_yellows", "seq_greens", "seq_blues", "seq_purples", "seq_pinks", "seq_oranges"), "Sequential Palettes")
 ```
 
 ## Summary

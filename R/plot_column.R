@@ -43,7 +43,7 @@ plot_column <- function(
     zero = TRUE,
     flip = FALSE,
     text = FALSE,
-    palette = "Qual9",
+    palette = "qual_9",
     scale_name = "",
     scale_label = ggplot2::waiver(),
     digits = 0,

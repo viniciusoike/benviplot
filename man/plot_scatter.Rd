@@ -16,7 +16,7 @@ plot_scatter(
   fit_formula = NULL,
   fit_ci = FALSE,
   zero = "none",
-  palette = "Qual9",
+  palette = "qual_9",
   scale_name = "",
   scale_label = ggplot2::waiver(),
   ...

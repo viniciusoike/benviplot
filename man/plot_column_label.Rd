@@ -14,7 +14,7 @@ plot_column_label(
   zero = TRUE,
   flip = TRUE,
   fill_guide = "none",
-  palette = "Qual9",
+  palette = "qual_9",
   text_color = "white",
   text_family = "Roboto",
   text_size = 4,

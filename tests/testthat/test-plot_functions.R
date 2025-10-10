@@ -48,7 +48,7 @@ test_that("plot_line respects palette parameter", {
     x = date,
     y = value,
     variable = group,
-    palette = "Qual5"
+    palette = "qual_5"
   )
 
   expect_s3_class(p, "ggplot")
@@ -234,7 +234,7 @@ test_that("plot_histogram respects palette parameter", {
   p <- plot_histogram(
     data = mtcars,
     x = mpg,
-    palette = "Seq3"
+    palette = "seq_greens"
   )
 
   expect_s3_class(p, "ggplot")

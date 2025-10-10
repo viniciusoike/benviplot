@@ -13,9 +13,9 @@
 #' @importFrom grDevices colorRampPalette rgb
 #' @importFrom cli cli_abort
 #' @examples
-#' benvi_palette("Set3")
-#' benvi_palette("Set3", n = 20, type = "continuous")
-#' benvi_palette("Set3", n = 2, type = "discrete")
+#' benvi_palette("greens")
+#' benvi_palette("greens", n = 20, type = "continuous")
+#' benvi_palette("greens", n = 2, type = "discrete")
 benvi_palette <- function(
     pal_name,
     n,
@@ -76,15 +76,15 @@ pal_pal <- function(pal_name, direction) {
 }
 
 #' @export
-#' @importFrom graphics image par rect text
+#' @importFrom graphics image par text
 print.palette <- function(x, ...) {
   n <- length(x)
-  old <- par(mar = c(0.5, 0.5, 0.5, 0.5))
+  old <- par(mar = c(0.5, 0.5, 2, 0.5))
   on.exit(par(old))
 
   image(1:n, 1, as.matrix(1:n), col = x,
         ylab = "", xaxt = "n", yaxt = "n", bty = "n")
 
-  rect(0, 0.9, n + 1, 1.1, col = rgb(1, 1, 1, 0.8), border = NA)
-  text((n + 1) / 2, 1, labels = attr(x, "name"), cex = 1, family = "serif")
+  text((n + 1) / 2, 1, labels = attr(x, "pal_name"),
+       cex = 1, pos = 3, offset = 0.5)
 }

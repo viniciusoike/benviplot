@@ -13,7 +13,7 @@
 #'
 #'   ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
 #'     geom_point() +
-#'     scale_color_benvi_d("Qual9")
+#'     scale_color_benvi_d("qual_9")
 #' }
 #'
 #' @export
@@ -83,7 +83,7 @@ scale_fill_benvi_d <- function(pal_name, direction = 1, ...) {
 #'
 #'   ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Petal.Length)) +
 #'     geom_point() +
-#'     scale_colour_benvi_c("Qual9")
+#'     scale_colour_benvi_c("qual_9")
 #' }
 #'
 #' @export

@@ -34,7 +34,7 @@ if (require('ggplot2')) {
 
   ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Petal.Length)) +
     geom_point() +
-    scale_colour_benvi_c("Qual9")
+    scale_colour_benvi_c("qual_9")
 }
 
 }

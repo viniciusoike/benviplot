@@ -108,7 +108,7 @@ head(mtcars)
 ```{r quick-scatter}
 ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
   geom_point(size = 3) +
-  scale_color_benvi_d(pal_name = "Qual2", name = "Cylinders") +
+  scale_color_benvi_d(pal_name = "qual_2", name = "Cylinders") +
   labs(
     title = "Fuel Efficiency vs. Weight",
     x = "Weight (1000 lbs)",
@@ -121,7 +121,7 @@ That's it! Just three key components:
 
 1. `scale_color_benvi_d()`: Applies benvi discrete color palette
 2. `theme_benvi()`: Applies benvi visual theme
-3. `palette = "Qual2"`: Selects specific color palette
+3. `palette = "qual_2"`: Selects specific color palette
 
 ## Viewing Color Palettes
 
@@ -129,13 +129,13 @@ Before using a palette, you can preview it:
 
 ```{r view-palettes}
 # View a qualitative palette
-benvi_palette("Qual2")
+benvi_palette("qual_2")
 
 # View a sequential palette
-benvi_palette("Seq3")
+benvi_palette("seq_greens")
 
 # View a set palette
-benvi_palette("Set5")
+benvi_palette("purples")
 ```
 
 ### Getting Hex Color Values
@@ -144,11 +144,11 @@ Extract hex codes for use outside ggplot2:
 
 ```{r hex-colors}
 # Get hex codes as character vector
-colors <- as.character(benvi_palette("Qual2"))
+colors <- as.character(benvi_palette("qual_2"))
 colors
 
 # Use specific colors
-my_blue <- benvi_palette("Qual2")[1]
+my_blue <- benvi_palette("qual_2")[1]
 my_blue
 ```
 
@@ -165,7 +165,7 @@ sales <- data.frame(
 
 ggplot(sales, aes(x = product, y = revenue, fill = product)) +
   geom_col(show.legend = FALSE) +
-  scale_fill_benvi_d(pal_name = "Set3") +
+  scale_fill_benvi_d(pal_name = "greens") +
   labs(
     title = "Revenue by Product",
     x = "Product",
@@ -179,7 +179,7 @@ ggplot(sales, aes(x = product, y = revenue, fill = product)) +
 ```{r line-chart}
 # Use built-in economics dataset
 ggplot(economics, aes(x = date, y = unemploy / 1000)) +
-  geom_line(color = benvi_palette("Set5")[1], linewidth = 1) +
+  geom_line(color = benvi_palette("purples")[1], linewidth = 1) +
   labs(
     title = "US Unemployment Over Time",
     x = "Year",
@@ -196,7 +196,7 @@ housing <- subset(txhousing, city %in% c("Austin", "Houston", "Dallas"))
 
 ggplot(housing, aes(x = date, y = city, fill = median)) +
   geom_tile() +
-  scale_fill_benvi_c(pal_name = "Seq5", name = "Median\nPrice ($)") +
+  scale_fill_benvi_c(pal_name = "seq_purples", name = "Median\nPrice ($)") +
   labs(
     title = "Median House Prices in Texas Cities",
     x = "Year",
@@ -229,7 +229,7 @@ plot_scatter(
   x = wt,
   y = mpg,
   variable = as.factor(cyl),
-  palette = "Qual5",
+  palette = "qual_5",
   scale_name = "Cylinders"
 )
 ```
@@ -244,7 +244,7 @@ plot_scatter(
   variable = as.factor(cyl),
   fit = TRUE,
   fit_method = "lm",
-  palette = "Qual5",
+  palette = "qual_5",
   scale_name = "Cylinders"
 ) +
   labs(
@@ -260,7 +260,7 @@ Helper functions return ggplot2 objects, so you can add layers:
 
 ```{r customization}
 plot_line(economics, x = date, y = unemploy / 1000) +
-  geom_smooth(se = FALSE, color = benvi_palette("Set1")[2]) +
+  geom_smooth(se = FALSE, color = benvi_palette("browns")[2]) +
   labs(
     title = "US Unemployment with Smoothed Trend",
     subtitle = "Unemployment figures in millions",
@@ -284,7 +284,7 @@ plot_line(economics, x = date, y = unemploy / 1000) +
 - Examples: `Qual1`, `Qual2`, ..., `Qual9`
 
 ```{r qual-example, eval = FALSE}
-benvi_palette("Qual3")
+benvi_palette("qual_3")
 ```
 
 ### Sequential Palettes (Seq0-Seq7)
@@ -296,7 +296,7 @@ benvi_palette("Qual3")
 - Examples: `Seq0`, `Seq1`, ..., `Seq7`
 
 ```{r seq-example, eval = FALSE}
-benvi_palette("Seq2")
+benvi_palette("seq_yellows")
 ```
 
 ### Set Palettes (Set0-Set7)
@@ -308,7 +308,7 @@ benvi_palette("Seq2")
 - Examples: `Set0`, `Set1`, ..., `Set7`
 
 ```{r set-example, eval = FALSE}
-benvi_palette("Set4")
+benvi_palette("blues")
 ```
 
 ### City-Specific Palettes
@@ -346,10 +346,10 @@ Yes! Use `direction = -1`:
 
 ```{r reverse-palette}
 # Normal direction
-benvi_palette("Seq3")
+benvi_palette("seq_greens")
 
 # Reversed
-benvi_palette("Seq3", direction = -1)
+benvi_palette("seq_greens", direction = -1)
 ```
 
 ### How do I use fewer colors than available?
@@ -358,7 +358,7 @@ Specify the number with `n`:
 
 ```{r subset-colors}
 # Get only 3 colors from an 8-color palette
-benvi_palette("Qual5", n = 3)
+benvi_palette("qual_5", n = 3)
 ```
 
 ### Can I use benvi colors in base R plots?
@@ -366,7 +366,7 @@ benvi_palette("Qual5", n = 3)
 Yes! Get hex codes and use them:
 
 ```{r base-plot}
-colors <- as.character(benvi_palette("Set5"))
+colors <- as.character(benvi_palette("purples"))
 
 plot(
   mtcars$wt,

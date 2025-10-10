@@ -28,7 +28,7 @@ if (require('ggplot2')) {
 
   ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
     geom_point() +
-    scale_color_benvi_d("Qual9")
+    scale_color_benvi_d("qual_9")
 }
 
 }

@@ -24,7 +24,7 @@ Construction of the package is inspired by the \href{https://github.com/ewenme/g
 package.
 }
 \examples{
-benvi_palette("Set3")
-benvi_palette("Set3", n = 20, type = "continuous")
-benvi_palette("Set3", n = 2, type = "discrete")
+benvi_palette("greens")
+benvi_palette("greens", n = 20, type = "continuous")
+benvi_palette("greens", n = 2, type = "discrete")
 }

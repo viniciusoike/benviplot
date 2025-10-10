@@ -4,7 +4,7 @@
 
 ## Background
 
-Benvi was a former brand name of QuintoAndar that was discontinued in 2024. Benvi was a brand used by QuintoAndar (2022-2024, primarily in Mexico before being rebranded). This R package (`benviplot`) uses publicly available color schemes from that period for data visualization purposes.
+Benvi was QuintoAndar's real estate platform brand that operated from 2022 to 2024, primarily serving the Mexican market. When the brand was discontinued and rebranded as Inmuebles24 Full in April 2024, this package preserved its publicly available color palettes and design system for the R community.
 
 ## Independence
 
