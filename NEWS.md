@@ -1,3 +1,169 @@
+# benviplot 1.1.0 - Modern Font Rendering
+
+**Major update: Eliminated DPI issues with modern font system** 🎉
+
+This release replaces the old showtext-based font system with a modern systemfonts/ragg stack, **completely eliminating the notorious DPI mismatch issues** that plagued font rendering in v1.0.0.
+
+## Why This Matters
+
+The old system (v1.0.0) had frustrating DPI problems:
+- Text rendered at different sizes in RStudio vs saved plots
+- Users had to constantly adjust `showtext_opts(dpi = ...)` settings
+- Output varied unpredictably across different devices
+- No reliable solution
+
+**The new system fixes all of this!** You now get consistent, high-quality text rendering across all outputs.
+
+## BREAKING CHANGES
+
+### Font System Migration
+
+❌ **Removed**:
+- `showtext` and `sysfonts` dependencies (completely removed)
+- `import_fonts()` function (replaced with `install_poppins()`)
+- Automatic showtext initialization on package load
+
+✅ **Added**:
+- `systemfonts` dependency for modern font management
+- `ragg` in Suggests for optimal graphics quality
+
+### New Font Management Functions
+
+- `install_poppins()` - Download and install Poppins system-wide (one-time setup)
+- `setup_benvi_fonts()` - Complete one-command setup (installs font + provides config guidance)
+- `check_poppins_installed()` - Check if Poppins is available
+- `font_status()` - Get detailed font setup status and recommendations
+- `get_poppins_variants()` - List available Poppins font weights
+
+### Automatic Fallback
+
+`theme_benvi()` now automatically falls back to system "sans" font if Poppins isn't installed. You'll see a one-time message suggesting installation, but all functionality works without Poppins.
+
+## New Features
+
+### ggsave_benvi()
+
+New wrapper around `ggsave()` with smart defaults:
+- Automatically uses ragg device for PNG files (if ragg is installed)
+- Default DPI of 300 for high quality
+- Consistent rendering across platforms
+- Falls back gracefully if ragg not available
+
+```r
+# Recommended way to save plots
+ggsave_benvi("my_plot.png", plot, width = 8, height = 6)
+```
+
+### Enhanced Documentation
+
+- **New vignette**: `vignette("font-setup")` - Comprehensive font installation and troubleshooting guide
+- Updated all existing vignettes for the new font system
+- Updated README with modern font installation instructions
+
+## Migration from v1.0.0
+
+### Quick Migration
+
+**Old workflow (v1.0.0):**
+```r
+library(benviplot)
+library(showtext)
+showtext_auto()
+# Still had DPI issues...
+```
+
+**New workflow (v1.1.0):**
+```r
+# One-time setup (once per computer)
+benviplot::setup_benvi_fonts()
+
+# Then just use the package
+library(benviplot)
+# Plots just work - no DPI issues!
+```
+
+### Detailed Steps
+
+1. **Remove old showtext code** from your scripts:
+   ```r
+   # DELETE these lines:
+   library(showtext)
+   showtext_auto()
+   import_fonts()
+   ```
+
+2. **Install Poppins system-wide** (one-time):
+   ```r
+   library(benviplot)
+   setup_benvi_fonts()  # Or: install_poppins()
+   ```
+
+3. **Optionally install ragg** for best quality:
+   ```r
+   install.packages("ragg")
+   # Then configure RStudio: Tools > Global Options > General > Graphics > Backend: AGG
+   ```
+
+4. **Update save code** (optional but recommended):
+   ```r
+   # Old
+   ggsave("plot.png", dpi = 300)
+
+   # New (recommended)
+   ggsave_benvi("plot.png")  # Smart defaults
+   ```
+
+That's it! No more DPI headaches.
+
+## Technical Details
+
+### Updated Dependencies
+
+- **Added to Imports**: `systemfonts` (for modern font discovery and management)
+- **Removed from Imports**: `showtext` (replaced with systemfonts)
+- **Removed from Suggests**: `sysfonts` (no longer needed)
+- **Added to Suggests**: `ragg` (optional, for best graphics quality)
+
+### Internal Changes
+
+- `theme_benvi()` now uses `systemfonts::system_fonts()` for font detection
+- Automatic fallback to "sans" if Poppins not available
+- One-time informative messages when fonts aren't installed
+- Removed `.onLoad()` showtext initialization
+
+### Testing
+
+- Updated all tests to use new font functions
+- Removed showtext-specific tests
+- Added tests for new font management functions
+- Removed `tests/showtext_dpi_issue.R` (problem is solved!)
+- All tests passing with modern font system
+
+## Benefits
+
+✅ **No DPI issues** - Text renders correctly at any resolution
+✅ **Consistent output** - Same rendering in RStudio, ggsave(), R Markdown
+✅ **Better quality** - Superior anti-aliasing with ragg
+✅ **Simpler workflow** - One-time font install, no per-session setup
+✅ **Faster** - Better performance than showtext
+✅ **Modern stack** - Actively maintained by Posit/RStudio team
+
+## Installation
+
+```r
+# Install from GitHub
+remotes::install_github("viniciusoike/benviplot")
+```
+
+## Getting Help
+
+- **Font setup guide**: `vignette("font-setup")`
+- **Check font status**: `font_status()`
+- **Documentation**: https://viniciusoike.github.io/benviplot/
+- **Issues**: https://github.com/viniciusoike/benviplot/issues
+
+---
+
 # benviplot 1.0.0 (2025-01-10) - Official Stable Release
 
 **First official stable release** 🎉

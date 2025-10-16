@@ -28,7 +28,7 @@ plot_column_label <- function(
     fill_guide = "none",
     palette = "qual_9",
     text_color = "white",
-    text_family = "Roboto",
+    text_family = "sans",
     text_size = 4,
     scale_name = "",
     scale_label = waiver()

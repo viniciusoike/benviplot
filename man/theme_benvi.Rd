@@ -6,6 +6,25 @@
 \usage{
 theme_benvi()
 }
+\value{
+A ggplot2 theme object
+}
 \description{
-A ggplot2 base theme for Benvi styled plots.
+A ggplot2 base theme for Benvi styled plots with clean, professional styling.
+
+This theme uses the Poppins font if installed on your system. If Poppins is
+not available, it falls back to the system's default sans-serif font.
+
+To install Poppins, run \code{\link[=install_poppins]{install_poppins()}} or \code{\link[=setup_benvi_fonts]{setup_benvi_fonts()}}.
+}
+\examples{
+library(ggplot2)
+
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point() +
+  labs(title = "Car weight vs MPG") +
+  theme_benvi()
+}
+\seealso{
+\code{\link[=install_poppins]{install_poppins()}}, \code{\link[=setup_benvi_fonts]{setup_benvi_fonts()}}, \code{\link[=font_status]{font_status()}}
 }

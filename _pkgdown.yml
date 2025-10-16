@@ -29,6 +29,8 @@ navbar:
       menu:
       - text: Getting Started
         href: articles/getting-started.html
+      - text: Font Setup
+        href: articles/font-setup.html
       - text: Color Palettes
         href: articles/color-palettes.html
       - text: Plot Functions
@@ -74,10 +76,23 @@ reference:
     contents:
     - theme_benvi
 
+  - title: Font Management
+    desc: Modern font setup and configuration
+    contents:
+    - setup_benvi_fonts
+    - install_poppins
+    - check_poppins_installed
+    - font_status
+    - get_poppins_variants
+
+  - title: Saving Plots
+    desc: Export plots with optimal settings
+    contents:
+    - ggsave_benvi
+
   - title: Utilities
     desc: Helper and utility functions
     contents:
-    - import_fonts
     - pretty_number
 
   - title: Data
@@ -90,6 +105,7 @@ articles:
   navbar: ~
   contents:
   - getting-started
+  - font-setup
 
 - title: Guides
   desc: Detailed guides for using benviplot

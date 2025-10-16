@@ -1,6 +1,6 @@
 Package: benviplot
 Title: Color Palettes and ggplot2 Extensions for Data Visualization
-Version: 1.0.0
+Version: 1.1.0
 Authors@R:
     person("Vinicius", "Oike", , "viniciusoike@gmail.com", role = c("aut", "cre"))
 Description: Provides color palettes and ggplot2 extensions for creating quality
@@ -21,13 +21,13 @@ Imports:
     ggplot2 (>= 4.0.0),
     graphics,
     scales,
-    showtext
+    systemfonts
 Suggests:
     curl,
     knitr,
     pkgdown,
+    ragg,
     rmarkdown,
-    sysfonts,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 LazyData: true

@@ -61,35 +61,38 @@ test_that("theme_benvi can be combined with other theme elements", {
   expect_equal(p$theme$legend.position, "bottom")
 })
 
-test_that("import_fonts runs without error", {
-  # This test may fail if fonts can't be downloaded, but shouldn't crash
-  expect_no_error(import_fonts())
+test_that("check_poppins_installed returns logical", {
+  result <- check_poppins_installed()
+  expect_type(result, "logical")
+  expect_length(result, 1)
 })
 
-test_that("import_fonts handles missing internet gracefully", {
-  # If curl is not available or no internet, should handle gracefully
-  skip_if_not_installed("curl")
+test_that("font_status returns information", {
+  # Should run without error and return invisibly
+  expect_invisible(font_status())
 
-  # Should not crash even if fonts can't be downloaded
-  expect_no_error(import_fonts())
+  result <- font_status()
+  expect_type(result, "list")
+  expect_named(result, c("poppins_installed", "ragg_available"))
+  expect_type(result$poppins_installed, "logical")
+  expect_type(result$ragg_available, "logical")
 })
 
-test_that("showtext is loaded on package load", {
-  # showtext should be automatically loaded
-  expect_true("showtext" %in% loadedNamespaces())
-})
-
-test_that("theme_benvi uses Poppins font when available", {
-  # Import fonts first
-  suppressMessages(import_fonts())
-
+test_that("theme_benvi uses appropriate font family", {
   theme <- theme_benvi()
 
-  # Check if font family is set
-  # Note: This might be empty if fonts aren't available
-  if (!is.null(theme$text$family)) {
-    expect_type(theme$text$family, "character")
-  }
+  # Should always have a text family set (either Poppins or sans)
+  expect_type(theme$text$family, "character")
+  expect_true(theme$text$family %in% c("Poppins", "sans"))
+})
+
+test_that("get_benvi_font_family returns valid font", {
+  # Internal function but important to test
+  font <- get_benvi_font_family()
+
+  expect_type(font, "character")
+  expect_length(font, 1)
+  expect_true(font %in% c("Poppins", "sans"))
 })
 
 test_that("theme_benvi works with faceted plots", {

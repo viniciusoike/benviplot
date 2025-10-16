@@ -128,56 +128,72 @@ ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
 
 ## Font Management
 
-### Automatic Font Loading
+### Modern Font System (v1.1.0+)
 
-`benviplot` automatically downloads and configures the Poppins font on first use:
+`benviplot` uses a modern font system based on systemfonts. Fonts are installed to your system once and work across all R sessions.
 
-```{r font-auto, eval = FALSE}
-library(benviplot)
-# Font loads automatically
+### One-Time Font Setup
+
+Install Poppins font to your system:
+
+```{r font-setup, eval = FALSE}
+# Recommended: Complete setup in one command
+setup_benvi_fonts()
+
+# Or install just the font
+install_poppins()
 ```
 
-### Manual Font Import
+**That's it!** The font is now available system-wide and will work in all R sessions.
 
-If needed, manually import fonts:
+### Automatic Fallback
 
-```{r font-manual, eval = FALSE}
-benviplot::import_fonts()
+If Poppins isn't installed, `theme_benvi()` automatically falls back to your system's default font. You'll see a one-time message suggesting installation:
+
+```{r font-fallback-demo, eval = FALSE}
+# Works even without Poppins installed
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point() +
+  theme_benvi()
+#> ℹ Poppins font not found. Using system default font instead.
+#> ℹ Install Poppins with: benviplot::install_poppins()
 ```
 
-### Troubleshooting Fonts
+### Check Font Status
 
-If fonts don't display:
+Verify your font setup:
 
-**1. Check Internet Connection**
+```{r font-status, eval = FALSE}
+# Check if Poppins is installed
+check_poppins_installed()
 
-Font download requires internet access.
-
-**2. Restart R Session**
-
-```{r restart, eval = FALSE}
-# Restart R, then:
-library(benviplot)
+# Get full status report
+font_status()
 ```
 
-**3. Verify Font Installation**
+### Using Other Fonts
 
-```{r verify-font, eval = FALSE}
-# Check available fonts
-sysfonts::font_families()
-```
+Override the default font family with `theme()`:
 
-**4. Use Fallback Font**
-
-Override with system font if needed:
-
-```{r fallback, eval = FALSE}
-# Not directly supported, but you can modify the theme
+```{r custom-font, eval = FALSE}
 ggplot(mtcars, aes(wt, mpg)) +
   geom_point() +
   theme_benvi() +
-  theme(text = element_text(family = "sans"))
+  theme(text = element_text(family = "Roboto"))
 ```
+
+### For Best Results: Install ragg
+
+For optimal text rendering quality:
+
+```{r ragg-install, eval = FALSE}
+install.packages("ragg")
+
+# Then configure RStudio:
+# Tools > Global Options > General > Graphics > Backend: AGG
+```
+
+See `vignette("font-setup")` for detailed instructions and troubleshooting.
 
 ## Customizing theme_benvi()
 
@@ -401,33 +417,55 @@ ggplot(mtcars, aes(x = factor(cyl), y = mpg, fill = factor(cyl))) +
 
 ## Saving Plots
 
-### For Print
+### Recommended: Use ggsave_benvi()
 
-```{r save-print, eval = FALSE}
+`benviplot` provides `ggsave_benvi()` which automatically uses the ragg graphics device for high-quality output:
+
+```{r save-recommended, eval = FALSE}
 p <- ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_point(color = benvi_palette("purples")[1], size = 3) +
   labs(title = "Fuel Efficiency") +
   theme_benvi()
 
-# Save high-resolution PNG
-ggsave("plot.png", p, width = 7, height = 5, dpi = 300)
+# Recommended: Uses ragg automatically for PNG
+ggsave_benvi("plot.png", p)
 
-# Save PDF (vector graphics)
-ggsave("plot.pdf", p, width = 7, height = 5)
+# PDF (vector graphics)
+ggsave_benvi("plot.pdf", p, width = 7, height = 5)
+```
+
+**Benefits of ggsave_benvi():**
+- Automatically uses ragg device for PNG files (better quality, no font issues)
+- Smart defaults (300 DPI, 7x5 inches)
+- Consistent output across platforms
+
+### For Print
+
+```{r save-print, eval = FALSE}
+# High-resolution for publication
+ggsave_benvi("plot.png", p, width = 7, height = 5)
 ```
 
 ### For Presentations
 
 ```{r save-presentation, eval = FALSE}
 # Larger size for slides
-ggsave("slide.png", p, width = 10, height = 6, dpi = 150)
+ggsave_benvi("slide.png", p, width = 10, height = 6)
 ```
 
 ### For Web
 
 ```{r save-web, eval = FALSE}
-# Optimized for web
-ggsave("web_plot.png", p, width = 8, height = 5, dpi = 96)
+# Standard web resolution
+ggsave_benvi("web_plot.png", p, width = 8, height = 5)
+```
+
+### Using Standard ggsave()
+
+You can still use regular `ggsave()` if preferred:
+
+```{r save-standard, eval = FALSE}
+ggsave("plot.png", p, width = 7, height = 5, dpi = 300)
 ```
 
 ## Accessibility Tips

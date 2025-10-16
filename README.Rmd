@@ -93,10 +93,9 @@ ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
   scale_color_benvi_d(pal_name = "qual_9", name = "Cylinders") +
   labs(
     title = "A Benvi styled plot",
-    subtitle = "Fontface is defined as Poppins using showtext",
+    subtitle = "Using the Poppins font for clean typography",
     x = "Weight (tons)",
-    y = "Miles per gallon",
-    caption = "Poppins font is downloaded using sysfonts::font_add_google or locally.") +
+    y = "Miles per gallon") +
   theme_benvi()
 ```
 
@@ -160,16 +159,22 @@ View all available palettes by calling `benvi_palette()` with different palette 
 
 ### Fonts
 
-The package uses the **Poppins** font from Google Fonts. On first use, the package will automatically download the font. An internet connection is required for initial setup.
+The package uses the **Poppins** font from Google Fonts for clean, professional typography.
 
-If you encounter font issues, manually import/download fonts.
+**Quick setup (one-time):**
 
 ```r
-# Usually works
-benviplot::import_fonts()
-# But, the only fail-proof option is to download and install locally
-# https://fonts.google.com
+# One command to set up fonts
+benviplot::setup_benvi_fonts()
 ```
+
+This installs Poppins to your system and provides guidance for optimal configuration.
+
+**What if I don't install Poppins?**
+
+No problem! The theme will automatically fall back to your system's default sans-serif font. However, for the best visual results, we recommend installing Poppins.
+
+For detailed font setup instructions and troubleshooting, see `vignette("font-setup")`.
 
 ## Getting Help
 

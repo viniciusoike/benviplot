@@ -54,41 +54,39 @@ remotes::install_github("viniciusoike/benviplot")
 
 - **R**: Version 4.1.0 or higher
 - **ggplot2**: Version 4.0.0 or higher
-- **Internet connection**: Required for initial font download
 
-## Font Setup
+## Font Setup (Optional but Recommended)
 
-`benviplot` uses the **Poppins** font family from Google Fonts to create professional-looking plots. The package will attempt to download and configure this font automatically on first use.
+`benviplot` uses the **Poppins** font family from Google Fonts for professional typography. Installing Poppins is **optional** - the theme will automatically fall back to your system's default font if Poppins isn't available.
 
-### Automatic Font Import
+### One-Command Setup
 
-Simply load the package - fonts will be set up automatically:
+The easiest way to set up fonts:
 
 ```{r, eval = FALSE}
 library(benviplot)
-#> Importing Poppins font from Google Fonts...
-#> ✔ Font imported successfully
+
+# One-time setup - installs Poppins and configures graphics
+setup_benvi_fonts()
 ```
 
-### Manual Font Import
+This command will:
+1. Download and install Poppins to your system
+2. Check for the ragg package (recommended for best quality)
+3. Provide guidance for RStudio configuration
 
-If you encounter font issues, manually import fonts:
+**You only need to do this once per computer!**
+
+### What if I skip font setup?
+
+No problem! The package will work perfectly fine without Poppins. You'll see a one-time message suggesting installation, but all functionality will work with your system's default font.
+
+### Detailed Font Setup
+
+For detailed installation instructions, troubleshooting, and information about the new font system, see:
 
 ```{r, eval = FALSE}
-benviplot::import_fonts()
-```
-
-### Troubleshooting Font Issues
-
-If fonts don't display correctly:
-
-1. **Check internet connection**: Font download requires internet access
-2. **Restart R session**: Sometimes fonts need a fresh session to load
-3. **Use system fonts as fallback**: Modify theme to use system fonts
-
-```{r, eval = FALSE}
-# Example: Override with system font
-theme_benvi(base_family = "sans")
+vignette("font-setup")
 ```
 
 ## Quick Start
@@ -392,7 +390,7 @@ plot(
 In this vignette you learned how to:
 
 - ✓ Install and set up benviplot
-- ✓ Configure Poppins fonts
+- ✓ Set up Poppins fonts (optional)
 - ✓ View and select color palettes
 - ✓ Create plots with benvi scales and themes
 - ✓ Use plot helper functions
