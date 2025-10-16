@@ -24,19 +24,19 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 ## Overview
 
-`benviplot` provides color palettes and ggplot2 extensions for creating
-quality graphics. The package includes:
+`benviplot` provides color palettes and ggplot2 helpers for creating
+high quality graphics. The package includes:
 
-- **Color Palettes**: Curated color schemes (Set, Qualitative,
-  Sequential palettes)
-- **ggplot2 Scales**: Discrete and continuous scales for seamless
-  ggplot2 integration
-- **Plot Helpers**: Wrapper functions for common visualizations
-- **Custom Theme**: Clean, professional theme with Poppins font support
+- **Color Palettes**: curated color schemes (Set, Qualitative,
+  Sequential palettes).
+- **ggplot2 Scales**: discrete and continuous scales for seamless
+  ggplot2 integration.
+- **Plot Helpers**: wrapper functions for common visualizations.
+- **Custom Theme**: clean, professional theme with Poppins font support.
 
 ## Installation
 
-You can install benviplot from GitHub:
+You can install benviplot from GitHub.
 
 ``` r
 # Install remotes if needed
@@ -48,7 +48,7 @@ remotes::install_github("viniciusoike/benviplot")
 
 ## Usage
 
-Load the package along with ggplot2:
+Load the package along with ggplot2.
 
 ``` r
 library(ggplot2)
@@ -67,6 +67,9 @@ benvi_palette()
 
 <img src="man/figures/README-unnamed-chunk-4-1.svg" width="80%" style="display: block; margin: auto;" />
 
+Colors follow Benvi reports guidelines that are tailored for specific
+cities.
+
 ``` r
 # Specify a different palette
 benvi_palette("rio_qual")
@@ -74,30 +77,22 @@ benvi_palette("rio_qual")
 
 <img src="man/figures/README-unnamed-chunk-5-1.svg" width="80%" style="display: block; margin: auto;" />
 
-The hex values can be extracted and used directly.
-
-``` r
-as.character(benvi_palette("qual_2"))
-#> [1] "#C5C9BA" "#816242" "#F2C037" "#009850" "#466795" "#9A75B4" "#EA4E58"
-#> [8] "#C64729"
-```
-
 ## Plotting
 
-To use the colors in plots use one of the `scale_*_benvi_*` functions:
+To use the colors in plots use one of the `scale_*_benvi_*` functions.
 
 - `scale_color_benvi_d`
 - `scale_color_benvi_c`
 - `scale_fill_benvi_c`
 - `scale_fill_benvi_d`
 
-Other option is to use `benvi_palette` and `scale_*_manual`. The code
-below shows a simple use case.
+The pacakge also supplies a generic `theme_benvi()` function that works
+best if Poppins is available.
 
 ``` r
 ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
-  geom_point() +
-  geom_smooth(color = benvi_palette("qual_9")[5], se = FALSE) +
+  geom_point(size = 2, alpha = 0.8) +
+  geom_smooth(color = benvi_palette("seq_oranges")[1], se = FALSE) +
   scale_color_benvi_d(pal_name = "qual_9", name = "Cylinders") +
   labs(
     title = "A Benvi styled plot",
@@ -105,39 +100,42 @@ ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
     x = "Weight (tons)",
     y = "Miles per gallon",
     caption = "Poppins font is downloaded using sysfonts::font_add_google or locally.") +
-  theme_benvi() +
-  theme(axis.text.x = element_text(angle = 0))
+  theme_benvi()
 #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-6-1.svg" width="80%" style="display: block; margin: auto;" />
 
 When using a continuous scale the colors are interpolated.
 
 ``` r
 housing <- subset(txhousing, city %in% c("Austin", "Houston", "Dallas"))
 
-ggplot(housing, aes(x = date, y = city, fill = median)) +
+ggplot(housing, aes(x = date, y = city, fill = median / 1e3)) +
   geom_tile(height = 0.8) +
-  scale_fill_benvi_c(pal_name = "greens", name = "Median House\nPrice ($)") +
+  scale_fill_benvi_c(pal_name = "greens", name = "Median House\nPrice (thous. $)") +
+  scale_x_continuous(expand = expansion(0)) +
+  labs(x = NULL, y = NULL) +
   theme_benvi() +
   theme(
-    legend.key.size = unit(1, "cm"),
-    legend.title = element_text(hjust = 0.5, vjust = 0.75)
+    legend.title = element_text(hjust = 0.5, vjust = 0.75),
+    axis.text = element_text(size = 12),
+    panel.grid = element_blank()
     )
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-7-1.svg" width="80%" style="display: block; margin: auto;" />
 
-I also created some `plot_` functions that help to create some standard
-plots. These functions aim to save typing when performing data
-exploration and can be used in reports.
+Finally, the package features some generic `plot_` functions that help
+to create standard plots. These functions aim to be efficient, allowing
+for quick data exploration, while remaining polished enough to be used
+for reports.
 
 ``` r
 plot_line(economics, x = date, y = uempmed)
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-8-1.svg" width="80%" style="display: block; margin: auto;" />
 
 These functions usually include simple helper arguments like `text` in
 the case of `plot_column` that plots its value above the column.
@@ -151,9 +149,8 @@ sales <- data.frame(
 plot_column(sales, x = x, y = y, text = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-9-1.svg" width="80%" style="display: block; margin: auto;" />
 
-Making good plots, however, will still usually require lots of typing.
 The final example shows the variable argument which replaces the
 `aes(fill = ...)` or `aes(color = ...)` in each function.
 
@@ -163,18 +160,11 @@ plot_scatter(
   variable = as.factor(cyl),
   fit = TRUE,
   fit_method = "auto",
-  scale_name = "Cylinders") +
-  labs(
-    title = "A Benvi styled plot",
-    subtitle = "Fontface is defined as Poppins using showtext",
-    x = "Weight (tons)",
-    y = "Miles per gallon",
-    caption = "Poppins font is downloaded using sysfonts::font_add_google or locally.") +
-  theme(axis.text.x = element_text(angle = 0))
+  scale_name = "Cylinders")
 #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-10-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ## Available Palettes
 
@@ -194,27 +184,20 @@ The package includes several palette families:
 View all available palettes by calling `benvi_palette()` with different
 palette names, or use `list_palettes()` to see all options.
 
-## Requirements
-
 ### Fonts
 
 The package uses the **Poppins** font from Google Fonts. On first use,
 the package will automatically download the font. An internet connection
 is required for initial setup.
 
-If you encounter font issues, manually import fonts:
+If you encounter font issues, manually import/download fonts.
 
 ``` r
+# Usually works
 benviplot::import_fonts()
+# But, the only fail-proof option is to download and install locally
+# https://fonts.google.com
 ```
-
-### Dependencies
-
-- R \>= 4.1.0
-- ggplot2 \>= 4.0.0
-- dplyr \>= 1.1.0
-
-See `DESCRIPTION` for complete dependency list.
 
 ## Getting Help
 
@@ -227,11 +210,6 @@ See `DESCRIPTION` for complete dependency list.
 ## License
 
 MIT License. See [LICENSE.md](LICENSE.md) for details.
-
-## Author
-
-**Vinicius Oike** Email: <viniciusoike@gmail.com> GitHub:
-[@viniciusoike](https://github.com/viniciusoike)
 
 ## Acknowledgments
 
