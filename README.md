@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# benviplot
+# benviplot <img src="man/figures/logo_cropped.png" align="right" height="139" alt="benviplot logo" />
 
 <!-- badges: start -->
 
@@ -36,7 +36,7 @@ quality graphics. The package includes:
 
 ## Installation
 
-You can install benviplot from GitHub.
+You can install benviplot from GitHub:
 
 ``` r
 # Install remotes if needed
@@ -48,7 +48,7 @@ remotes::install_github("viniciusoike/benviplot")
 
 ## Usage
 
-Load the package along with ggplot2.
+Load the package along with ggplot2:
 
 ``` r
 library(ggplot2)
@@ -57,21 +57,24 @@ library(benviplot)
 
 ## Color palettes
 
-Color palettes can be visualized using `benvi_palette`.
+Color palettes can be visualized using `benvi_palette`. The default
+palette is “qual_2”.
 
 ``` r
-benvi_palette("rio_qual")
+# Default palette (qual_2)
+benvi_palette()
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ``` r
-benvi_palette("qual_2")
+# Specify a different palette
+benvi_palette("rio_qual")
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.svg" width="80%" style="display: block; margin: auto;" />
 
-Although the console prints a palette the hex values can be used directly.
+The hex values can be extracted and used directly.
 
 ``` r
 as.character(benvi_palette("qual_2"))
@@ -88,7 +91,8 @@ To use the colors in plots use one of the `scale_*_benvi_*` functions:
 - `scale_fill_benvi_c`
 - `scale_fill_benvi_d`
 
-Another option is to use `benvi_palette` and `scale_*_manual`. The code below shows a simple use case.
+Other option is to use `benvi_palette` and `scale_*_manual`. The code
+below shows a simple use case.
 
 ``` r
 ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
@@ -103,6 +107,7 @@ ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
     caption = "Poppins font is downloaded using sysfonts::font_add_google or locally.") +
   theme_benvi() +
   theme(axis.text.x = element_text(angle = 0))
+#> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 ```
 
 <img src="man/figures/README-unnamed-chunk-7-1.svg" width="80%" style="display: block; margin: auto;" />
@@ -124,7 +129,9 @@ ggplot(housing, aes(x = date, y = city, fill = median)) +
 
 <img src="man/figures/README-unnamed-chunk-8-1.svg" width="80%" style="display: block; margin: auto;" />
 
-I also created some `plot_` functions that help to create some standard plots, inspired by Benvi's data visualization principles. These functions aim to save typing when performing data exploration and can be used in reports.
+I also created some `plot_` functions that help to create some standard
+plots. These functions aim to save typing when performing data
+exploration and can be used in reports.
 
 ``` r
 plot_line(economics, x = date, y = uempmed)
@@ -132,7 +139,8 @@ plot_line(economics, x = date, y = uempmed)
 
 <img src="man/figures/README-unnamed-chunk-9-1.svg" width="80%" style="display: block; margin: auto;" />
 
-These functions usually include simple helper arguments like `text` in the case of `plot_column` that plots its value above the column.
+These functions usually include simple helper arguments like `text` in
+the case of `plot_column` that plots its value above the column.
 
 ``` r
 sales <- data.frame(
@@ -145,7 +153,8 @@ plot_column(sales, x = x, y = y, text = TRUE)
 
 <img src="man/figures/README-unnamed-chunk-10-1.svg" width="80%" style="display: block; margin: auto;" />
 
-Making good plots, however, will still usually require lots of typing. The final example shows the `variable` argument which replaces the
+Making good plots, however, will still usually require lots of typing.
+The final example shows the variable argument which replaces the
 `aes(fill = ...)` or `aes(color = ...)` in each function.
 
 ``` r
@@ -153,6 +162,7 @@ plot_scatter(
   mtcars, wt, mpg,
   variable = as.factor(cyl),
   fit = TRUE,
+  fit_method = "auto",
   scale_name = "Cylinders") +
   labs(
     title = "A Benvi styled plot",
@@ -161,6 +171,7 @@ plot_scatter(
     y = "Miles per gallon",
     caption = "Poppins font is downloaded using sysfonts::font_add_google or locally.") +
   theme(axis.text.x = element_text(angle = 0))
+#> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 ```
 
 <img src="man/figures/README-unnamed-chunk-11-1.svg" width="80%" style="display: block; margin: auto;" />
@@ -197,6 +208,14 @@ If you encounter font issues, manually import fonts:
 benviplot::import_fonts()
 ```
 
+### Dependencies
+
+- R \>= 4.1.0
+- ggplot2 \>= 4.0.0
+- dplyr \>= 1.1.0
+
+See `DESCRIPTION` for complete dependency list.
+
 ## Getting Help
 
 - **Documentation**: Access via `?benviplot` or visit
@@ -216,4 +235,5 @@ MIT License. See [LICENSE.md](LICENSE.md) for details.
 
 ## Acknowledgments
 
-This package uses color schemes inspired by the discontinued Benvi brand. This is an independent project not affiliated with QuintoAndar.
+This package uses color schemes inspired by the discontinued Benvi
+brand. This is an independent project not affiliated with QuintoAndar.

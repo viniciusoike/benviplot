@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# benviplot <img src="man/figures/logo.png" align="right" height="139" alt="benviplot logo" />
+# benviplot <img src="man/figures/logo_cropped.png" align="right" height="139" alt="benviplot logo" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/viniciusoike/benviplot/workflows/R-CMD-check/badge.svg)](https://github.com/viniciusoike/benviplot/actions)
