@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# benviplot
+# benviplot <img src="man/figures/logo.png" align="right" height="139" alt="benviplot logo" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/viniciusoike/benviplot/workflows/R-CMD-check/badge.svg)](https://github.com/viniciusoike/benviplot/actions)
@@ -61,17 +61,19 @@ library(benviplot)
 
 ## Color palettes
 
-Color palettes can be visualized using `benvi_palette`.
+Color palettes can be visualized using `benvi_palette`. The default palette is "qual_2".
 
 ```{r}
+# Default palette (qual_2)
+benvi_palette()
+```
+
+```{r}
+# Specify a different palette
 benvi_palette("rio_qual")
 ```
 
-```{r}
-benvi_palette("qual_2")
-```
-
-Although the console prints a palette the hex values can be used directly.
+The hex values can be extracted and used directly.
 
 ```{r}
 as.character(benvi_palette("qual_2"))

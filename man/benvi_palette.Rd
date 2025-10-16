@@ -4,10 +4,15 @@
 \alias{benvi_palette}
 \title{A color palette for Benvi.}
 \usage{
-benvi_palette(pal_name, n, direction = 1, type = c("discrete", "continuous"))
+benvi_palette(
+  pal_name = "qual_2",
+  n,
+  direction = 1,
+  type = c("discrete", "continuous")
+)
 }
 \arguments{
-\item{pal_name}{Name of the palette.}
+\item{pal_name}{Name of the palette. Defaults to "qual_2".}
 
 \item{n}{Number of colors desired. Sets have 4 colors, Qual have 8 colors.}
 
@@ -24,6 +29,10 @@ Construction of the package is inspired by the \href{https://github.com/ewenme/g
 package.
 }
 \examples{
+# Use default palette
+benvi_palette()
+
+# Specify palette name
 benvi_palette("greens")
 benvi_palette("greens", n = 20, type = "continuous")
 benvi_palette("greens", n = 2, type = "discrete")

@@ -14,7 +14,7 @@ scale_color_benvi_c(pal_name, direction = 1, ...)
 scale_fill_benvi_c(pal_name, direction = 1, ...)
 }
 \arguments{
-\item{pal_name}{Name of the palette.}
+\item{pal_name}{Name of the palette. Defaults to "qual_2".}
 
 \item{direction}{Either \code{1} or \code{-1}. If \code{-1} the palette will be reversed.}
 

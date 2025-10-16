@@ -3,21 +3,25 @@
 #' Construction of the package is inspired by the [ghibli](https://github.com/ewenme/ghibli)
 #' package.
 #'
+#' @param pal_name Name of the palette. Defaults to "qual_2".
 #' @param n Number of colors desired. Sets have 4 colors, Qual have 8 colors.
 #' @param direction Either `1` or `-1`. If `-1` the palette will be reversed.
 #' @param type Either "continuous" or "discrete". Continuous automatically
 #' interpolates between the colors.
-#' @param pal_name Name of the palette.
 #' @return A vector of characters with color attribute
 #' @export
 #' @importFrom grDevices colorRampPalette rgb
 #' @importFrom cli cli_abort
 #' @examples
+#' # Use default palette
+#' benvi_palette()
+#'
+#' # Specify palette name
 #' benvi_palette("greens")
 #' benvi_palette("greens", n = 20, type = "continuous")
 #' benvi_palette("greens", n = 2, type = "discrete")
 benvi_palette <- function(
-    pal_name,
+    pal_name = "qual_2",
     n,
     direction = 1,
     type = c("discrete", "continuous")) {
@@ -76,15 +80,12 @@ pal_pal <- function(pal_name, direction) {
 }
 
 #' @export
-#' @importFrom graphics image par text
+#' @importFrom graphics image par
 print.palette <- function(x, ...) {
   n <- length(x)
-  old <- par(mar = c(0.5, 0.5, 2, 0.5))
+  old <- par(mar = c(0.5, 0.5, 0.5, 0.5))
   on.exit(par(old))
 
   image(1:n, 1, as.matrix(1:n), col = x,
         ylab = "", xaxt = "n", yaxt = "n", bty = "n")
-
-  text((n + 1) / 2, 1, labels = attr(x, "pal_name"),
-       cex = 1, pos = 3, offset = 0.5)
 }
