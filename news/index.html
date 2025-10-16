@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,6 +20,7 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/getting-started.html">Getting Started</a></li>
+    <li><a class="dropdown-item" href="../articles/font-setup.html">Font Setup</a></li>
     <li><a class="dropdown-item" href="../articles/color-palettes.html">Color Palettes</a></li>
     <li><a class="dropdown-item" href="../articles/plot-functions.html">Plot Functions</a></li>
     <li><a class="dropdown-item" href="../articles/themes-and-styling.html">Themes and Styling</a></li>
@@ -40,6 +41,166 @@
       <small>Source: <a href="https://github.com/viniciusoike/benviplot/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.0" id="benviplot-110---modern-font-rendering">benviplot 1.1.0 - Modern Font Rendering<a class="anchor" aria-label="anchor" href="#benviplot-110---modern-font-rendering"></a></h2>
+<p><strong>Major update: Eliminated DPI issues with modern font system</strong> 🎉</p>
+<p>This release replaces the old showtext-based font system with a modern systemfonts/ragg stack, <strong>completely eliminating the notorious DPI mismatch issues</strong> that plagued font rendering in v1.0.0.</p>
+<div class="section level3">
+<h3 id="why-this-matters-1-1-0">Why This Matters<a class="anchor" aria-label="anchor" href="#why-this-matters-1-1-0"></a></h3>
+<p>The old system (v1.0.0) had frustrating DPI problems: - Text rendered at different sizes in RStudio vs saved plots - Users had to constantly adjust <code>showtext_opts(dpi = ...)</code> settings - Output varied unpredictably across different devices - No reliable solution</p>
+<p><strong>The new system fixes all of this!</strong> You now get consistent, high-quality text rendering across all outputs.</p>
+</div>
+<div class="section level3">
+<h3 id="breaking-changes-1-1-0">BREAKING CHANGES<a class="anchor" aria-label="anchor" href="#breaking-changes-1-1-0"></a></h3>
+<div class="section level4">
+<h4 id="font-system-migration-1-1-0">Font System Migration<a class="anchor" aria-label="anchor" href="#font-system-migration-1-1-0"></a></h4>
+<p>❌ <strong>Removed</strong>: - <code>showtext</code> and <code>sysfonts</code> dependencies (completely removed) - <code>import_fonts()</code> function (replaced with <code><a href="../reference/install_poppins.html">install_poppins()</a></code>) - Automatic showtext initialization on package load</p>
+<p>✅ <strong>Added</strong>: - <code>systemfonts</code> dependency for modern font management - <code>ragg</code> in Suggests for optimal graphics quality</p>
+</div>
+<div class="section level4">
+<h4 id="new-font-management-functions-1-1-0">New Font Management Functions<a class="anchor" aria-label="anchor" href="#new-font-management-functions-1-1-0"></a></h4>
+<ul><li>
+<code><a href="../reference/install_poppins.html">install_poppins()</a></code> - Download and install Poppins system-wide (one-time setup)</li>
+<li>
+<code><a href="../reference/setup_benvi_fonts.html">setup_benvi_fonts()</a></code> - Complete one-command setup (installs font + provides config guidance)</li>
+<li>
+<code><a href="../reference/check_poppins_installed.html">check_poppins_installed()</a></code> - Check if Poppins is available</li>
+<li>
+<code><a href="../reference/font_status.html">font_status()</a></code> - Get detailed font setup status and recommendations</li>
+<li>
+<code><a href="../reference/get_poppins_variants.html">get_poppins_variants()</a></code> - List available Poppins font weights</li>
+</ul></div>
+<div class="section level4">
+<h4 id="automatic-fallback-1-1-0">Automatic Fallback<a class="anchor" aria-label="anchor" href="#automatic-fallback-1-1-0"></a></h4>
+<p><code><a href="../reference/theme_benvi.html">theme_benvi()</a></code> now automatically falls back to system “sans” font if Poppins isn’t installed. You’ll see a one-time message suggesting installation, but all functionality works without Poppins.</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="new-features-1-1-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-1-0"></a></h3>
+<div class="section level4">
+<h4 id="ggsave_benvi-1-1-0">ggsave_benvi()<a class="anchor" aria-label="anchor" href="#ggsave_benvi-1-1-0"></a></h4>
+<p>New wrapper around <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave()</a></code> with smart defaults: - Automatically uses ragg device for PNG files (if ragg is installed) - Default DPI of 300 for high quality - Consistent rendering across platforms - Falls back gracefully if ragg not available</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Recommended way to save plots</span></span>
+<span><span class="fu"><a href="../reference/ggsave_benvi.html">ggsave_benvi</a></span><span class="op">(</span><span class="st">"my_plot.png"</span>, <span class="va">plot</span>, width <span class="op">=</span> <span class="fl">8</span>, height <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="enhanced-documentation-1-1-0">Enhanced Documentation<a class="anchor" aria-label="anchor" href="#enhanced-documentation-1-1-0"></a></h4>
+<ul><li>
+<strong>New vignette</strong>: <code><a href="../articles/font-setup.html">vignette("font-setup")</a></code> - Comprehensive font installation and troubleshooting guide</li>
+<li>Updated all existing vignettes for the new font system</li>
+<li>Updated README with modern font installation instructions</li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="migration-from-v100-1-1-0">Migration from v1.0.0<a class="anchor" aria-label="anchor" href="#migration-from-v100-1-1-0"></a></h3>
+<div class="section level4">
+<h4 id="quick-migration-1-1-0">Quick Migration<a class="anchor" aria-label="anchor" href="#quick-migration-1-1-0"></a></h4>
+<p><strong>Old workflow (v1.0.0):</strong></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/viniciusoike/benviplot" class="external-link">benviplot</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/yixuan/showtext" class="external-link">showtext</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/showtext/man/showtext_auto.html" class="external-link">showtext_auto</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># Still had DPI issues...</span></span></code></pre></div>
+<p><strong>New workflow (v1.1.0):</strong></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># One-time setup (once per computer)</span></span>
+<span><span class="fu">benviplot</span><span class="fu">::</span><span class="fu"><a href="../reference/setup_benvi_fonts.html">setup_benvi_fonts</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Then just use the package</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/viniciusoike/benviplot" class="external-link">benviplot</a></span><span class="op">)</span></span>
+<span><span class="co"># Plots just work - no DPI issues!</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="detailed-steps-1-1-0">Detailed Steps<a class="anchor" aria-label="anchor" href="#detailed-steps-1-1-0"></a></h4>
+<ol style="list-style-type: decimal"><li>
+<p><strong>Remove old showtext code</strong> from your scripts:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># DELETE these lines:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/yixuan/showtext" class="external-link">showtext</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/showtext/man/showtext_auto.html" class="external-link">showtext_auto</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">import_fonts</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</li>
+<li>
+<p><strong>Install Poppins system-wide</strong> (one-time):</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/viniciusoike/benviplot" class="external-link">benviplot</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/setup_benvi_fonts.html">setup_benvi_fonts</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># Or: install_poppins()</span></span></code></pre></div>
+</li>
+<li>
+<p><strong>Optionally install ragg</strong> for best quality:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ragg"</span><span class="op">)</span></span>
+<span><span class="co"># Then configure RStudio: Tools &gt; Global Options &gt; General &gt; Graphics &gt; Backend: AGG</span></span></code></pre></div>
+</li>
+<li>
+<p><strong>Update save code</strong> (optional but recommended):</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Old</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"plot.png"</span>, dpi <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># New (recommended)</span></span>
+<span><span class="fu"><a href="../reference/ggsave_benvi.html">ggsave_benvi</a></span><span class="op">(</span><span class="st">"plot.png"</span><span class="op">)</span>  <span class="co"># Smart defaults</span></span></code></pre></div>
+</li>
+</ol><p>That’s it! No more DPI headaches.</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="technical-details-1-1-0">Technical Details<a class="anchor" aria-label="anchor" href="#technical-details-1-1-0"></a></h3>
+<div class="section level4">
+<h4 id="updated-dependencies-1-1-0">Updated Dependencies<a class="anchor" aria-label="anchor" href="#updated-dependencies-1-1-0"></a></h4>
+<ul><li>
+<strong>Added to Imports</strong>: <code>systemfonts</code> (for modern font discovery and management)</li>
+<li>
+<strong>Removed from Imports</strong>: <code>showtext</code> (replaced with systemfonts)</li>
+<li>
+<strong>Removed from Suggests</strong>: <code>sysfonts</code> (no longer needed)</li>
+<li>
+<strong>Added to Suggests</strong>: <code>ragg</code> (optional, for best graphics quality)</li>
+</ul></div>
+<div class="section level4">
+<h4 id="internal-changes-1-1-0">Internal Changes<a class="anchor" aria-label="anchor" href="#internal-changes-1-1-0"></a></h4>
+<ul><li>
+<code><a href="../reference/theme_benvi.html">theme_benvi()</a></code> now uses <code><a href="https://systemfonts.r-lib.org/reference/system_fonts.html" class="external-link">systemfonts::system_fonts()</a></code> for font detection</li>
+<li>Automatic fallback to “sans” if Poppins not available</li>
+<li>One-time informative messages when fonts aren’t installed</li>
+<li>Removed <code>.onLoad()</code> showtext initialization</li>
+</ul></div>
+<div class="section level4">
+<h4 id="testing-1-1-0">Testing<a class="anchor" aria-label="anchor" href="#testing-1-1-0"></a></h4>
+<ul><li>Updated all tests to use new font functions</li>
+<li>Removed showtext-specific tests</li>
+<li>Added tests for new font management functions</li>
+<li>Removed <code>tests/showtext_dpi_issue.R</code> (problem is solved!)</li>
+<li>All tests passing with modern font system</li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="benefits-1-1-0">Benefits<a class="anchor" aria-label="anchor" href="#benefits-1-1-0"></a></h3>
+<p>✅ <strong>No DPI issues</strong> - Text renders correctly at any resolution ✅ <strong>Consistent output</strong> - Same rendering in RStudio, ggsave(), R Markdown ✅ <strong>Better quality</strong> - Superior anti-aliasing with ragg ✅ <strong>Simpler workflow</strong> - One-time font install, no per-session setup ✅ <strong>Faster</strong> - Better performance than showtext ✅ <strong>Modern stack</strong> - Actively maintained by Posit/RStudio team</p>
+</div>
+<div class="section level3">
+<h3 id="installation-1-1-0">Installation<a class="anchor" aria-label="anchor" href="#installation-1-1-0"></a></h3>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Install from GitHub</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"viniciusoike/benviplot"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="getting-help-1-1-0">Getting Help<a class="anchor" aria-label="anchor" href="#getting-help-1-1-0"></a></h3>
+<ul><li>
+<strong>Font setup guide</strong>: <code><a href="../articles/font-setup.html">vignette("font-setup")</a></code>
+</li>
+<li>
+<strong>Check font status</strong>: <code><a href="../reference/font_status.html">font_status()</a></code>
+</li>
+<li>
+<strong>Documentation</strong>: <a href="https://viniciusoike.github.io/benviplot/" class="uri">https://viniciusoike.github.io/benviplot/</a>
+</li>
+<li>
+<strong>Issues</strong>: <a href="https://github.com/viniciusoike/benviplot/issues" class="external-link uri">https://github.com/viniciusoike/benviplot/issues</a>
+</li>
+</ul><hr></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="benviplot-100-2025-01-10---official-stable-release">benviplot 1.0.0 (2025-01-10) - Official Stable Release<a class="anchor" aria-label="anchor" href="#benviplot-100-2025-01-10---official-stable-release"></a></h2>
 <p><strong>First official stable release</strong> 🎉</p>
@@ -78,13 +239,13 @@
 </ul></div>
 <div class="section level4">
 <h4 id="installation-1-0-0">Installation<a class="anchor" aria-label="anchor" href="#installation-1-0-0"></a></h4>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Install from GitHub</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"viniciusoike/benviplot"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="quick-start-1-0-0">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start-1-0-0"></a></h4>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/viniciusoike/benviplot" class="external-link">benviplot</a></span><span class="op">)</span></span>
 <span></span>
@@ -100,12 +261,12 @@
 <div class="section level4">
 <h4 id="migration-from-pre-release-versions-1-0-0">Migration from Pre-Release Versions<a class="anchor" aria-label="anchor" href="#migration-from-pre-release-versions-1-0-0"></a></h4>
 <p>If upgrading from v0.9.5 or earlier, update palette names:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># OLD → NEW</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">benvi_palette</span>(<span class="st">"Set0"</span>) → <span class="fu">benvi_palette</span>(<span class="st">"grays"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">benvi_palette</span>(<span class="st">"Seq3"</span>) → <span class="fu">benvi_palette</span>(<span class="st">"seq_greens"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">benvi_palette</span>(<span class="st">"Qual5"</span>) → <span class="fu">benvi_palette</span>(<span class="st">"qual_5"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="fu">benvi_palette</span>(<span class="st">"index_blue"</span>) → <span class="fu">benvi_palette</span>(<span class="st">"benvi_blue"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">benvi_palette</span>(<span class="st">"Basic"</span>) → <span class="fu">benvi_palette</span>(<span class="st">"basic"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># OLD → NEW</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">benvi_palette</span>(<span class="st">"Set0"</span>) → <span class="fu">benvi_palette</span>(<span class="st">"grays"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="fu">benvi_palette</span>(<span class="st">"Seq3"</span>) → <span class="fu">benvi_palette</span>(<span class="st">"seq_greens"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="fu">benvi_palette</span>(<span class="st">"Qual5"</span>) → <span class="fu">benvi_palette</span>(<span class="st">"qual_5"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="fu">benvi_palette</span>(<span class="st">"index_blue"</span>) → <span class="fu">benvi_palette</span>(<span class="st">"benvi_blue"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="fu">benvi_palette</span>(<span class="st">"Basic"</span>) → <span class="fu">benvi_palette</span>(<span class="st">"basic"</span>)</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="legal-1-0-0">Legal<a class="anchor" aria-label="anchor" href="#legal-1-0-0"></a></h4>
@@ -288,7 +449,7 @@
 <div class="section level4">
 <h4 id="improvements-1-0-0">Improvements<a class="anchor" aria-label="anchor" href="#improvements-1-0-0"></a></h4>
 <ul><li>Modernized error handling: Replaced <code><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop()</a></code> with informative <code><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli::cli_abort()</a></code> messages</li>
-<li>Enhanced <code><a href="../reference/import_fonts.html">import_fonts()</a></code> with robust error handling and progress feedback</li>
+<li>Enhanced <code>import_fonts()</code> with robust error handling and progress feedback</li>
 <li>Improved <code><a href="../reference/pretty_number.html">pretty_number()</a></code> with input validation</li>
 <li>Refactored <code><a href="../reference/plot_add_xy.html">plot_add_xy()</a></code> and <code><a href="../reference/get_hist_bw.html">get_hist_bw()</a></code> to use <code><a href="https://rdrr.io/r/base/switch.html" class="external-link">switch()</a></code> statements</li>
 <li>Added case-insensitive method matching in <code><a href="../reference/get_hist_bw.html">get_hist_bw()</a></code>
@@ -361,7 +522,7 @@
 <div class="section level4">
 <h4 id="features-1-0-0-2">Features<a class="anchor" aria-label="anchor" href="#features-1-0-0-2"></a></h4>
 <ul><li>Implemented automatic Google Fonts download on package load</li>
-<li>Added <code><a href="../reference/import_fonts.html">import_fonts()</a></code> function for manual font management</li>
+<li>Added <code>import_fonts()</code> function for manual font management</li>
 <li>Updated palette handling to remove accents</li>
 </ul><hr></div>
 </div>
@@ -394,7 +555,7 @@
 </li>
 </ul></li>
 <li>Custom theme: <code><a href="../reference/theme_benvi.html">theme_benvi()</a></code> with Poppins font</li>
-<li>Utility functions: <code><a href="../reference/pretty_number.html">pretty_number()</a></code>, <code><a href="../reference/import_fonts.html">import_fonts()</a></code>
+<li>Utility functions: <code><a href="../reference/pretty_number.html">pretty_number()</a></code>, <code>import_fonts()</code>
 </li>
 <li>Sample data: <code>iqa</code> (QuintoAndar rent index)</li>
 </ul><hr></div>
