@@ -22,55 +22,60 @@
 #' sales <- data.frame(time = 2000:2005, value = c(10, 5, 6, 8, 11, 4))
 #' plot_line(data = sales, x = time, y = value)
 plot_line <- function(
-    data,
-    x,
-    y,
-    color,
-    variable,
-    zero = TRUE,
-    point = FALSE,
-    pal_name,
-    scale_name = "",
-    scale_label = ggplot2::waiver(),
-    ...) {
-
+  data,
+  x,
+  y,
+  color,
+  variable,
+  zero = TRUE,
+  point = FALSE,
+  pal_name,
+  scale_name = "",
+  scale_label = ggplot2::waiver(),
+  ...
+) {
   if (missing(variable)) {
-
-    if (missing(color)) { color <- benvi_palette("benvi_blue", 1) }
+    if (missing(color)) {
+      color <- benvi_palette("benvi_blue", 1)
+    }
 
     p <-
       ggplot(
         data = data,
-        aes(x = {{ x }}, y = {{ y }})) +
+        aes(x = {{ x }}, y = {{ y }})
+      ) +
       geom_line(
         linewidth = 1,
-        color = color)
+        color = color
+      )
 
     if (isTRUE(point)) {
       p <- p + geom_point(color = color)
-      }
-
+    }
   } else {
-
-    if (missing(pal_name)) { pal_name <- "qual_benvi" }
+    if (missing(pal_name)) {
+      pal_name <- "qual_benvi"
+    }
 
     p <-
       ggplot(
         data = data,
-        aes(x = {{ x }}, y = {{ y }})) +
+        aes(x = {{ x }}, y = {{ y }})
+      ) +
       geom_line(
         data = data,
         aes(color = {{ variable }}),
-        linewidth = 1) +
+        linewidth = 1
+      ) +
       scale_color_benvi_d(
         pal_name = pal_name,
         name = scale_name,
-        labels = scale_label)
+        labels = scale_label
+      )
 
     if (isTRUE(point)) {
-      p <- p + geom_point(data = data, aes(color = {{variable}}))
+      p <- p + geom_point(data = data, aes(color = {{ variable }}))
     }
-
   }
 
   if (isTRUE(zero)) {
@@ -82,6 +87,4 @@ plot_line <- function(
     theme_benvi()
 
   return(p)
-
 }
-

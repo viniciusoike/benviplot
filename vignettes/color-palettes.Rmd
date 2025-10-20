@@ -22,6 +22,12 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(ggplot2)
 library(benviplot)
+
+# Prepare data subsets used throughout examples
+index_subset <- subset(
+  iqaiw,
+  rooms == "Total" & name_muni %in% c("São Paulo", "Rio de Janeiro", "Belo Horizonte")
+)
 ```
 
 ## Introduction
@@ -37,6 +43,7 @@ This vignette provides a comprehensive guide to all color palettes available in 
 - **Qualitative Palettes** (8 colors): Larger categorical datasets
 - **Sequential Palettes** (9 colors): Continuous/ordered data
 - **City-Specific Palettes**: Themed palettes for Brazilian cities
+- **Benvi Brand Palettes**: Benvi-focused colors (qual_benvi, div_blue_muted, div_purple_muted)
 - **Index Palettes**: Specialized single-color scales
 
 ## Basic Palettes
@@ -120,14 +127,15 @@ for (pal_name in qual_names) {
 **Example**:
 
 ```{r qual-example}
-# Use mtcars with multiple groups
-ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(carb))) +
-  geom_point(size = 3) +
-  scale_color_benvi_d(pal_name = "qual_3", name = "Carburetors") +
+# Use rental data with multiple cities
+iqaiw_total <- subset(iqaiw, rooms == "Total")
+ggplot(iqaiw_total, aes(x = date, y = index, color = name_muni)) +
+  geom_line(linewidth = 1) +
+  scale_color_benvi_d(pal_name = "qual_3", name = "City") +
   labs(
-    title = "MPG vs Weight by Carburetor Count",
-    x = "Weight (1000 lbs)",
-    y = "Miles per Gallon"
+    title = "Rental Price Index by City",
+    x = NULL,
+    y = "Index (base = 100)"
   ) +
   theme_benvi()
 ```
@@ -226,6 +234,68 @@ ggplot(city_data, aes(x = district, y = price, fill = district)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
+## Benvi Brand Palettes
+
+New palettes emphasizing Benvi's brand identity with blues and purples.
+
+### qual_benvi
+
+A qualitative palette combining Benvi's signature colors - perfect as the default for multi-group visualizations:
+
+```{r qual-benvi}
+benvi_palette("qual_benvi")
+```
+
+**When to use**: As the new default for categorical data visualization, especially in Benvi-branded materials.
+
+**Example**:
+
+```{r qual-benvi-example}
+ggplot(iqaiw_total, aes(x = date, y = index, color = name_muni)) +
+  geom_line(linewidth = 1) +
+  scale_color_benvi_d(pal_name = "qual_benvi", name = "City") +
+  labs(
+    title = "Rental Price Index - Benvi Brand Colors",
+    x = NULL,
+    y = "Index"
+  ) +
+  theme_benvi()
+```
+
+### div_blue_muted & div_purple_muted
+
+Diverging/muted palettes for subtle comparisons or neutral visualizations:
+
+```{r div-muted}
+benvi_palette("div_blue_muted")
+benvi_palette("div_purple_muted")
+```
+
+**When to use**:
+- Diverging data around a neutral midpoint
+- Subtle, professional visualizations
+- When you need softer color contrasts
+
+**Example**:
+
+```{r div-muted-example}
+# Simple example with three categories
+simple_data <- data.frame(
+  category = c("Below Target", "At Target", "Above Target"),
+  count = c(15, 25, 20)
+)
+
+ggplot(simple_data, aes(x = category, y = count, fill = category)) +
+  geom_col(show.legend = FALSE) +
+  scale_fill_manual(values = benvi_palette("div_blue_muted")) +
+  labs(
+    title = "Performance Distribution",
+    x = NULL,
+    y = "Count"
+  ) +
+  theme_benvi()
+```
+
 ## Index Palettes
 
 Specialized single-color gradients for index visualizations.
@@ -301,8 +371,8 @@ my_color <- benvi_palette("qual_5")[3]
 my_color
 
 # Use in a plot
-ggplot(mtcars, aes(x = wt, y = mpg)) +
-  geom_point(color = my_color, size = 3) +
+ggplot(iqa, aes(x = date, y = index)) +
+  geom_line(color = my_color, linewidth = 1) +
   labs(title = "Using a Single Extracted Color") +
   theme_benvi()
 ```
@@ -365,15 +435,15 @@ When choosing palettes, consider:
 - **Use labels**: Don't rely solely on color to convey information
 
 ```{r accessibility}
-# Example with both color and shape
-ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl), shape = as.factor(cyl))) +
-  geom_point(size = 3) +
-  scale_color_benvi_d(pal_name = "purples", name = "Cylinders") +
-  scale_shape_manual(values = c(16, 17, 15), name = "Cylinders") +
+# Example with both color and line type
+ggplot(index_subset, aes(x = date, y = index, color = name_muni, linetype = name_muni)) +
+  geom_line(linewidth = 1) +
+  scale_color_benvi_d(pal_name = "purples", name = "City") +
+  scale_linetype_manual(values = c("solid", "dashed", "dotted"), name = "City") +
   labs(
-    title = "Using Color AND Shape for Accessibility",
-    x = "Weight (1000 lbs)",
-    y = "Miles per Gallon"
+    title = "Using Color AND Line Type for Accessibility",
+    x = NULL,
+    y = "Index"
   ) +
   theme_benvi()
 ```

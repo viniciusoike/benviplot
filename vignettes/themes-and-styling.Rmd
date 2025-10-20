@@ -42,13 +42,14 @@ Visual consistency is key to professional data visualization. This vignette show
 Simply add `theme_benvi()` to any ggplot:
 
 ```{r basic-theme}
-ggplot(mtcars, aes(x = wt, y = mpg)) +
-  geom_point(color = benvi_palette("purples")[1], size = 3) +
+spo_latest <- subset(sales_report, name_muni == "São Paulo" & date == max(date))
+ggplot(spo_latest, aes(x = price_m2_listing, y = price_m2_contract)) +
+  geom_point(color = benvi_palette("benvi_blue")[3], size = 3) +
   labs(
-    title = "Fuel Efficiency vs. Weight",
+    title = "Listing vs Contract Prices",
     subtitle = "Using theme_benvi()",
-    x = "Weight (1000 lbs)",
-    y = "Miles per Gallon"
+    x = "Listing Price (R$/m²)",
+    y = "Contract Price (R$/m²)"
   ) +
   theme_benvi()
 ```
@@ -90,8 +91,8 @@ p2
 - **Caption**: 6pt, dark gray
 
 ```{r typography}
-ggplot(economics, aes(x = date, y = unemploy / 1000)) +
-  geom_line(color = benvi_palette("browns")[1], linewidth = 1) +
+ggplot(iqa, aes(x = date, y = index)) +
+  geom_line(color = benvi_palette("benvi_blue")[1], linewidth = 1) +
   labs(
     title = "Title: Clear and Prominent",
     subtitle = "Subtitle: Provides additional context",
@@ -282,14 +283,16 @@ ggplot(economics, aes(x = date, y = unemploy)) +
 
 ```{r publication-example}
 # Sample data
-housing_subset <- txhousing |>
-  dplyr::filter(city %in% c("Austin", "Houston", "Dallas"))
+index_subset <- subset(
+  iqaiw,
+  rooms == "Total" & name_muni %in% c("São Paulo", "Rio de Janeiro", "Belo Horizonte")
+)
 
 # Publication-ready plot
-ggplot(housing_subset, aes(x = date, y = median / 1000, color = city)) +
+ggplot(index_subset, aes(x = date, y = index, color = name_muni)) +
   geom_line(linewidth = 1.2) +
   scale_color_benvi_d(
-    pal_name = "purples",
+    pal_name = "qual_benvi",
     name = "City"
   ) +
   labs(

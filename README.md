@@ -90,18 +90,18 @@ The pacakge also supplies a generic `theme_benvi()` function that works
 best if Poppins is available.
 
 ``` r
-ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
-  geom_point(size = 2, alpha = 0.8) +
-  geom_smooth(color = benvi_palette("seq_oranges")[1], se = FALSE) +
-  scale_color_benvi_d(pal_name = "qual_9", name = "Cylinders") +
+# Rental price index for major cities
+index_data <- subset(iqaiw, rooms == "Total")
+
+ggplot(index_data, aes(x = date, y = index, color = name_muni)) +
+  geom_line(linewidth = 1, alpha = 0.8) +
+  scale_color_benvi_d(pal_name = "qual_benvi", name = "City") +
   labs(
     title = "A Benvi styled plot",
-    subtitle = "Fontface is defined as Poppins using showtext",
-    x = "Weight (tons)",
-    y = "Miles per gallon",
-    caption = "Poppins font is downloaded using sysfonts::font_add_google or locally.") +
+    subtitle = "Using the Poppins font for clean typography",
+    x = NULL,
+    y = "Index (base = 100)") +
   theme_benvi()
-#> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.svg" width="80%" style="display: block; margin: auto;" />
@@ -109,11 +109,10 @@ ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
 When using a continuous scale the colors are interpolated.
 
 ``` r
-housing <- subset(txhousing, city %in% c("Austin", "Houston", "Dallas"))
-
-ggplot(housing, aes(x = date, y = city, fill = median / 1e3)) +
+# Price per m2 by city over time
+ggplot(iqaiw, aes(x = date, y = name_muni, fill = price_m2)) +
   geom_tile(height = 0.8) +
-  scale_fill_benvi_c(pal_name = "greens", name = "Median House\nPrice (thous. $)") +
+  scale_fill_benvi_c(pal_name = "benvi_blue", name = "Price (R$/m²)") +
   scale_x_continuous(expand = expansion(0)) +
   labs(x = NULL, y = NULL) +
   theme_benvi() +
@@ -132,7 +131,8 @@ for quick data exploration, while remaining polished enough to be used
 for reports.
 
 ``` r
-plot_line(economics, x = date, y = uempmed)
+# Rental price index over time
+plot_line(iqa, x = date, y = index)
 ```
 
 <img src="man/figures/README-unnamed-chunk-8-1.svg" width="80%" style="display: block; margin: auto;" />
@@ -155,13 +155,15 @@ The final example shows the variable argument which replaces the
 `aes(fill = ...)` or `aes(color = ...)` in each function.
 
 ``` r
+# Listing vs contract prices by city
+latest_sales <- subset(sales_report, date == max(date))
 plot_scatter(
-  mtcars, wt, mpg,
-  variable = as.factor(cyl),
+  latest_sales, price_m2_listing, price_m2_contract,
+  variable = name_muni,
   fit = TRUE,
-  fit_method = "auto",
-  scale_name = "Cylinders")
-#> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+  fit_method = "lm",
+  scale_name = "City")
+#> `geom_smooth()` using formula = 'y ~ x'
 ```
 
 <img src="man/figures/README-unnamed-chunk-10-1.svg" width="80%" style="display: block; margin: auto;" />
@@ -186,18 +188,27 @@ palette names, or use `list_palettes()` to see all options.
 
 ### Fonts
 
-The package uses the **Poppins** font from Google Fonts. On first use,
-the package will automatically download the font. An internet connection
-is required for initial setup.
+The package uses the **Poppins** font from Google Fonts for clean,
+professional typography.
 
-If you encounter font issues, manually import/download fonts.
+**Quick setup (one-time):**
 
 ``` r
-# Usually works
-benviplot::import_fonts()
-# But, the only fail-proof option is to download and install locally
-# https://fonts.google.com
+# One command to set up fonts
+benviplot::setup_benvi_fonts()
 ```
+
+This installs Poppins to your system and provides guidance for optimal
+configuration.
+
+**What if I don’t install Poppins?**
+
+No problem! The theme will automatically fall back to your system’s
+default sans-serif font. However, for the best visual results, we
+recommend installing Poppins.
+
+For detailed font setup instructions and troubleshooting, see
+`vignette("font-setup")`.
 
 ## Getting Help
 

@@ -31,10 +31,10 @@ palettes with the \code{ggplot2} package.
 \examples{
 
 if (require('ggplot2')) {
-
-  ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Petal.Length)) +
+  # Continuous color scale with sales data
+  ggplot(sales_report, aes(x = price_m2_listing, y = price_m2_contract, colour = price_m2_listing)) +
     geom_point() +
-    scale_colour_benvi_c("qual_9")
+    scale_colour_benvi_c("benvi_blue")
 }
 
 }

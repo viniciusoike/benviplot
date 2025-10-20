@@ -10,10 +10,11 @@
 #' @examples
 #'
 #' if (require('ggplot2')) {
-#'
-#'   ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
-#'     geom_point() +
-#'     scale_color_benvi_d("qual_9")
+#'   # Discrete color scale with rental index data
+#'   iqaiw_total <- subset(iqaiw, rooms == "Total")
+#'   ggplot(iqaiw_total, aes(x = date, y = index, colour = name_muni)) +
+#'     geom_line() +
+#'     scale_color_benvi_d("qual_benvi")
 #' }
 #'
 #' @export
@@ -80,10 +81,10 @@ scale_fill_benvi_d <- function(pal_name, direction = 1, ...) {
 #' @examples
 #'
 #' if (require('ggplot2')) {
-#'
-#'   ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Petal.Length)) +
+#'   # Continuous color scale with sales data
+#'   ggplot(sales_report, aes(x = price_m2_listing, y = price_m2_contract, colour = price_m2_listing)) +
 #'     geom_point() +
-#'     scale_colour_benvi_c("qual_9")
+#'     scale_colour_benvi_c("benvi_blue")
 #' }
 #'
 #' @export

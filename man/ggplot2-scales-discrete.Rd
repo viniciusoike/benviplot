@@ -25,10 +25,11 @@ Functions to use \code{ggplot2} scales with Benvi colors.
 \examples{
 
 if (require('ggplot2')) {
-
-  ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
-    geom_point() +
-    scale_color_benvi_d("qual_9")
+  # Discrete color scale with rental index data
+  iqaiw_total <- subset(iqaiw, rooms == "Total")
+  ggplot(iqaiw_total, aes(x = date, y = index, colour = name_muni)) +
+    geom_line() +
+    scale_color_benvi_d("qual_benvi")
 }
 
 }

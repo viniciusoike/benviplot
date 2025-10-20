@@ -20,9 +20,11 @@ To install Poppins, run \code{\link[=install_poppins]{install_poppins()}} or \co
 \examples{
 library(ggplot2)
 
-ggplot(mtcars, aes(wt, mpg)) +
+# Simple scatter plot with benvi theme
+spo_sales <- subset(sales_report, name_muni == "São Paulo" & date == max(date))
+ggplot(spo_sales, aes(price_m2_listing, price_m2_contract)) +
   geom_point() +
-  labs(title = "Car weight vs MPG") +
+  labs(title = "Listing vs Contract Prices") +
   theme_benvi()
 }
 \seealso{
