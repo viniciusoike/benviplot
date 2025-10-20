@@ -8,7 +8,7 @@ plot_histogram(
   data,
   x,
   color = "#FFFFFF",
-  fill = "#3957BD",
+  fill = "#021841",
   zero = TRUE,
   bins = NULL,
   method = "fd",

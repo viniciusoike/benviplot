@@ -16,7 +16,7 @@ plot_column(
   text_inside = FALSE,
   text_place = NULL,
   text_padding = NULL,
-  palette = "qual_9",
+  palette = "qual_benvi",
   scale_name = "",
   scale_label = ggplot2::waiver(),
   digits = 0,

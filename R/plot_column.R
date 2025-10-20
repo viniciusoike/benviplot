@@ -62,7 +62,7 @@ plot_column <- function(
     text_inside = FALSE,
     text_place = NULL,
     text_padding = NULL,
-    palette = "qual_9",
+    palette = "qual_benvi",
     scale_name = "",
     scale_label = ggplot2::waiver(),
     digits = 0,
@@ -75,7 +75,7 @@ plot_column <- function(
     ...) {
 
   if (missing(variable)) {
-    if (missing(fill)) { fill <- "#3957BD" }
+    if (missing(fill)) { fill <- "#021841" }
 
     p <-
       ggplot(

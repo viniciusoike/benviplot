@@ -92,6 +92,12 @@ qual7 <- c("Violeta", "Quartzo", "Lirio", "Floresta", "Primavera")
 qual8 <- c("Topazio", "Pessego", "Musgo", "Violeta", "Terracota")
 qual9 <- c("AzulQuinto", "Manteiga", "Floresta", "Violeta", "Blush")
 
+# Benvi-focused qualitative palette (mix of hex and named colors)
+qual_benvi_hex <- c("#021841", "#2F405F", "#441835", "#654055", "#E0D6F6", "#E0DFDC")
+qual_benvi_named <- c("Floresta", "Manteiga")
+qual_benvi <- c(qual_benvi_hex, get_hex(qual_benvi_named))
+
+# Sequential palettes for Benvi identity
 index_blue <- c(
   "#021841", "#192C50", "#2F405F", "#46546E", "#5D687D", "#737C8C", "#8A919C",
   "#A0A5AB", "#B7B9BA", "#CECDC9")
@@ -99,6 +105,10 @@ index_prpl <- c(
   "#441835", "#552C45", "#654055", "#765466", "#876876", "#977C86", "#A89196",
   "#B8A5A6", "#C9B9B6", "#DACDC7"
 )
+
+# Diverging/muted palettes with Benvi colors
+div_blue_muted <- c("#021841", "#E0DFDC", "#E0D6F6")
+div_purple_muted <- c("#441835", "#E0DFDC", "#E0D6F6")
 
 sets <- list(
   grays = set0,
@@ -126,6 +136,7 @@ sets <- list(
   qual_7 = qual7,
   qual_8 = qual8,
   qual_9 = qual9,
+  qual_benvi = qual_benvi,
   spo_seq = spo_seq,
   spo_div = spo_div,
   spo_qual = spo_qual,
@@ -136,6 +147,8 @@ sets <- list(
   bhe_div = bhe_div,
   benvi_blue = index_blue,
   benvi_purple = index_prpl,
+  div_blue_muted = div_blue_muted,
+  div_purple_muted = div_purple_muted,
   basic = basic
   )
 

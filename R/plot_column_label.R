@@ -48,7 +48,7 @@ plot_column_label <- function(
     zero = TRUE,
     flip = TRUE,
     fill_guide = "none",
-    palette = "qual_9",
+    palette = "qual_benvi",
     text_color = "white",
     text_family = "sans",
     text_size = 4,
@@ -64,7 +64,7 @@ plot_column_label <- function(
 
   if (missing(variable)) {
     if (missing(fill)) {
-      fill <- benvi_palette("basic", 1)
+      fill <- benvi_palette("benvi_blue", 1)
     }
 
     if (missing(label)) {

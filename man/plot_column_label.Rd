@@ -14,7 +14,7 @@ plot_column_label(
   zero = TRUE,
   flip = TRUE,
   fill_guide = "none",
-  palette = "qual_9",
+  palette = "qual_benvi",
   text_color = "white",
   text_family = "sans",
   text_size = 4,

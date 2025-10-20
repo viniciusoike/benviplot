@@ -17,7 +17,7 @@ plot_scatter(
   fit_color = NULL,
   fit_ci = FALSE,
   zero = "none",
-  palette = "qual_9",
+  palette = "qual_benvi",
   scale_name = "",
   scale_label = ggplot2::waiver(),
   ...

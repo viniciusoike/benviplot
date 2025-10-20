@@ -18,7 +18,7 @@ plot_area <- function(
     variable,
     zero = TRUE,
     order = TRUE,
-    palette = "qual_9",
+    palette = "qual_benvi",
     scale_name = "",
     scale_label = ggplot2::waiver(),
     text = FALSE,
@@ -31,7 +31,7 @@ plot_area <- function(
 
   if (missing(variable)) {
     if (missing(fill)) {
-      fill <- benvi_palette("basic", 1)
+      fill <- benvi_palette("benvi_blue", 1)
     }
 
     # Plot a simple area chart of a single-variable

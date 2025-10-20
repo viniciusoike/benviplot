@@ -36,7 +36,7 @@ plot_line <- function(
 
   if (missing(variable)) {
 
-    if (missing(color)) { color <- benvi_palette("basic", 1) }
+    if (missing(color)) { color <- benvi_palette("benvi_blue", 1) }
 
     p <-
       ggplot(
@@ -52,7 +52,7 @@ plot_line <- function(
 
   } else {
 
-    if (missing(pal_name)) { pal_name <- "qual_9" }
+    if (missing(pal_name)) { pal_name <- "qual_benvi" }
 
     p <-
       ggplot(

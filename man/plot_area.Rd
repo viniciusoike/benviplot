@@ -12,7 +12,7 @@ plot_area(
   variable,
   zero = TRUE,
   order = TRUE,
-  palette = "qual_9",
+  palette = "qual_benvi",
   scale_name = "",
   scale_label = ggplot2::waiver(),
   text = FALSE,
