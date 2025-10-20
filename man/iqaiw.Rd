@@ -7,14 +7,15 @@
 \format{
 \subsection{iqaiw}{
 
-A data frame with 6 cities across multiple time periods
+A data frame with 1,660 observations across 6 cities and multiple time periods:
 \describe{
-\item{date}{Date of the observation}
+\item{date}{Date of the observation (first day of month)}
 \item{name_muni}{Name of the municipality. One of: Belo Horizonte, Brasília,
 Curitiba, Porto Alegre, Rio de Janeiro, São Paulo}
+\item{rooms}{Number of rooms in the property, or "Total" for city-level aggregate}
 \item{index}{Rental price index, normalized to 100 at first observation per city}
-\item{chg}{Monthly percent variation of the index}
-\item{acum12m}{12-month accumulated variation of the index}
+\item{chg}{Monthly percent variation of the index (decimal form)}
+\item{acum12m}{12-month accumulated variation of the index (decimal form)}
 \item{price_m2}{Estimated rental price per square meter (R$/m²)}
 }
 }

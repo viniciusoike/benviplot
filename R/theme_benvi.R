@@ -9,7 +9,6 @@
 #' @return Character string with font family name
 #' @keywords internal
 get_benvi_font_family <- function() {
-
   # Check if Poppins is installed
   poppins_available <- check_poppins_installed()
 
@@ -40,9 +39,8 @@ get_benvi_font_family <- function() {
 #' @keywords internal
 #'
 #' @importFrom ggplot2 %+replace% theme_minimal theme element_blank element_rect
-#' element_text margin
+#' element_text margin rel
 theme_custom <- function(...) {
-
   # Get font family (Poppins or fallback to sans)
   font_family <- get_benvi_font_family()
 
@@ -63,25 +61,34 @@ theme_custom <- function(...) {
       # Text elements
       text = element_text(
         family = font_family,
-        size = 10,
-        color = "gray15"),
+        size = 11,
+        color = "gray15"
+      ),
       # Title
       plot.title = element_text(
-        size = 12,
+        size = rel(1.27),
         color = "#000000",
-        hjust = 0),
+        hjust = 0,
+        margin = margin(0, 0, 5.5, 0)
+      ),
       # Subtitle
       plot.subtitle = element_text(
-        size = 8,
+        size = rel(0.91),
         color = "gray30",
         hjust = 0,
         vjust = 1,
-        margin = margin(2.5, 0, 5, 0, unit = "pt")),
+        margin = margin(0, 0, 5.5, 0)
+      ),
       # Caption
-      plot.caption  = element_text(
-        size = 6,
+      plot.caption = element_text(
+        size = rel(0.73),
         color = "gray30",
-        hjust = 1)
+        hjust = 1,
+        margin = margin(5.5, 0, 0, 0)
+      ),
+
+      # Plot margins
+      plot.margin = margin(10, 10, 10, 10)
     )
 }
 

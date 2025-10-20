@@ -57,17 +57,17 @@ test_that("plot_line respects palette parameter", {
 # plot_line_trend() tests ----
 
 test_that("plot_line_trend creates a ggplot object", {
-  df <- iqa[iqa$name_muni == "São Paulo", ]
+  df <- iqa[iqa$name_muni == "Rio De Janeiro", ]
   df$series_id <- "original"
   df_trend <- df
   df_trend$series_id <- "trend"
-  df_trend$rent_m2 <- df_trend$rent_m2 * 1.1
+  df_trend$price_m2 <- df_trend$price_m2 * 1.1
   df_combined <- rbind(df, df_trend)
 
   p <- plot_line_trend(
     data = df_combined,
-    x = ts_date,
-    y = rent_m2,
+    x = date,
+    y = price_m2,
     name_series = "original",
     name_trend = "trend"
   )

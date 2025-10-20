@@ -1,18 +1,18 @@
-#' QuintoAndar Index data
+#' QuintoAndar Index (IQA) - Rental Price Index
 #'
-#' A subset of data from the QuintoAndar rent index
+#' Historical rental price index data from QuintoAndar. This is the legacy IQA
+#' index, which has been superseded by the IQAIW (see \code{\link{iqaiw}}).
 #'
 #' @format ## iqa
-#' A data frame
+#' A data frame with 96 observations and 6 variables:
 #' \describe{
+#'   \item{date}{Date of the observation (first day of month)}
 #'   \item{name_muni}{Name of the municipality (city)}
-#'   \item{ts_date}{Date of the observation}
-#'   \item{rent_m2}{Observed median rent}
-#'   \item{wrent_m2}{Weighted observed median rent}
-#'   \item{wgt_inc}{Income weight}
-#'   \item{chg}{Monthly percent variation of the index}
-#'   \item{acum12m}{12-month accumulated variation of the index}
-#'   }
+#'   \item{index}{Rental price index, normalized to 100 at first observation}
+#'   \item{chg}{Monthly percent variation of the index (decimal form)}
+#'   \item{acum12m}{12-month accumulated variation of the index (decimal form)}
+#'   \item{price_m2}{Estimated rental price per square meter (R$/m²)}
+#' }
 #' @source Benvi
 "iqa"
 
@@ -39,14 +39,15 @@
 #' mix data sources.
 #'
 #' @format ## iqaiw
-#' A data frame with 6 cities across multiple time periods
+#' A data frame with 1,660 observations across 6 cities and multiple time periods:
 #' \describe{
-#'   \item{date}{Date of the observation}
+#'   \item{date}{Date of the observation (first day of month)}
 #'   \item{name_muni}{Name of the municipality. One of: Belo Horizonte, Brasília,
 #'     Curitiba, Porto Alegre, Rio de Janeiro, São Paulo}
+#'   \item{rooms}{Number of rooms in the property, or "Total" for city-level aggregate}
 #'   \item{index}{Rental price index, normalized to 100 at first observation per city}
-#'   \item{chg}{Monthly percent variation of the index}
-#'   \item{acum12m}{12-month accumulated variation of the index}
+#'   \item{chg}{Monthly percent variation of the index (decimal form)}
+#'   \item{acum12m}{12-month accumulated variation of the index (decimal form)}
 #'   \item{price_m2}{Estimated rental price per square meter (R$/m²)}
 #' }
 #'
@@ -67,3 +68,49 @@
 #'   theme_benvi()
 #' }
 "iqaiw"
+
+#' QuintoAndar Sales Report - Zone-Level Rental Data
+#'
+#' Rental price data at the zone (neighborhood) level for major Brazilian cities.
+#' Contains both listing prices and actual contract prices, allowing comparison
+#' between asking prices and transaction prices.
+#'
+#' @format ## sales_report
+#' A data frame with 272 observations across multiple cities and zones:
+#' \describe{
+#'   \item{date}{Date of the observation (first day of month)}
+#'   \item{name_muni}{Name of the municipality (city). Includes: Belo Horizonte,
+#'     São Paulo}
+#'   \item{name_zone}{Name of the zone/neighborhood within the city}
+#'   \item{price_m2_listing}{Median listing price per square meter (R$/m²)}
+#'   \item{price_m2_contract}{Median contract price per square meter (R$/m²)}
+#' }
+#'
+#' @details
+#' This dataset provides zone-level granularity, showing rental prices for
+#' specific neighborhoods within cities. The difference between
+#' \code{price_m2_listing} and \code{price_m2_contract} can indicate
+#' negotiation patterns or market dynamics.
+#'
+#' @source Benvi
+#'
+#' @examples
+#' \dontrun{
+#' # Compare listing vs contract prices
+#' library(ggplot2)
+#' library(dplyr)
+#'
+#' sales_report |>
+#'   filter(name_muni == "São Paulo", date == max(date)) |>
+#'   ggplot(aes(x = price_m2_listing, y = price_m2_contract)) +
+#'   geom_point(color = benvi_palette("blues")[3], size = 3) +
+#'   geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
+#'   labs(
+#'     title = "Listing vs Contract Prices by Zone",
+#'     subtitle = "São Paulo - Most Recent Month",
+#'     x = "Listing Price (R$/m²)",
+#'     y = "Contract Price (R$/m²)"
+#'   ) +
+#'   theme_benvi()
+#' }
+"sales_report"

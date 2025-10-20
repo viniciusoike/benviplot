@@ -29,10 +29,11 @@ plot_histogram(
 \item{zero}{Logical indicating if a horizontal (y = 0) line should be drawn
 on the plot.}
 
-\item{bins}{Number of bins.}
+\item{bins}{Number of bins. When specified, overrides \code{method}.}
 
-\item{method}{Character indicating an algorithm to compute optimal number of
-bins. See details. Overridden by bins. Defaults to \code{method = "fd"}.}
+\item{method}{Character specifying the binning algorithm. Must be one of:
+\code{"fd"} (default), \code{"FD"}, \code{"Scott"}, \code{"Sturges"}, \code{"Rice"}, or \code{"sqrt"}.
+See Details for algorithm descriptions. Ignored when \code{bins} is specified.}
 
 \item{density}{Logical indicating if density should be plotted on y-axis.}
 
@@ -45,6 +46,30 @@ A ggplot2 object
 }
 \description{
 Plot a histogram chart
+}
+\details{
+\subsection{Binning Methods}{
+
+The \code{method} parameter controls which algorithm is used to compute the optimal
+bin width. Available methods:
+
+\describe{
+\item{\code{"fd"} or \code{"FD"}}{\strong{Freedman-Diaconis rule} (default). Robust to
+outliers, uses IQR. Formula: \eqn{2 * IQR / n^{1/3}}. Best for most
+distributions.}
+\item{\code{"Scott"}}{\strong{Scott's rule}. Uses standard deviation. Formula:
+\eqn{3 * sd / n^{1/3}}. Works well for normal-like distributions.}
+\item{\code{"Sturges"}}{\strong{Sturges' formula}. Simple logarithmic rule. Formula:
+\eqn{k = \lceil log_2(n) \rceil} bins. Good for roughly normal data.}
+\item{\code{"Rice"}}{\strong{Rice rule}. Cube root based. Formula:
+\eqn{k = \lceil 2n^{1/3} \rceil} bins. General purpose rule.}
+\item{\code{"sqrt"}}{\strong{Square root rule}. Formula: \eqn{k = \lceil \sqrt{n} \rceil}
+bins. Simple, tends to oversmooth.}
+}
+
+When in doubt, use the default \code{"fd"} (Freedman-Diaconis), which is robust
+and works well across different distributions.
+}
 }
 \examples{
 set.seed(5)

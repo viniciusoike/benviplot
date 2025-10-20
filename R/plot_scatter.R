@@ -8,6 +8,10 @@
 #' @param fit_method Type of model to generate regression line. See `geom_smooth`
 #' for more control and details. Defaults to `"auto"`.
 #' @param fit_formula A formula for fit_method. See `geom_smooth`.
+#' @param fit_color Color of the fitted regression line. Only applied when
+#' `fit_variable = FALSE`. When `NULL` (default), uses automatic color selection.
+#' When `fit_variable = TRUE`, the fit line colors are inherited from the
+#' grouping variable and this parameter is ignored.
 #' @param fit_ci Logical indicating if confidence interval should be plotted.
 #' Defaults to `FALSE` for less cluttered visualization.
 #' @param zero Draws axis lines. Must be one of `"x"`, `"y"`, `"both"`, or
@@ -27,6 +31,7 @@ plot_scatter <- function(
     fit_variable = FALSE,
     fit_method = "auto",
     fit_formula = NULL,
+    fit_color = NULL,
     fit_ci = FALSE,
     zero = "none",
     palette = "qual_9",
@@ -72,14 +77,27 @@ plot_scatter <- function(
   }
 
   if (isTRUE(fit)) {
-    p <- p + geom_smooth(
-      data = data,
-      aes(x = {{ x }}, y = {{ y }}),
-      method = fit_method,
-      formula = fit_formula,
-      se = fit_ci,
-      inherit.aes = fit_variable
-    )
+    # When fit_variable is FALSE and fit_color is specified, use it
+    if (!fit_variable && !is.null(fit_color)) {
+      p <- p + geom_smooth(
+        data = data,
+        aes(x = {{ x }}, y = {{ y }}),
+        method = fit_method,
+        formula = fit_formula,
+        se = fit_ci,
+        color = fit_color,
+        inherit.aes = FALSE
+      )
+    } else {
+      p <- p + geom_smooth(
+        data = data,
+        aes(x = {{ x }}, y = {{ y }}),
+        method = fit_method,
+        formula = fit_formula,
+        se = fit_ci,
+        inherit.aes = fit_variable
+      )
+    }
   }
 
   p <- p + theme_benvi()

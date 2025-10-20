@@ -14,6 +14,7 @@ plot_scatter(
   fit_variable = FALSE,
   fit_method = "auto",
   fit_formula = NULL,
+  fit_color = NULL,
   fit_ci = FALSE,
   zero = "none",
   palette = "qual_9",
@@ -44,6 +45,11 @@ Defaults to \code{FALSE}.}
 for more control and details. Defaults to \code{"auto"}.}
 
 \item{fit_formula}{A formula for fit_method. See \code{geom_smooth}.}
+
+\item{fit_color}{Color of the fitted regression line. Only applied when
+\code{fit_variable = FALSE}. When \code{NULL} (default), uses automatic color selection.
+When \code{fit_variable = TRUE}, the fit line colors are inherited from the
+grouping variable and this parameter is ignored.}
 
 \item{fit_ci}{Logical indicating if confidence interval should be plotted.
 Defaults to \code{FALSE} for less cluttered visualization.}

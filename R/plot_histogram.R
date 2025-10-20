@@ -6,12 +6,36 @@
 #' @param fill Color of the inner part of the column.
 #' @param zero Logical indicating if a horizontal (y = 0) line should be drawn
 #' on the plot.
-#' @param bins Number of bins.
-#' @param method Character indicating an algorithm to compute optimal number of
-#' bins. See details. Overridden by bins. Defaults to `method = "fd"`.
+#' @param bins Number of bins. When specified, overrides `method`.
+#' @param method Character specifying the binning algorithm. Must be one of:
+#'   `"fd"` (default), `"FD"`, `"Scott"`, `"Sturges"`, `"Rice"`, or `"sqrt"`.
+#'   See Details for algorithm descriptions. Ignored when `bins` is specified.
 #' @param density Logical indicating if density should be plotted on y-axis.
 #' @param facet <[`data-masked`][ggplot2::aes_eval]> Optional variable to facet the graphics.
 #' @param ... Additional parameters to `facet_wrap()`
+#'
+#' @details
+#' ## Binning Methods
+#'
+#' The `method` parameter controls which algorithm is used to compute the optimal
+#' bin width. Available methods:
+#'
+#' \describe{
+#'   \item{`"fd"` or `"FD"`}{**Freedman-Diaconis rule** (default). Robust to
+#'     outliers, uses IQR. Formula: \eqn{2 * IQR / n^{1/3}}. Best for most
+#'     distributions.}
+#'   \item{`"Scott"`}{**Scott's rule**. Uses standard deviation. Formula:
+#'     \eqn{3 * sd / n^{1/3}}. Works well for normal-like distributions.}
+#'   \item{`"Sturges"`}{**Sturges' formula**. Simple logarithmic rule. Formula:
+#'     \eqn{k = \lceil log_2(n) \rceil} bins. Good for roughly normal data.}
+#'   \item{`"Rice"`}{**Rice rule**. Cube root based. Formula:
+#'     \eqn{k = \lceil 2n^{1/3} \rceil} bins. General purpose rule.}
+#'   \item{`"sqrt"`}{**Square root rule**. Formula: \eqn{k = \lceil \sqrt{n} \rceil}
+#'     bins. Simple, tends to oversmooth.}
+#' }
+#'
+#' When in doubt, use the default `"fd"` (Freedman-Diaconis), which is robust
+#' and works well across different distributions.
 #'
 #' @return A ggplot2 object
 #' @export

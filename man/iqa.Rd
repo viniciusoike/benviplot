@@ -3,19 +3,18 @@
 \docType{data}
 \name{iqa}
 \alias{iqa}
-\title{QuintoAndar Index data}
+\title{QuintoAndar Index (IQA) - Rental Price Index}
 \format{
 \subsection{iqa}{
 
-A data frame
+A data frame with 96 observations and 6 variables:
 \describe{
+\item{date}{Date of the observation (first day of month)}
 \item{name_muni}{Name of the municipality (city)}
-\item{ts_date}{Date of the observation}
-\item{rent_m2}{Observed median rent}
-\item{wrent_m2}{Weighted observed median rent}
-\item{wgt_inc}{Income weight}
-\item{chg}{Monthly percent variation of the index}
-\item{acum12m}{12-month accumulated variation of the index}
+\item{index}{Rental price index, normalized to 100 at first observation}
+\item{chg}{Monthly percent variation of the index (decimal form)}
+\item{acum12m}{12-month accumulated variation of the index (decimal form)}
+\item{price_m2}{Estimated rental price per square meter (R$/m²)}
 }
 }
 }
@@ -26,6 +25,7 @@ Benvi
 iqa
 }
 \description{
-A subset of data from the QuintoAndar rent index
+Historical rental price index data from QuintoAndar. This is the legacy IQA
+index, which has been superseded by the IQAIW (see \code{\link{iqaiw}}).
 }
 \keyword{datasets}
