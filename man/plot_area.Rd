@@ -47,8 +47,7 @@ Default behavior (\code{TRUE}) stacks the largest groups on top.}
 
 \item{scale_label}{String indicating fill legend labels.}
 
-\item{text}{Logical indicating if text labels should be plotted above column
-bars}
+\item{text}{Logical indicating if text labels should be plotted on column bars}
 
 \item{text_color}{Color of the text label. Default is \code{"gray20"}.}
 

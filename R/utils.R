@@ -1,23 +1,45 @@
-#' Format a number as a label
+#' Format numbers using Brazilian conventions
 #'
 #' @param x A numeric vector
-#' @param digits Number of decimal cases to include
-#' @param percent Logical indicating if % should be pasted
+#' @param digits Number of decimal places to include. Can be negative to round
+#'   to tens, hundreds, etc.
+#' @param percent Logical indicating if % symbol should be appended
 #'
-#' @description This is a convenient wrapper to both the `format` and the `round`
-#' base functions to convert a numeric vector into a character of labels for
-#' tables or plots.
+#' @description
+#' Formats numbers using Brazilian locale conventions: period (.) as thousands
+#' separator and comma (,) as decimal separator. This is a convenient wrapper
+#' to both the `format` and `round` base functions to convert numeric vectors
+#' into character labels for tables or plots.
 #'
-#' @return A character vector
+#' @details
+#' Brazilian number formatting uses:
+#' - Thousands separator: `.` (period)
+#' - Decimal separator: `,` (comma)
+#'
+#' For example, 1234567.89 becomes "1.234.567,9" (with digits = 1).
+#'
+#' @return A character vector with formatted numbers
 #' @importFrom cli cli_abort
 #' @export
 #'
 #' @examples
+#' # Basic formatting
 #' x <- 1235134.123
-#' pretty_number(x)
-#' pretty_number(x, digits = 3)
-#' pretty_number(x, digits = 1, percent = TRUE)
-pretty_number <- function(x, digits = 1, percent = FALSE) {
+#' format_num_br(x)
+#'
+#' # Different decimal places
+#' format_num_br(x, digits = 3)
+#' format_num_br(x, digits = 0)
+#'
+#' # With percentage
+#' format_num_br(12.5, digits = 1, percent = TRUE)
+#'
+#' # Negative digits round to tens, hundreds, etc.
+#' format_num_br(1234567, digits = -3)
+#'
+#' # Works with vectors
+#' format_num_br(c(100, 1000, 10000))
+format_num_br <- function(x, digits = 1, percent = FALSE) {
 
   # Input validation
   if (!is.numeric(x)) {
@@ -43,12 +65,39 @@ pretty_number <- function(x, digits = 1, percent = FALSE) {
 
   # Round number (note: digits can be negative)
   x <- round(x, digits = digits)
-  # Brazilian standard number marking
+  # Brazilian standard number formatting
   x <- format(x, big.mark = ".", decimal.mark = ",")
-  # Pastes % symbol
+  # Append % symbol if requested
   if (isTRUE(percent)) {
     x <- paste0(x, "%")
   }
 
   return(x)
+}
+
+#' Format a number as a label (Deprecated)
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `pretty_number()` has been renamed to `format_num_br()` for clarity.
+#' The new name better reflects that this function uses Brazilian number
+#' formatting conventions.
+#'
+#' @inheritParams format_num_br
+#' @return A character vector with formatted numbers
+#' @keywords internal
+#' @export
+#'
+#' @examples
+#' # Use format_num_br() instead
+#' x <- 1235134.123
+#' format_num_br(x)
+pretty_number <- function(x, digits = 1, percent = FALSE) {
+  lifecycle::deprecate_soft(
+    when = "1.1.1",
+    what = "pretty_number()",
+    with = "format_num_br()"
+  )
+  format_num_br(x = x, digits = digits, percent = percent)
 }

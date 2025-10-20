@@ -56,7 +56,7 @@ test_that("plot_line respects palette parameter", {
 
 # plot_line_trend() tests ----
 
-test_that("plot_line_trend creates a ggplot object", {
+test_that("plot_line_trend is deprecated", {
   df <- iqa[iqa$name_muni == "Rio De Janeiro", ]
   df$series_id <- "original"
   df_trend <- df
@@ -64,18 +64,39 @@ test_that("plot_line_trend creates a ggplot object", {
   df_trend$price_m2 <- df_trend$price_m2 * 1.1
   df_combined <- rbind(df, df_trend)
 
-  p <- plot_line_trend(
-    data = df_combined,
-    x = date,
-    y = price_m2,
-    name_series = "original",
-    name_trend = "trend"
+  lifecycle::expect_deprecated(
+    plot_line_trend(
+      data = df_combined,
+      x = date,
+      y = price_m2,
+      name_series = "original",
+      name_trend = "trend"
+    )
   )
+})
 
-  expect_s3_class(p, "ggplot")
-  # Should have 2 line layers
-  line_layers <- sapply(p$layers, function(x) "GeomLine" %in% class(x$geom))
-  expect_equal(sum(line_layers), 2)
+test_that("plot_line_trend still creates a ggplot object", {
+  df <- iqa[iqa$name_muni == "Rio De Janeiro", ]
+  df$series_id <- "original"
+  df_trend <- df
+  df_trend$series_id <- "trend"
+  df_trend$price_m2 <- df_trend$price_m2 * 1.1
+  df_combined <- rbind(df, df_trend)
+
+  suppressWarnings({
+    p <- plot_line_trend(
+      data = df_combined,
+      x = date,
+      y = price_m2,
+      name_series = "original",
+      name_trend = "trend"
+    )
+
+    expect_s3_class(p, "ggplot")
+    # Should have 2 line layers
+    line_layers <- sapply(p$layers, function(x) "GeomLine" %in% class(x$geom))
+    expect_equal(sum(line_layers), 2)
+  })
 })
 
 # plot_column() tests ----
@@ -121,28 +142,85 @@ test_that("plot_column works with variable parameter", {
   expect_s3_class(p, "ggplot")
 })
 
-# plot_column_label() tests ----
-
-test_that("plot_column_label creates a ggplot object", {
-  p <- plot_column_label(
+test_that("plot_column with text_inside creates ggfittext layer", {
+  p <- plot_column(
     data = test_cat_data,
     x = category,
-    y = value
+    y = value,
+    text = TRUE,
+    text_inside = TRUE
   )
 
   expect_s3_class(p, "ggplot")
-})
-
-test_that("plot_column_label has text layer", {
-  p <- plot_column_label(
-    data = test_cat_data,
-    x = category,
-    y = value
-  )
 
   # Check for geom_bar_text layer from ggfittext
   geom_classes <- sapply(p$layers, function(x) class(x$geom))
   expect_true(any(sapply(geom_classes, function(x) "GeomBarText" %in% x)))
+})
+
+test_that("plot_column with text_inside respects flip parameter", {
+  # Vertical bars (flip = FALSE)
+  p1 <- plot_column(
+    data = test_cat_data,
+    x = category,
+    y = value,
+    text = TRUE,
+    text_inside = TRUE,
+    flip = FALSE
+  )
+
+  # Horizontal bars (flip = TRUE)
+  p2 <- plot_column(
+    data = test_cat_data,
+    x = category,
+    y = value,
+    text = TRUE,
+    text_inside = TRUE,
+    flip = TRUE
+  )
+
+  expect_s3_class(p1, "ggplot")
+  expect_s3_class(p2, "ggplot")
+
+  # p2 should have coord_flip
+  expect_true("CoordFlip" %in% class(p2$coordinates))
+})
+
+# plot_column_label() tests ----
+
+test_that("plot_column_label is deprecated", {
+  lifecycle::expect_deprecated(
+    plot_column_label(
+      data = test_cat_data,
+      x = category,
+      y = value
+    )
+  )
+})
+
+test_that("plot_column_label still creates a ggplot object", {
+  suppressWarnings({
+    p <- plot_column_label(
+      data = test_cat_data,
+      x = category,
+      y = value
+    )
+    expect_s3_class(p, "ggplot")
+  })
+})
+
+test_that("plot_column_label has text layer", {
+  suppressWarnings({
+    p <- plot_column_label(
+      data = test_cat_data,
+      x = category,
+      y = value
+    )
+
+    # Check for geom_bar_text layer from ggfittext
+    geom_classes <- sapply(p$layers, function(x) class(x$geom))
+    expect_true(any(sapply(geom_classes, function(x) "GeomBarText" %in% x)))
+  })
 })
 
 # plot_scatter() tests ----

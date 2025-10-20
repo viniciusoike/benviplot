@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_line_trend.R
 \name{plot_line_trend}
 \alias{plot_line_trend}
-\title{Plot the original series plus a trend-line with emphasis on the trendline}
+\title{Plot the original series plus a trend-line with emphasis on the trendline (Deprecated)}
 \usage{
 plot_line_trend(
   data,
@@ -35,5 +35,35 @@ on the plot.}
 A ggplot2 plot
 }
 \description{
-Plot the original series plus a trend-line with emphasis on the trendline
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{plot_line_trend()} has been deprecated due to its inflexible data format
+requirements. Use standard ggplot2 with \code{geom_smooth()} or manual trend
+calculations instead.
 }
+\details{
+\subsection{Migration Guide}{
+
+The functionality can be easily replicated with standard ggplot2:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Instead of plot_line_trend():
+library(ggplot2)
+
+# Automatic smooth trend:
+ggplot(df, aes(x = date, y = value)) +
+  geom_line(alpha = 0.5, color = benvi_palette("blues")[3]) +
+  geom_smooth(method = "loess", se = FALSE, linewidth = 1,
+              color = benvi_palette("blues")[4]) +
+  theme_benvi()
+
+# Or with manual trend data:
+ggplot() +
+  geom_line(data = original, aes(x = date, y = value),
+            alpha = 0.5, color = benvi_palette("blues")[3]) +
+  geom_line(data = trend, aes(x = date, y = value),
+            linewidth = 1, color = benvi_palette("blues")[4]) +
+  theme_benvi()
+}\if{html}{\out{</div>}}
+}
+}
+\keyword{internal}

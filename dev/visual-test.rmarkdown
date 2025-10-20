@@ -512,3 +512,4 @@ This document provides a comprehensive visual test suite for the benviplot packa
 - **Theme consistency**: Testing theme_benvi() across various plot types
 
 Use this document to quickly evaluate visual changes after package updates.
+

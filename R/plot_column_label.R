@@ -1,21 +1,43 @@
-#' Column plot with text labels
+#' Column plot with text labels (Deprecated)
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `plot_column_label()` has been deprecated in favor of enhanced `plot_column()`.
+#' Use `plot_column(text = TRUE, text_inside = TRUE, flip = TRUE)` instead.
+#'
 #' @inheritParams plot_column
 #' @param label <[`data-masked`][ggplot2::aes_eval]> Text label to mapped onto the column. Defaults to y variable.
 #' @param fill_guide Optional indicating if fill guide should be suppressed.
 #'
+#' @details
+#' ## Migration Guide
 #'
+#' The functionality of `plot_column_label()` is now available in `plot_column()`
+#' with the `text_inside` parameter:
+#'
+#' ```r
+#' # Old (deprecated):
+#' plot_column_label(df, x = category, y = value, flip = TRUE)
+#'
+#' # New (recommended):
+#' plot_column(df, x = category, y = value,
+#'             text = TRUE, text_inside = TRUE, flip = TRUE)
+#' ```
+#'
+#' @keywords internal
 #' @importFrom ggplot2 ggplot aes waiver geom_col geom_text coord_flip theme position_stack guides
 #' @importFrom ggfittext geom_bar_text
 #' @return A ggplot2 plot
 #' @export
 #'
 #' @examples
+#' # Use plot_column() instead
 #' df <- data.frame(
-#'   house_region = c("Vila Mariana", "Moema", "Bela Vista"),
-#'   price_m2_sold = c(11257.12, 9874.54, 8991.38)
+#'   cat = c("A", "B", "C"),
+#'   value = c(11257, 9874, 8991)
 #' )
-#'
-#' plot_column_label(df, x = house_region, y = price_m2_sold, fill = "#633758")
+#' plot_column(df, x = cat, y = value, text = TRUE, text_inside = TRUE, flip = TRUE)
 plot_column_label <- function(
     data,
     x,
@@ -33,6 +55,12 @@ plot_column_label <- function(
     scale_name = "",
     scale_label = waiver()
 ) {
+
+  lifecycle::deprecate_soft(
+    when = "1.1.1",
+    what = "plot_column_label()",
+    with = "plot_column(text_inside = )"
+  )
 
   if (missing(variable)) {
     if (missing(fill)) {

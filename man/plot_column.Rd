@@ -13,6 +13,9 @@ plot_column(
   zero = TRUE,
   flip = FALSE,
   text = FALSE,
+  text_inside = FALSE,
+  text_place = NULL,
+  text_padding = NULL,
   palette = "qual_9",
   scale_name = "",
   scale_label = ggplot2::waiver(),
@@ -44,8 +47,18 @@ axis should be plotted.}
 
 \item{flip}{Logical indicating if plot should be flipped}
 
-\item{text}{Logical indicating if text labels should be plotted above column
-bars}
+\item{text}{Logical indicating if text labels should be plotted on column bars}
+
+\item{text_inside}{Logical indicating if text labels should be placed inside
+bars (using ggfittext). When TRUE, text is auto-sized to fit inside bars.
+When FALSE (default), text appears above/beside bars at fixed size.}
+
+\item{text_place}{Placement of inside text. One of "top", "bottom", "left",
+"right", "centre"/"center". Only used when text_inside = TRUE. Defaults to
+"centre" for vertical bars or "right" for flipped bars.}
+
+\item{text_padding}{Padding around inside text as grid::unit(). Only used
+when text_inside = TRUE. Defaults to 1mm.}
 
 \item{palette}{String indicating the name of which palette to use.}
 
@@ -76,6 +89,14 @@ A ggplot2 plot
 Plot a column chart
 }
 \examples{
+# Basic column chart
 df <- data.frame(cat = factor(c("A", "B", "C")), value = c(5, 7, 3))
 plot_column(data = df, x = cat, y = value)
+
+# With text labels above bars
+plot_column(data = df, x = cat, y = value, text = TRUE)
+
+# With text labels inside bars (auto-sized)
+plot_column(data = df, x = cat, y = value, text = TRUE, text_inside = TRUE)
+
 }

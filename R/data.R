@@ -59,7 +59,7 @@
 #' library(ggplot2)
 #' ggplot(iqaiw, aes(x = date, y = index, color = name_muni)) +
 #'   geom_line() +
-#'   scale_color_benvi_d(pal_name = "qual_6", name = "City") +
+#'   scale_color_benvi_d(pal_name = "qual_6", name = "name_muni") +
 #'   labs(
 #'     title = "IQAIW: Rental Price Index",
 #'     x = "Date",
@@ -71,7 +71,7 @@
 
 #' QuintoAndar Sales Report - Zone-Level Rental Data
 #'
-#' Rental price data at the zone (neighborhood) level for major Brazilian cities.
+#' Rental price data at the zone (region) level for major Brazilian cities.
 #' Contains both listing prices and actual contract prices, allowing comparison
 #' between asking prices and transaction prices.
 #'
@@ -80,30 +80,29 @@
 #' \describe{
 #'   \item{date}{Date of the observation (first day of month)}
 #'   \item{name_muni}{Name of the municipality (city). Includes: Belo Horizonte,
-#'     São Paulo}
-#'   \item{name_zone}{Name of the zone/neighborhood within the city}
+#'     Rio de Janeiro, and São Paulo}
+#'   \item{name_zone}{Name of the zone within the city}
 #'   \item{price_m2_listing}{Median listing price per square meter (R$/m²)}
 #'   \item{price_m2_contract}{Median contract price per square meter (R$/m²)}
 #' }
 #'
 #' @details
-#' This dataset provides zone-level granularity, showing rental prices for
-#' specific neighborhoods within cities. The difference between
+#' This dataset provides zone-level granularity, showing sales prices for
+#' specific regions within cities. The difference between
 #' \code{price_m2_listing} and \code{price_m2_contract} can indicate
 #' negotiation patterns or market dynamics.
 #'
-#' @source Benvi
+#' @source Benvi (Sales Report 2023-Q3).
 #'
 #' @examples
 #' \dontrun{
 #' # Compare listing vs contract prices
 #' library(ggplot2)
-#' library(dplyr)
 #'
-#' sales_report |>
-#'   filter(name_muni == "São Paulo", date == max(date)) |>
-#'   ggplot(aes(x = price_m2_listing, y = price_m2_contract)) +
-#'   geom_point(color = benvi_palette("blues")[3], size = 3) +
+#' spo_sales <- subset(sales_report, name_muni == "São Paulo" & date == max(date))
+#'
+#' ggplot(spo_sales, aes(x = price_m2_listing, y = price_m2_contract)) +
+#'   geom_point(color = benvi_palette("benvi_blue")[3], size = 2) +
 #'   geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
 #'   labs(
 #'     title = "Listing vs Contract Prices by Zone",

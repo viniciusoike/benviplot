@@ -16,6 +16,17 @@ When asked to perform tasks related to this repository, please follow these guid
 
 `benviplot` is an R package that provides ggplot2 extensions with standardized color palettes and plotting functions for Benvi (QuintoAndar Group). It includes custom color palettes, themes, and helper plot functions.
 
+## Writting documentation
+
+This applies to vignettes, examples and tutorial-material. General guidelines:
+
+- Avoid pipeing into ggplot or plot calls.
+- Use `subset` when possible to avoid the need to call `dplyr`.
+- Make examples as simple as possible. Leave complex use cases for vignettes.
+- Always use datasets that are shipped with this package (i.e. iqa, iqaiw, sales_report) or default R datasets (mtcars, iris).
+- Add comments to code but be terse and always comment above the code (never to the right).
+- When writting long-form content like vignettes try to reuse the same dataset several times. This makes it easier for the user to focus on the visualizations themselves and not so much on the data manipulation.
+
 ## Development Commands
 
 ### Package Development

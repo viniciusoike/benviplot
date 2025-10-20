@@ -1,9 +1,9 @@
 # Tests for utility functions
 
-# pretty_number() tests ----
+# format_num_br() tests ----
 
-test_that("pretty_number formats numbers correctly", {
-  result <- pretty_number(1234567.89)
+test_that("format_num_br formats numbers correctly", {
+  result <- format_num_br(1234567.89)
 
   expect_type(result, "character")
   expect_length(result, 1)
@@ -12,106 +12,106 @@ test_that("pretty_number formats numbers correctly", {
   expect_match(result, "\\.")
 })
 
-test_that("pretty_number handles different digit specifications", {
+test_that("format_num_br handles different digit specifications", {
   x <- 1234567.89
 
-  result_0 <- pretty_number(x, digits = 0)
-  result_1 <- pretty_number(x, digits = 1)
-  result_2 <- pretty_number(x, digits = 2)
+  result_0 <- format_num_br(x, digits = 0)
+  result_1 <- format_num_br(x, digits = 1)
+  result_2 <- format_num_br(x, digits = 2)
 
   expect_type(result_0, "character")
   expect_type(result_1, "character")
   expect_type(result_2, "character")
 })
 
-test_that("pretty_number handles negative digits", {
+test_that("format_num_br handles negative digits", {
   # Negative digits round to tens, hundreds, etc.
-  result <- pretty_number(1234567, digits = -3)
+  result <- format_num_br(1234567, digits = -3)
 
   expect_type(result, "character")
 })
 
-test_that("pretty_number adds percent sign when requested", {
-  result <- pretty_number(12.5, digits = 1, percent = TRUE)
+test_that("format_num_br adds percent sign when requested", {
+  result <- format_num_br(12.5, digits = 1, percent = TRUE)
 
   expect_type(result, "character")
   expect_match(result, "%$")
 })
 
-test_that("pretty_number handles vectors", {
+test_that("format_num_br handles vectors", {
   x <- c(100, 1000, 10000)
-  result <- pretty_number(x)
+  result <- format_num_br(x)
 
   expect_type(result, "character")
   expect_length(result, 3)
 })
 
-test_that("pretty_number handles zero", {
-  result <- pretty_number(0)
+test_that("format_num_br handles zero", {
+  result <- format_num_br(0)
 
   expect_type(result, "character")
   expect_equal(result, "0")
 })
 
-test_that("pretty_number handles negative numbers", {
-  result <- pretty_number(-1234.56)
+test_that("format_num_br handles negative numbers", {
+  result <- format_num_br(-1234.56)
 
   expect_type(result, "character")
   expect_match(result, "^-")
 })
 
-test_that("pretty_number handles large numbers with separators", {
-  result <- pretty_number(10000)  # Ten thousand
+test_that("format_num_br handles large numbers with separators", {
+  result <- format_num_br(10000)  # Ten thousand
 
   expect_type(result, "character")
   expect_match(result, "\\.")  # Should have thousand separators
   expect_equal(result, "10.000")
 })
 
-test_that("pretty_number handles very small numbers", {
-  result <- pretty_number(0.001, digits = 3)
+test_that("format_num_br handles very small numbers", {
+  result <- format_num_br(0.001, digits = 3)
 
   expect_type(result, "character")
 })
 
-test_that("pretty_number throws error for non-numeric input", {
+test_that("format_num_br throws error for non-numeric input", {
   expect_error(
-    pretty_number("not a number"),
+    format_num_br("not a number"),
     "must be numeric"
   )
 
   expect_error(
-    pretty_number(factor(c("a", "b"))),
+    format_num_br(factor(c("a", "b"))),
     "must be numeric"
   )
 })
 
-test_that("pretty_number throws error for invalid digits", {
+test_that("format_num_br throws error for invalid digits", {
   expect_error(
-    pretty_number(123, digits = "not numeric"),
+    format_num_br(123, digits = "not numeric"),
     "must be a single numeric"
   )
 
   expect_error(
-    pretty_number(123, digits = c(1, 2)),
+    format_num_br(123, digits = c(1, 2)),
     "must be a single numeric"
   )
 })
 
-test_that("pretty_number throws error for invalid percent", {
+test_that("format_num_br throws error for invalid percent", {
   expect_error(
-    pretty_number(123, percent = "yes"),
+    format_num_br(123, percent = "yes"),
     "must be a single logical"
   )
 
   expect_error(
-    pretty_number(123, percent = c(TRUE, FALSE)),
+    format_num_br(123, percent = c(TRUE, FALSE)),
     "must be a single logical"
   )
 })
 
-test_that("pretty_number handles NA values", {
-  result <- pretty_number(c(100, NA, 200))
+test_that("format_num_br handles NA values", {
+  result <- format_num_br(c(100, NA, 200))
 
   expect_type(result, "character")
   expect_length(result, 3)
@@ -119,11 +119,29 @@ test_that("pretty_number handles NA values", {
   expect_true(any(grepl("NA", result)))
 })
 
-test_that("pretty_number Brazilian format is correct", {
-  result <- pretty_number(1234.56, digits = 2)
+test_that("format_num_br Brazilian format is correct", {
+  result <- format_num_br(1234.56, digits = 2)
 
   # Should use . for thousands and , for decimals (Brazilian standard)
   expect_match(result, "1\\.234,56")
+})
+
+# Deprecation tests ----
+
+test_that("pretty_number is deprecated", {
+  # Suppress the deprecation warning for testing
+  lifecycle::expect_deprecated(
+    pretty_number(123.45),
+    "pretty_number"
+  )
+})
+
+test_that("pretty_number still works correctly", {
+  # Suppress deprecation warning
+  suppressWarnings({
+    result <- pretty_number(1234.56, digits = 2)
+    expect_equal(result, format_num_br(1234.56, digits = 2))
+  })
 })
 
 # plot_add_xy() tests ----

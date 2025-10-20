@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_column_label.R
 \name{plot_column_label}
 \alias{plot_column_label}
-\title{Column plot with text labels}
+\title{Column plot with text labels (Deprecated)}
 \usage{
 plot_column_label(
   data,
@@ -60,13 +60,32 @@ axis should be plotted.}
 A ggplot2 plot
 }
 \description{
-Column plot with text labels
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{plot_column_label()} has been deprecated in favor of enhanced \code{plot_column()}.
+Use \code{plot_column(text = TRUE, text_inside = TRUE, flip = TRUE)} instead.
+}
+\details{
+\subsection{Migration Guide}{
+
+The functionality of \code{plot_column_label()} is now available in \code{plot_column()}
+with the \code{text_inside} parameter:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Old (deprecated):
+plot_column_label(df, x = category, y = value, flip = TRUE)
+
+# New (recommended):
+plot_column(df, x = category, y = value,
+            text = TRUE, text_inside = TRUE, flip = TRUE)
+}\if{html}{\out{</div>}}
+}
 }
 \examples{
+# Use plot_column() instead
 df <- data.frame(
-  house_region = c("Vila Mariana", "Moema", "Bela Vista"),
-  price_m2_sold = c(11257.12, 9874.54, 8991.38)
+  cat = c("A", "B", "C"),
+  value = c(11257, 9874, 8991)
 )
-
-plot_column_label(df, x = house_region, y = price_m2_sold, fill = "#633758")
+plot_column(df, x = cat, y = value, text = TRUE, text_inside = TRUE, flip = TRUE)
 }
+\keyword{internal}

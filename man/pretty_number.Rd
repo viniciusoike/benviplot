@@ -2,28 +2,31 @@
 % Please edit documentation in R/utils.R
 \name{pretty_number}
 \alias{pretty_number}
-\title{Format a number as a label}
+\title{Format a number as a label (Deprecated)}
 \usage{
 pretty_number(x, digits = 1, percent = FALSE)
 }
 \arguments{
 \item{x}{A numeric vector}
 
-\item{digits}{Number of decimal cases to include}
+\item{digits}{Number of decimal places to include. Can be negative to round
+to tens, hundreds, etc.}
 
-\item{percent}{Logical indicating if \% should be pasted}
+\item{percent}{Logical indicating if \% symbol should be appended}
 }
 \value{
-A character vector
+A character vector with formatted numbers
 }
 \description{
-This is a convenient wrapper to both the \code{format} and the \code{round}
-base functions to convert a numeric vector into a character of labels for
-tables or plots.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{pretty_number()} has been renamed to \code{format_num_br()} for clarity.
+The new name better reflects that this function uses Brazilian number
+formatting conventions.
 }
 \examples{
+# Use format_num_br() instead
 x <- 1235134.123
-pretty_number(x)
-pretty_number(x, digits = 3)
-pretty_number(x, digits = 1, percent = TRUE)
+format_num_br(x)
 }
+\keyword{internal}

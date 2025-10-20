@@ -56,7 +56,7 @@ mix data sources.
 library(ggplot2)
 ggplot(iqaiw, aes(x = date, y = index, color = name_muni)) +
   geom_line() +
-  scale_color_benvi_d(pal_name = "qual_6", name = "City") +
+  scale_color_benvi_d(pal_name = "qual_6", name = "name_muni") +
   labs(
     title = "IQAIW: Rental Price Index",
     x = "Date",
