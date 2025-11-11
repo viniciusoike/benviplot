@@ -1,0 +1,10 @@
+*.html
+*.pdf
+*.R
+*_cache/
+*_files/
+*.utf8.md
+*.knit.md
+/.quarto/
+figure/
+figures/
