@@ -15,12 +15,12 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-> **DISCLAIMER**: This is an unofficial, independent project created by
-> Vinicius Oike and is **NOT** affiliated with, endorsed by, or
-> connected to QuintoAndar in any way. Benvi was a former brand of
-> QuintoAndar that was discontinued in 2024. This package uses publicly
-> available color schemes from that period for data visualization
-> purposes. See [DISCLAIMER.md](DISCLAIMER.md) for details.
+> **DISCLAIMER**: This is an unofficial, independent project and is
+> **NOT** affiliated with, endorsed by, or connected to QuintoAndar in
+> any way. Benvi was a former brand of QuintoAndar that was discontinued
+> in 2024. This package uses publicly available color schemes from that
+> period for data visualization purposes. See
+> [DISCLAIMER.md](DISCLAIMER.md) for details.
 
 ## Overview
 
@@ -125,17 +125,10 @@ ggplot(iqaiw, aes(x = date, y = name_muni, fill = price_m2)) +
 
 <img src="man/figures/README-unnamed-chunk-7-1.svg" width="80%" style="display: block; margin: auto;" />
 
-Finally, the package features some generic `plot_` functions that help
-to create standard plots. These functions aim to be efficient, allowing
-for quick data exploration, while remaining polished enough to be used
-for reports.
-
-``` r
-# Rental price index over time
-plot_line(iqa, x = date, y = index)
-```
-
-<img src="man/figures/README-unnamed-chunk-8-1.svg" width="80%" style="display: block; margin: auto;" />
+The package features some generic `plot_` functions that help to create
+standard plots. These functions aim to be efficient, allowing for quick
+data exploration, while remaining polished enough to be used for
+reports.
 
 These functions usually include simple helper arguments like `text` in
 the case of `plot_column` that plots its value above the column.
@@ -149,7 +142,7 @@ sales <- data.frame(
 plot_column(sales, x = x, y = y, text = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-8-1.svg" width="80%" style="display: block; margin: auto;" />
 
 The final example shows the variable argument which replaces the
 `aes(fill = ...)` or `aes(color = ...)` in each function.
@@ -166,49 +159,7 @@ plot_scatter(
 #> `geom_smooth()` using formula = 'y ~ x'
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.svg" width="80%" style="display: block; margin: auto;" />
-
-## Available Palettes
-
-The package includes several palette families:
-
-- **Theme Palettes** (grays, browns, yellows, greens, blues, purples,
-  pinks, oranges): 4-color palettes for basic visualizations
-- **Qualitative Palettes** (qual_1 through qual_9): 8-color palettes for
-  categorical data
-- **Sequential Palettes** (seq_grays, seq_browns, etc.): 9-color
-  gradients for continuous data
-- **City-specific**: Special palettes for São Paulo, Rio, and Belo
-  Horizonte (spo\_*, rio\_*, bhe\_\*)
-- **Brand Colors**: Specialized color scales (benvi_blue, benvi_purple,
-  basic)
-
-View all available palettes by calling `benvi_palette()` with different
-palette names, or use `list_palettes()` to see all options.
-
-### Fonts
-
-The package uses the **Poppins** font from Google Fonts for clean,
-professional typography.
-
-**Quick setup (one-time):**
-
-``` r
-# One command to set up fonts
-benviplot::setup_benvi_fonts()
-```
-
-This installs Poppins to your system and provides guidance for optimal
-configuration.
-
-**What if I don’t install Poppins?**
-
-No problem! The theme will automatically fall back to your system’s
-default sans-serif font. However, for the best visual results, we
-recommend installing Poppins.
-
-For detailed font setup instructions and troubleshooting, see
-`vignette("font-setup")`.
+<img src="man/figures/README-unnamed-chunk-9-1.svg" width="80%" style="display: block; margin: auto;" />
 
 ## Getting Help
 
