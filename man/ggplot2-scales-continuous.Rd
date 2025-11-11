@@ -7,11 +7,11 @@
 \alias{scale_fill_benvi_c}
 \title{Continuous scales to use for ggplot2}
 \usage{
-scale_colour_benvi_c(pal_name, direction = 1, ...)
+scale_colour_benvi_c(pal_name = "benvi_blue", direction = 1, ...)
 
-scale_color_benvi_c(pal_name, direction = 1, ...)
+scale_color_benvi_c(pal_name = "benvi_blue", direction = 1, ...)
 
-scale_fill_benvi_c(pal_name, direction = 1, ...)
+scale_fill_benvi_c(pal_name = "benvi_blue", direction = 1, ...)
 }
 \arguments{
 \item{pal_name}{Name of the palette. Defaults to "qual_2".}

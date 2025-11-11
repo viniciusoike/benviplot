@@ -6,11 +6,11 @@
 \alias{scale_fill_benvi_d}
 \title{Discrete scales to use for ggplot2}
 \usage{
-scale_colour_benvi_d(pal_name, direction = 1, ...)
+scale_colour_benvi_d(pal_name = "qual_benvi", direction = 1, ...)
 
-scale_color_benvi_d(pal_name, direction = 1, ...)
+scale_color_benvi_d(pal_name = "qual_benvi", direction = 1, ...)
 
-scale_fill_benvi_d(pal_name, direction = 1, ...)
+scale_fill_benvi_d(pal_name = "qual_benvi", direction = 1, ...)
 }
 \arguments{
 \item{pal_name}{Name of the palette.}

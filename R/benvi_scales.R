@@ -3,7 +3,7 @@
 #' Functions to use `ggplot2` scales with Benvi colors.
 #'
 #' @rdname ggplot2-scales-discrete
-#' @param pal_name Name of the palette.
+#' @param pal_name Name of the palette. Defaults to "qual_benvi".
 #' @param direction Either `1` or `-1`. If `-1` the palette will be reversed.
 #' @param ... additional arguments to pass to discrete_scale
 #'
@@ -21,7 +21,7 @@
 #' @export
 #' @importFrom ggplot2 discrete_scale
 #' @importFrom cli cli_abort
-scale_colour_benvi_d <- function(pal_name, direction = 1, ...) {
+scale_colour_benvi_d <- function(pal_name = "qual_benvi", direction = 1, ...) {
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     cli::cli_abort(c(
@@ -48,7 +48,7 @@ scale_color_benvi_d <- scale_colour_benvi_d
 #' @export
 #' @importFrom ggplot2 discrete_scale
 #' @importFrom cli cli_abort
-scale_fill_benvi_d <- function(pal_name, direction = 1, ...) {
+scale_fill_benvi_d <- function(pal_name = "qual_benvi", direction = 1, ...) {
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     cli::cli_abort(c(
@@ -94,7 +94,7 @@ scale_fill_benvi_d <- function(pal_name, direction = 1, ...) {
 #' @export
 #' @importFrom ggplot2 scale_colour_gradientn
 #' @importFrom cli cli_abort
-scale_colour_benvi_c <- function(pal_name, direction = 1, ...) {
+scale_colour_benvi_c <- function(pal_name = "benvi_blue", direction = 1, ...) {
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     cli::cli_abort(c(
@@ -120,7 +120,7 @@ scale_color_benvi_c <- scale_colour_benvi_c
 #' @export
 #' @importFrom ggplot2 scale_fill_gradientn
 #' @importFrom cli cli_abort
-scale_fill_benvi_c <- function(pal_name, direction = 1, ...) {
+scale_fill_benvi_c <- function(pal_name = "benvi_blue", direction = 1, ...) {
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     cli::cli_abort(c(
