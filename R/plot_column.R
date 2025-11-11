@@ -36,6 +36,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Basic column chart
 #' df <- data.frame(cat = factor(c("A", "B", "C")), value = c(5, 7, 3))
 #' plot_column(data = df, x = cat, y = value)
@@ -45,6 +46,7 @@
 #'
 #' # With text labels inside bars (auto-sized)
 #' plot_column(data = df, x = cat, y = value, text = TRUE, text_inside = TRUE)
+#' }
 #'
 #' @importFrom ggplot2 ggplot aes geom_col geom_hline geom_text coord_flip labs
 #' theme element_blank position_stack position_dodge

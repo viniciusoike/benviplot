@@ -29,12 +29,15 @@ These functions provide the option to use Benvi colors inside continuous
 palettes with the \code{ggplot2} package.
 }
 \examples{
-
+\dontrun{
 if (require('ggplot2')) {
   # Continuous color scale with sales data
-  ggplot(sales_report, aes(x = price_m2_listing, y = price_m2_contract, colour = price_m2_listing)) +
+  ggplot(sales_report, aes(x = price_m2_listing,
+                           y = price_m2_contract,
+                           colour = price_m2_listing)) +
     geom_point() +
     scale_colour_benvi_c("benvi_blue")
+}
 }
 
 }

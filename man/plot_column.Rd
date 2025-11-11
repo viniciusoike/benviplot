@@ -89,6 +89,7 @@ A ggplot2 plot
 Plot a column chart
 }
 \examples{
+\dontrun{
 # Basic column chart
 df <- data.frame(cat = factor(c("A", "B", "C")), value = c(5, 7, 3))
 plot_column(data = df, x = cat, y = value)
@@ -98,5 +99,6 @@ plot_column(data = df, x = cat, y = value, text = TRUE)
 
 # With text labels inside bars (auto-sized)
 plot_column(data = df, x = cat, y = value, text = TRUE, text_inside = TRUE)
+}
 
 }

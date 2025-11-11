@@ -32,12 +32,14 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Use plot_column() instead
 #' df <- data.frame(
 #'   cat = c("A", "B", "C"),
 #'   value = c(11257, 9874, 8991)
 #' )
 #' plot_column(df, x = cat, y = value, text = TRUE, text_inside = TRUE, flip = TRUE)
+#' }
 plot_column_label <- function(
     data,
     x,

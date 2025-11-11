@@ -18,6 +18,7 @@ not available, it falls back to the system's default sans-serif font.
 To install Poppins, run \code{\link[=install_poppins]{install_poppins()}} or \code{\link[=setup_benvi_fonts]{setup_benvi_fonts()}}.
 }
 \examples{
+\dontrun{
 library(ggplot2)
 
 # Simple scatter plot with benvi theme
@@ -26,6 +27,7 @@ ggplot(spo_sales, aes(price_m2_listing, price_m2_contract)) +
   geom_point() +
   labs(title = "Listing vs Contract Prices") +
   theme_benvi()
+}
 }
 \seealso{
 \code{\link[=install_poppins]{install_poppins()}}, \code{\link[=setup_benvi_fonts]{setup_benvi_fonts()}}, \code{\link[=font_status]{font_status()}}

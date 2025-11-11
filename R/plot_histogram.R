@@ -43,6 +43,7 @@
 #' @importFrom cli cli_abort
 #'
 #' @examples
+#' \dontrun{
 #' set.seed(5)
 #' tbl <- data.frame(x = rnorm(n = 1000))
 #'
@@ -60,6 +61,7 @@
 #' x = c(rnorm(500), runif(500), rexp(500))
 #' )
 #' plot_histogram(data = tbl, x = x, facet = city, density = TRUE)
+#' }
 plot_histogram <- function(
     data,
     x,

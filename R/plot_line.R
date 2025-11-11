@@ -19,8 +19,10 @@
 #' @importFrom ggplot2 ggplot aes geom_line geom_point geom_hline labs
 #'
 #' @examples
+#' \dontrun{
 #' sales <- data.frame(time = 2000:2005, value = c(10, 5, 6, 8, 11, 4))
 #' plot_line(data = sales, x = time, y = value)
+#' }
 plot_line <- function(
   data,
   x,

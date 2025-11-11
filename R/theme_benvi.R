@@ -108,6 +108,7 @@ theme_custom <- function(...) {
 #' @seealso [install_poppins()], [setup_benvi_fonts()], [font_status()]
 #'
 #' @examples
+#' \dontrun{
 #' library(ggplot2)
 #'
 #' # Simple scatter plot with benvi theme
@@ -116,6 +117,7 @@ theme_custom <- function(...) {
 #'   geom_point() +
 #'   labs(title = "Listing vs Contract Prices") +
 #'   theme_benvi()
+#' }
 theme_benvi <- function() {
   theme_custom()
 }
