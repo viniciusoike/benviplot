@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,13 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/viniciusoike/benviplot" class="external-link">benviplot</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/viniciusoike/benviplot" class="external-link">benviplot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Prepare data subsets used throughout examples</span></span>
+<span><span class="va">index_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span></span>
+<span>  <span class="va">iqaiw</span>,</span>
+<span>  <span class="va">rooms</span> <span class="op">==</span> <span class="st">"Total"</span> <span class="op">&amp;</span> <span class="va">name_muni</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"São Paulo"</span>, <span class="st">"Rio de Janeiro"</span>, <span class="st">"Belo Horizonte"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
@@ -104,6 +110,9 @@ data</li>
 <strong>City-Specific Palettes</strong>: Themed palettes for
 Brazilian cities</li>
 <li>
+<strong>Benvi Brand Palettes</strong>: Benvi-focused colors
+(qual_benvi, div_blue_muted, div_purple_muted)</li>
+<li>
 <strong>Index Palettes</strong>: Specialized single-color
 scales</li>
 </ul>
@@ -115,7 +124,7 @@ scales</li>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Basic palette (3 colors)</span></span>
 <span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"basic"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/basic-palettes-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/basic-palettes-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <p><strong>When to use</strong>: Simple visualizations with 2-3
 categories.</p>
 <p><strong>Example</strong>:</p>
@@ -130,7 +139,7 @@ categories.</p>
 <span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_fill_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"basic"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Using Basic Palette"</span>, x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/basic-example-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/basic-example-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="set-palettes-set0---set7">Set Palettes (Set0 - Set7)<a class="anchor" aria-label="anchor" href="#set-palettes-set0---set7"></a>
@@ -144,7 +153,7 @@ for small categorical datasets.</p>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">pal_name</span> <span class="kw">in</span> <span class="va">theme_names</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="va">pal_name</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/set-palettes-display-1.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-2.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-3.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-4.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-5.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-6.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-7.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-8.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/set-palettes-display-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-2.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-3.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-4.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-5.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-6.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-7.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/set-palettes-display-8.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <p><strong>When to use</strong>: - Categorical data with 2-4 groups -
 Charts where you need strong color contrast - Professional
 presentations</p>
@@ -161,7 +170,7 @@ presentations</p>
 <span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_fill_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"purples"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Regional Sales"</span>, x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Sales ($1000s)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/set-example-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/set-example-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="qualitative-palettes-qual1---qual9">Qualitative Palettes (Qual1 - Qual9)<a class="anchor" aria-label="anchor" href="#qualitative-palettes-qual1---qual9"></a>
@@ -175,23 +184,24 @@ categorical datasets where you need many distinguishable colors.</p>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">pal_name</span> <span class="kw">in</span> <span class="va">qual_names</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="va">pal_name</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/qual-palettes-display-1.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-2.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-3.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-4.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-5.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-6.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-7.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-8.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-9.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/qual-palettes-display-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-2.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-3.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-4.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-5.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-6.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-7.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-8.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/qual-palettes-display-9.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <p><strong>When to use</strong>: - Categorical data with 5-8 groups -
 Complex visualizations with many categories - Dashboards and
 multi-series charts</p>
 <p><strong>Example</strong>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Use mtcars with multiple groups</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">wt</span>, y <span class="op">=</span> <span class="va">mpg</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">carb</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_color_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"qual_3"</span>, name <span class="op">=</span> <span class="st">"Carburetors"</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="co"># Use rental data with multiple cities</span></span>
+<span><span class="va">iqaiw_total</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">iqaiw</span>, <span class="va">rooms</span> <span class="op">==</span> <span class="st">"Total"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">iqaiw_total</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">index</span>, color <span class="op">=</span> <span class="va">name_muni</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_color_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"qual_3"</span>, name <span class="op">=</span> <span class="st">"City"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"MPG vs Weight by Carburetor Count"</span>,</span>
-<span>    x <span class="op">=</span> <span class="st">"Weight (1000 lbs)"</span>,</span>
-<span>    y <span class="op">=</span> <span class="st">"Miles per Gallon"</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Rental Price Index by City"</span>,</span>
+<span>    x <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Index (base = 100)"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/qual-example-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/qual-example-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="sequential-palettes-seq0---seq7">Sequential Palettes (Seq0 - Seq7)<a class="anchor" aria-label="anchor" href="#sequential-palettes-seq0---seq7"></a>
@@ -205,7 +215,7 @@ to dark. Perfect for continuous or ordered data.</p>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">pal_name</span> <span class="kw">in</span> <span class="va">seq_names</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="va">pal_name</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/seq-palettes-display-1.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/seq-palettes-display-2.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/seq-palettes-display-3.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/seq-palettes-display-4.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/seq-palettes-display-5.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/seq-palettes-display-6.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/seq-palettes-display-7.png" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/seq-palettes-display-8.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/seq-palettes-display-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/seq-palettes-display-2.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/seq-palettes-display-3.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/seq-palettes-display-4.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/seq-palettes-display-5.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/seq-palettes-display-6.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/seq-palettes-display-7.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"><img src="color-palettes_files/figure-html/seq-palettes-display-8.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <p><strong>When to use</strong>: - Continuous numerical data - Heatmaps
 and choropleth maps - Ordered categorical data (e.g., Low/Medium/High) -
 Data where progression/intensity matters</p>
@@ -228,7 +238,7 @@ Data where progression/intensity matters</p>
 <span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    axis.ticks <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/seq-example-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/seq-example-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="city-specific-palettes">City-Specific Palettes<a class="anchor" aria-label="anchor" href="#city-specific-palettes"></a>
@@ -240,36 +250,36 @@ qualitative, sequential, and diverging variants.</p>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"spo_seq"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/spo-palettes-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/spo-palettes-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"spo_div"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/spo-palettes-2.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/spo-palettes-2.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"spo_qual"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/spo-palettes-3.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/spo-palettes-3.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="rio-de-janeiro-palettes">Rio de Janeiro Palettes<a class="anchor" aria-label="anchor" href="#rio-de-janeiro-palettes"></a>
 </h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"rio_seq"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/rio-palettes-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/rio-palettes-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"rio_div"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/rio-palettes-2.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/rio-palettes-2.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"rio_qual"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/rio-palettes-3.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/rio-palettes-3.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="belo-horizonte-palettes">Belo Horizonte Palettes<a class="anchor" aria-label="anchor" href="#belo-horizonte-palettes"></a>
 </h3>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"bhe_seq"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/bhe-palettes-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/bhe-palettes-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"bhe_div"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/bhe-palettes-2.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/bhe-palettes-2.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <p><strong>When to use</strong>: - Geographic visualizations (maps,
 regional data) - Reports specific to these cities - When you want
 location-themed aesthetics</p>
@@ -291,26 +301,88 @@ location-themed aesthetics</p>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/city-example-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/city-example-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="benvi-brand-palettes">Benvi Brand Palettes<a class="anchor" aria-label="anchor" href="#benvi-brand-palettes"></a>
+</h2>
+<p>New palettes emphasizing Benvi’s brand identity with blues and
+purples.</p>
+<div class="section level3">
+<h3 id="qual_benvi">qual_benvi<a class="anchor" aria-label="anchor" href="#qual_benvi"></a>
+</h3>
+<p>A qualitative palette combining Benvi’s signature colors - perfect as
+the default for multi-group visualizations:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_benvi"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="color-palettes_files/figure-html/qual-benvi-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
+<p><strong>When to use</strong>: As the new default for categorical data
+visualization, especially in Benvi-branded materials.</p>
+<p><strong>Example</strong>:</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">iqaiw_total</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">index</span>, color <span class="op">=</span> <span class="va">name_muni</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_color_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"qual_benvi"</span>, name <span class="op">=</span> <span class="st">"City"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Rental Price Index - Benvi Brand Colors"</span>,</span>
+<span>    x <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Index"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="color-palettes_files/figure-html/qual-benvi-example-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
+</div>
+<div class="section level3">
+<h3 id="div_blue_muted-div_purple_muted">div_blue_muted &amp; div_purple_muted<a class="anchor" aria-label="anchor" href="#div_blue_muted-div_purple_muted"></a>
+</h3>
+<p>Diverging/muted palettes for subtle comparisons or neutral
+visualizations:</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"div_blue_muted"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="color-palettes_files/figure-html/div-muted-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"div_purple_muted"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="color-palettes_files/figure-html/div-muted-2.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
+<p><strong>When to use</strong>: - Diverging data around a neutral
+midpoint - Subtle, professional visualizations - When you need softer
+color contrasts</p>
+<p><strong>Example</strong>:</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Simple example with three categories</span></span>
+<span><span class="va">simple_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  category <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Below Target"</span>, <span class="st">"At Target"</span>, <span class="st">"Above Target"</span><span class="op">)</span>,</span>
+<span>  count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">25</span>, <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">simple_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">category</span>, y <span class="op">=</span> <span class="va">count</span>, fill <span class="op">=</span> <span class="va">category</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"div_blue_muted"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Performance Distribution"</span>,</span>
+<span>    x <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Count"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="color-palettes_files/figure-html/div-muted-example-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="index-palettes">Index Palettes<a class="anchor" aria-label="anchor" href="#index-palettes"></a>
 </h2>
 <p>Specialized single-color gradients for index visualizations.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Blue index</span></span>
 <span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"benvi_blue"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/index-palettes-1.png" width="672" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<p><img src="color-palettes_files/figure-html/index-palettes-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Purple index</span></span>
 <span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"benvi_purple"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/index-palettes-2.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/index-palettes-2.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <p><strong>When to use</strong>: - Financial indices and time series -
 Single-metric dashboards - When you want monochromatic emphasis</p>
 <p><strong>Example</strong>:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Stock index over time</span></span>
 <span><span class="va">index_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.Date.html" class="external-link">seq.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2020-01-01"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2024-12-31"</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"month"</span><span class="op">)</span>,</span>
@@ -326,7 +398,7 @@ Single-metric dashboards - When you want monochromatic emphasis</p>
 <span>    y <span class="op">=</span> <span class="st">"Index Value"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/index-example-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/index-example-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="advanced-usage">Advanced Usage<a class="anchor" aria-label="anchor" href="#advanced-usage"></a>
@@ -335,18 +407,18 @@ Single-metric dashboards - When you want monochromatic emphasis</p>
 <h3 id="reversing-palettes">Reversing Palettes<a class="anchor" aria-label="anchor" href="#reversing-palettes"></a>
 </h3>
 <p>Any palette can be reversed using <code>direction = -1</code>:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Original</span></span>
 <span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"seq_purples"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/reverse-1.png" width="672" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<p><img src="color-palettes_files/figure-html/reverse-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Reversed</span></span>
 <span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"seq_purples"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/reverse-2.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/reverse-2.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <p>This is useful when you want dark-to-light instead of
 light-to-dark:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">heatmap_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, fill <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/ggplot2-scales-continuous.html">scale_fill_benvi_c</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"seq_purples"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, name <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -356,44 +428,44 @@ light-to-dark:</p>
 <span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    axis.ticks <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/reverse-example-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/reverse-example-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="extracting-specific-colors">Extracting Specific Colors<a class="anchor" aria-label="anchor" href="#extracting-specific-colors"></a>
 </h3>
 <p>Get individual colors from a palette:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the 3rd color from Qual5</span></span>
 <span><span class="va">my_color</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_5"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span>
 <span><span class="va">my_color</span></span>
 <span><span class="co">#&gt; [1] "#9A75B4"</span></span>
 <span></span>
 <span><span class="co"># Use in a plot</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">wt</span>, y <span class="op">=</span> <span class="va">mpg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">my_color</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">iqa</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">index</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">my_color</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Using a Single Extracted Color"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/extract-colors-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/extract-colors-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="custom-number-of-colors">Custom Number of Colors<a class="anchor" aria-label="anchor" href="#custom-number-of-colors"></a>
 </h3>
 <p>For discrete palettes, request fewer colors:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get only 4 colors from an 8-color palette</span></span>
 <span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_7"</span>, n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/custom-n-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/custom-n-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <p>For continuous palettes, interpolate any number:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Interpolate to get 15 colors</span></span>
 <span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"seq_yellows"</span>, n <span class="op">=</span> <span class="fl">15</span>, type <span class="op">=</span> <span class="st">"continuous"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/interpolate-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/interpolate-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="combining-palettes">Combining Palettes<a class="anchor" aria-label="anchor" href="#combining-palettes"></a>
 </h3>
 <p>Mix colors from different palettes for custom schemes:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create custom palette from multiple sources</span></span>
 <span><span class="va">custom_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"greens"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
@@ -413,7 +485,7 @@ light-to-dark:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">custom_colors</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Custom Combined Palette"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/combine-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/combine-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -448,19 +520,19 @@ shapes</li>
 <strong>Use labels</strong>: Don’t rely solely on color to convey
 information</li>
 </ul>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Example with both color and shape</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">wt</span>, y <span class="op">=</span> <span class="va">mpg</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_color_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"purples"</span>, name <span class="op">=</span> <span class="st">"Cylinders"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_shape_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">15</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"Cylinders"</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Example with both color and line type</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">index_subset</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">index</span>, color <span class="op">=</span> <span class="va">name_muni</span>, linetype <span class="op">=</span> <span class="va">name_muni</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_color_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"purples"</span>, name <span class="op">=</span> <span class="st">"City"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_linetype_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"dashed"</span>, <span class="st">"dotted"</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"City"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"Using Color AND Shape for Accessibility"</span>,</span>
-<span>    x <span class="op">=</span> <span class="st">"Weight (1000 lbs)"</span>,</span>
-<span>    y <span class="op">=</span> <span class="st">"Miles per Gallon"</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Using Color AND Line Type for Accessibility"</span>,</span>
+<span>    x <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Index"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/accessibility-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/accessibility-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -524,7 +596,7 @@ information</li>
 <h2 id="complete-palette-gallery">Complete Palette Gallery<a class="anchor" aria-label="anchor" href="#complete-palette-gallery"></a>
 </h2>
 <p>Here’s a quick visual reference of all available palettes:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a function to display palette swatches</span></span>
 <span><span class="va">show_palette_grid</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">palette_names</span>, <span class="va">title</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">n_pals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">palette_names</span><span class="op">)</span></span>
@@ -553,15 +625,15 @@ information</li>
 <span></span>
 <span><span class="co"># Display theme palettes</span></span>
 <span><span class="fu">show_palette_grid</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"grays"</span>, <span class="st">"browns"</span>, <span class="st">"yellows"</span>, <span class="st">"greens"</span>, <span class="st">"blues"</span>, <span class="st">"purples"</span>, <span class="st">"pinks"</span>, <span class="st">"oranges"</span><span class="op">)</span>, <span class="st">"Theme Palettes"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/gallery-1.png" width="672" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<p><img src="color-palettes_files/figure-html/gallery-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display Qualitative palettes</span></span>
 <span><span class="fu">show_palette_grid</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"qual_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="st">"Qualitative Palettes"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/gallery-qual-1.png" width="672" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<p><img src="color-palettes_files/figure-html/gallery-qual-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display Sequential palettes</span></span>
 <span><span class="fu">show_palette_grid</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seq_grays"</span>, <span class="st">"seq_browns"</span>, <span class="st">"seq_yellows"</span>, <span class="st">"seq_greens"</span>, <span class="st">"seq_blues"</span>, <span class="st">"seq_purples"</span>, <span class="st">"seq_pinks"</span>, <span class="st">"seq_oranges"</span><span class="op">)</span>, <span class="st">"Sequential Palettes"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="color-palettes_files/figure-html/gallery-seq-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="color-palettes_files/figure-html/gallery-seq-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
@@ -612,7 +684,7 @@ palette tools</li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

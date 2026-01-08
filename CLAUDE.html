@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,6 +58,16 @@
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a></h2>
 <p><code>benviplot</code> is an R package that provides ggplot2 extensions with standardized color palettes and plotting functions for Benvi (QuintoAndar Group). It includes custom color palettes, themes, and helper plot functions.</p>
 </div>
+<div class="section level2">
+<h2 id="writting-documentation">Writting documentation<a class="anchor" aria-label="anchor" href="#writting-documentation"></a></h2>
+<p>This applies to vignettes, examples and tutorial-material. General guidelines:</p>
+<ul><li>Avoid pipeing into ggplot or plot calls.</li>
+<li>Use <code>subset</code> when possible to avoid the need to call <code>dplyr</code>.</li>
+<li>Make examples as simple as possible. Leave complex use cases for vignettes.</li>
+<li>Always use datasets that are shipped with this package (i.e. iqa, iqaiw, sales_report) or default R datasets (mtcars, iris).</li>
+<li>Add comments to code but be terse and always comment above the code (never to the right).</li>
+<li>When writting long-form content like vignettes try to reuse the same dataset several times. This makes it easier for the user to focus on the visualizations themselves and not so much on the data manipulation.</li>
+</ul></div>
 <div class="section level2">
 <h2 id="development-commands">Development Commands<a class="anchor" aria-label="anchor" href="#development-commands"></a></h2>
 <div class="section level3">
@@ -137,7 +147,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

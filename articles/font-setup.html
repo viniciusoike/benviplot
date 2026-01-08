@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,100 +83,61 @@ outputs.</p>
 <div class="section level3">
 <h3 id="why-we-changed">Why We Changed<a class="anchor" aria-label="anchor" href="#why-we-changed"></a>
 </h3>
-<p>The previous system (v1.0.0) used the <code>showtext</code> package,
-which had a notorious DPI mismatch problem:</p>
-<ul>
-<li>Text would render at different sizes in RStudio vs saved plots</li>
-<li>Users had to constantly adjust <code>showtext_opts(dpi = ...)</code>
-settings</li>
-<li>Output varied unpredictably across different devices</li>
-<li>No reliable one-size-fits-all solution</li>
-</ul>
-<p><strong>The new system fixes all of this.</strong> By using
-systemfonts and ragg, you get:</p>
-<p>✅ <strong>Consistent output</strong> - Same rendering in RStudio,
-ggsave(), and R Markdown ✅ <strong>No DPI issues</strong> - Text
-renders correctly at any resolution ✅ <strong>Better quality</strong> -
-Superior anti-aliasing and text rendering ✅ <strong>Simpler
-workflow</strong> - One-time font installation, no per-session setup ✅
-<strong>Faster</strong> - Better performance than showtext</p>
+<p>The previous system (&lt;=v1.0.0) used the <code>showtext</code>
+package, which had a DPI mismatch problem. As a result, users had to
+adjust <code>showtext_opts(dpi = ...)</code> settings before exporting
+plots, and output varied unpredictably across different devices and
+IDEs. Changing the DPI settings would also affect the resolution of the
+plots inside the RStudio Plots pane, making for a less than ideal user
+experience.</p>
+<p>The new system fixes these issues. The only trade-off is that Poppins
+must be installed locally. Installing Poppins, however, is simple and
+free. Additionally, if Poppins is not available, the system will fall
+back to system “sans” font and will still render correctly at any
+resolution.</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="quick-start-one-command-setup">Quick Start: One-Command Setup<a class="anchor" aria-label="anchor" href="#quick-start-one-command-setup"></a>
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The easiest way to set up fonts for benviplot is to run one
-command:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/viniciusoike/benviplot" class="external-link">benviplot</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># One-time setup - installs Poppins and provides RStudio configuration guidance</span></span>
-<span><span class="fu"><a href="../reference/setup_benvi_fonts.html">setup_benvi_fonts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>This function will:</p>
-<ol style="list-style-type: decimal">
-<li>Download and install the Poppins font to your system</li>
-<li>Check if ragg is installed (recommended for best quality)</li>
-<li>Provide instructions for configuring RStudio</li>
-</ol>
-<p>After running this once, you’re done! The fonts will work in all R
-sessions.</p>
-</div>
-<div class="section level2">
-<h2 id="detailed-installation">Detailed Installation<a class="anchor" aria-label="anchor" href="#detailed-installation"></a>
-</h2>
-<div class="section level3">
-<h3 id="install-poppins-font">Install Poppins Font<a class="anchor" aria-label="anchor" href="#install-poppins-font"></a>
-</h3>
+<p>The optimal setup requires: 1) installing Poppins; and 2) installing
+the <code>ragg</code> package. For RStudio users, an additional step is
+required to set AGG as the default graphics device.</p>
 <div class="section level4">
-<h4 id="option-1-automatic-installation-recommended">Option 1: Automatic Installation (Recommended)<a class="anchor" aria-label="anchor" href="#option-1-automatic-installation-recommended"></a>
+<h4 id="install-poppins-font">Install Poppins Font<a class="anchor" aria-label="anchor" href="#install-poppins-font"></a>
 </h4>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Install Poppins font from Google Fonts</span></span>
-<span><span class="fu">benviplot</span><span class="fu">::</span><span class="fu"><a href="../reference/install_poppins.html">install_poppins</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>This downloads and installs Poppins system-wide. You only need to do
-this once per computer.</p>
-</div>
-<div class="section level4">
-<h4 id="option-2-manual-installation">Option 2: Manual Installation<a class="anchor" aria-label="anchor" href="#option-2-manual-installation"></a>
-</h4>
-<p>You can also install Poppins manually:</p>
+<p>The most reliable way to install Poppins is to get it from Google
+Fonts.</p>
 <ol style="list-style-type: decimal">
 <li>Go to <a href="https://fonts.google.com/specimen/Poppins" class="external-link">Google
 Fonts - Poppins</a>
 </li>
 <li>Click “Download family”</li>
 <li>Extract the ZIP file</li>
-<li>Install the fonts:
-<ul>
-<li>
-<strong>Windows</strong>: Right-click each .ttf file →
-“Install”</li>
-<li>
-<strong>macOS</strong>: Double-click each .ttf file → “Install
-Font”</li>
-<li>
-<strong>Linux</strong>: Copy .ttf files to <code>~/.fonts/</code> or
-use your system’s font manager</li>
-</ul>
-</li>
+<li>Install the fonts</li>
 </ol>
-<p>After manual installation, restart R to make the fonts available.</p>
+<p>Remember to restart R to make the fonts available.</p>
+<p>An alternative way to install Poppins is to run
+<code><a href="../reference/install_poppins.html">install_poppins()</a></code>. This function might not work on all
+systems, however.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Install Poppins font from Google Fonts</span></span>
+<span><span class="fu">benviplot</span><span class="fu">::</span><span class="fu"><a href="../reference/install_poppins.html">install_poppins</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
-</div>
-<div class="section level3">
-<h3 id="install-ragg-optional-but-recommended">Install ragg (Optional but Recommended)<a class="anchor" aria-label="anchor" href="#install-ragg-optional-but-recommended"></a>
-</h3>
+<div class="section level4">
+<h4 id="install-ragg">Install ragg<a class="anchor" aria-label="anchor" href="#install-ragg"></a>
+</h4>
 <p>For the best graphics quality, install the <code>ragg</code>
-package:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+package.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ragg"</span><span class="op">)</span></span></code></pre></div>
-<p>The ragg package provides high-quality graphics devices with
-excellent text rendering.</p>
+<p>Remember to restart R and/or your IDE to make sure everything works
+as intended.</p>
+<hr>
 </div>
-</div>
-<div class="section level2">
-<h2 id="configure-rstudio-optional">Configure RStudio (Optional)<a class="anchor" aria-label="anchor" href="#configure-rstudio-optional"></a>
-</h2>
+<div class="section level4">
+<h4 id="configure-rstudio-optional">Configure RStudio (Optional)<a class="anchor" aria-label="anchor" href="#configure-rstudio-optional"></a>
+</h4>
 <p>To use ragg as the default graphics device in RStudio:</p>
 <ol style="list-style-type: decimal">
 <li>Go to <strong>Tools → Global Options → General →
@@ -188,37 +149,44 @@ Graphics</strong>
 </ol>
 <p>This ensures all plots in the RStudio Plots pane use ragg for
 rendering.</p>
+<hr>
 </div>
-<div class="section level2">
-<h2 id="check-your-setup">Check Your Setup<a class="anchor" aria-label="anchor" href="#check-your-setup"></a>
-</h2>
+<div class="section level4">
+<h4 id="quick-start-one-command-setup">Quick Start: One-Command Setup<a class="anchor" aria-label="anchor" href="#quick-start-one-command-setup"></a>
+</h4>
+<p>An alternative, but still experimental way to set up fonts for
+benviplot is to run <code><a href="../reference/setup_benvi_fonts.html">setup_benvi_fonts()</a></code>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/viniciusoike/benviplot" class="external-link">benviplot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># One-time setup - installs Poppins and provides RStudio configuration guidance</span></span>
+<span><span class="fu"><a href="../reference/setup_benvi_fonts.html">setup_benvi_fonts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>This function will:</p>
+<ol style="list-style-type: decimal">
+<li>Download and install the Poppins font to your system.</li>
+<li>Check if <code>ragg</code> is installed (recommended for best
+quality).</li>
+<li>Provide instructions for configuring RStudio.</li>
+</ol>
+</div>
+<div class="section level3">
+<h3 id="check-your-setup">Check Your Setup<a class="anchor" aria-label="anchor" href="#check-your-setup"></a>
+</h3>
 <p>Use <code><a href="../reference/font_status.html">font_status()</a></code> to check your current
 configuration:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/font_status.html">font_status</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>This will report:</p>
-<ul>
-<li>Whether Poppins is installed</li>
-<li>Whether ragg is available</li>
-<li>Recommendations for optimal setup</li>
-</ul>
+</div>
 </div>
 <div class="section level2">
-<h2 id="using-benviplot-with-fonts">Using benviplot with Fonts<a class="anchor" aria-label="anchor" href="#using-benviplot-with-fonts"></a>
+<h2 id="using-benviplot-with-poppins">Using benviplot with Poppins<a class="anchor" aria-label="anchor" href="#using-benviplot-with-poppins"></a>
 </h2>
 <div class="section level3">
 <h3 id="theme-behavior">Theme Behavior<a class="anchor" aria-label="anchor" href="#theme-behavior"></a>
 </h3>
 <p>The <code><a href="../reference/theme_benvi.html">theme_benvi()</a></code> function automatically detects whether
-Poppins is installed:</p>
-<ul>
-<li>
-<strong>If Poppins is installed</strong>: Uses Poppins for all
-text</li>
-<li>
-<strong>If Poppins is not installed</strong>: Falls back to system
-“sans” font</li>
-</ul>
+Poppins is installed. If it’s not installed, it falls back to system
+“sans” font.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/viniciusoike/benviplot" class="external-link">benviplot</a></span><span class="op">)</span></span>
@@ -227,91 +195,13 @@ text</li>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"My Plot"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># Automatically uses Poppins or fallback</span></span></code></pre></div>
-<p>You’ll see a one-time message if Poppins isn’t installed, suggesting
-installation.</p>
 </div>
 <div class="section level3">
-<h3 id="saving-plots">Saving Plots<a class="anchor" aria-label="anchor" href="#saving-plots"></a>
+<h3 id="using-other-fonts">Using Other Fonts<a class="anchor" aria-label="anchor" href="#using-other-fonts"></a>
 </h3>
-<p>Use <code><a href="../reference/ggsave_benvi.html">ggsave_benvi()</a></code> for optimized plot saving:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">wt</span>, <span class="va">mpg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Automatically uses ragg for PNG if available</span></span>
-<span><span class="fu"><a href="../reference/ggsave_benvi.html">ggsave_benvi</a></span><span class="op">(</span><span class="st">"my_plot.png"</span>, <span class="va">p</span>, width <span class="op">=</span> <span class="fl">8</span>, height <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Works with any format</span></span>
-<span><span class="fu"><a href="../reference/ggsave_benvi.html">ggsave_benvi</a></span><span class="op">(</span><span class="st">"my_plot.pdf"</span>, <span class="va">p</span>, width <span class="op">=</span> <span class="fl">8</span>, height <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
-<p><code><a href="../reference/ggsave_benvi.html">ggsave_benvi()</a></code> automatically:</p>
-<ul>
-<li>Uses ragg device for PNG files (if ragg is installed)</li>
-<li>Sets DPI to 300 for high quality</li>
-<li>Provides consistent output across platforms</li>
-</ul>
-<p>You can still use regular <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave()</a></code>, but
-<code><a href="../reference/ggsave_benvi.html">ggsave_benvi()</a></code> provides better defaults.</p>
-</div>
-</div>
-<div class="section level2">
-<h2 id="troubleshooting">Troubleshooting<a class="anchor" aria-label="anchor" href="#troubleshooting"></a>
-</h2>
-<div class="section level3">
-<h3 id="poppins-font-not-found-message">“Poppins font not found” Message<a class="anchor" aria-label="anchor" href="#poppins-font-not-found-message"></a>
-</h3>
-<p>If you see this message when using <code><a href="../reference/theme_benvi.html">theme_benvi()</a></code>:</p>
-<ol style="list-style-type: decimal">
-<li>Install Poppins: <code><a href="../reference/install_poppins.html">install_poppins()</a></code>
-</li>
-<li>Restart R</li>
-<li>Try again</li>
-</ol>
-</div>
-<div class="section level3">
-<h3 id="font-looks-different">Font Looks Different<a class="anchor" aria-label="anchor" href="#font-looks-different"></a>
-</h3>
-<p>If the font doesn’t look like Poppins:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Check if Poppins is actually installed</span></span>
-<span><span class="fu"><a href="../reference/check_poppins_installed.html">check_poppins_installed</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># If FALSE, install it</span></span>
-<span><span class="fu"><a href="../reference/install_poppins.html">install_poppins</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="ragg-not-working-in-rstudio">ragg Not Working in RStudio<a class="anchor" aria-label="anchor" href="#ragg-not-working-in-rstudio"></a>
-</h3>
-<ol style="list-style-type: decimal">
-<li>Ensure ragg is installed: <code>install.packages("ragg")</code>
-</li>
-<li>Configure RStudio: Tools → Global Options → General → Graphics →
-Backend: AGG</li>
-<li>Restart RStudio</li>
-</ol>
-</div>
-<div class="section level3">
-<h3 id="text-still-has-size-issues">Text Still Has Size Issues<a class="anchor" aria-label="anchor" href="#text-still-has-size-issues"></a>
-</h3>
-<p>The new system eliminates DPI issues, but if you’re still seeing
-problems:</p>
-<ol style="list-style-type: decimal">
-<li>Ensure you’re using benviplot v1.1.0 or later:
-<code>packageVersion("benviplot")</code>
-</li>
-<li>Check that you’re not loading the old showtext package</li>
-<li>Use <code><a href="../reference/ggsave_benvi.html">ggsave_benvi()</a></code> instead of base
-<code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave()</a></code>
-</li>
-</ol>
-</div>
-</div>
-<div class="section level2">
-<h2 id="advanced-using-other-fonts">Advanced: Using Other Fonts<a class="anchor" aria-label="anchor" href="#advanced-using-other-fonts"></a>
-</h2>
 <p>While benviplot is designed for Poppins, you can use any system font
-with the systemfonts framework:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+with the systemfonts framework.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List all available system fonts</span></span>
 <span><span class="fu">systemfonts</span><span class="fu">::</span><span class="fu"><a href="https://systemfonts.r-lib.org/reference/system_fonts.html" class="external-link">system_fonts</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -321,86 +211,24 @@ with the systemfonts framework:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"Roboto"</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Override font</span></span></code></pre></div>
-<p>For more advanced font management, see the <a href="https://systemfonts.r-lib.org/" class="external-link">systemfonts documentation</a>.</p>
-</div>
-<div class="section level2">
-<h2 id="migration-from-v1-0-0">Migration from v1.0.0<a class="anchor" aria-label="anchor" href="#migration-from-v1-0-0"></a>
-</h2>
-<p>If you’re upgrading from benviplot v1.0.0:</p>
-<div class="section level3">
-<h3 id="what-changed">What Changed<a class="anchor" aria-label="anchor" href="#what-changed"></a>
-</h3>
-<ul>
-<li>❌ <strong>Removed</strong>: <code>showtext</code> and
-<code>sysfonts</code> packages</li>
-<li>❌ <strong>Removed</strong>: <code>import_fonts()</code> function
-(replaced with <code><a href="../reference/install_poppins.html">install_poppins()</a></code>)</li>
-<li>✅ <strong>Added</strong>: Modern systemfonts-based font
-management</li>
-<li>✅ <strong>Added</strong>: New functions:
-<code><a href="../reference/install_poppins.html">install_poppins()</a></code>, <code><a href="../reference/setup_benvi_fonts.html">setup_benvi_fonts()</a></code>,
-<code><a href="../reference/font_status.html">font_status()</a></code>, <code><a href="../reference/ggsave_benvi.html">ggsave_benvi()</a></code>
-</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="migration-steps">Migration Steps<a class="anchor" aria-label="anchor" href="#migration-steps"></a>
-</h3>
-<ol style="list-style-type: decimal">
-<li>Remove old showtext code from your scripts:</li>
-</ol>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># OLD (v1.0.0) - DELETE THIS</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/yixuan/showtext" class="external-link">showtext</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/showtext/man/showtext_auto.html" class="external-link">showtext_auto</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">import_fonts</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># NEW (v1.1.0) - One-time setup</span></span>
-<span><span class="fu"><a href="../reference/setup_benvi_fonts.html">setup_benvi_fonts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<ol start="2" style="list-style-type: decimal">
-<li>Install Poppins system-wide (one time):</li>
-</ol>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/install_poppins.html">install_poppins</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<ol start="3" style="list-style-type: decimal">
-<li>Optionally install ragg for best quality:</li>
-</ol>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ragg"</span><span class="op">)</span></span></code></pre></div>
-<ol start="4" style="list-style-type: decimal">
-<li>Update your plotting code (optional):</li>
-</ol>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># OLD</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"plot.png"</span>, dpi <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># NEW (recommended)</span></span>
-<span><span class="fu"><a href="../reference/ggsave_benvi.html">ggsave_benvi</a></span><span class="op">(</span><span class="st">"plot.png"</span><span class="op">)</span>  <span class="co"># Smart defaults</span></span></code></pre></div>
-<p>That’s it! Your plots will now render consistently without any DPI
-issues.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
-<p>The new font system in benviplot v1.1.0 provides a dramatically
-better user experience:</p>
+<p>The new font system in benviplot v1.1.0 aims to provide a better user
+experience.</p>
 <ul>
 <li>
-<strong>One-time setup</strong>: Install fonts to your system
-once</li>
-<li>
 <strong>No DPI issues</strong>: Consistent rendering at any
-resolution</li>
+resolution.</li>
 <li>
 <strong>Better quality</strong>: Superior text rendering with
-ragg</li>
+ragg.</li>
 <li>
 <strong>Simpler code</strong>: No per-session font loading
-required</li>
+required.</li>
 </ul>
-<p>For most users, running <code><a href="../reference/setup_benvi_fonts.html">setup_benvi_fonts()</a></code> once is all
-you need!</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -413,7 +241,7 @@ you need!</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

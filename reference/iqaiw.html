@@ -11,7 +11,7 @@ and online listings from QuintoAndar's listings (including ImovelWeb)."></head><
 
     <a class="navbar-brand me-2" href="../index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,21 +64,24 @@ and online listings from QuintoAndar's listings (including ImovelWeb).</p>
 <h3 id="iqaiw">iqaiw<a class="anchor" aria-label="anchor" href="#iqaiw"></a></h3>
 
 
-<p>A data frame with 6 cities across multiple time periods</p><dl><dt>date</dt>
-<dd><p>Date of the observation</p></dd>
+<p>A data frame with 1,660 observations across 6 cities and multiple time periods:</p><dl><dt>date</dt>
+<dd><p>Date of the observation (first day of month)</p></dd>
 
 <dt>name_muni</dt>
 <dd><p>Name of the municipality. One of: Belo Horizonte, Brasília,
 Curitiba, Porto Alegre, Rio de Janeiro, São Paulo</p></dd>
 
+<dt>rooms</dt>
+<dd><p>Number of rooms in the property, or "Total" for city-level aggregate</p></dd>
+
 <dt>index</dt>
 <dd><p>Rental price index, normalized to 100 at first observation per city</p></dd>
 
 <dt>chg</dt>
-<dd><p>Monthly percent variation of the index</p></dd>
+<dd><p>Monthly percent variation of the index (decimal form)</p></dd>
 
 <dt>acum12m</dt>
-<dd><p>12-month accumulated variation of the index</p></dd>
+<dd><p>12-month accumulated variation of the index (decimal form)</p></dd>
 
 <dt>price_m2</dt>
 <dd><p>Estimated rental price per square meter (R$/m²)</p></dd>
@@ -119,7 +122,7 @@ mix data sources.</p>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">iqaiw</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">index</span>, color <span class="op">=</span> <span class="va">name_muni</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="ggplot2-scales-discrete.html">scale_color_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"qual_6"</span>, name <span class="op">=</span> <span class="st">"City"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="ggplot2-scales-discrete.html">scale_color_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"qual_6"</span>, name <span class="op">=</span> <span class="st">"name_muni"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    title <span class="op">=</span> <span class="st">"IQAIW: Rental Price Index"</span>,</span></span>
 <span class="r-in"><span>    x <span class="op">=</span> <span class="st">"Date"</span>,</span></span>
@@ -138,7 +141,7 @@ mix data sources.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

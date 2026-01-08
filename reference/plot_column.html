@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,10 @@
 <span>  zero <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  flip <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  text <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  palette <span class="op">=</span> <span class="st">"qual_9"</span>,</span>
+<span>  text_inside <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  text_place <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text_padding <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  palette <span class="op">=</span> <span class="st">"qual_benvi"</span>,</span>
 <span>  scale_name <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  scale_label <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/waiver.html" class="external-link">waiver</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
@@ -107,8 +110,24 @@ axis should be plotted.</p></dd>
 
 
 <dt id="arg-text">text<a class="anchor" aria-label="anchor" href="#arg-text"></a></dt>
-<dd><p>Logical indicating if text labels should be plotted above column
-bars</p></dd>
+<dd><p>Logical indicating if text labels should be plotted on column bars</p></dd>
+
+
+<dt id="arg-text-inside">text_inside<a class="anchor" aria-label="anchor" href="#arg-text-inside"></a></dt>
+<dd><p>Logical indicating if text labels should be placed inside
+bars (using ggfittext). When TRUE, text is auto-sized to fit inside bars.
+When FALSE (default), text appears above/beside bars at fixed size.</p></dd>
+
+
+<dt id="arg-text-place">text_place<a class="anchor" aria-label="anchor" href="#arg-text-place"></a></dt>
+<dd><p>Placement of inside text. One of "top", "bottom", "left",
+"right", "centre"/"center". Only used when text_inside = TRUE. Defaults to
+"centre" for vertical bars or "right" for flipped bars.</p></dd>
+
+
+<dt id="arg-text-padding">text_padding<a class="anchor" aria-label="anchor" href="#arg-text-padding"></a></dt>
+<dd><p>Padding around inside text as grid::unit(). Only used
+when text_inside = TRUE. Defaults to 1mm.</p></dd>
 
 
 <dt id="arg-palette">palette<a class="anchor" aria-label="anchor" href="#arg-palette"></a></dt>
@@ -162,11 +181,18 @@ bars</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>cat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span><span class="op">)</span>, value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co"># Basic column chart</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>cat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span><span class="op">)</span>, value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">plot_column</span><span class="op">(</span>data <span class="op">=</span> <span class="va">df</span>, x <span class="op">=</span> <span class="va">cat</span>, y <span class="op">=</span> <span class="va">value</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Poppins font not found. Using system default font instead.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Install Poppins with: `benviplot::install_poppins()`</span>
-<span class="r-plt img"><img src="plot_column-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># With text labels above bars</span></span></span>
+<span class="r-in"><span><span class="fu">plot_column</span><span class="op">(</span>data <span class="op">=</span> <span class="va">df</span>, x <span class="op">=</span> <span class="va">cat</span>, y <span class="op">=</span> <span class="va">value</span>, text <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># With text labels inside bars (auto-sized)</span></span></span>
+<span class="r-in"><span><span class="fu">plot_column</span><span class="op">(</span>data <span class="op">=</span> <span class="va">df</span>, x <span class="op">=</span> <span class="va">cat</span>, y <span class="op">=</span> <span class="va">value</span>, text <span class="op">=</span> <span class="cn">TRUE</span>, text_inside <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -178,7 +204,7 @@ bars</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

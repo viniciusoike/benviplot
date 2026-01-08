@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,43 +74,17 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>Welcome to <code>benviplot</code>! This package provides a
-comprehensive set of tools for creating beautiful, publication-ready
-visualizations in R using ggplot2.</p>
-<div class="section level3">
-<h3 id="what-is-benviplot">What is benviplot?<a class="anchor" aria-label="anchor" href="#what-is-benviplot"></a>
-</h3>
-<p><code>benviplot</code> offers:</p>
-<ul>
-<li>
-<strong>Curated Color Palettes</strong>: Professional color schemes
-optimized for data visualization</li>
-<li>
-<strong>ggplot2 Integration</strong>: Seamless scales for both
-discrete and continuous data</li>
-<li>
-<strong>Plot Helpers</strong>: Convenience functions for common
-chart types</li>
-<li>
-<strong>Custom Theme</strong>: Clean, modern theme with professional
-typography</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="disclaimer">Disclaimer<a class="anchor" aria-label="anchor" href="#disclaimer"></a>
-</h3>
-<p><strong>IMPORTANT</strong>: This is an unofficial, independent
-project created by Vinicius Oike and is <strong>NOT</strong> affiliated
-with, endorsed by, or connected to QuintoAndar in any way. Benvi was a
-former brand of QuintoAndar that was discontinued in 2024. This package
-uses publicly available color schemes from that period for data
-visualization purposes.</p>
-</div>
+<p><code>benviplot</code> provides color palettes and ggplot2 helper
+functions tailored for EDA. The color underlying color schemes are based
+on Benvi, a discontinued brand of Brazilian proptech QuintoAndar. This
+package uses publicly available color schemes for data visualization
+purposes.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>Install <code>benviplot</code> from GitHub:</p>
+<p>The easiest way to install <code>benviplot</code> currently is
+directly from GitHub.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Install remotes if needed</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -119,395 +93,182 @@ visualization purposes.</p>
 <span></span>
 <span><span class="co"># Install benviplot</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"viniciusoike/benviplot"</span><span class="op">)</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="system-requirements">System Requirements<a class="anchor" aria-label="anchor" href="#system-requirements"></a>
-</h3>
-<ul>
-<li>
-<strong>R</strong>: Version 4.1.0 or higher</li>
-<li>
-<strong>ggplot2</strong>: Version 4.0.0 or higher</li>
-</ul>
-</div>
 </div>
 <div class="section level2">
 <h2 id="font-setup-optional-but-recommended">Font Setup (Optional but Recommended)<a class="anchor" aria-label="anchor" href="#font-setup-optional-but-recommended"></a>
 </h2>
 <p><code>benviplot</code> uses the <strong>Poppins</strong> font family
-from Google Fonts for professional typography. Installing Poppins is
-<strong>optional</strong> - the theme will automatically fall back to
-your system’s default font if Poppins isn’t available.</p>
+from Google Fonts. Installing Poppins is <strong>optional</strong> - the
+theme will automatically fall back to your system’s default font if
+Poppins isn’t available.</p>
 <div class="section level3">
 <h3 id="one-command-setup">One-Command Setup<a class="anchor" aria-label="anchor" href="#one-command-setup"></a>
 </h3>
-<p>The easiest way to set up fonts:</p>
+<p>Poppins is freely available at Google Fonts but you can also install
+it with <code><a href="../reference/setup_benvi_fonts.html">setup_benvi_fonts()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/viniciusoike/benviplot" class="external-link">benviplot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># One-time setup - installs Poppins and configures graphics</span></span>
 <span><span class="fu"><a href="../reference/setup_benvi_fonts.html">setup_benvi_fonts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>This command will: 1. Download and install Poppins to your system 2.
-Check for the ragg package (recommended for best quality) 3. Provide
-guidance for RStudio configuration</p>
-<p><strong>You only need to do this once per computer!</strong></p>
-</div>
-<div class="section level3">
-<h3 id="what-if-i-skip-font-setup">What if I skip font setup?<a class="anchor" aria-label="anchor" href="#what-if-i-skip-font-setup"></a>
-</h3>
-<p>No problem! The package will work perfectly fine without Poppins.
-You’ll see a one-time message suggesting installation, but all
-functionality will work with your system’s default font.</p>
-</div>
-<div class="section level3">
-<h3 id="detailed-font-setup">Detailed Font Setup<a class="anchor" aria-label="anchor" href="#detailed-font-setup"></a>
-</h3>
-<p>For detailed installation instructions, troubleshooting, and
-information about the new font system, see:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"font-setup"</span><span class="op">)</span></span></code></pre></div>
+<p>This function additionally checks if <code>ragg</code> is installed
+and provides guidance for RStudio configuration. If you’re running R
+from Positron, no additional configuration is necessary.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="quick-start">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
-<p>Let’s create your first plot with benviplot!</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p>While the package can work with base R plots, the recommended use is
+together with <code>ggplot2</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/viniciusoike/benviplot" class="external-link">benviplot</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Use built-in mtcars dataset</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                    mpg cyl disp  hp drat    wt  qsec vs am gear carb</span></span>
-<span><span class="co">#&gt; Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4</span></span>
-<span><span class="co">#&gt; Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</span></span>
-<span><span class="co">#&gt; Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1</span></span>
-<span><span class="co">#&gt; Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2</span></span>
-<span><span class="co">#&gt; Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="a-simple-scatter-plot">A Simple Scatter Plot<a class="anchor" aria-label="anchor" href="#a-simple-scatter-plot"></a>
-</h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/viniciusoike/benviplot" class="external-link">benviplot</a></span><span class="op">)</span></span></code></pre></div>
+<p>The basic usage of package is centered around the
+<code><a href="../reference/theme_benvi.html">theme_benvi()</a></code> and <code>scale_*</code> functions.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">wt</span>, y <span class="op">=</span> <span class="va">mpg</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_color_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"qual_2"</span>, name <span class="op">=</span> <span class="st">"Cylinders"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_color_benvi_d</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Cylinders"</span>, pal_name <span class="op">=</span> <span class="st">"qual_8"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Fuel Efficiency vs. Weight"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Weight (1000 lbs)"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Miles per Gallon"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/quick-scatter-1.png" width="672" style="display: block; margin: auto;"></p>
-<p>That’s it! Just three key components:</p>
-<ol style="list-style-type: decimal">
-<li>
-<code><a href="../reference/ggplot2-scales-discrete.html">scale_color_benvi_d()</a></code>: Applies benvi discrete color
-palette</li>
-<li>
-<code><a href="../reference/theme_benvi.html">theme_benvi()</a></code>: Applies benvi visual theme</li>
-<li>
-<code>palette = "qual_2"</code>: Selects specific color palette</li>
-</ol>
-</div>
+<p><img src="getting-started_files/figure-html/quick-scatter-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="viewing-color-palettes">Viewing Color Palettes<a class="anchor" aria-label="anchor" href="#viewing-color-palettes"></a>
 </h2>
-<p>Before using a palette, you can preview it:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p>Before using a palette, you can preview it.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># View a qualitative palette</span></span>
 <span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_2"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/view-palettes-1.png" width="672" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p><img src="getting-started_files/figure-html/view-palettes-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># View a sequential palette</span></span>
-<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"seq_greens"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/view-palettes-2.png" width="672" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"benvi_blue"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="getting-started_files/figure-html/view-palettes-2.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="co"># View a set palette</span></span>
-<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"purples"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/view-palettes-3.png" width="672" style="display: block; margin: auto;"></p>
-<div class="section level3">
-<h3 id="getting-hex-color-values">Getting Hex Color Values<a class="anchor" aria-label="anchor" href="#getting-hex-color-values"></a>
-</h3>
-<p>Extract hex codes for use outside ggplot2:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Get hex codes as character vector</span></span>
-<span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_2"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">colors</span></span>
-<span><span class="co">#&gt; [1] "#C5C9BA" "#816242" "#F2C037" "#009850" "#466795" "#9A75B4" "#EA4E58"</span></span>
-<span><span class="co">#&gt; [8] "#C64729"</span></span>
-<span></span>
-<span><span class="co"># Use specific colors</span></span>
-<span><span class="va">my_blue</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_2"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
-<span><span class="va">my_blue</span></span>
-<span><span class="co">#&gt; [1] "#C5C9BA"</span></span></code></pre></div>
-</div>
+<span><span class="co"># Get hex codes as character vector</span></span>
+<span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_2"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="basic-examples">Basic Examples<a class="anchor" aria-label="anchor" href="#basic-examples"></a>
+<h2 id="general-examples">General Examples<a class="anchor" aria-label="anchor" href="#general-examples"></a>
 </h2>
 <div class="section level3">
-<h3 id="bar-chart-with-discrete-colors">Bar Chart with Discrete Colors<a class="anchor" aria-label="anchor" href="#bar-chart-with-discrete-colors"></a>
+<h3 id="bar-chart">Bar Chart<a class="anchor" aria-label="anchor" href="#bar-chart"></a>
 </h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<p>For simple plots it’s easier to select colors using
+<code>benvi_palette</code> and <code>theme_benvi</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sample data</span></span>
 <span><span class="va">sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  product <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,</span>
-<span>  revenue <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">120</span>, <span class="fl">200</span>, <span class="fl">150</span>, <span class="fl">180</span>, <span class="fl">220</span><span class="op">)</span></span>
+<span>  cities <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"São Paulo"</span>,</span>
+<span>    <span class="st">"Rio de Janeiro"</span>,</span>
+<span>    <span class="st">"Belo Horizonte"</span>,</span>
+<span>    <span class="st">"Porto Alegre"</span>,</span>
+<span>    <span class="st">"Curitiba"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  revenue <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">125</span>, <span class="fl">200</span>, <span class="fl">150</span>, <span class="fl">175</span>, <span class="fl">80</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">sales</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">product</span>, y <span class="op">=</span> <span class="va">revenue</span>, fill <span class="op">=</span> <span class="va">product</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_fill_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"greens"</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">sales</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cities</span>, y <span class="op">=</span> <span class="va">revenue</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"benvi_blue"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Revenue by Product"</span>,</span>
-<span>    x <span class="op">=</span> <span class="st">"Product"</span>,</span>
+<span>    x <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Revenue ($1000s)"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/bar-chart-1.png" width="672" style="display: block; margin: auto;"></p>
-</div>
-<div class="section level3">
-<h3 id="line-chart-with-groups">Line Chart with Groups<a class="anchor" aria-label="anchor" href="#line-chart-with-groups"></a>
-</h3>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Use built-in economics dataset</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">economics</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">unemploy</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"purples"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"US Unemployment Over Time"</span>,</span>
-<span>    x <span class="op">=</span> <span class="st">"Year"</span>,</span>
-<span>    y <span class="op">=</span> <span class="st">"Unemployed (millions)"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/line-chart-1.png" width="672" style="display: block; margin: auto;"></p>
+<span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.grid.major.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="getting-started_files/figure-html/bar-chart-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="heatmap-with-continuous-colors">Heatmap with Continuous Colors<a class="anchor" aria-label="anchor" href="#heatmap-with-continuous-colors"></a>
 </h3>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<p>Even though the Benvi palettes are discrete, applying them to a
+continuous variable still works.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sample data - Texas housing</span></span>
 <span><span class="va">housing</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">txhousing</span>, <span class="va">city</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Austin"</span>, <span class="st">"Houston"</span>, <span class="st">"Dallas"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">housing</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">city</span>, fill <span class="op">=</span> <span class="va">median</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">housing</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">city</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log10</a></span><span class="op">(</span><span class="va">median</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/ggplot2-scales-continuous.html">scale_fill_benvi_c</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"seq_purples"</span>, name <span class="op">=</span> <span class="st">"Median\nPrice ($)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggplot2-scales-continuous.html">scale_fill_benvi_c</a></span><span class="op">(</span></span>
+<span>      pal_name <span class="op">=</span> <span class="st">"benvi_blue"</span>,</span>
+<span>      name <span class="op">=</span> <span class="st">"Median\nPrice ($)"</span>,</span>
+<span>      direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Median House Prices in Texas Cities"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Year"</span>,</span>
 <span>    y <span class="op">=</span> <span class="cn">NULL</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/heatmap-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="getting-started_files/figure-html/heatmap-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="using-plot-helper-functions">Using Plot Helper Functions<a class="anchor" aria-label="anchor" href="#using-plot-helper-functions"></a>
 </h2>
 <p><code>benviplot</code> includes convenience functions for common plot
-types. These save typing during exploratory data analysis.</p>
-<div class="section level3">
-<h3 id="simple-line-plot">Simple Line Plot<a class="anchor" aria-label="anchor" href="#simple-line-plot"></a>
-</h3>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+types. These save typing during exploratory data analysis. These
+functions come with several changes to default <code>ggplot2</code>
+values. The first example shows a simple line plot using the
+<code>economics</code> dataset.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_line.html">plot_line</a></span><span class="op">(</span><span class="va">economics</span>, x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">uempmed</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/helper-line-1.png" width="672" style="display: block; margin: auto;"></p>
-</div>
-<div class="section level3">
-<h3 id="column-plot-with-labels">Column Plot with Labels<a class="anchor" aria-label="anchor" href="#column-plot-with-labels"></a>
-</h3>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_column.html">plot_column</a></span><span class="op">(</span><span class="va">sales</span>, x <span class="op">=</span> <span class="va">product</span>, y <span class="op">=</span> <span class="va">revenue</span>, text <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/helper-column-1.png" width="672" style="display: block; margin: auto;"></p>
-</div>
-<div class="section level3">
-<h3 id="scatter-plot-with-grouping">Scatter Plot with Grouping<a class="anchor" aria-label="anchor" href="#scatter-plot-with-grouping"></a>
-</h3>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<p><img src="getting-started_files/figure-html/helper-line-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
+<p>The plot generated above is essentially a wrapper around other
+<code>ggplot2</code> functions as arguments.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Makes the same plot as the one above</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">economics</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">uempmed</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"benvi_blue"</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>The helper functions include several convenient arguments such as
+<code>text</code> that add text labels on bar plots.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_column.html">plot_column</a></span><span class="op">(</span><span class="va">sales</span>, x <span class="op">=</span> <span class="va">cities</span>, y <span class="op">=</span> <span class="va">revenue</span>, text <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="getting-started_files/figure-html/helper-column-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
+<p>These functions also support using aesthetics as grouping variables
+under a generic <code>variable</code> alias.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span></span>
 <span>  <span class="va">mtcars</span>,</span>
 <span>  x <span class="op">=</span> <span class="va">wt</span>,</span>
 <span>  y <span class="op">=</span> <span class="va">mpg</span>,</span>
 <span>  variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>,</span>
-<span>  palette <span class="op">=</span> <span class="st">"qual_5"</span>,</span>
+<span>  palette <span class="op">=</span> <span class="st">"qual_8"</span>,</span>
 <span>  scale_name <span class="op">=</span> <span class="st">"Cylinders"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/helper-scatter-1.png" width="672" style="display: block; margin: auto;"></p>
-</div>
-<div class="section level3">
-<h3 id="adding-trend-lines">Adding Trend Lines<a class="anchor" aria-label="anchor" href="#adding-trend-lines"></a>
-</h3>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span></span>
-<span>  <span class="va">mtcars</span>,</span>
-<span>  x <span class="op">=</span> <span class="va">wt</span>,</span>
-<span>  y <span class="op">=</span> <span class="va">mpg</span>,</span>
-<span>  variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>,</span>
-<span>  fit <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  fit_method <span class="op">=</span> <span class="st">"lm"</span>,</span>
-<span>  palette <span class="op">=</span> <span class="st">"qual_5"</span>,</span>
-<span>  scale_name <span class="op">=</span> <span class="st">"Cylinders"</span></span>
-<span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"Fuel Efficiency by Weight and Cylinders"</span>,</span>
-<span>    x <span class="op">=</span> <span class="st">"Weight (1000 lbs)"</span>,</span>
-<span>    y <span class="op">=</span> <span class="st">"Miles per Gallon"</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/scatter-trend-1.png" width="672" style="display: block; margin: auto;"></p>
-</div>
-</div>
-<div class="section level2">
-<h2 id="customizing-your-plots">Customizing Your Plots<a class="anchor" aria-label="anchor" href="#customizing-your-plots"></a>
-</h2>
-<p>Helper functions return ggplot2 objects, so you can add layers:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<p><img src="getting-started_files/figure-html/helper-scatter-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
+<p>Finally, helper functions return <code>ggplot2</code> objects, so you
+can add layers normally.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_line.html">plot_line</a></span><span class="op">(</span><span class="va">economics</span>, x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">unemploy</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>se <span class="op">=</span> <span class="cn">FALSE</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"browns"</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>se <span class="op">=</span> <span class="cn">FALSE</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"oranges"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"US Unemployment with Smoothed Trend"</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="st">"Unemployment figures in millions"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Year"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Unemployed (millions)"</span>,</span>
 <span>    caption <span class="op">=</span> <span class="st">"Data: economics dataset"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/customization-1.png" width="672" style="display: block; margin: auto;"></p>
-</div>
-<div class="section level2">
-<h2 id="understanding-palette-types">Understanding Palette Types<a class="anchor" aria-label="anchor" href="#understanding-palette-types"></a>
-</h2>
-<p><code>benviplot</code> organizes palettes by use case:</p>
-<div class="section level3">
-<h3 id="qualitative-palettes-qual1-qual9">Qualitative Palettes (Qual1-Qual9)<a class="anchor" aria-label="anchor" href="#qualitative-palettes-qual1-qual9"></a>
-</h3>
-<p><strong>Use for</strong>: Categorical data without inherent order
-(e.g., product types, regions)</p>
-<ul>
-<li>8 distinct colors</li>
-<li>Optimized for visual differentiation</li>
-<li>Examples: <code>Qual1</code>, <code>Qual2</code>, …,
-<code>Qual9</code>
-</li>
-</ul>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_3"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="sequential-palettes-seq0-seq7">Sequential Palettes (Seq0-Seq7)<a class="anchor" aria-label="anchor" href="#sequential-palettes-seq0-seq7"></a>
-</h3>
-<p><strong>Use for</strong>: Continuous data with ordered progression
-(e.g., temperature, percentages)</p>
-<ul>
-<li>9-color gradients</li>
-<li>Light to dark progression</li>
-<li>Examples: <code>Seq0</code>, <code>Seq1</code>, …,
-<code>Seq7</code>
-</li>
-</ul>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"seq_yellows"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="set-palettes-set0-set7">Set Palettes (Set0-Set7)<a class="anchor" aria-label="anchor" href="#set-palettes-set0-set7"></a>
-</h3>
-<p><strong>Use for</strong>: Small categorical datasets (2-4
-categories)</p>
-<ul>
-<li>4 carefully chosen colors</li>
-<li>Good contrast and balance</li>
-<li>Examples: <code>Set0</code>, <code>Set1</code>, …,
-<code>Set7</code>
-</li>
-</ul>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"blues"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="city-specific-palettes">City-Specific Palettes<a class="anchor" aria-label="anchor" href="#city-specific-palettes"></a>
-</h3>
-<p>Themed palettes for Brazilian cities:</p>
-<ul>
-<li>
-<code>spo_qual</code>, <code>spo_seq</code>, <code>spo_div</code>:
-São Paulo</li>
-<li>
-<code>rio_qual</code>, <code>rio_seq</code>, <code>rio_div</code>:
-Rio de Janeiro</li>
-<li>
-<code>bhe_qual</code>, <code>bhe_seq</code>, <code>bhe_div</code>:
-Belo Horizonte</li>
-</ul>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"rio_qual"</span><span class="op">)</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="next-steps">Next Steps<a class="anchor" aria-label="anchor" href="#next-steps"></a>
-</h2>
-<p>Now that you’re familiar with the basics:</p>
-<ol style="list-style-type: decimal">
-<li>
-<strong>Explore all palettes</strong>: See
-<code><a href="../articles/color-palettes.html">vignette("color-palettes")</a></code> for complete gallery</li>
-<li>
-<strong>Learn plot functions</strong>: Check
-<code><a href="../articles/plot-functions.html">vignette("plot-functions")</a></code> for detailed examples</li>
-<li>
-<strong>Customize themes</strong>: Read
-<code><a href="../articles/themes-and-styling.html">vignette("themes-and-styling")</a></code> for advanced styling</li>
-</ol>
-</div>
-<div class="section level2">
-<h2 id="common-questions">Common Questions<a class="anchor" aria-label="anchor" href="#common-questions"></a>
-</h2>
-<div class="section level3">
-<h3 id="how-do-i-choose-the-right-palette">How do I choose the right palette?<a class="anchor" aria-label="anchor" href="#how-do-i-choose-the-right-palette"></a>
-</h3>
-<ul>
-<li>
-<strong>Categorical data</strong> (no order): Use <code>Qual*</code>
-palettes</li>
-<li>
-<strong>Continuous/ordered data</strong>: Use <code>Seq*</code>
-palettes</li>
-<li>
-<strong>Small categories (≤4)</strong>: Use <code>Set*</code>
-palettes</li>
-<li>
-<strong>Geographic data</strong>: Consider city-specific
-palettes</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="can-i-reverse-a-palette">Can I reverse a palette?<a class="anchor" aria-label="anchor" href="#can-i-reverse-a-palette"></a>
-</h3>
-<p>Yes! Use <code>direction = -1</code>:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Normal direction</span></span>
-<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"seq_greens"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/reverse-palette-1.png" width="672" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="co"># Reversed</span></span>
-<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"seq_greens"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/reverse-palette-2.png" width="672" style="display: block; margin: auto;"></p>
-</div>
-<div class="section level3">
-<h3 id="how-do-i-use-fewer-colors-than-available">How do I use fewer colors than available?<a class="anchor" aria-label="anchor" href="#how-do-i-use-fewer-colors-than-available"></a>
-</h3>
-<p>Specify the number with <code>n</code>:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Get only 3 colors from an 8-color palette</span></span>
-<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_5"</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/subset-colors-1.png" width="672" style="display: block; margin: auto;"></p>
-</div>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="getting-started_files/figure-html/customization-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <div class="section level3">
 <h3 id="can-i-use-benvi-colors-in-base-r-plots">Can I use benvi colors in base R plots?<a class="anchor" aria-label="anchor" href="#can-i-use-benvi-colors-in-base-r-plots"></a>
 </h3>
-<p>Yes! Get hex codes and use them:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<p>You can use benvi colors normally in base R plots. However,
+replicating <code>ggplot2</code> functionality might be challenging.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"purples"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
@@ -520,8 +281,23 @@ palettes</li>
 <span>  ylab <span class="op">=</span> <span class="st">"MPG"</span>,</span>
 <span>  main <span class="op">=</span> <span class="st">"Using benvi colors in base R"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/base-plot-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="getting-started_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
+</div>
+<div class="section level2">
+<h2 id="next-steps">Next Steps<a class="anchor" aria-label="anchor" href="#next-steps"></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Explore all palettes</strong>: See
+<code><a href="../articles/color-palettes.html">vignette("color-palettes")</a></code> for complete gallery.</li>
+<li>
+<strong>Learn plot functions</strong>: Check
+<code><a href="../articles/plot-functions.html">vignette("plot-functions")</a></code> for detailed examples.</li>
+<li>
+<strong>Customize themes</strong>: Read
+<code><a href="../articles/themes-and-styling.html">vignette("themes-and-styling")</a></code> for advanced styling.</li>
+</ol>
 </div>
 <div class="section level2">
 <h2 id="getting-help">Getting Help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
@@ -538,20 +314,7 @@ etc.</li>
 <strong>Report issues</strong>: <a href="https://github.com/viniciusoike/benviplot/issues" class="external-link uri">https://github.com/viniciusoike/benviplot/issues</a>
 </li>
 <li>
-<strong>Ask questions</strong>: Open a GitHub discussion</li>
-</ul>
-</div>
-<div class="section level2">
-<h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
-</h2>
-<p>In this vignette you learned how to:</p>
-<ul>
-<li>✓ Install and set up benviplot</li>
-<li>✓ Set up Poppins fonts (optional)</li>
-<li>✓ View and select color palettes</li>
-<li>✓ Create plots with benvi scales and themes</li>
-<li>✓ Use plot helper functions</li>
-<li>✓ Choose appropriate palettes for your data</li>
+<strong>Ask questions</strong>: Open a GitHub discussion.</li>
 </ul>
 <p>Happy plotting!</p>
 </div>
@@ -566,7 +329,7 @@ etc.</li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
