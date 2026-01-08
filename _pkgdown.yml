@@ -94,11 +94,13 @@ reference:
     desc: Helper and utility functions
     contents:
     - pretty_number
+    - format_num_br
 
   - title: Data
     desc: Example datasets
     contents:
     - starts_with("iqa")
+    - sales_report
 
 articles:
 - title: Getting Started
