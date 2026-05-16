@@ -2,17 +2,16 @@
 % Please edit documentation in R/fonts-modern.R
 \name{font_status}
 \alias{font_status}
-\title{Get font installation status and recommendations}
+\title{Report benviplot font status}
 \usage{
 font_status()
 }
 \value{
-Invisibly returns a list with status information. Prints a formatted
-report to the console.
+Invisibly returns a list with \code{poppins_installed} and \code{ragg_available}.
 }
 \description{
-Reports the current font setup status, including whether Poppins is installed,
-whether ragg is available, and provides actionable recommendations.
+Reports whether Poppins is installed and whether the \code{ragg} graphics device
+is available, with actionable recommendations for each.
 }
 \examples{
 font_status()

@@ -26,17 +26,7 @@ navbar:
       href: reference/index.html
     articles:
       text: Articles
-      menu:
-      - text: Getting Started
-        href: articles/getting-started.html
-      - text: Font Setup
-        href: articles/font-setup.html
-      - text: Color Palettes
-        href: articles/color-palettes.html
-      - text: Plot Functions
-        href: articles/plot-functions.html
-      - text: Themes and Styling
-        href: articles/themes-and-styling.html
+      href: articles/getting-started.html
     news:
       text: Changelog
       href: news/index.html
@@ -63,9 +53,7 @@ reference:
     desc: Wrapper functions for common plot types
     contents:
     - plot_line
-    - plot_line_trend
     - plot_column
-    - plot_column_label
     - plot_scatter
     - plot_area
     - plot_histogram
@@ -77,13 +65,10 @@ reference:
     - theme_benvi
 
   - title: Font Management
-    desc: Modern font setup and configuration
+    desc: Font setup and status
     contents:
-    - setup_benvi_fonts
     - install_poppins
-    - check_poppins_installed
     - font_status
-    - get_poppins_variants
 
   - title: Saving Plots
     desc: Export plots with optimal settings
@@ -93,7 +78,6 @@ reference:
   - title: Utilities
     desc: Helper and utility functions
     contents:
-    - pretty_number
     - format_num_br
 
   - title: Data
@@ -107,14 +91,6 @@ articles:
   navbar: ~
   contents:
   - getting-started
-  - font-setup
-
-- title: Guides
-  desc: Detailed guides for using benviplot
-  contents:
-  - color-palettes
-  - plot-functions
-  - themes-and-styling
 
 footer:
   structure:

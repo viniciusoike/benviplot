@@ -5,8 +5,8 @@
 #' Default behavior (`TRUE`) stacks the largest groups on top.
 #' @param position Argument passed to `geom_area`.
 #' @importFrom ggplot2 ggplot aes waiver geom_area geom_hline labs theme
-#' @importFrom forcats fct_reorder
-#' @importFrom dplyr filter mutate
+#' @importFrom dplyr mutate
+#' @importFrom stats reorder
 #'
 #' @return A ggplot2 plot
 #' @export
@@ -51,8 +51,7 @@ plot_area <- function(
       # Orders the fill variable to stack bigger groups on the top
       data <- dplyr::mutate(
         data,
-        ordered_fill = factor({{ variable }}),
-        ordered_fill = forcats::fct_reorder(ordered_fill, - {{ y }})
+        ordered_fill = reorder(factor({{ variable }}), -{{ y }})
       )
 
       # Plot a fill-colored area chart

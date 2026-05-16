@@ -126,24 +126,6 @@ test_that("format_num_br Brazilian format is correct", {
   expect_match(result, "1\\.234,56")
 })
 
-# Deprecation tests ----
-
-test_that("pretty_number is deprecated", {
-  # Suppress the deprecation warning for testing
-  lifecycle::expect_deprecated(
-    pretty_number(123.45),
-    "pretty_number"
-  )
-})
-
-test_that("pretty_number still works correctly", {
-  # Suppress deprecation warning
-  suppressWarnings({
-    result <- pretty_number(1234.56, digits = 2)
-    expect_equal(result, format_num_br(1234.56, digits = 2))
-  })
-})
-
 # plot_add_xy() tests ----
 
 test_that("plot_add_xy adds horizontal and vertical lines", {

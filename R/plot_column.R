@@ -50,7 +50,6 @@
 #'
 #' @importFrom ggplot2 ggplot aes geom_col geom_hline geom_text coord_flip labs
 #' theme element_blank position_stack position_dodge
-#' @importFrom ggfittext geom_bar_text
 #' @importFrom dplyr mutate pull
 plot_column <- function(
     data,
@@ -110,24 +109,25 @@ plot_column <- function(
   if (isTRUE(text)) {
 
     if (isTRUE(text_inside)) {
-      # Use ggfittext for auto-sized text inside bars
+      if (!requireNamespace("ggfittext", quietly = TRUE)) {
+        cli::cli_abort(c(
+          "Package {.pkg ggfittext} is required for {.code text_inside = TRUE}.",
+          "i" = "Install with: {.code install.packages('ggfittext')}"
+        ))
+      }
 
-      # Set defaults for text_place based on flip
       if (is.null(text_place)) {
         text_place <- if (isTRUE(flip)) "right" else "centre"
       }
 
-      # Set default padding
       if (is.null(text_padding)) {
         text_padding <- grid::unit(1, "mm")
       }
 
-      # Format labels
       dflabel <- data |>
         dplyr::mutate(
           label = format_num_br({{y}}, digits = digits, percent = percent))
 
-      # Add geom_bar_text layer
       p <- p + ggfittext::geom_bar_text(
         data = dflabel,
         aes(x = {{ x }}, y = {{ y }}, label = label),

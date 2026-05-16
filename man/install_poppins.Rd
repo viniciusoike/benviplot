@@ -10,16 +10,15 @@ install_poppins()
 Invisibly returns \code{TRUE} if installation succeeds, throws an error otherwise.
 }
 \description{
-Downloads and installs the Poppins font family from Google Fonts to your
-system. This is a one-time operation that makes the font available to all
-R sessions and graphics devices.
+Downloads and installs the Poppins font family from Google Fonts. This is a
+one-time operation that makes the font available to all R sessions and
+graphics devices.
 
-\strong{Note:} This function requires an internet connection and may require
-administrative privileges on some systems.
+Requires the \code{systemfonts} package and an internet connection. After
+installation, \code{theme_benvi()} will automatically use Poppins.
 }
 \examples{
 \dontrun{
-# Install Poppins font (requires internet connection)
 install_poppins()
 }
 }

@@ -74,30 +74,3 @@ format_num_br <- function(x, digits = 1, percent = FALSE) {
 
   return(x)
 }
-
-#' Format a number as a label (Deprecated)
-#'
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' `pretty_number()` has been renamed to `format_num_br()` for clarity.
-#' The new name better reflects that this function uses Brazilian number
-#' formatting conventions.
-#'
-#' @inheritParams format_num_br
-#' @return A character vector with formatted numbers
-#' @keywords internal
-#' @export
-#'
-#' @examples
-#' # Use format_num_br() instead
-#' x <- 1235134.123
-#' format_num_br(x)
-pretty_number <- function(x, digits = 1, percent = FALSE) {
-  lifecycle::deprecate_soft(
-    when = "1.1.1",
-    what = "pretty_number()",
-    with = "format_num_br()"
-  )
-  format_num_br(x = x, digits = digits, percent = percent)
-}

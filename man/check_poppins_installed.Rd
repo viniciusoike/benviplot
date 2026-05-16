@@ -7,12 +7,10 @@
 check_poppins_installed()
 }
 \value{
-Logical value: \code{TRUE} if Poppins is installed, \code{FALSE} otherwise.
+Logical: \code{TRUE} if Poppins is installed, \code{FALSE} otherwise.
 }
 \description{
-Checks whether the Poppins font family is available on the system by querying
-installed system fonts.
+Checks whether the Poppins font family is available on the system. Returns
+\code{FALSE} silently if the \code{systemfonts} package is not installed.
 }
-\examples{
-check_poppins_installed()
-}
+\keyword{internal}

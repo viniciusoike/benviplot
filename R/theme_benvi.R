@@ -100,12 +100,12 @@ theme_custom <- function(...) {
 #' This theme uses the Poppins font if installed on your system. If Poppins is
 #' not available, it falls back to the system's default sans-serif font.
 #'
-#' To install Poppins, run [install_poppins()] or [setup_benvi_fonts()].
+#' To install Poppins, run [install_poppins()].
 #'
 #' @return A ggplot2 theme object
 #' @export
 #'
-#' @seealso [install_poppins()], [setup_benvi_fonts()], [font_status()]
+#' @seealso [install_poppins()], [font_status()]
 #'
 #' @examples
 #' \dontrun{

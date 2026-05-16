@@ -15,7 +15,7 @@ A ggplot2 base theme for Benvi styled plots with clean, professional styling.
 This theme uses the Poppins font if installed on your system. If Poppins is
 not available, it falls back to the system's default sans-serif font.
 
-To install Poppins, run \code{\link[=install_poppins]{install_poppins()}} or \code{\link[=setup_benvi_fonts]{setup_benvi_fonts()}}.
+To install Poppins, run \code{\link[=install_poppins]{install_poppins()}}.
 }
 \examples{
 \dontrun{
@@ -30,5 +30,5 @@ ggplot(spo_sales, aes(price_m2_listing, price_m2_contract)) +
 }
 }
 \seealso{
-\code{\link[=install_poppins]{install_poppins()}}, \code{\link[=setup_benvi_fonts]{setup_benvi_fonts()}}, \code{\link[=font_status]{font_status()}}
+\code{\link[=install_poppins]{install_poppins()}}, \code{\link[=font_status]{font_status()}}
 }
