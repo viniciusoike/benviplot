@@ -17,7 +17,7 @@ shows all colors in each palette.}
 Invisibly returns \code{NULL}. Called for its side effect of creating a plot.
 }
 \description{
-Visually displays all available Benvi palettes in a grid layout, similar to
+Visually displays all available Benvi palettes in a grid layout, modelled on
 \code{RColorBrewer::display.brewer.all()}. Optionally filter by palette type.
 }
 \examples{
