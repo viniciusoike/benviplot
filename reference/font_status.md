@@ -1,8 +1,7 @@
-# Get font installation status and recommendations
+# Report benviplot font status
 
-Reports the current font setup status, including whether Poppins is
-installed, whether ragg is available, and provides actionable
-recommendations.
+Reports whether Poppins is installed and whether the `ragg` graphics
+device is available, with actionable recommendations for each.
 
 ## Usage
 
@@ -12,8 +11,7 @@ font_status()
 
 ## Value
 
-Invisibly returns a list with status information. Prints a formatted
-report to the console.
+Invisibly returns a list with `poppins_installed` and `ragg_available`.
 
 ## Examples
 
@@ -24,8 +22,4 @@ font_status()
 #> ! Poppins font: not installed
 #> ℹ Install with: `benviplot::install_poppins()`
 #> ✔ ragg package: available
-#> 
-#> ── Recommendations ──
-#> 
-#> → Run `setup_benvi_fonts()` for one-command setup
 ```

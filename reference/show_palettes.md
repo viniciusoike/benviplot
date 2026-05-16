@@ -1,7 +1,7 @@
 # Display all Benvi palettes
 
-Visually displays all available Benvi palettes in a grid layout, similar
-to
+Visually displays all available Benvi palettes in a grid layout,
+modelled on
 [`RColorBrewer::display.brewer.all()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html).
 Optionally filter by palette type.
 
@@ -17,9 +17,7 @@ show_palettes(type = "all", n = NULL)
 
   Character string specifying the palette type to display. One of:
   `"all"` (default), `"theme"`, `"sequential"`, `"qualitative"`,
-  `"city"`, or `"brand"`. See
-  [`list_palettes()`](https://viniciusoike.github.io/benviplot/reference/list_palettes.md)
-  for details.
+  `"city"`, or `"brand"`.
 
 - n:
 

@@ -25,6 +25,7 @@ high quality graphics. The package includes:
 You can install benviplot from GitHub.
 
 ``` r
+
 # Install remotes if needed
 # install.packages("remotes")
 
@@ -37,7 +38,9 @@ remotes::install_github("viniciusoike/benviplot")
 Load the package along with ggplot2.
 
 ``` r
+
 library(ggplot2)
+#> Warning: package 'ggplot2' was built under R version 4.5.2
 library(benviplot)
 ```
 
@@ -47,6 +50,7 @@ Color palettes can be visualized using `benvi_palette`. The default
 palette is “qual_2”.
 
 ``` r
+
 # Default palette (qual_2)
 benvi_palette()
 ```
@@ -57,6 +61,7 @@ Colors follow Benvi reports guidelines that are tailored for specific
 cities.
 
 ``` r
+
 # Specify a different palette
 benvi_palette("rio_qual")
 ```
@@ -77,6 +82,7 @@ The pacakge also supplies a generic
 function that works best if Poppins is available.
 
 ``` r
+
 # Rental price index for major cities
 index_data <- subset(iqaiw, rooms == "Total")
 
@@ -96,6 +102,7 @@ ggplot(index_data, aes(x = date, y = index, color = name_muni)) +
 When using a continuous scale the colors are interpolated.
 
 ``` r
+
 # Price per m2 by city over time
 ggplot(iqaiw, aes(x = date, y = name_muni, fill = price_m2)) +
   geom_tile(height = 0.8) +
@@ -121,6 +128,7 @@ These functions usually include simple helper arguments like `text` in
 the case of `plot_column` that plots its value above the column.
 
 ``` r
+
 sales <- data.frame(
   x = factor(c(1, 2, 3, 4, 5, 6)),
   y = c(200, 220, 230, 210, 240, 290)
@@ -135,6 +143,7 @@ The final example shows the variable argument which replaces the
 `aes(fill = ...)` or `aes(color = ...)` in each function.
 
 ``` r
+
 # Listing vs contract prices by city
 latest_sales <- subset(sales_report, date == max(date))
 plot_scatter(
@@ -175,12 +184,6 @@ Access and customize color palettes
 
 - [`benvi_palette()`](https://viniciusoike.github.io/benviplot/reference/benvi_palette.md)
   : A color palette for Benvi.
-- [`benvi_colors()`](https://viniciusoike.github.io/benviplot/reference/benvi_colors.md)
-  : Get Benvi colors by name
-- [`list_palettes()`](https://viniciusoike.github.io/benviplot/reference/list_palettes.md)
-  : List available palette names
-- [`list_colors()`](https://viniciusoike.github.io/benviplot/reference/list_colors.md)
-  : List available color names
 - [`show_palettes()`](https://viniciusoike.github.io/benviplot/reference/show_palettes.md)
   : Display all Benvi palettes
 
@@ -203,13 +206,8 @@ Wrapper functions for common plot types
 
 - [`plot_line()`](https://viniciusoike.github.io/benviplot/reference/plot_line.md)
   : Title
-- [`plot_line_trend()`](https://viniciusoike.github.io/benviplot/reference/plot_line_trend.md)
-  **\[deprecated\]** : Plot the original series plus a trend-line with
-  emphasis on the trendline (Deprecated)
 - [`plot_column()`](https://viniciusoike.github.io/benviplot/reference/plot_column.md)
   : Plot a column chart
-- [`plot_column_label()`](https://viniciusoike.github.io/benviplot/reference/plot_column_label.md)
-  **\[deprecated\]** : Column plot with text labels (Deprecated)
 - [`plot_scatter()`](https://viniciusoike.github.io/benviplot/reference/plot_scatter.md)
   : Plot a scatter chart
 - [`plot_area()`](https://viniciusoike.github.io/benviplot/reference/plot_area.md)
@@ -228,18 +226,12 @@ Custom ggplot2 themes
 
 ## Font Management
 
-Modern font setup and configuration
+Font setup and status
 
-- [`setup_benvi_fonts()`](https://viniciusoike.github.io/benviplot/reference/setup_benvi_fonts.md)
-  : One-command setup for benviplot fonts
 - [`install_poppins()`](https://viniciusoike.github.io/benviplot/reference/install_poppins.md)
   : Install Poppins font from Google Fonts
-- [`check_poppins_installed()`](https://viniciusoike.github.io/benviplot/reference/check_poppins_installed.md)
-  : Check if Poppins font is installed on the system
 - [`font_status()`](https://viniciusoike.github.io/benviplot/reference/font_status.md)
-  : Get font installation status and recommendations
-- [`get_poppins_variants()`](https://viniciusoike.github.io/benviplot/reference/get_poppins_variants.md)
-  : Get available Poppins font variants
+  : Report benviplot font status
 
 ## Saving Plots
 
@@ -252,8 +244,6 @@ Export plots with optimal settings
 
 Helper and utility functions
 
-- [`pretty_number()`](https://viniciusoike.github.io/benviplot/reference/pretty_number.md)
-  **\[deprecated\]** : Format a number as a label (Deprecated)
 - [`format_num_br()`](https://viniciusoike.github.io/benviplot/reference/format_num_br.md)
   : Format numbers using Brazilian conventions
 
@@ -274,16 +264,3 @@ Example datasets
 
 - [Getting Started with
   benviplot](https://viniciusoike.github.io/benviplot/articles/getting-started.md):
-- [Font Setup
-  Guide](https://viniciusoike.github.io/benviplot/articles/font-setup.md):
-
-### Guides
-
-Detailed guides for using benviplot
-
-- [Color Palettes in
-  benviplot](https://viniciusoike.github.io/benviplot/articles/color-palettes.md):
-- [Plot Helper
-  Functions](https://viniciusoike.github.io/benviplot/articles/plot-functions.md):
-- [Themes and
-  Styling](https://viniciusoike.github.io/benviplot/articles/themes-and-styling.md):

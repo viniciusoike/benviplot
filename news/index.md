@@ -34,14 +34,13 @@ Automatic showtext initialization on package load
 
 - [`install_poppins()`](https://viniciusoike.github.io/benviplot/reference/install_poppins.md) -
   Download and install Poppins system-wide (one-time setup)
-- [`setup_benvi_fonts()`](https://viniciusoike.github.io/benviplot/reference/setup_benvi_fonts.md) -
-  Complete one-command setup (installs font + provides config guidance)
+- `setup_benvi_fonts()` - Complete one-command setup (installs font +
+  provides config guidance)
 - [`check_poppins_installed()`](https://viniciusoike.github.io/benviplot/reference/check_poppins_installed.md) -
   Check if Poppins is available
 - [`font_status()`](https://viniciusoike.github.io/benviplot/reference/font_status.md) -
   Get detailed font setup status and recommendations
-- [`get_poppins_variants()`](https://viniciusoike.github.io/benviplot/reference/get_poppins_variants.md) -
-  List available Poppins font weights
+- `get_poppins_variants()` - List available Poppins font weights
 
 #### Automatic Fallback
 
@@ -61,15 +60,15 @@ is installed) - Default DPI of 300 for high quality - Consistent
 rendering across platforms - Falls back gracefully if ragg not available
 
 ``` r
+
 # Recommended way to save plots
 ggsave_benvi("my_plot.png", plot, width = 8, height = 6)
 ```
 
 #### Enhanced Documentation
 
-- **New vignette**:
-  [`vignette("font-setup")`](https://viniciusoike.github.io/benviplot/articles/font-setup.md) -
-  Comprehensive font installation and troubleshooting guide
+- **New vignette**: `vignette("font-setup")` - Comprehensive font
+  installation and troubleshooting guide
 - Updated all existing vignettes for the new font system
 - Updated README with modern font installation instructions
 
@@ -80,6 +79,7 @@ ggsave_benvi("my_plot.png", plot, width = 8, height = 6)
 **Old workflow (v1.0.0):**
 
 ``` r
+
 library(benviplot)
 library(showtext)
 showtext_auto()
@@ -89,6 +89,7 @@ showtext_auto()
 **New workflow (v1.1.0):**
 
 ``` r
+
 # One-time setup (once per computer)
 benviplot::setup_benvi_fonts()
 
@@ -102,6 +103,7 @@ library(benviplot)
 1.  **Remove old showtext code** from your scripts:
 
     ``` r
+
     # DELETE these lines:
     library(showtext)
     showtext_auto()
@@ -111,6 +113,7 @@ library(benviplot)
 2.  **Install Poppins system-wide** (one-time):
 
     ``` r
+
     library(benviplot)
     setup_benvi_fonts()  # Or: install_poppins()
     ```
@@ -118,6 +121,7 @@ library(benviplot)
 3.  **Optionally install ragg** for best quality:
 
     ``` r
+
     install.packages("ragg")
     # Then configure RStudio: Tools > Global Options > General > Graphics > Backend: AGG
     ```
@@ -125,6 +129,7 @@ library(benviplot)
 4.  **Update save code** (optional but recommended):
 
     ``` r
+
     # Old
     ggsave("plot.png", dpi = 300)
 
@@ -174,14 +179,14 @@ maintained by Posit/RStudio team
 ### Installation
 
 ``` r
+
 # Install from GitHub
 remotes::install_github("viniciusoike/benviplot")
 ```
 
 ### Getting Help
 
-- **Font setup guide**:
-  [`vignette("font-setup")`](https://viniciusoike.github.io/benviplot/articles/font-setup.md)
+- **Font setup guide**: `vignette("font-setup")`
 - **Check font status**:
   [`font_status()`](https://viniciusoike.github.io/benviplot/reference/font_status.md)
 - **Documentation**: <https://viniciusoike.github.io/benviplot/>
@@ -215,13 +220,11 @@ intuitive, descriptive names - Old names like `Set0-7`, `Qual1-9`,
 palettes: `index_blue` → `benvi_blue`, `index_prpl` → `benvi_purple`,
 `Basic` → `basic`
 
-**New Utility Functions**: -
-[`benvi_colors()`](https://viniciusoike.github.io/benviplot/reference/benvi_colors.md):
-Get hex codes for individual colors or list all color names -
-`list_palettes(type)`: List available palettes filtered by type -
-[`list_colors()`](https://viniciusoike.github.io/benviplot/reference/list_colors.md):
-List all color names - `show_palettes(type, n)`: Visual display of
-palettes (like RColorBrewer)
+**New Utility Functions**: - `benvi_colors()`: Get hex codes for
+individual colors or list all color names - `list_palettes(type)`: List
+available palettes filtered by type - `list_colors()`: List all color
+names - `show_palettes(type, n)`: Visual display of palettes (like
+RColorBrewer)
 
 #### Quality & Infrastructure
 
@@ -243,6 +246,7 @@ palettes (like RColorBrewer)
 #### Installation
 
 ``` r
+
 # Install from GitHub
 remotes::install_github("viniciusoike/benviplot")
 ```
@@ -250,6 +254,7 @@ remotes::install_github("viniciusoike/benviplot")
 #### Quick Start
 
 ``` r
+
 library(ggplot2)
 library(benviplot)
 
@@ -309,12 +314,11 @@ from that period for data visualization purposes.
 #### New Features
 
 - Added utility functions for palette discovery and exploration:
-  - [`benvi_colors()`](https://viniciusoike.github.io/benviplot/reference/benvi_colors.md):
-    Get hex codes for individual named colors or list all color names
+  - `benvi_colors()`: Get hex codes for individual named colors or list
+    all color names
   - `list_palettes(type)`: List available palette names (filterable by
     type: “theme”, “sequential”, “qualitative”, “city”, “brand”)
-  - [`list_colors()`](https://viniciusoike.github.io/benviplot/reference/list_colors.md):
-    List all 36 available Benvi color names
+  - `list_colors()`: List all 36 available Benvi color names
   - `show_palettes(type, n)`: Visual display of all palettes (similar to
     RColorBrewer::display.brewer.all())
 
@@ -322,9 +326,8 @@ from that period for data visualization purposes.
 
 - Fixed `print.palette()` S3 method to remove white horizontal line in
   palette visualization
-- Fixed internal naming conflict between
-  [`benvi_colors()`](https://viniciusoike.github.io/benviplot/reference/benvi_colors.md)
-  function and `benvi_colors` data object
+- Fixed internal naming conflict between `benvi_colors()` function and
+  `benvi_colors` data object
 
 #### Updated
 
@@ -450,18 +453,12 @@ version 1.0.0 will be the official stable release.
 
 #### Bug Fixes
 
-- Fixed
-  [`plot_line_trend()`](https://viniciusoike.github.io/benviplot/reference/plot_line_trend.md):
-  Updated deprecated `size` → `linewidth` for ggplot2 4.0.0
-- Fixed
-  [`plot_line_trend()`](https://viniciusoike.github.io/benviplot/reference/plot_line_trend.md):
-  Corrected return value assignment
-- Fixed
-  [`plot_column_label()`](https://viniciusoike.github.io/benviplot/reference/plot_column_label.md):
-  Corrected `guide_fill` → `fill_guide` typo
-- Fixed
-  [`plot_column_label()`](https://viniciusoike.github.io/benviplot/reference/plot_column_label.md):
-  Fixed label aesthetic for tidy evaluation
+- Fixed `plot_line_trend()`: Updated deprecated `size` → `linewidth` for
+  ggplot2 4.0.0
+- Fixed `plot_line_trend()`: Corrected return value assignment
+- Fixed `plot_column_label()`: Corrected `guide_fill` → `fill_guide`
+  typo
+- Fixed `plot_column_label()`: Fixed label aesthetic for tidy evaluation
 - Fixed
   [`plot_area()`](https://viniciusoike.github.io/benviplot/reference/plot_area.md):
   Corrected `label` → `labels` in scale call
@@ -477,9 +474,7 @@ version 1.0.0 will be the official stable release.
   messages
 - Enhanced `import_fonts()` with robust error handling and progress
   feedback
-- Improved
-  [`pretty_number()`](https://viniciusoike.github.io/benviplot/reference/pretty_number.md)
-  with input validation
+- Improved `pretty_number()` with input validation
 - Refactored
   [`plot_add_xy()`](https://viniciusoike.github.io/benviplot/reference/plot_add_xy.md)
   and
@@ -588,14 +583,11 @@ version 1.0.0 will be the official stable release.
     [`plot_scatter()`](https://viniciusoike.github.io/benviplot/reference/plot_scatter.md)
   - [`plot_area()`](https://viniciusoike.github.io/benviplot/reference/plot_area.md),
     [`plot_histogram()`](https://viniciusoike.github.io/benviplot/reference/plot_histogram.md)
-  - [`plot_line_trend()`](https://viniciusoike.github.io/benviplot/reference/plot_line_trend.md),
-    [`plot_column_label()`](https://viniciusoike.github.io/benviplot/reference/plot_column_label.md)
+  - `plot_line_trend()`, `plot_column_label()`
 - Custom theme:
   [`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md)
   with Poppins font
-- Utility functions:
-  [`pretty_number()`](https://viniciusoike.github.io/benviplot/reference/pretty_number.md),
-  `import_fonts()`
+- Utility functions: `pretty_number()`, `import_fonts()`
 - Sample data: `iqa` (QuintoAndar rent index)
 
 ------------------------------------------------------------------------

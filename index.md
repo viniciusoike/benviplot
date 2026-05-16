@@ -25,6 +25,7 @@ high quality graphics. The package includes:
 You can install benviplot from GitHub.
 
 ``` r
+
 # Install remotes if needed
 # install.packages("remotes")
 
@@ -37,7 +38,9 @@ remotes::install_github("viniciusoike/benviplot")
 Load the package along with ggplot2.
 
 ``` r
+
 library(ggplot2)
+#> Warning: package 'ggplot2' was built under R version 4.5.2
 library(benviplot)
 ```
 
@@ -47,6 +50,7 @@ Color palettes can be visualized using `benvi_palette`. The default
 palette is “qual_2”.
 
 ``` r
+
 # Default palette (qual_2)
 benvi_palette()
 ```
@@ -57,6 +61,7 @@ Colors follow Benvi reports guidelines that are tailored for specific
 cities.
 
 ``` r
+
 # Specify a different palette
 benvi_palette("rio_qual")
 ```
@@ -77,6 +82,7 @@ The pacakge also supplies a generic
 function that works best if Poppins is available.
 
 ``` r
+
 # Rental price index for major cities
 index_data <- subset(iqaiw, rooms == "Total")
 
@@ -96,6 +102,7 @@ ggplot(index_data, aes(x = date, y = index, color = name_muni)) +
 When using a continuous scale the colors are interpolated.
 
 ``` r
+
 # Price per m2 by city over time
 ggplot(iqaiw, aes(x = date, y = name_muni, fill = price_m2)) +
   geom_tile(height = 0.8) +
@@ -121,6 +128,7 @@ These functions usually include simple helper arguments like `text` in
 the case of `plot_column` that plots its value above the column.
 
 ``` r
+
 sales <- data.frame(
   x = factor(c(1, 2, 3, 4, 5, 6)),
   y = c(200, 220, 230, 210, 240, 290)
@@ -135,6 +143,7 @@ The final example shows the variable argument which replaces the
 `aes(fill = ...)` or `aes(color = ...)` in each function.
 
 ``` r
+
 # Listing vs contract prices by city
 latest_sales <- subset(sales_report, date == max(date))
 plot_scatter(
