@@ -52,6 +52,7 @@ Load the package along with ggplot2.
 
 ``` r
 library(ggplot2)
+#> Warning: package 'ggplot2' was built under R version 4.5.2
 library(benviplot)
 ```
 
@@ -65,7 +66,7 @@ palette is “qual_2”.
 benvi_palette()
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-4-1.svg" alt="" width="80%" style="display: block; margin: auto;" />
 
 Colors follow Benvi reports guidelines that are tailored for specific
 cities.
@@ -75,7 +76,7 @@ cities.
 benvi_palette("rio_qual")
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-5-1.svg" alt="" width="80%" style="display: block; margin: auto;" />
 
 ## Plotting
 
@@ -104,7 +105,7 @@ ggplot(index_data, aes(x = date, y = index, color = name_muni)) +
   theme_benvi()
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-6-1.svg" alt="" width="80%" style="display: block; margin: auto;" />
 
 When using a continuous scale the colors are interpolated.
 
@@ -123,7 +124,7 @@ ggplot(iqaiw, aes(x = date, y = name_muni, fill = price_m2)) +
     )
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-7-1.svg" alt="" width="80%" style="display: block; margin: auto;" />
 
 The package features some generic `plot_` functions that help to create
 standard plots. These functions aim to be efficient, allowing for quick
@@ -142,7 +143,7 @@ sales <- data.frame(
 plot_column(sales, x = x, y = y, text = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-8-1.svg" alt="" width="80%" style="display: block; margin: auto;" />
 
 The final example shows the variable argument which replaces the
 `aes(fill = ...)` or `aes(color = ...)` in each function.
@@ -159,7 +160,7 @@ plot_scatter(
 #> `geom_smooth()` using formula = 'y ~ x'
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.svg" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-9-1.svg" alt="" width="80%" style="display: block; margin: auto;" />
 
 ## Getting Help
 

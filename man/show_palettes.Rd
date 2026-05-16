@@ -8,8 +8,7 @@ show_palettes(type = "all", n = NULL)
 }
 \arguments{
 \item{type}{Character string specifying the palette type to display. One of:
-\code{"all"} (default), \code{"theme"}, \code{"sequential"}, \code{"qualitative"}, \code{"city"}, or \code{"brand"}.
-See \code{\link[=list_palettes]{list_palettes()}} for details.}
+\code{"all"} (default), \code{"theme"}, \code{"sequential"}, \code{"qualitative"}, \code{"city"}, or \code{"brand"}.}
 
 \item{n}{Number of colors to display from each palette. If \code{NULL} (default),
 shows all colors in each palette.}

@@ -81,9 +81,6 @@ The package uses a centralized color palette system stored in `inst/extdata/`:
 - `print.palette()`: S3 method for visualizing palettes
 
 **R/palette_utils.R**:
-- `benvi_colors(color_names)`: Get hex codes for individual named colors or list all color names
-- `list_palettes(type)`: List available palette names, filterable by type ("all", "theme", "sequential", "qualitative", "city", "brand")
-- `list_colors()`: List all 36 available Benvi color names
 - `show_palettes(type, n)`: Visual display of all palettes (like RColorBrewer::display.brewer.all())
 
 **R/benvi_scales.R**:

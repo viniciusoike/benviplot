@@ -39,9 +39,6 @@ reference:
     desc: Access and customize color palettes
     contents:
     - benvi_palette
-    - benvi_colors
-    - list_palettes
-    - list_colors
     - show_palettes
 
   - title: ggplot2 Scales
