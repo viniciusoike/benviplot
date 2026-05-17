@@ -6,11 +6,6 @@
 #' output when available, ensuring high-quality rendering with proper font
 #' support and no DPI issues.
 #'
-#' **Key improvements over base ggsave():**
-#' - Uses ragg device for PNG files when available (better quality, no font issues)
-#' - Optimized default DPI (300) for publication-quality output
-#' - Consistent rendering across different platforms
-#'
 #' If ragg is not installed, falls back to the default graphics device.
 #'
 #' @param filename File name to create on disk. The file extension determines
@@ -47,15 +42,16 @@
 #' }
 #'
 #' @importFrom ggplot2 ggsave
-ggsave_benvi <- function(filename,
-                         plot = ggplot2::last_plot(),
-                         device = NULL,
-                         width = 7,
-                         height = 5,
-                         units = "in",
-                         dpi = 300,
-                         ...) {
-
+ggsave_benvi <- function(
+  filename,
+  plot = ggplot2::last_plot(),
+  device = NULL,
+  width = 7,
+  height = 5,
+  units = "in",
+  dpi = 300,
+  ...
+) {
   # Determine file extension
   ext <- tolower(tools::file_ext(filename))
 
@@ -69,7 +65,9 @@ ggsave_benvi <- function(filename,
       }
     } else {
       if (!isTRUE(getOption("benviplot.ragg_suggest_shown"))) {
-        cli::cli_alert_info("Install ragg for better PNG quality: {.code install.packages('ragg')}")
+        cli::cli_alert_info(
+          "Install ragg for better PNG quality: {.code install.packages('ragg')}"
+        )
         options(benviplot.ragg_suggest_shown = TRUE)
       }
     }

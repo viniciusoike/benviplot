@@ -52,50 +52,52 @@
 #' theme element_blank position_stack position_dodge
 #' @importFrom dplyr mutate pull
 plot_column <- function(
-    data,
-    x,
-    y,
-    fill,
-    variable,
-    zero = TRUE,
-    flip = FALSE,
-    text = FALSE,
-    text_inside = FALSE,
-    text_place = NULL,
-    text_padding = NULL,
-    palette = "qual_benvi",
-    scale_name = "",
-    scale_label = ggplot2::waiver(),
-    digits = 0,
-    percent = FALSE,
-    text_color = "gray20",
-    text_family = "Poppins",
-    text_size = 3,
-    position_col = "stack",
-    position_text = position_col,
-    ...) {
-
+  data,
+  x,
+  y,
+  fill,
+  variable,
+  zero = TRUE,
+  flip = FALSE,
+  text = FALSE,
+  text_inside = FALSE,
+  text_place = NULL,
+  text_padding = NULL,
+  palette = "qual_benvi",
+  scale_name = "",
+  scale_label = ggplot2::waiver(),
+  digits = 0,
+  percent = FALSE,
+  text_color = "gray20",
+  text_family = "Poppins",
+  text_size = 3,
+  position_col = "stack",
+  position_text = position_col,
+  ...
+) {
   if (missing(variable)) {
-    if (missing(fill)) { fill <- "#021841" }
+    if (missing(fill)) {
+      fill <- "#021841"
+    }
 
     p <-
       ggplot(
         data = data,
-        aes(x = {{ x }}, y = {{ y }})) +
+        aes(x = {{ x }}, y = {{ y }})
+      ) +
       geom_col(fill = fill, position = position_col, ...)
-
   } else {
-
     p <-
       ggplot(
         data = data,
-        aes(x = {{ x }}, y = {{ y }}, fill = {{ variable }})) +
+        aes(x = {{ x }}, y = {{ y }}, fill = {{ variable }})
+      ) +
       geom_col(position = position_col, ...) +
       scale_fill_benvi_d(
         pal_name = palette,
         name = scale_name,
-        labels = scale_label)
-
+        labels = scale_label
+      )
   }
 
   if (isTRUE(zero)) {
@@ -107,7 +109,6 @@ plot_column <- function(
   }
 
   if (isTRUE(text)) {
-
     if (isTRUE(text_inside)) {
       if (!requireNamespace("ggfittext", quietly = TRUE)) {
         cli::cli_abort(c(
@@ -126,27 +127,29 @@ plot_column <- function(
 
       dflabel <- data |>
         dplyr::mutate(
-          label = format_num_br({{y}}, digits = digits, percent = percent))
+          label = format_num_br({{ y }}, digits = digits, percent = percent)
+        )
 
-      p <- p + ggfittext::geom_bar_text(
-        data = dflabel,
-        aes(x = {{ x }}, y = {{ y }}, label = label),
-        min.size = text_size,
-        family = text_family,
-        color = text_color,
-        place = text_place,
-        padding.x = if (isTRUE(flip)) text_padding else grid::unit(0, "mm"),
-        padding.y = if (isTRUE(flip)) grid::unit(0, "mm") else text_padding
-      )
-
+      p <- p +
+        ggfittext::geom_bar_text(
+          data = dflabel,
+          aes(x = {{ x }}, y = {{ y }}, label = label),
+          min.size = text_size,
+          family = text_family,
+          color = text_color,
+          place = text_place,
+          padding.x = if (isTRUE(flip)) text_padding else grid::unit(0, "mm"),
+          padding.y = if (isTRUE(flip)) grid::unit(0, "mm") else text_padding
+        )
     } else {
       # Use geom_text for fixed-size text above/beside bars
 
       yjust <- max(data |> dplyr::pull({{ y }}), na.rm = TRUE) * 0.05
       dflabel <- data |>
         dplyr::mutate(
-          ytext = ifelse({{y}} > 0, {{y}} + yjust, {{y}} - yjust),
-          label = format_num_br({{y}}, digits = digits, percent = percent))
+          ytext = ifelse({{ y }} > 0, {{ y }} + yjust, {{ y }} - yjust),
+          label = format_num_br({{ y }}, digits = digits, percent = percent)
+        )
 
       if (missing(position_text)) {
         position_text <- "identity"
@@ -159,16 +162,16 @@ plot_column <- function(
         position_text <- position_dodge(width = 0.9)
       }
 
-      p <- p + geom_text(
-        data = dflabel,
-        aes(x = {{ x }}, y = ytext, label = label),
-        color = text_color,
-        position = position_text,
-        family = text_family,
-        size = text_size
-      )
+      p <- p +
+        geom_text(
+          data = dflabel,
+          aes(x = {{ x }}, y = ytext, label = label),
+          color = text_color,
+          position = position_text,
+          family = text_family,
+          size = text_size
+        )
     }
-
   }
 
   p <- p +
@@ -179,5 +182,4 @@ plot_column <- function(
     )
 
   return(p)
-
 }

@@ -22,23 +22,23 @@
 #' @return A ggplot2 plot.
 #' @export
 plot_scatter <- function(
-    data,
-    x,
-    y,
-    color,
-    variable,
-    fit = FALSE,
-    fit_variable = FALSE,
-    fit_method = "auto",
-    fit_formula = NULL,
-    fit_color = NULL,
-    fit_ci = FALSE,
-    zero = "none",
-    palette = "qual_benvi",
-    scale_name = "",
-    scale_label = ggplot2::waiver(),
-    ...) {
-
+  data,
+  x,
+  y,
+  color,
+  variable,
+  fit = FALSE,
+  fit_variable = FALSE,
+  fit_method = "auto",
+  fit_formula = NULL,
+  fit_color = NULL,
+  fit_ci = FALSE,
+  zero = "none",
+  palette = "qual_benvi",
+  scale_name = "",
+  scale_label = ggplot2::waiver(),
+  ...
+) {
   if (!zero %in% c("none", "x", "y", "both")) {
     cli::cli_abort(c(
       "{.arg zero} must be one of: {.val none}, {.val x}, {.val y}, or {.val both}.",
@@ -46,57 +46,53 @@ plot_scatter <- function(
     ))
   }
 
-
   if (missing(variable)) {
-
     if (missing(color)) {
-
       color <- benvi_palette("benvi_blue", 1)
-
     }
 
     p <- ggplot(data = data, aes(x = {{ x }}, y = {{ y }}))
     p <- plot_add_xy(p, type = zero)
     p <- p + geom_point(color = color, ...)
-
   } else {
-
     p <- ggplot(
       data = data,
       aes(x = {{ x }}, y = {{ y }}, color = {{ variable }})
-      )
+    )
 
     p <- plot_add_xy(p, type = zero)
     p <- p + geom_point(...)
-    p <- p + scale_color_benvi_d(
-      pal_name = palette,
-      name = scale_name,
-      labels = scale_label
-    )
-
+    p <- p +
+      scale_color_benvi_d(
+        pal_name = palette,
+        name = scale_name,
+        labels = scale_label
+      )
   }
 
   if (isTRUE(fit)) {
     # When fit_variable is FALSE and fit_color is specified, use it
     if (!fit_variable && !is.null(fit_color)) {
-      p <- p + geom_smooth(
-        data = data,
-        aes(x = {{ x }}, y = {{ y }}),
-        method = fit_method,
-        formula = fit_formula,
-        se = fit_ci,
-        color = fit_color,
-        inherit.aes = FALSE
-      )
+      p <- p +
+        geom_smooth(
+          data = data,
+          aes(x = {{ x }}, y = {{ y }}),
+          method = fit_method,
+          formula = fit_formula,
+          se = fit_ci,
+          color = fit_color,
+          inherit.aes = FALSE
+        )
     } else {
-      p <- p + geom_smooth(
-        data = data,
-        aes(x = {{ x }}, y = {{ y }}),
-        method = fit_method,
-        formula = fit_formula,
-        se = fit_ci,
-        inherit.aes = fit_variable
-      )
+      p <- p +
+        geom_smooth(
+          data = data,
+          aes(x = {{ x }}, y = {{ y }}),
+          method = fit_method,
+          formula = fit_formula,
+          se = fit_ci,
+          inherit.aes = fit_variable
+        )
     }
   }
 
@@ -113,7 +109,6 @@ plot_scatter <- function(
 #' @export
 #' @importFrom ggplot2 geom_hline geom_vline
 plot_add_xy <- function(plot, type = "both") {
-
   plot <- switch(
     type,
     none = plot,

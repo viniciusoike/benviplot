@@ -21,11 +21,11 @@
 #' benvi_palette("greens", n = 20, type = "continuous")
 #' benvi_palette("greens", n = 2, type = "discrete")
 benvi_palette <- function(
-    pal_name = "qual_2",
-    n,
-    direction = 1,
-    type = c("discrete", "continuous")) {
-
+  pal_name = "qual_2",
+  n,
+  direction = 1,
+  type = c("discrete", "continuous")
+) {
   if (abs(direction) != 1) {
     cli::cli_abort(c(
       "{.arg direction} must be 1 or -1.",
@@ -68,15 +68,12 @@ benvi_palette <- function(
   }
 
   structure(out, class = "palette", pal_name = pal_name)
-
 }
 
 pal_pal <- function(pal_name, direction) {
-
   function(n) {
     benvi_palette(pal_name = pal_name, direction = direction)
   }
-
 }
 
 #' @export
@@ -86,6 +83,14 @@ print.palette <- function(x, ...) {
   old <- par(mar = c(0.5, 0.5, 0.5, 0.5))
   on.exit(par(old))
 
-  image(1:n, 1, as.matrix(1:n), col = x,
-        ylab = "", xaxt = "n", yaxt = "n", bty = "n")
+  image(
+    1:n,
+    1,
+    as.matrix(1:n),
+    col = x,
+    ylab = "",
+    xaxt = "n",
+    yaxt = "n",
+    bty = "n"
+  )
 }

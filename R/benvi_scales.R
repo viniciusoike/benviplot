@@ -22,7 +22,6 @@
 #' @importFrom ggplot2 discrete_scale
 #' @importFrom cli cli_abort
 scale_colour_benvi_d <- function(pal_name = "qual_benvi", direction = 1, ...) {
-
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     cli::cli_abort(c(
       "Package {.pkg ggplot2} is required.",
@@ -33,8 +32,8 @@ scale_colour_benvi_d <- function(pal_name = "qual_benvi", direction = 1, ...) {
   ggplot2::discrete_scale(
     "colour",
     palette = pal_pal(pal_name = pal_name, direction = direction),
-    ...)
-
+    ...
+  )
 }
 
 #' @rdname ggplot2-scales-discrete
@@ -49,7 +48,6 @@ scale_color_benvi_d <- scale_colour_benvi_d
 #' @importFrom ggplot2 discrete_scale
 #' @importFrom cli cli_abort
 scale_fill_benvi_d <- function(pal_name = "qual_benvi", direction = 1, ...) {
-
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     cli::cli_abort(c(
       "Package {.pkg ggplot2} is required.",
@@ -60,8 +58,8 @@ scale_fill_benvi_d <- function(pal_name = "qual_benvi", direction = 1, ...) {
   ggplot2::discrete_scale(
     "fill",
     palette = pal_pal(pal_name = pal_name, direction = direction),
-    ...)
-
+    ...
+  )
 }
 
 #' Continuous scales to use for ggplot2
@@ -95,7 +93,6 @@ scale_fill_benvi_d <- function(pal_name = "qual_benvi", direction = 1, ...) {
 #' @importFrom ggplot2 scale_colour_gradientn
 #' @importFrom cli cli_abort
 scale_colour_benvi_c <- function(pal_name = "benvi_blue", direction = 1, ...) {
-
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     cli::cli_abort(c(
       "Package {.pkg ggplot2} is required.",
@@ -108,8 +105,10 @@ scale_colour_benvi_c <- function(pal_name = "benvi_blue", direction = 1, ...) {
       pal_name = pal_name,
       direction = direction,
       n = 256,
-      type = "continuous"),
-    ...)
+      type = "continuous"
+    ),
+    ...
+  )
 }
 
 #' @rdname ggplot2-scales-continuous
@@ -121,7 +120,6 @@ scale_color_benvi_c <- scale_colour_benvi_c
 #' @importFrom ggplot2 scale_fill_gradientn
 #' @importFrom cli cli_abort
 scale_fill_benvi_c <- function(pal_name = "benvi_blue", direction = 1, ...) {
-
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     cli::cli_abort(c(
       "Package {.pkg ggplot2} is required.",
@@ -134,6 +132,8 @@ scale_fill_benvi_c <- function(pal_name = "benvi_blue", direction = 1, ...) {
       pal_name = pal_name,
       direction = direction,
       n = 256,
-      type = "continuous"),
-    ...)
+      type = "continuous"
+    ),
+    ...
+  )
 }

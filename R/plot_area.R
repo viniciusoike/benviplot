@@ -11,24 +11,23 @@
 #' @return A ggplot2 plot
 #' @export
 plot_area <- function(
-    data,
-    x,
-    y,
-    fill,
-    variable,
-    zero = TRUE,
-    order = TRUE,
-    palette = "qual_benvi",
-    scale_name = "",
-    scale_label = ggplot2::waiver(),
-    text = FALSE,
-    text_color = "gray20",
-    text_family = "Poppins",
-    text_size = 3,
-    position = "stack",
-    position_text = "identity"
+  data,
+  x,
+  y,
+  fill,
+  variable,
+  zero = TRUE,
+  order = TRUE,
+  palette = "qual_benvi",
+  scale_name = "",
+  scale_label = ggplot2::waiver(),
+  text = FALSE,
+  text_color = "gray20",
+  text_family = "Poppins",
+  text_size = 3,
+  position = "stack",
+  position_text = "identity"
 ) {
-
   if (missing(variable)) {
     if (missing(fill)) {
       fill <- benvi_palette("benvi_blue", 1)
@@ -43,11 +42,8 @@ plot_area <- function(
         fill = fill,
         position = position
       )
-
   } else {
-
     if (isTRUE(order)) {
-
       # Orders the fill variable to stack bigger groups on the top
       data <- dplyr::mutate(
         data,
@@ -62,9 +58,7 @@ plot_area <- function(
           aes(x = {{ x }}, y = {{ y }}, fill = ordered_fill),
           position = position
         )
-
     } else {
-
       # Plot a fill-colored area chart (unordered)
 
       p <- ggplot() +
@@ -73,7 +67,6 @@ plot_area <- function(
           aes(x = {{ x }}, y = {{ y }}, fill = {{ variable }}),
           position = position
         )
-
     }
 
     # Include benvi colors
@@ -84,7 +77,6 @@ plot_area <- function(
         name = scale_name,
         labels = scale_label
       )
-
   }
 
   # Horizontal line (y = 0)
@@ -94,9 +86,7 @@ plot_area <- function(
   }
 
   if (isTRUE(text)) {
-
     # work in progress
-
   }
 
   # Remove x-axis label and Benvi theme
@@ -109,5 +99,4 @@ plot_area <- function(
     )
 
   return(p)
-
 }

@@ -63,27 +63,26 @@
 #' plot_histogram(data = tbl, x = x, facet = city, density = TRUE)
 #' }
 plot_histogram <- function(
-    data,
-    x,
-    color = "#FFFFFF",
-    fill = "#021841",
-    zero = TRUE,
-    bins = NULL,
-    method = "fd",
-    density = FALSE,
-    facet = FALSE,
-    ...) {
-
+  data,
+  x,
+  color = "#FFFFFF",
+  fill = "#021841",
+  zero = TRUE,
+  bins = NULL,
+  method = "fd",
+  density = FALSE,
+  facet = FALSE,
+  ...
+) {
   histBinsMethods <- c("sqrt", "Sturges", "Rice", "Scott", "FD", "fd")
 
   if (!is.null(bins) && is.numeric(bins)) {
-
     if (isFALSE(density)) {
       p <-
         ggplot() +
         geom_histogram(
           data = data,
-          aes(x = {{x}}),
+          aes(x = {{ x }}),
           color = color,
           fill = fill,
           bins = bins
@@ -93,17 +92,14 @@ plot_histogram <- function(
         ggplot() +
         geom_histogram(
           data = data,
-          aes(x = {{x}}, y = after_stat(density)),
+          aes(x = {{ x }}, y = after_stat(density)),
           color = color,
           fill = fill,
           bins = bins
         )
     }
-
   } else {
-
     if (is.character(method)) {
-
       if (!method %in% histBinsMethods) {
         cli::cli_abort(c(
           "{.arg method} must be one of: {.or {histBinsMethods}}.",
@@ -111,34 +107,28 @@ plot_histogram <- function(
         ))
       }
 
-      if(isFALSE(density)) {
-
+      if (isFALSE(density)) {
         p <-
           ggplot() +
           geom_histogram(
             data = data,
-            aes(x = {{x}}),
+            aes(x = {{ x }}),
             color = color,
             fill = fill,
             binwidth = function(x) get_hist_bw(x, type = method)
           )
-
       } else {
-
         p <-
           ggplot() +
           geom_histogram(
             data = data,
-            aes(x = {{x}}, y = after_stat(density)),
+            aes(x = {{ x }}, y = after_stat(density)),
             color = color,
             fill = fill,
             binwidth = function(x) get_hist_bw(x, type = method)
           )
-
       }
-
-  }
-
+    }
   }
 
   if (isTRUE(zero)) {
@@ -153,7 +143,6 @@ plot_histogram <- function(
     theme_benvi()
 
   return(p)
-
 }
 
 
@@ -166,16 +155,15 @@ plot_histogram <- function(
 #' @return An integer
 #' @importFrom stats IQR sd
 get_hist_bw <- function(x, type = "FD") {
-
   # Normalize type to uppercase for switch
   type <- toupper(type)
 
   h <- switch(
     type,
-    FD = 2 * IQR(x) / length(x)^(1/3),
-    SCOTT = 3 * sd(x) / length(x)^(1/3),
+    FD = 2 * IQR(x) / length(x)^(1 / 3),
+    SCOTT = 3 * sd(x) / length(x)^(1 / 3),
     RICE = {
-      k <- ceiling(2 * length(x)^(1/3))
+      k <- ceiling(2 * length(x)^(1 / 3))
       ceiling((max(x) - min(x)) / k)
     },
     SQRT = {
@@ -189,5 +177,4 @@ get_hist_bw <- function(x, type = "FD") {
   )
 
   return(h)
-
 }

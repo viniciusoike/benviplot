@@ -32,7 +32,6 @@ check_poppins_installed <- function() {
 #' install_poppins()
 #' }
 install_poppins <- function() {
-
   if (!requireNamespace("systemfonts", quietly = TRUE)) {
     cli::cli_abort(c(
       "Package {.pkg systemfonts} is required to install fonts.",
@@ -51,7 +50,16 @@ install_poppins <- function() {
     {
       systemfonts::get_from_google_fonts(
         "Poppins",
-        weights = c("regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic")
+        weights = c(
+          "regular",
+          "italic",
+          "500",
+          "500italic",
+          "600",
+          "600italic",
+          "700",
+          "700italic"
+        )
       )
       cli::cli_alert_success("Poppins installed successfully!")
       invisible(TRUE)
@@ -79,7 +87,6 @@ install_poppins <- function() {
 #' @examples
 #' font_status()
 font_status <- function() {
-
   poppins_installed <- check_poppins_installed()
   ragg_available <- requireNamespace("ragg", quietly = TRUE)
 
@@ -95,7 +102,9 @@ font_status <- function() {
   if (ragg_available) {
     cli::cli_alert_success("ragg package: {.strong available}")
   } else {
-    cli::cli_alert_info("ragg package: not installed (optional but recommended)")
+    cli::cli_alert_info(
+      "ragg package: not installed (optional but recommended)"
+    )
     cli::cli_alert_info("Install with: {.code install.packages('ragg')}")
   }
 
@@ -103,5 +112,8 @@ font_status <- function() {
     cli::cli_alert_success("Your setup is optimal for benviplot!")
   }
 
-  invisible(list(poppins_installed = poppins_installed, ragg_available = ragg_available))
+  invisible(list(
+    poppins_installed = poppins_installed,
+    ragg_available = ragg_available
+  ))
 }

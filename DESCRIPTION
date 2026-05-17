@@ -3,10 +3,8 @@ Title: Color Palettes and ggplot2 Extensions for Data Visualization
 Version: 1.2.0
 Authors@R:
     person("Vinicius", "Oike", , "viniciusoike@gmail.com", role = c("aut", "cre"))
-Description: Provides color palettes and ggplot2 extensions for creating quality
-    graphics. This package uses color schemes from the discontinued Benvi brand
-    (2024) for data visualization purposes. This is an unofficial, independent
-    project not affiliated with QuintoAndar. See DISCLAIMER.md for details.
+Description: Provides color palettes and ggplot2 scale extensions. The colors
+            are heavily inspired by discontinued Benvi brand.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
