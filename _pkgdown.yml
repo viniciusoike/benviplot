@@ -4,7 +4,7 @@ template:
   bootstrap: 5
   bootswatch: flatly
   bslib:
-    primary: "#009850"
+    primary: "#021841"
     base_font: {google: "Poppins"}
 
 home:
