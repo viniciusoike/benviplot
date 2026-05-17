@@ -17,7 +17,7 @@ show_palettes(type = "all", n = NULL)
 
   Character string specifying the palette type to display. One of:
   `"all"` (default), `"theme"`, `"sequential"`, `"qualitative"`,
-  `"city"`, or `"brand"`.
+  `"diverging"`, `"city"`, or `"brand"`.
 
 - n:
 

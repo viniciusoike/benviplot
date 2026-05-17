@@ -6,15 +6,6 @@ with smart defaults optimized for benviplot graphics. Automatically uses
 the ragg graphics device for PNG output when available, ensuring
 high-quality rendering with proper font support and no DPI issues.
 
-**Key improvements over base ggsave():**
-
-- Uses ragg device for PNG files when available (better quality, no font
-  issues)
-
-- Optimized default DPI (300) for publication-quality output
-
-- Consistent rendering across different platforms
-
 If ragg is not installed, falls back to the default graphics device.
 
 ## Usage

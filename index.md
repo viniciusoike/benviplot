@@ -1,13 +1,5 @@
 # benviplot ![benviplot logo](reference/figures/logo_cropped.png)
 
-> **DISCLAIMER**: This is an unofficial, independent project and is
-> **NOT** affiliated with, endorsed by, or connected to QuintoAndar in
-> any way. Benvi was a former brand of QuintoAndar that was discontinued
-> in 2024. This package uses publicly available color schemes from that
-> period for data visualization purposes. See
-> [DISCLAIMER.md](https://viniciusoike.github.io/benviplot/DISCLAIMER.md)
-> for details.
-
 ## Overview
 
 `benviplot` provides color palettes and ggplot2 helpers for creating
@@ -40,33 +32,17 @@ Load the package along with ggplot2.
 ``` r
 
 library(ggplot2)
-#> Warning: package 'ggplot2' was built under R version 4.5.2
 library(benviplot)
 ```
 
 ## Color palettes
 
-Color palettes can be visualized using `benvi_palette`. The default
-palette is “qual_2”.
+Color palettes can be visualized using `benvi_palette`.
 
 ``` r
 
-# Default palette (qual_2)
 benvi_palette()
 ```
-
-![](reference/figures/README-unnamed-chunk-4-1.svg)
-
-Colors follow Benvi reports guidelines that are tailored for specific
-cities.
-
-``` r
-
-# Specify a different palette
-benvi_palette("rio_qual")
-```
-
-![](reference/figures/README-unnamed-chunk-5-1.svg)
 
 ## Plotting
 
@@ -84,40 +60,61 @@ function that works best if Poppins is available.
 ``` r
 
 # Rental price index for major cities
-index_data <- subset(iqaiw, rooms == "Total")
+index_data <- iqaiw |>
+  filter(
+    rooms %in% c("1", "2"),
+    between(date, as.Date("2023-01-01"), as.Date("2025-12-31"))
+  )
 
-ggplot(index_data, aes(x = date, y = index, color = name_muni)) +
-  geom_line(linewidth = 1, alpha = 0.8) +
-  scale_color_benvi_d(pal_name = "qual_benvi", name = "City") +
+ggplot(index_data, aes(date, index, color = rooms)) +
+  geom_line(lwd = 0.7) +
+  facet_wrap(vars(name_muni)) +
+  scale_color_benvi_d() +
   labs(
-    title = "A Benvi styled plot",
-    subtitle = "Using the Poppins font for clean typography",
+    title = "IQAIW Rental Index by City",
     x = NULL,
-    y = "Index (base = 100)") +
+    y = "Index (base = 100)",
+    color = "Rooms",
+    caption = "Source: IQAIW (benviplot)"
+  ) +
   theme_benvi()
 ```
 
-![](reference/figures/README-unnamed-chunk-6-1.svg)
+![](reference/figures/readme_plot_example_1.png)
 
 When using a continuous scale the colors are interpolated.
 
 ``` r
 
 # Price per m2 by city over time
-ggplot(iqaiw, aes(x = date, y = name_muni, fill = price_m2)) +
-  geom_tile(height = 0.8) +
-  scale_fill_benvi_c(pal_name = "benvi_blue", name = "Price (R$/m²)") +
-  scale_x_continuous(expand = expansion(0)) +
+index_data <- iqaiw |>
+  filter(
+    rooms == "Total",
+    between(date, as.Date("2023-01-01"), as.Date("2025-12-31"))
+  ) |>
+  mutate(xdate = lubridate::year(date) + (lubridate::month(date) - 1) / 12)
+
+ggplot(index_data, aes(x = xdate, y = name_muni, fill = acum12m * 100)) +
+  geom_tile(height = 0.6, color = "gray90") +
+  scale_fill_benvi_c(
+    pal_name = "benvi_blue",
+    name = "YoY Change (%)",
+    direction = -1
+  ) +
+  scale_x_continuous(
+    breaks = seq(2023, 2025, 1),
+    expand = expansion(0)
+  ) +
   labs(x = NULL, y = NULL) +
   theme_benvi() +
   theme(
     legend.title = element_text(hjust = 0.5, vjust = 0.75),
     axis.text = element_text(size = 12),
     panel.grid = element_blank()
-    )
+  )
 ```
 
-![](reference/figures/README-unnamed-chunk-7-1.svg)
+![](reference/figures/readme_plot_example_2.png)
 
 The package features some generic `plot_` functions that help to create
 standard plots. These functions aim to be efficient, allowing for quick
@@ -137,33 +134,11 @@ sales <- data.frame(
 plot_column(sales, x = x, y = y, text = TRUE)
 ```
 
-![](reference/figures/README-unnamed-chunk-8-1.svg)
-
-The final example shows the variable argument which replaces the
-`aes(fill = ...)` or `aes(color = ...)` in each function.
-
-``` r
-
-# Listing vs contract prices by city
-latest_sales <- subset(sales_report, date == max(date))
-plot_scatter(
-  latest_sales, price_m2_listing, price_m2_contract,
-  variable = name_muni,
-  fit = TRUE,
-  fit_method = "lm",
-  scale_name = "City")
-#> `geom_smooth()` using formula = 'y ~ x'
-```
-
-![](reference/figures/README-unnamed-chunk-9-1.svg)
+![](reference/figures/readme_plot_example_3.png)
 
 ## Getting Help
 
-- **Documentation**: Access via `?benviplot` or visit
-  <https://viniciusoike.github.io/benviplot/>
-- **Issues**: Report bugs at
-  <https://github.com/viniciusoike/benviplot/issues>
-- **Questions**: Open a discussion on GitHub
+Visit <https://viniciusoike.github.io/>
 
 ## License
 
