@@ -8,15 +8,12 @@
 #' @param ... additional arguments to pass to discrete_scale
 #'
 #' @examples
-#' \dontrun{
-#' if (require('ggplot2')) {
-#'   # Discrete color scale with rental index data
-#'   iqaiw_total <- subset(iqaiw, rooms == "Total")
-#'   ggplot(iqaiw_total, aes(x = date, y = index, colour = name_muni)) +
-#'     geom_line() +
-#'     scale_color_benvi_d("qual_benvi")
-#' }
-#' }
+#' library(ggplot2)
+#' # Discrete color scale with rental index data
+#' iqaiw_total <- subset(iqaiw, rooms == "Total")
+#' ggplot(iqaiw_total, aes(x = date, y = index, colour = name_muni)) +
+#'   geom_line() +
+#'   scale_color_benvi_d("qual_benvi")
 #'
 #' @export
 #' @importFrom ggplot2 discrete_scale
@@ -78,16 +75,11 @@ scale_fill_benvi_d <- function(pal_name = "qual_benvi", direction = 1, ...) {
 #' @rdname ggplot2-scales-continuous
 #'
 #' @examples
-#' \dontrun{
-#' if (require('ggplot2')) {
-#'   # Continuous color scale with sales data
-#'   ggplot(sales_report, aes(x = price_m2_listing,
-#'                            y = price_m2_contract,
-#'                            colour = price_m2_listing)) +
-#'     geom_point() +
-#'     scale_colour_benvi_c("benvi_blue")
-#' }
-#' }
+#' library(ggplot2)
+#'
+#' ggplot(mtcars, aes(x = wt, y = mpg, color = hp)) +
+#'   geom_point() +
+#'   scale_color_benvi_c("benvi_blue")
 #'
 #' @export
 #' @importFrom ggplot2 scale_colour_gradientn

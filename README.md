@@ -29,15 +29,40 @@ high quality graphics. The package includes:
 
 ## Installation
 
-You can install benviplot from GitHub.
+Install the released version from CRAN:
 
 ``` r
-# Install remotes if needed
-# install.packages("remotes")
+install.packages("benviplot")
+```
 
-# Install benviplot from GitHub
+Or install the development version from GitHub:
+
+``` r
+# install.packages("remotes")
 remotes::install_github("viniciusoike/benviplot")
 ```
+
+## Font Setup
+
+`benviplot` bundles the Poppins font family and registers it
+automatically on load (requires the `systemfonts` package). By default,
+`theme_benvi()` uses the system sans-serif font so the package works on
+any rendering device without warnings.
+
+To enable Poppins, set the option once per session:
+
+``` r
+options(theme_benvi.font_family = "Poppins")
+```
+
+To make this permanent, add that line to your `~/.Rprofile`. For the
+best rendering quality, also install the `ragg` package:
+
+``` r
+install.packages("ragg")
+```
+
+You can verify your current setup with `font_status()`.
 
 ## Usage
 
@@ -65,7 +90,7 @@ To use the colors in plots use one of the `scale_*_benvi_*` functions.
 - `scale_fill_benvi_c`
 - `scale_fill_benvi_d`
 
-The pacakge also supplies a generic `theme_benvi()` function that works
+The package also supplies a generic `theme_benvi()` function that works
 best if Poppins is available.
 
 ``` r
@@ -146,11 +171,13 @@ plot_column(sales, x = x, y = y, text = TRUE)
 
 ## Getting Help
 
-Visit <https://viniciusoike.github.io/>
+Visit <https://viniciusoike.github.io/benviplot/>
 
 ## License
 
-MIT License. See [LICENSE.md](LICENSE.md) for details.
+MIT License. See
+[LICENSE.md](https://github.com/viniciusoike/benviplot/blob/master/LICENSE.md)
+for details.
 
 ## Acknowledgments
 

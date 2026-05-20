@@ -31,7 +31,7 @@ convert_city_names <- function(city) {
     "cur" = "Curitiba",
     "poa" = "Porto Alegre",
     "rio" = "Rio de Janeiro",
-    "spo" = "S\u00e3o Paulo"
+    "spo" = "São Paulo"
   )
   return(unname(vlname[city]))
 }

@@ -721,3 +721,108 @@ walk2(data, paths, write_csv)   # multiple arguments
 ```
 
 This document should be referenced for all R development to ensure modern, performant, and maintainable code.
+
+---
+
+## benviplot Package Conventions
+
+### Aesthetic Detection Pattern
+
+All `plot_*` functions must use `detect_aesthetic_type()` for `color` and `fill` parameters. This enables a unified API where the same parameter accepts either a static color string or a bare column name for variable mapping.
+
+**Canonical pattern:**
+
+```r
+plot_example <- function(data, x, y, color = NULL, pal_name = "qual_benvi", ...) {
+  color_quo <- rlang::enquo(color)
+  color_type <- detect_aesthetic_type(color_quo, "color", data)
+
+  if (color_type$type == "variable_mapping") {
+    p <- ggplot(data, aes(x = {{ x }}, y = {{ y }}, color = !!color_quo)) +
+      geom_point() +
+      scale_color_benvi_d(pal_name = pal_name)
+  } else {
+    static_color <- if (color_type$type == "static_color") {
+      color_type$value
+    } else {
+      benvi_palette("benvi_blue", 1)
+    }
+    p <- ggplot(data, aes(x = {{ x }}, y = {{ y }})) +
+      geom_point(color = static_color)
+  }
+  p + theme_benvi()
+}
+```
+
+**Rules:**
+- Call `rlang::enquo()` at the very top of the function body, before any branching.
+- Always pass `data` to `detect_aesthetic_type()` — it detects continuous vs discrete variables.
+- When the parameter is missing (`type == "missing"`), fall back to a sensible default from the Benvi palette.
+- For `fill`-based functions (column, area, histogram), apply the same pattern using `fill_quo`.
+
+### Parameter Naming Conventions
+
+Apply consistently across all `plot_*` functions.
+
+**Palette:**
+- `pal_name` — not `palette`. Matches `benvi_palette()`'s own argument name.
+
+**Text styling (when present):**
+- `text_color` — color of text labels
+- `text_size` — numeric size passed to `size =` in `geom_text`
+- `text_family` — font family; not `text_font`. Mirrors `element_text(family = ...)`.
+
+**Scale / legend:**
+- `scale_name` — legend title
+- `scale_label` — legend labels (defaults to `ggplot2::waiver()`)
+
+**Avoid:**
+- `palette` as a parameter name in `plot_*` functions (use `pal_name`)
+- `text_font` (use `text_family`)
+- `colour` as a user-facing parameter name (use `color`; internal ggplot2 aliases are fine)
+
+### CRAN Example Policy
+
+**Default: run all examples bare** — no wrapper unless there is a concrete reason the example will fail on CRAN.
+
+| Wrapper | When to use |
+|---------|-------------|
+| *(none)* | Self-contained examples using package datasets (`iqa`, `iqaiw`, `sales_report`) or base R datasets (`mtcars`, `iris`) |
+| `\examplesIf(requireNamespace("pkg", quietly = TRUE))` | Example requires an optional `Suggests` dependency (e.g. `ggfittext`) |
+| `\dontrun{}` | Example has side effects (writes files, modifies system state) or requires internet or an interactive session |
+
+```r
+# Good - runs bare on CRAN
+#' @examples
+#' plot_line(data = iqa, x = date, y = index)
+
+# Good - optional dependency guard
+#' @examples
+#' \examplesIf(requireNamespace("ggfittext", quietly = TRUE))
+#' plot_column(data = df, x = cat, y = value, text = TRUE, text_inside = TRUE)
+
+# Good - side effects / internet
+#' @examples
+#' \dontrun{
+#' install_poppins()
+#' }
+
+# Avoid - unnecessary wrapping of fast, self-contained examples
+#' @examples
+#' \donttest{
+#' plot_line(data = iqa, x = date, y = index)
+#' }
+```
+
+### Export Policy
+
+**Export:**
+- All `plot_*` functions (`plot_line`, `plot_column`, `plot_scatter`, `plot_area`, `plot_histogram`, `plot_add_xy`)
+- `theme_benvi()`, `benvi_palette()`, `show_palettes()`
+- Scale functions: `scale_color_benvi_d/c()`, `scale_fill_benvi_d/c()` and their `_colour_` aliases
+- User-facing utilities: `font_status()`, `install_poppins()`, `ggsave_benvi()`, `format_num_br()`
+
+**Do not export (mark with `@keywords internal`):**
+- `detect_aesthetic_type()`, `is_valid_color()`, `get_hist_bw()`
+- `register_bundled_poppins()`, `check_poppins_installed()`
+- Any helper prefixed with `.`

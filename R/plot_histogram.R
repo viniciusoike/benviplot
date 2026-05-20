@@ -2,8 +2,13 @@
 #'
 #' @param data A data.frame type object
 #' @param x <[`data-masked`][ggplot2::aes_eval]> Indicates the numeric variable to be mapped
-#' @param color Color of the line of column.
-#' @param fill Color of the inner part of the column.
+#' @param color Color of the column border. Defaults to `"#FFFFFF"` (white).
+#' @param fill Fill color for the columns. Either a color string (e.g., `"blue"`,
+#'   `"#021841"`) for a single static color, or a bare column name (without
+#'   quotes) to map a grouping variable to fill color.
+#' @param pal_name String indicating the name of which palette to use when
+#'   `fill` is a variable mapping.
+#' @param scale_name String indicating fill legend title.
 #' @param zero Logical indicating if a horizontal (y = 0) line should be drawn
 #' on the plot.
 #' @param bins Number of bins. When specified, overrides `method`.
@@ -40,10 +45,10 @@
 #' @return A ggplot2 object
 #' @export
 #' @importFrom ggplot2 ggplot aes geom_histogram facet_wrap after_stat vars
+#' @importFrom rlang enquo
 #' @importFrom cli cli_abort
 #'
 #' @examples
-#' \dontrun{
 #' set.seed(5)
 #' tbl <- data.frame(x = rnorm(n = 1000))
 #'
@@ -55,18 +60,16 @@
 #' plot_histogram(data = tbl, x = x, method = "sqrt")
 #' plot_histogram(data = tbl, x = x, method = "Rice")
 #'
-#' # To compare multiple groups use facet
-#' tbl <- data.frame(
-#' city = rep(c("A", "B", "C"), each.out = 500),
-#' x = c(rnorm(500), runif(500), rexp(500))
-#' )
-#' plot_histogram(data = tbl, x = x, facet = city, density = TRUE)
-#' }
+#' # Facet by rooms category
+#' spo <- subset(iqaiw, name_muni == "S\u00e3o Paulo" & rooms != "Total")
+#' plot_histogram(data = spo, x = index, facet = rooms)
 plot_histogram <- function(
   data,
   x,
   color = "#FFFFFF",
-  fill = "#021841",
+  fill = NULL,
+  pal_name = "qual_benvi",
+  scale_name = "",
   zero = TRUE,
   bins = NULL,
   method = "fd",
@@ -76,59 +79,48 @@ plot_histogram <- function(
 ) {
   histBinsMethods <- c("sqrt", "Sturges", "Rice", "Scott", "FD", "fd")
 
-  if (!is.null(bins) && is.numeric(bins)) {
-    if (isFALSE(density)) {
-      p <-
-        ggplot() +
-        geom_histogram(
-          data = data,
-          aes(x = {{ x }}),
-          color = color,
-          fill = fill,
-          bins = bins
-        )
+  fill_quo <- rlang::enquo(fill)
+  fill_type <- detect_aesthetic_type(fill_quo, "fill", data)
+  static_fill <- if (fill_type$type == "static_color") fill_type$value else "#021841"
+
+  # Build aes mapping
+  if (fill_type$type == "variable_mapping") {
+    hist_mapping <- if (isTRUE(density)) {
+      aes(x = {{ x }}, y = ggplot2::after_stat(density), fill = !!fill_quo)
     } else {
-      p <-
-        ggplot() +
-        geom_histogram(
-          data = data,
-          aes(x = {{ x }}, y = after_stat(density)),
-          color = color,
-          fill = fill,
-          bins = bins
-        )
+      aes(x = {{ x }}, fill = !!fill_quo)
     }
   } else {
-    if (is.character(method)) {
-      if (!method %in% histBinsMethods) {
-        cli::cli_abort(c(
-          "{.arg method} must be one of: {.or {histBinsMethods}}.",
-          "x" = "You provided: {.val {method}}"
-        ))
-      }
-
-      if (isFALSE(density)) {
-        p <-
-          ggplot() +
-          geom_histogram(
-            data = data,
-            aes(x = {{ x }}),
-            color = color,
-            fill = fill,
-            binwidth = function(x) get_hist_bw(x, type = method)
-          )
-      } else {
-        p <-
-          ggplot() +
-          geom_histogram(
-            data = data,
-            aes(x = {{ x }}, y = after_stat(density)),
-            color = color,
-            fill = fill,
-            binwidth = function(x) get_hist_bw(x, type = method)
-          )
-      }
+    hist_mapping <- if (isTRUE(density)) {
+      aes(x = {{ x }}, y = ggplot2::after_stat(density))
+    } else {
+      aes(x = {{ x }})
     }
+  }
+
+  # Build binning arguments
+  if (!is.null(bins) && is.numeric(bins)) {
+    bw_args <- list(bins = bins)
+  } else {
+    if (!method %in% histBinsMethods) {
+      cli::cli_abort(c(
+        "{.arg method} must be one of: {.or {histBinsMethods}}.",
+        "x" = "You provided: {.val {method}}"
+      ))
+    }
+    bw_args <- list(binwidth = function(x) get_hist_bw(x, type = method))
+  }
+
+  # Build geom args and construct plot
+  base_args <- c(list(data = data, mapping = hist_mapping, color = color), bw_args)
+  if (fill_type$type != "variable_mapping") {
+    base_args$fill <- static_fill
+  }
+
+  p <- ggplot2::ggplot() + do.call(geom_histogram, base_args)
+
+  if (fill_type$type == "variable_mapping") {
+    p <- p + scale_fill_benvi_d(pal_name = pal_name, name = scale_name)
   }
 
   if (isTRUE(zero)) {
@@ -139,8 +131,7 @@ plot_histogram <- function(
     p <- p + facet_wrap(vars({{ facet }}), ...)
   }
 
-  p <- p +
-    theme_benvi()
+  p <- p + theme_benvi()
 
   return(p)
 }

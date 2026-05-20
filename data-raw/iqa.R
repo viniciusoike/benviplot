@@ -29,7 +29,7 @@ convert_city_names <- Vectorize(function(city) {
     "cur" = "Curitiba",
     "poa" = "Porto Alegre",
     "rio" = "Rio de Janeiro",
-    "spo" = "S\u00e3o Paulo"
+    "spo" = "São Paulo"
   )
 
   if (city %in% names(vlname)) {

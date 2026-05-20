@@ -1,6 +1,8 @@
 #' Plot an area chart
 #' @inheritParams plot_column
-#' @param fill Color for the area underneath the line
+#' @param fill Fill color for the area. Either a color string (e.g., `"blue"`,
+#'   `"#021841"`) for a single static color, or a bare column name (without
+#'   quotes) to map a grouping variable to fill color.
 #' @param order Logical indicating if the stacked areas should be ordered.
 #' Default behavior (`TRUE`) stacks the largest groups on top.
 #' @param position Argument passed to `geom_area`.
@@ -10,47 +12,41 @@
 #'
 #' @return A ggplot2 plot
 #' @export
+#'
+#' @examples
+#' # Simple area chart
+#' sao_paulo <- subset(iqa, name_muni == "S\u00e3o Paulo")
+#' plot_area(data = sao_paulo, x = date, y = index)
+#'
+#' # Stacked area chart with fill mapping
+#' total <- subset(iqaiw, rooms == "Total")
+#' plot_area(data = total, x = date, y = index, fill = name_muni)
 plot_area <- function(
   data,
   x,
   y,
-  fill,
-  variable,
+  fill = NULL,
   zero = TRUE,
   order = TRUE,
-  palette = "qual_benvi",
+  pal_name = "qual_benvi",
   scale_name = "",
   scale_label = ggplot2::waiver(),
   text = FALSE,
   text_color = "gray20",
-  text_family = "Poppins",
+  text_family = getOption("theme_benvi.font_family", "sans"),
   text_size = 3,
   position = "stack",
   position_text = "identity"
 ) {
-  if (missing(variable)) {
-    if (missing(fill)) {
-      fill <- benvi_palette("benvi_blue", 1)
-    }
+  fill_quo <- rlang::enquo(fill)
+  fill_type <- detect_aesthetic_type(fill_quo, "fill", data)
 
-    # Plot a simple area chart of a single-variable
-
-    p <- ggplot() +
-      geom_area(
-        data = data,
-        aes(x = {{ x }}, y = {{ y }}),
-        fill = fill,
-        position = position
-      )
-  } else {
+  if (fill_type$type == "variable_mapping") {
     if (isTRUE(order)) {
-      # Orders the fill variable to stack bigger groups on the top
       data <- dplyr::mutate(
         data,
-        ordered_fill = reorder(factor({{ variable }}), -{{ y }})
+        ordered_fill = reorder(factor(!!fill_quo), -{{ y }})
       )
-
-      # Plot a fill-colored area chart
 
       p <- ggplot() +
         geom_area(
@@ -59,23 +55,33 @@ plot_area <- function(
           position = position
         )
     } else {
-      # Plot a fill-colored area chart (unordered)
-
       p <- ggplot() +
         geom_area(
           data = data,
-          aes(x = {{ x }}, y = {{ y }}, fill = {{ variable }}),
+          aes(x = {{ x }}, y = {{ y }}, fill = !!fill_quo),
           position = position
         )
     }
 
-    # Include benvi colors
-
     p <- p +
       scale_fill_benvi_d(
-        pal_name = palette,
+        pal_name = pal_name,
         name = scale_name,
         labels = scale_label
+      )
+  } else {
+    static_fill <- if (fill_type$type == "static_color") {
+      fill_type$value
+    } else {
+      benvi_palette("benvi_blue", 1)
+    }
+
+    p <- ggplot() +
+      geom_area(
+        data = data,
+        aes(x = {{ x }}, y = {{ y }}),
+        fill = static_fill,
+        position = position
       )
   }
 

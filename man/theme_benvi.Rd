@@ -2,33 +2,45 @@
 % Please edit documentation in R/theme_benvi.R
 \name{theme_benvi}
 \alias{theme_benvi}
-\title{A base theme for Benvi plots}
+\title{A theme for Benvi styled plots}
 \usage{
-theme_benvi()
+theme_benvi(
+  base_family = getOption("theme_benvi.font_family", "sans"),
+  base_size = 10,
+  background = FALSE
+)
+}
+\arguments{
+\item{base_family}{Argument passed to \code{\link[ggplot2:ggtheme]{ggplot2::theme_minimal()}}. Defaults to 'sans'.}
+
+\item{base_size}{Argument passed to \code{\link[ggplot2:ggtheme]{ggplot2::theme_minimal()}}. Defaults to 10.}
+
+\item{background}{Logical. Adds an offwhite (creme) background to the plot.}
 }
 \value{
 A ggplot2 theme object
 }
 \description{
-A ggplot2 base theme for Benvi styled plots with clean, professional styling.
+A ggplot2 base theme for Benvi styled plots.
 
-This theme uses the Poppins font if installed on your system. If Poppins is
-not available, it falls back to the system's default sans-serif font.
-
-To install Poppins, run \code{\link[=install_poppins]{install_poppins()}}.
+Poppins is bundled with the package and registered automatically on load
+(requires the \code{systemfonts} package). If \code{systemfonts} is not installed,
+the theme falls back to the system's default sans-serif font.
 }
 \examples{
-\dontrun{
 library(ggplot2)
+# Single series for example
+series <- subset(iqaiw, name_muni == "S\u00e3o Paulo" & rooms == "Total")
 
-# Simple scatter plot with benvi theme
-spo_sales <- subset(sales_report, name_muni == "São Paulo" & date == max(date))
-ggplot(spo_sales, aes(price_m2_listing, price_m2_contract)) +
-  geom_point() +
-  labs(title = "Listing vs Contract Prices") +
+# Base theme
+ggplot(series, aes(date, index)) +
+  geom_line(color = benvi_palette("benvi_blue")[1], lwd = 1) +
+  labs(x = NULL, y = "Index (base = 100)", title = "IQAIW") +
   theme_benvi()
-}
-}
-\seealso{
-\code{\link[=install_poppins]{install_poppins()}}, \code{\link[=font_status]{font_status()}}
+
+# Optional offwhite (creme) background
+ggplot(series, aes(date, index)) +
+  geom_line(color = benvi_palette("benvi_blue")[1], lwd = 1) +
+  labs(x = NULL, y = "Index (base = 100)", title = "IQAIW") +
+  theme_benvi(background = TRUE)
 }

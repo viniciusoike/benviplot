@@ -23,14 +23,14 @@ test_that("plot_line creates a ggplot object", {
     data = iqa,
     x = date,
     y = price_m2,
-    variable = name_muni
+    color = name_muni
   )
 
   expect_s3_class(p, "ggplot")
   expect_true("GeomLine" %in% class(p$layers[[1]]$geom))
 })
 
-test_that("plot_line works without variable parameter", {
+test_that("plot_line works without color parameter", {
   df_single <- subset(iqa, name_muni == "São Paulo")
 
   p <- plot_line(
@@ -47,8 +47,8 @@ test_that("plot_line respects palette parameter", {
     data = test_ts_data,
     x = date,
     y = value,
-    variable = group,
-    palette = "qual_5"
+    color = group,
+    pal_name = "qual_5"
   )
 
   expect_s3_class(p, "ggplot")
@@ -80,7 +80,7 @@ test_that("plot_column works with text labels", {
   expect_gte(length(p$layers), 2)
 })
 
-test_that("plot_column works with variable parameter", {
+test_that("plot_column works with fill parameter", {
   df <- data.frame(
     cat = rep(c("A", "B"), each = 2),
     subcat = rep(c("X", "Y"), 2),
@@ -91,7 +91,7 @@ test_that("plot_column works with variable parameter", {
     data = df,
     x = cat,
     y = val,
-    variable = subcat
+    fill = subcat
   )
 
   expect_s3_class(p, "ggplot")
@@ -154,12 +154,12 @@ test_that("plot_scatter creates a ggplot object", {
   expect_true("GeomPoint" %in% class(p$layers[[1]]$geom))
 })
 
-test_that("plot_scatter works with variable parameter", {
+test_that("plot_scatter works with color parameter", {
   p <- plot_scatter(
     data = mtcars,
     x = wt,
     y = mpg,
-    variable = cyl
+    color = cyl
   )
 
   expect_s3_class(p, "ggplot")
@@ -170,7 +170,7 @@ test_that("plot_scatter can be faceted", {
     data = mtcars,
     x = wt,
     y = mpg,
-    variable = cyl
+    color = cyl
   ) +
     facet_wrap(~gear)
 
@@ -185,14 +185,14 @@ test_that("plot_area creates a ggplot object", {
     data = test_ts_data,
     x = date,
     y = value,
-    variable = group
+    fill = group
   )
 
   expect_s3_class(p, "ggplot")
   expect_true("GeomArea" %in% class(p$layers[[1]]$geom))
 })
 
-test_that("plot_area works without variable", {
+test_that("plot_area works without fill", {
   df_single <- test_ts_data[test_ts_data$group == "A", ]
 
   p <- plot_area(
@@ -286,7 +286,7 @@ test_that("plot functions work with benvi theme", {
     data = test_ts_data,
     x = date,
     y = value,
-    variable = group
+    color = group
   ) +
     theme_benvi()
 
@@ -298,7 +298,7 @@ test_that("plot functions can be customized with additional layers", {
     data = mtcars,
     x = wt,
     y = mpg,
-    variable = cyl
+    color = cyl
   ) +
     geom_smooth(method = "lm", se = FALSE, color = "black") +
     labs(title = "Custom Title")

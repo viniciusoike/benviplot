@@ -1,6 +1,6 @@
 #' Display all Benvi palettes
 #'
-#' Visually displays all available Benvi palettes in a grid layout, modelled on
+#' Visually displays all available Benvi palettes in a grid layout, modeled on
 #' `RColorBrewer::display.brewer.all()`. Optionally filter by palette type.
 #'
 #' @param type Character string specifying the palette type to display. One of:

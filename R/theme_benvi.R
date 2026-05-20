@@ -1,57 +1,59 @@
-#' Get the font family to use for benviplot themes
+#' A theme for Benvi styled plots
 #'
 #' @description
-#' Determines which font family to use based on system font availability.
-#' Prefers Poppins if installed, otherwise falls back to "sans".
+#' A ggplot2 base theme for Benvi styled plots.
 #'
-#' Shows a one-time message if Poppins is not installed, suggesting installation.
+#' Poppins is bundled with the package and registered automatically on load
+#' (requires the `systemfonts` package). If `systemfonts` is not installed,
+#' the theme falls back to the system's default sans-serif font.
 #'
-#' @return Character string with font family name
-#' @keywords internal
-get_benvi_font_family <- function() {
-  # Check if Poppins is installed
-  poppins_available <- check_poppins_installed()
-
-  if (poppins_available) {
-    return("Poppins")
+#' @param base_family Argument passed to [ggplot2::theme_minimal()]. Defaults to 'sans'.
+#' @param base_size Argument passed to [ggplot2::theme_minimal()]. Defaults to 10.
+#' @param background Logical. Adds an offwhite (creme) background to the plot.
+#'
+#' @return A ggplot2 theme object
+#' @importFrom ggplot2 %+replace% theme_minimal theme element_blank
+#' element_line element_rect element_text margin rel
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#' # Single series for example
+#' series <- subset(iqaiw, name_muni == "S\u00e3o Paulo" & rooms == "Total")
+#'
+#' # Base theme
+#' ggplot(series, aes(date, index)) +
+#'   geom_line(color = benvi_palette("benvi_blue")[1], lwd = 1) +
+#'   labs(x = NULL, y = "Index (base = 100)", title = "IQAIW") +
+#'   theme_benvi()
+#'
+#' # Optional offwhite (creme) background
+#' ggplot(series, aes(date, index)) +
+#'   geom_line(color = benvi_palette("benvi_blue")[1], lwd = 1) +
+#'   labs(x = NULL, y = "Index (base = 100)", title = "IQAIW") +
+#'   theme_benvi(background = TRUE)
+theme_benvi <- function(
+  base_family = getOption("theme_benvi.font_family", "sans"),
+  base_size = 10,
+  background = FALSE
+) {
+  font_family <- if (is.null(base_family)) {
+    getOption("theme_benvi.font_family", "sans")
+  } else {
+    base_family
   }
 
-  # Show message only once per session
-  if (!isTRUE(getOption("benviplot.font_message_shown"))) {
-    cli::cli_alert_info(
-      "Poppins font not found. Using system default font instead."
-    )
-    cli::cli_alert_info(
-      "Install Poppins with: {.code benviplot::install_poppins()}"
-    )
-    options(benviplot.font_message_shown = TRUE)
-  }
+  bg <- ifelse(background, "#fbf5e7", "#FFFFFF")
 
-  return("sans")
-}
-
-#' A base custom theme for ggplot plots
-#'
-#' @description A base theme for ggplot plots in a Benvi style. Called by
-#' `theme_benvi`.
-#'
-#' @param ... Further arguments to `theme_minimal`
-#' @keywords internal
-#'
-#' @importFrom ggplot2 %+replace% theme_minimal theme element_blank element_rect
-#' element_text margin rel
-theme_custom <- function(...) {
-  # Get font family (Poppins or fallback to sans)
-  font_family <- get_benvi_font_family()
-
-  theme_minimal(...) %+replace%
+  theme_minimal(base_family = font_family, base_size = base_size) %+replace%
     theme(
       # Remove minor panel grid lines
       panel.grid.minor = element_blank(),
+      panel.grid.major = element_line(color = "#e2e2e2"),
 
       # Background colors
-      panel.background = element_rect(fill = "#FFFFFF", colour = "#FFFFFF"),
-      plot.background = element_rect(fill = "#FFFFFF", colour = "#FFFFFF"),
+      panel.background = element_rect(fill = bg, colour = bg),
+      plot.background = element_rect(fill = bg, colour = bg),
 
       # Small legend always on top
       legend.position = "top",
@@ -61,7 +63,6 @@ theme_custom <- function(...) {
       # Text elements
       text = element_text(
         family = font_family,
-        size = 11,
         color = "gray15"
       ),
       # Title
@@ -90,34 +91,4 @@ theme_custom <- function(...) {
       # Plot margins
       plot.margin = margin(10, 10, 10, 10)
     )
-}
-
-#' A base theme for Benvi plots
-#'
-#' @description
-#' A ggplot2 base theme for Benvi styled plots with clean, professional styling.
-#'
-#' This theme uses the Poppins font if installed on your system. If Poppins is
-#' not available, it falls back to the system's default sans-serif font.
-#'
-#' To install Poppins, run [install_poppins()].
-#'
-#' @return A ggplot2 theme object
-#' @export
-#'
-#' @seealso [install_poppins()], [font_status()]
-#'
-#' @examples
-#' \dontrun{
-#' library(ggplot2)
-#'
-#' # Simple scatter plot with benvi theme
-#' spo_sales <- subset(sales_report, name_muni == "São Paulo" & date == max(date))
-#' ggplot(spo_sales, aes(price_m2_listing, price_m2_contract)) +
-#'   geom_point() +
-#'   labs(title = "Listing vs Contract Prices") +
-#'   theme_benvi()
-#' }
-theme_benvi <- function() {
-  theme_custom()
 }

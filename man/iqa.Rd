@@ -5,8 +5,6 @@
 \alias{iqa}
 \title{QuintoAndar Index (IQA) - Rental Price Index}
 \format{
-\subsection{iqa}{
-
 A data frame with 96 observations and 6 variables:
 \describe{
 \item{date}{Date of the observation (first day of month)}
@@ -17,9 +15,8 @@ A data frame with 96 observations and 6 variables:
 \item{price_m2}{Estimated rental price per square meter (R$/m²)}
 }
 }
-}
 \source{
-Benvi
+QuintoAndar
 }
 \usage{
 iqa
@@ -27,5 +24,22 @@ iqa
 \description{
 Historical rental price index data from QuintoAndar. This is the legacy IQA
 index, which has been superseded by the IQAIW (see \code{\link{iqaiw}}).
+}
+\examples{
+# To visualize the dataset
+head(iqa)
+str(iqa)
+
+# Plot index over time for all cities
+library(ggplot2)
+ggplot(iqa, aes(x = date, y = index, color = name_muni)) +
+  geom_line() +
+  scale_color_benvi_d(pal_name = "qual_9", name = "City") +
+  labs(
+    title = "IQAIW: Rental Price Index",
+    x = "Date",
+    y = "Index (base = 100)"
+  ) +
+  theme_benvi()
 }
 \keyword{datasets}

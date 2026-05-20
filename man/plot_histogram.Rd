@@ -8,7 +8,9 @@ plot_histogram(
   data,
   x,
   color = "#FFFFFF",
-  fill = "#021841",
+  fill = NULL,
+  pal_name = "qual_benvi",
+  scale_name = "",
   zero = TRUE,
   bins = NULL,
   method = "fd",
@@ -22,9 +24,16 @@ plot_histogram(
 
 \item{x}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Indicates the numeric variable to be mapped}
 
-\item{color}{Color of the line of column.}
+\item{color}{Color of the column border. Defaults to \code{"#FFFFFF"} (white).}
 
-\item{fill}{Color of the inner part of the column.}
+\item{fill}{Fill color for the columns. Either a color string (e.g., \code{"blue"},
+\code{"#021841"}) for a single static color, or a bare column name (without
+quotes) to map a grouping variable to fill color.}
+
+\item{pal_name}{String indicating the name of which palette to use when
+\code{fill} is a variable mapping.}
+
+\item{scale_name}{String indicating fill legend title.}
 
 \item{zero}{Logical indicating if a horizontal (y = 0) line should be drawn
 on the plot.}
@@ -72,7 +81,6 @@ and works well across different distributions.
 }
 }
 \examples{
-\dontrun{
 set.seed(5)
 tbl <- data.frame(x = rnorm(n = 1000))
 
@@ -84,11 +92,7 @@ plot_histogram(data = tbl, x = x, bins = 50)
 plot_histogram(data = tbl, x = x, method = "sqrt")
 plot_histogram(data = tbl, x = x, method = "Rice")
 
-# To compare multiple groups use facet
-tbl <- data.frame(
-city = rep(c("A", "B", "C"), each.out = 500),
-x = c(rnorm(500), runif(500), rexp(500))
-)
-plot_histogram(data = tbl, x = x, facet = city, density = TRUE)
-}
+# Facet by rooms category
+spo <- subset(iqaiw, name_muni == "S\u00e3o Paulo" & rooms != "Total")
+plot_histogram(data = spo, x = index, facet = rooms)
 }

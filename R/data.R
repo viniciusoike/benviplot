@@ -3,7 +3,7 @@
 #' Historical rental price index data from QuintoAndar. This is the legacy IQA
 #' index, which has been superseded by the IQAIW (see \code{\link{iqaiw}}).
 #'
-#' @format ## iqa
+#' @format
 #' A data frame with 96 observations and 6 variables:
 #' \describe{
 #'   \item{date}{Date of the observation (first day of month)}
@@ -13,7 +13,23 @@
 #'   \item{acum12m}{12-month accumulated variation of the index (decimal form)}
 #'   \item{price_m2}{Estimated rental price per square meter (R$/m²)}
 #' }
-#' @source Benvi
+#' @source QuintoAndar
+#' @examples
+#' # To visualize the dataset
+#' head(iqa)
+#' str(iqa)
+#'
+#' # Plot index over time for all cities
+#' library(ggplot2)
+#' ggplot(iqa, aes(x = date, y = index, color = name_muni)) +
+#'   geom_line() +
+#'   scale_color_benvi_d(pal_name = "qual_9", name = "City") +
+#'   labs(
+#'     title = "IQAIW: Rental Price Index",
+#'     x = "Date",
+#'     y = "Index (base = 100)"
+#'   ) +
+#'   theme_benvi()
 "iqa"
 
 #' QuintoAndar ImovelWeb Rental Index (IQAIW)
@@ -38,7 +54,7 @@
 #' been improved simply by adopting a hedonic methodology, without the need to
 #' mix data sources.
 #'
-#' @format ## iqaiw
+#' @format
 #' A data frame with 1,660 observations across 6 cities and multiple time periods:
 #' \describe{
 #'   \item{date}{Date of the observation (first day of month)}
@@ -54,26 +70,30 @@
 #' @source \url{https://publicfiles.data.quintoandar.com.br/indice_quintoandar_imovelweb/index_quintoandar_imovelweb_serie.csv}
 #'
 #' @examples
-#' \dontrun{
+#'
+#' # To visualize the dataset
+#' head(iqaiw)
+#' str(iqaiw)
+#'
 #' # Plot index over time for all cities
 #' library(ggplot2)
 #' ggplot(iqaiw, aes(x = date, y = index, color = name_muni)) +
 #'   geom_line() +
-#'   scale_color_benvi_d(pal_name = "qual_6", name = "name_muni") +
+#'   scale_color_benvi_d(pal_name = "qual_6", name = "City") +
 #'   labs(
 #'     title = "IQAIW: Rental Price Index",
 #'     x = "Date",
 #'     y = "Index (base = 100)"
 #'   ) +
 #'   theme_benvi()
-#' }
+#'
 "iqaiw"
 
-#' QuintoAndar Sales Report - Zone-Level Rental Data
+#' QuintoAndar Sales Report
 #'
-#' Rental price data at the zone (region) level for major Brazilian cities.
-#' Contains both listing prices and actual contract prices, allowing comparison
-#' between asking prices and transaction prices.
+#' Sales price data at a region level for major Brazilian cities.
+#' Contains contract prices per square meter, allowing comparison across cities
+#' and zones.
 #'
 #' @format ## sales_report
 #' A data frame with 272 observations across multiple cities and zones:
@@ -82,34 +102,21 @@
 #'   \item{name_muni}{Name of the municipality (city). Includes: Belo Horizonte,
 #'     Rio de Janeiro, and São Paulo}
 #'   \item{name_zone}{Name of the zone within the city}
-#'   \item{price_m2_listing}{Median listing price per square meter (R$/m²)}
-#'   \item{price_m2_contract}{Median contract price per square meter (R$/m²)}
+#'   \item{price_m2}{Median contract price per square meter (R$/m²)}
 #' }
 #'
 #' @details
 #' This dataset provides zone-level granularity, showing sales prices for
-#' specific regions within cities. The difference between
-#' \code{price_m2_listing} and \code{price_m2_contract} can indicate
-#' negotiation patterns or market dynamics.
+#' specific regions within cities.
 #'
-#' @source Benvi (Sales Report 2023-Q3).
+#' @source QuintoAndar (Sales Report 2020-Q1/2023-Q3). \url{https://publicfiles.data.quintoandar.com.br/sale_report/RelatorioCV_4T_2022.pdf}
 #'
 #' @examples
-#' \dontrun{
-#' # Compare listing vs contract prices
+#' # Compare contract prices across zones
 #' library(ggplot2)
 #'
-#' spo_sales <- subset(sales_report, name_muni == "São Paulo" & date == max(date))
-#'
-#' ggplot(spo_sales, aes(x = price_m2_listing, y = price_m2_contract)) +
-#'   geom_point(color = benvi_palette("benvi_blue")[3], size = 2) +
-#'   geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
-#'   labs(
-#'     title = "Listing vs Contract Prices by Zone",
-#'     subtitle = "São Paulo - Most Recent Month",
-#'     x = "Listing Price (R$/m²)",
-#'     y = "Contract Price (R$/m²)"
-#'   ) +
-#'   theme_benvi()
-#' }
+#' spo_sales <- subset(sales_report, name_muni == "S\u00e3o Paulo" & date == max(date))
+#' ggplot(spo_sales, aes(x = price_m2, y = name_zone)) +
+#' geom_col(fill = benvi_palette("benvi_blue")[3]) +
+#' theme_benvi()
 "sales_report"

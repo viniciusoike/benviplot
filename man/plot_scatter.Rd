@@ -8,8 +8,7 @@ plot_scatter(
   data,
   x,
   y,
-  color,
-  variable,
+  color = NULL,
   fit = FALSE,
   fit_variable = FALSE,
   fit_method = "auto",
@@ -17,7 +16,7 @@ plot_scatter(
   fit_color = NULL,
   fit_ci = FALSE,
   zero = "none",
-  palette = "qual_benvi",
+  pal_name = "qual_benvi",
   scale_name = "",
   scale_label = ggplot2::waiver(),
   ...
@@ -30,10 +29,10 @@ plot_scatter(
 
 \item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped in the y-axis.}
 
-\item{color}{Color of the points}
-
-\item{variable}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be used as grouping for the color groups. Should
-only be used if \code{fill} is missing.}
+\item{color}{Color of the points. Either a color string (e.g., \code{"blue"},
+\code{"#021841"}) for a single static color, or a bare column name (without
+quotes) to map a grouping variable to color. Continuous numeric variables
+automatically use a continuous color scale.}
 
 \item{fit}{Logical indicating if a regression line should be plotted on top
 of the chart.}
@@ -57,7 +56,7 @@ Defaults to \code{FALSE} for less cluttered visualization.}
 \item{zero}{Draws axis lines. Must be one of \code{"x"}, \code{"y"}, \code{"both"}, or
 \code{"none"} (default).}
 
-\item{palette}{String indicating the name of which palette to use.}
+\item{pal_name}{String indicating the name of which palette to use.}
 
 \item{scale_name}{String indicating fill legend title.}
 
@@ -70,4 +69,10 @@ A ggplot2 plot.
 }
 \description{
 Plot a scatter chart
+}
+\examples{
+plot_scatter(data = mtcars, x = wt, y = mpg)
+
+# With regression line
+plot_scatter(data = mtcars, x = wt, y = mpg, fit = TRUE)
 }

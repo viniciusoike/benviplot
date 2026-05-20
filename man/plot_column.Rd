@@ -8,21 +8,20 @@ plot_column(
   data,
   x,
   y,
-  fill,
-  variable,
+  fill = NULL,
   zero = TRUE,
   flip = FALSE,
   text = FALSE,
   text_inside = FALSE,
   text_place = NULL,
   text_padding = NULL,
-  palette = "qual_benvi",
+  pal_name = "qual_benvi",
   scale_name = "",
   scale_label = ggplot2::waiver(),
   digits = 0,
   percent = FALSE,
   text_color = "gray20",
-  text_family = "Poppins",
+  text_family = getOption("theme_benvi.font_family", "sans"),
   text_size = 3,
   position_col = "stack",
   position_text = position_col,
@@ -36,11 +35,9 @@ plot_column(
 
 \item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped in the y-axis.}
 
-\item{fill}{Color for the columns. Should only be used if \code{variable}
-is missing.}
-
-\item{variable}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be used as grouping for the color groups. Should
-only be used if \code{fill} is missing.}
+\item{fill}{Fill color for the columns. Either a color string (e.g.,
+\code{"blue"}, \code{"#021841"}) for a single static color, or a bare column name
+(without quotes) to map a grouping variable to fill color.}
 
 \item{zero}{Logical indicating whether a horizontal line crossing the y = 0
 axis should be plotted.}
@@ -60,7 +57,7 @@ When FALSE (default), text appears above/beside bars at fixed size.}
 \item{text_padding}{Padding around inside text as grid::unit(). Only used
 when text_inside = TRUE. Defaults to 1mm.}
 
-\item{palette}{String indicating the name of which palette to use.}
+\item{pal_name}{String indicating the name of which palette to use.}
 
 \item{scale_name}{String indicating fill legend title.}
 
@@ -72,7 +69,7 @@ when text_inside = TRUE. Defaults to 1mm.}
 
 \item{text_color}{Color of the text label. Default is \code{"gray20"}.}
 
-\item{text_family}{Font of the text label. Default is \code{"Poppins"}.}
+\item{text_family}{Font of the text label. Defaults to \code{getOption("theme_benvi.font_family", "sans")}.}
 
 \item{text_size}{Size of the text label. Default is \code{3}.}
 
@@ -89,16 +86,16 @@ A ggplot2 plot
 Plot a column chart
 }
 \examples{
-\dontrun{
-# Basic column chart
-df <- data.frame(cat = factor(c("A", "B", "C")), value = c(5, 7, 3))
-plot_column(data = df, x = cat, y = value)
+# Column chart by city at the latest date
+latest <- subset(iqa, date == max(iqa$date))
+plot_column(data = latest, x = name_muni, y = index)
 
 # With text labels above bars
-plot_column(data = df, x = cat, y = value, text = TRUE)
+plot_column(data = latest, x = name_muni, y = index, text = TRUE)
 
-# With text labels inside bars (auto-sized)
-plot_column(data = df, x = cat, y = value, text = TRUE, text_inside = TRUE)
-}
-
+\dontshow{if (requireNamespace("ggfittext", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+# With text labels inside bars
+latest <- subset(iqa, date == max(iqa$date))
+plot_column(data = latest, x = name_muni, y = index, text = TRUE, text_inside = TRUE)
+\dontshow{\}) # examplesIf}
 }

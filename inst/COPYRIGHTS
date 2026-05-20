@@ -1,0 +1,8 @@
+The benviplot package bundles the Poppins font family in inst/fonts/.
+
+Poppins is designed by the Indian Type Foundry and Jonny Pinhorn.
+Copyright 2020 The Poppins Project Authors (https://github.com/itfoundry/Poppins)
+
+Poppins is licensed under the SIL Open Font License, Version 1.1.
+A copy of the license is provided in inst/fonts/OFL.txt and is also
+available at https://scripts.sil.org/OFL

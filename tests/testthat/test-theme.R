@@ -86,15 +86,6 @@ test_that("theme_benvi uses appropriate font family", {
   expect_true(theme$text$family %in% c("Poppins", "sans"))
 })
 
-test_that("get_benvi_font_family returns valid font", {
-  # Internal function but important to test
-  font <- get_benvi_font_family()
-
-  expect_type(font, "character")
-  expect_length(font, 1)
-  expect_true(font %in% c("Poppins", "sans"))
-})
-
 test_that("theme_benvi works with faceted plots", {
   p <- ggplot(mtcars, aes(x = wt, y = mpg)) +
     geom_point() +

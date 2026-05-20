@@ -16,3 +16,6 @@
 ^\.github$
 ^refs$
 ^dev$
+^figure$
+^README\.html$
+^cran-comments\.md$

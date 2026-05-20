@@ -5,8 +5,6 @@
 \alias{iqaiw}
 \title{QuintoAndar ImovelWeb Rental Index (IQAIW)}
 \format{
-\subsection{iqaiw}{
-
 A data frame with 1,660 observations across 6 cities and multiple time periods:
 \describe{
 \item{date}{Date of the observation (first day of month)}
@@ -17,7 +15,6 @@ Curitiba, Porto Alegre, Rio de Janeiro, São Paulo}
 \item{chg}{Monthly percent variation of the index (decimal form)}
 \item{acum12m}{12-month accumulated variation of the index (decimal form)}
 \item{price_m2}{Estimated rental price per square meter (R$/m²)}
-}
 }
 }
 \source{
@@ -51,18 +48,22 @@ mix data sources.
 }
 
 \examples{
-\dontrun{
+
+# To visualize the dataset
+head(iqaiw)
+str(iqaiw)
+
 # Plot index over time for all cities
 library(ggplot2)
 ggplot(iqaiw, aes(x = date, y = index, color = name_muni)) +
   geom_line() +
-  scale_color_benvi_d(pal_name = "qual_6", name = "name_muni") +
+  scale_color_benvi_d(pal_name = "qual_6", name = "City") +
   labs(
     title = "IQAIW: Rental Price Index",
     x = "Date",
     y = "Index (base = 100)"
   ) +
   theme_benvi()
-}
+
 }
 \keyword{datasets}

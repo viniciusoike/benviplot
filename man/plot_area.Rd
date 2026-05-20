@@ -8,16 +8,15 @@ plot_area(
   data,
   x,
   y,
-  fill,
-  variable,
+  fill = NULL,
   zero = TRUE,
   order = TRUE,
-  palette = "qual_benvi",
+  pal_name = "qual_benvi",
   scale_name = "",
   scale_label = ggplot2::waiver(),
   text = FALSE,
   text_color = "gray20",
-  text_family = "Poppins",
+  text_family = getOption("theme_benvi.font_family", "sans"),
   text_size = 3,
   position = "stack",
   position_text = "identity"
@@ -30,10 +29,9 @@ plot_area(
 
 \item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped in the y-axis.}
 
-\item{fill}{Color for the area underneath the line}
-
-\item{variable}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be used as grouping for the color groups. Should
-only be used if \code{fill} is missing.}
+\item{fill}{Fill color for the area. Either a color string (e.g., \code{"blue"},
+\code{"#021841"}) for a single static color, or a bare column name (without
+quotes) to map a grouping variable to fill color.}
 
 \item{zero}{Logical indicating whether a horizontal line crossing the y = 0
 axis should be plotted.}
@@ -41,7 +39,7 @@ axis should be plotted.}
 \item{order}{Logical indicating if the stacked areas should be ordered.
 Default behavior (\code{TRUE}) stacks the largest groups on top.}
 
-\item{palette}{String indicating the name of which palette to use.}
+\item{pal_name}{String indicating the name of which palette to use.}
 
 \item{scale_name}{String indicating fill legend title.}
 
@@ -51,7 +49,7 @@ Default behavior (\code{TRUE}) stacks the largest groups on top.}
 
 \item{text_color}{Color of the text label. Default is \code{"gray20"}.}
 
-\item{text_family}{Font of the text label. Default is \code{"Poppins"}.}
+\item{text_family}{Font of the text label. Defaults to \code{getOption("theme_benvi.font_family", "sans")}.}
 
 \item{text_size}{Size of the text label. Default is \code{3}.}
 
@@ -64,4 +62,13 @@ A ggplot2 plot
 }
 \description{
 Plot an area chart
+}
+\examples{
+# Simple area chart
+sao_paulo <- subset(iqa, name_muni == "S\u00e3o Paulo")
+plot_area(data = sao_paulo, x = date, y = index)
+
+# Stacked area chart with fill mapping
+total <- subset(iqaiw, rooms == "Total")
+plot_area(data = total, x = date, y = index, fill = name_muni)
 }

@@ -21,41 +21,63 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-`benviplot` provides color palettes and ggplot2 helper functions for exploratory data analysis. The color schemes are based on Benvi, a discontinued brand of the Brazilian proptech QuintoAndar. All color information used here is publicly available and this project is not affiliated with QuintoAndar.
+`benviplot` provides color palettes and ggplot2 helper functions for exploratory data analysis. The color schemes are based on Benvi, a discontinued brand of the Brazilian proptech QuintoAndar[^1]. The package ships with a custom ggplot2 theme, a family of discrete and continuous color scales, and convenience wrappers for common chart types.
 
-## Installation
+[^1]: All color information used here is publicly available and this project is not affiliated with QuintoAndar.
+
+### Installation
 
 ```{r, eval = FALSE}
 # Install remotes if needed
-if (!requireNamespace("remotes", quietly = TRUE)) {
-  install.packages("remotes")
-}
+install.packages("remotes")
 
 remotes::install_github("viniciusoike/benviplot")
 ```
 
-## Font Setup (Optional)
+### Font Setup (Optional)
 
-`benviplot` uses the **Poppins** font family from Google Fonts. Installing it is optional — `theme_benvi()` falls back to the system's default sans-serif font automatically.
+`benviplot` bundles the Poppins font family and registers it automatically when
+the package loads (requires the `systemfonts` package). By default,
+`theme_benvi()` uses the system sans-serif font so nothing breaks on machines
+that lack `systemfonts` or use a base PDF/PostScript device.
+
+To activate Poppins, set the option once per session:
 
 ```{r, eval = FALSE}
-library(benviplot)
+options(theme_benvi.font_family = "Poppins")
+```
 
-# One-time installation (requires internet and the systemfonts package)
-install_poppins()
+To make this permanent across sessions, add the same line to your `~/.Rprofile`.
+You can open it with `usethis::edit_r_profile()`.
 
-# Check your current font and graphics device status
+For the best rendering quality with custom fonts, install the `ragg` package.
+When `ragg` is set as the graphics device (the default in RStudio and Positron),
+Poppins renders correctly in all output formats.
+
+```{r, eval = FALSE}
+install.packages("ragg")
+```
+
+You can check your full font and device status at any time with:
+
+```{r, eval = FALSE}
 font_status()
 ```
 
 ## Quick Start
 
-```{r setup}
+```{r setup, include = FALSE}
+library(ggplot2)
+library(benviplot)
+options(theme_benvi.font_family = "Poppins")
+```
+
+```{r load}
 library(ggplot2)
 library(benviplot)
 ```
 
-The core of the package is `theme_benvi()` combined with the `scale_*_benvi_*()` functions.
+The core of the package is `theme_benvi()` combined with the `scale_*_benvi_*()` functions. Together, they give any ggplot2 chart a consistent look with minimal effort. In the example below, `scale_fill_benvi_d()` maps the discrete cylinder variable to the `"qual_8"` qualitative palette, while `theme_benvi()` handles the rest of the styling.
 
 ```{r quick-scatter}
 ggplot(mtcars, aes(x = wt, y = mpg, fill = as.factor(cyl))) +
@@ -71,11 +93,13 @@ ggplot(mtcars, aes(x = wt, y = mpg, fill = as.factor(cyl))) +
 
 ## Color Palettes
 
+The package organizes its palettes into several families: theme, sequential, qualitative, diverging, city-specific, and brand. Each family serves a different purpose, and choosing the right one depends on the nature of your variable.
+
 ### Browsing palettes
 
-`show_palettes()` gives a visual overview of all available palettes, modelled on `RColorBrewer::display.brewer.all()`.
+`show_palettes()` gives a visual overview of all available palettes. Calling it without arguments displays every palette in the package; pass a type name to narrow the output.
 
-```{r show-all, fig.asp = 2.5}
+```{r show-all, fig.asp = 2.5, eval = FALSE}
 show_palettes()
 ```
 
@@ -87,17 +111,21 @@ show_palettes("sequential")
 
 ### Accessing palette colors
 
-`benvi_palette()` returns a vector of hex codes. Print it to preview the swatch.
+`benvi_palette()` returns a named vector of hex codes. Printing it renders a color swatch in the console, which is useful for quick visual comparison.
 
 ```{r view-palettes}
 # Preview a palette
 benvi_palette("qual_2")
+```
 
+To use the colors outside of ggplot2 (e.g. in base R or as input to another package), coerce to a plain character vector.
+
+```{r}
 # Get hex codes as a plain character vector
 as.character(benvi_palette("benvi_blue"))
 ```
 
-Discrete palettes have 4–9 colors; use `type = "continuous"` to interpolate any number.
+Discrete palettes contain between 4 and 9 fixed colors. When you need more granularity, set `type = "continuous"` to interpolate an arbitrary number of colors along the palette gradient.
 
 ```{r continuous}
 benvi_palette("seq_greens", n = 20, type = "continuous")
@@ -105,14 +133,19 @@ benvi_palette("seq_greens", n = 20, type = "continuous")
 
 ## Using ggplot2 Scales
 
-### Discrete scale
+The scale functions follow the standard ggplot2 naming convention: `scale_{aesthetic}_benvi_{d|c}()`, where `d` is for discrete variables and `c` is for continuous ones. Both `color` and `fill` variants are available, and `colour` spellings work as expected.
+
+### Discrete scales
+
+Discrete scales map categorical variables to a qualitative or city-specific palette. The `pal_name` argument (or the first positional argument) selects which palette to use.
 
 ```{r discrete-scale}
 iqaiw_total <- subset(iqaiw, rooms == "Total")
 
 ggplot(iqaiw_total, aes(x = date, y = index, color = name_muni)) +
-  geom_line(linewidth = 0.8) +
-  scale_color_benvi_d(pal_name = "qual_6", name = NULL) +
+  geom_line(linewidth = 0.7) +
+  geom_hline(yintercept = 100) +
+  scale_color_benvi_d("rio_qual", name = NULL) +
   labs(
     title = "IQAIW Rental Index by City",
     x = NULL,
@@ -121,28 +154,40 @@ ggplot(iqaiw_total, aes(x = date, y = index, color = name_muni)) +
   theme_benvi()
 ```
 
-### Continuous scale
+### Continuous scales
+
+Continuous scales interpolate across a sequential or brand palette. They are well suited for heatmaps, choropleths, and any visualization where a numeric variable needs a smooth color gradient. Use `direction = -1` to reverse the palette.
 
 ```{r continuous-scale}
-spo_sales <- subset(sales_report, name_muni == "São Paulo" & date == max(date))
+iqaiw_total <- subset(iqaiw_total, !is.na(acum12m))
 
-ggplot(spo_sales, aes(x = price_m2_listing, y = price_m2_contract,
-                      color = price_m2_listing)) +
-  geom_point(size = 2) +
-  scale_color_benvi_c(pal_name = "benvi_blue", name = "Listing\n(R$/m²)") +
-  labs(
-    title = "Listing vs. Contract Prices — São Paulo",
-    x = "Listing price (R$/m²)",
-    y = "Contract price (R$/m²)"
+ggplot(iqaiw_total, aes(x = date, y = name_muni, fill = acum12m * 100)) +
+  geom_tile(height = 0.6, color = "#ffffff") +
+  scale_fill_benvi_c(
+    pal_name = "benvi_blue",
+    name = "YoY Change (%)",
+    direction = -1
   ) +
-  theme_benvi()
+  scale_x_continuous(
+    breaks = seq(2023, 2025, 1),
+    expand = expansion(0)
+  ) +
+  labs(x = NULL, y = NULL) +
+  theme_benvi() +
+  theme(
+    legend.title = element_text(hjust = 0.5, vjust = 0.75),
+    axis.text = element_text(size = 12),
+    panel.grid = element_blank()
+  )
 ```
 
 ## Plot Helper Functions
 
-`benviplot` includes convenience wrappers for common chart types. Each returns a `ggplot2` object so additional layers can be added normally.
+`benviplot` includes convenience wrappers for common chart types. These functions accept a data frame and column names via tidy evaluation, apply `theme_benvi()` automatically, and return a standard `ggplot2` object. They are designed for quick exploratory work; for publication-quality figures, building the plot from scratch gives you full control.
 
 ### Line chart
+
+`plot_line()` draws a single-series line chart. Pass `color` to map a grouping variable and get multiple lines with an automatic legend.
 
 ```{r helper-line}
 plot_line(economics, x = date, y = uempmed)
@@ -150,9 +195,17 @@ plot_line(economics, x = date, y = uempmed)
 
 ### Bar chart
 
+`plot_column()` creates a vertical bar chart. Setting `text = TRUE` adds value labels above each bar; for bars with enough height, `text_inside = TRUE` places labels inside the bars instead (requires the `ggfittext` package).
+
 ```{r helper-column}
 sales <- data.frame(
-  cities  = c("São Paulo", "Rio de Janeiro", "Belo Horizonte", "Porto Alegre", "Curitiba"),
+  cities = c(
+    "São Paulo",
+    "Rio de Janeiro",
+    "Belo Horizonte",
+    "Porto Alegre",
+    "Curitiba"
+  ),
   revenue = c(125, 200, 150, 175, 80)
 )
 
@@ -161,45 +214,48 @@ plot_column(sales, x = cities, y = revenue, text = TRUE)
 
 ### Scatter plot
 
+`plot_scatter()` maps `x` and `y` to a scatter plot. A `color` argument maps a grouping variable to the point fill using a Benvi palette. Set `smooth = TRUE` to overlay a regression line.
+
 ```{r helper-scatter}
 plot_scatter(
   mtcars,
-  x        = wt,
-  y        = mpg,
-  variable = as.factor(cyl),
-  palette  = "qual_8",
+  x = wt,
+  y = mpg,
+  color = as.factor(cyl),
+  palette = "qual_5",
   scale_name = "Cylinders"
 )
 ```
 
 ### Adding layers
 
-Because helpers return `ggplot2` objects, you can extend them freely.
+Because all helpers return `ggplot2` objects, you can extend them with additional layers, scales, or theme adjustments as you normally would.
 
 ```{r customization}
 plot_line(economics, x = date, y = unemploy / 1000) +
   geom_smooth(se = FALSE, color = benvi_palette("oranges")[3]) +
   labs(
-    title    = "US Unemployment with Smoothed Trend",
+    title = "US Unemployment with Smoothed Trend",
     subtitle = "Unemployment figures in millions",
     x = NULL,
     y = "Unemployed (millions)",
-    caption  = "Data: economics dataset"
+    caption = "Data: economics dataset"
   )
 ```
 
 ## Base R
 
-`benvi_palette()` returns plain hex codes, so it works with base R graphics too.
+The palettes are not tied to ggplot2. Since `benvi_palette()` returns plain hex codes, you can use them anywhere that accepts color strings, including base R graphics, `lattice`, or any other plotting system.
 
 ```{r base-r}
 colors <- as.character(benvi_palette("purples"))
 
 plot(
-  mtcars$wt, mtcars$mpg,
-  col  = colors[mtcars$cyl / 2 - 1],
-  pch  = 19,
-  cex  = 1.5,
+  mtcars$wt,
+  mtcars$mpg,
+  col = colors[mtcars$cyl / 2 - 1],
+  pch = 19,
+  cex = 1.5,
   xlab = "Weight (1000 lbs)",
   ylab = "Miles per Gallon",
   main = "Using Benvi colors in base R"
@@ -208,6 +264,6 @@ plot(
 
 ## Getting Help
 
-- **Function documentation**: `?benvi_palette`, `?theme_benvi`, `?scale_color_benvi_d`
-- **Package website**: https://viniciusoike.github.io/benviplot/
-- **Report issues**: https://github.com/viniciusoike/benviplot/issues
+-   **Function documentation**: `?benvi_palette`, `?theme_benvi`, `?scale_color_benvi_d`
+-   **Package website**: https://viniciusoike.github.io/benviplot/
+-   **Report issues**: https://github.com/viniciusoike/benviplot/issues

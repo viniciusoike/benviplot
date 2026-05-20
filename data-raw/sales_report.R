@@ -13,7 +13,6 @@ expected_names <- c(
   "ts_date",
   "name_city",
   "name_zone",
-  "price_listing",
   "price_contract"
 )
 
@@ -22,8 +21,7 @@ new_names <- c(
   "date",
   "name_muni",
   "name_zone",
-  "price_m2_listing",
-  "price_m2_contract"
+  "price_m2"
 )
 
 # Convert city abbreviations to full names
@@ -34,7 +32,7 @@ convert_city_names <- function(city) {
     "cur" = "Curitiba",
     "poa" = "Porto Alegre",
     "rio" = "Rio de Janeiro",
-    "spo" = "S\u00e3o Paulo"
+    "spo" = "São Paulo"
   )
   return(unname(vlname[city]))
 }

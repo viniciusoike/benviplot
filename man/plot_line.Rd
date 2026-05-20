@@ -8,8 +8,7 @@ plot_line(
   data,
   x,
   y,
-  color,
-  variable,
+  color = NULL,
   zero = TRUE,
   point = FALSE,
   pal_name,
@@ -25,10 +24,9 @@ plot_line(
 
 \item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped on the y-axis.}
 
-\item{color}{Indicates the color of the line. Should only be used in the
-absence of \code{variable}.}
-
-\item{variable}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Indicates the grouping variable for color groups.}
+\item{color}{Color of the line. Either a color string (e.g., \code{"blue"},
+\code{"#021841"}) for a single static color, or a bare column name (without
+quotes) to map a grouping variable to color.}
 
 \item{zero}{Logical indicating if a horizontal line (y = 0) should be drawn
 on the plot.}
@@ -50,8 +48,11 @@ A ggplot2 plot
 Title
 }
 \examples{
-\dontrun{
-sales <- data.frame(time = 2000:2005, value = c(10, 5, 6, 8, 11, 4))
-plot_line(data = sales, x = time, y = value)
-}
+# Single series
+sao_paulo <- subset(iqa, name_muni == "S\u00e3o Paulo")
+plot_line(data = sao_paulo, x = date, y = index)
+
+# Multiple series with color mapping
+total <- subset(iqaiw, rooms == "Total")
+plot_line(data = total, x = date, y = index, color = name_muni)
 }
