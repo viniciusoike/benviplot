@@ -54,7 +54,6 @@ reference:
     - plot_scatter
     - plot_area
     - plot_histogram
-    - plot_add_xy
 
   - title: Themes
     desc: Custom ggplot2 themes
