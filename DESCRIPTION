@@ -34,5 +34,5 @@ Suggests:
 Config/testthat/edition: 3
 LazyData: true
 VignetteBuilder: knitr
-URL: https://github.com/viniciusoike/benviplot
+URL: https://viniciusoike.github.io/benviplot/, https://github.com/viniciusoike/benviplot
 BugReports: https://github.com/viniciusoike/benviplot/issues
