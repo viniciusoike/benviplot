@@ -8,14 +8,13 @@
 #'   (without quotes) to map a grouping variable to fill color.
 #' @param zero Logical indicating whether a horizontal line crossing the y = 0
 #' axis should be plotted.
-#' @param flip Logical indicating if plot should be flipped
 #' @param text Logical indicating if text labels should be plotted on column bars
 #' @param text_inside Logical indicating if text labels should be placed inside
 #'   bars (using ggfittext). When TRUE, text is auto-sized to fit inside bars.
 #'   When FALSE (default), text appears above/beside bars at fixed size.
 #' @param text_place Placement of inside text. One of "top", "bottom", "left",
 #'   "right", "centre"/"center". Only used when text_inside = TRUE. Defaults to
-#'   "centre" for vertical bars or "right" for flipped bars.
+#'   "centre".
 #' @param text_padding Padding around inside text as grid::unit(). Only used
 #'   when text_inside = TRUE. Defaults to 1mm.
 #' @param pal_name String indicating the name of which palette to use.
@@ -29,7 +28,6 @@
 #' @param position_col Argument passed on to `position` in `geom_col`.
 #' @param position_text Argument passed on to `position` in `geom_text`.
 #' @param ... Further arguments for `geom_text`
-
 #'
 #' @return A ggplot2 plot
 #' @export
@@ -47,7 +45,7 @@
 #' latest <- subset(iqa, date == max(iqa$date))
 #' plot_column(data = latest, x = name_muni, y = index, text = TRUE, text_inside = TRUE)
 #'
-#' @importFrom ggplot2 ggplot aes geom_col geom_hline geom_text coord_flip labs
+#' @importFrom ggplot2 ggplot aes geom_col geom_hline geom_text labs
 #' theme element_blank position_stack position_dodge
 #' @importFrom dplyr mutate pull
 plot_column <- function(
@@ -56,7 +54,6 @@ plot_column <- function(
   y,
   fill = NULL,
   zero = TRUE,
-  flip = FALSE,
   text = FALSE,
   text_inside = FALSE,
   text_place = NULL,
@@ -107,10 +104,6 @@ plot_column <- function(
     p <- p + geom_hline(yintercept = 0)
   }
 
-  if (isTRUE(flip)) {
-    p <- p + coord_flip()
-  }
-
   if (isTRUE(text)) {
     if (isTRUE(text_inside)) {
       if (!requireNamespace("ggfittext", quietly = TRUE)) {
@@ -121,7 +114,7 @@ plot_column <- function(
       }
 
       if (is.null(text_place)) {
-        text_place <- if (isTRUE(flip)) "right" else "centre"
+        text_place <- "centre"
       }
 
       if (is.null(text_padding)) {
@@ -141,12 +134,10 @@ plot_column <- function(
           family = text_family,
           color = text_color,
           place = text_place,
-          padding.x = if (isTRUE(flip)) text_padding else grid::unit(0, "mm"),
-          padding.y = if (isTRUE(flip)) grid::unit(0, "mm") else text_padding
+          padding.x = grid::unit(0, "mm"),
+          padding.y = text_padding
         )
     } else {
-      # Use geom_text for fixed-size text above/beside bars
-
       yjust <- max(data |> dplyr::pull({{ y }}), na.rm = TRUE) * 0.05
       dflabel <- data |>
         dplyr::mutate(
