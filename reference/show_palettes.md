@@ -1,7 +1,7 @@
 # Display all Benvi palettes
 
-Visually displays all available Benvi palettes in a grid layout,
-modelled on
+Visually displays all available Benvi palettes in a grid layout, modeled
+on
 [`RColorBrewer::display.brewer.all()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html).
 Optionally filter by palette type.
 

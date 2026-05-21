@@ -36,22 +36,20 @@ Wrapper functions for common plot types
   : Plot an area chart
 - [`plot_histogram()`](https://viniciusoike.github.io/benviplot/reference/plot_histogram.md)
   : Plot a histogram chart
-- [`plot_add_xy()`](https://viniciusoike.github.io/benviplot/reference/plot_add_xy.md)
-  : Add axis to a plot
 
 ## Themes
 
 Custom ggplot2 themes
 
 - [`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md)
-  : A base theme for Benvi plots
+  : A theme for Benvi styled plots
 
 ## Font Management
 
 Font setup and status
 
 - [`install_poppins()`](https://viniciusoike.github.io/benviplot/reference/install_poppins.md)
-  : Install Poppins font from Google Fonts
+  : Install Poppins font system-wide from Google Fonts
 - [`font_status()`](https://viniciusoike.github.io/benviplot/reference/font_status.md)
   : Report benviplot font status
 
@@ -78,4 +76,4 @@ Example datasets
 - [`iqaiw`](https://viniciusoike.github.io/benviplot/reference/iqaiw.md)
   : QuintoAndar ImovelWeb Rental Index (IQAIW)
 - [`sales_report`](https://viniciusoike.github.io/benviplot/reference/sales_report.md)
-  : QuintoAndar Sales Report - Zone-Level Rental Data
+  : QuintoAndar Sales Report

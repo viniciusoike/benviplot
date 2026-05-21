@@ -67,20 +67,7 @@ Invisibly returns the filename.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-library(ggplot2)
-
-p <- ggplot(mtcars, aes(wt, mpg)) +
-  geom_point() +
-  theme_benvi()
-
-# Save with automatic ragg device (if installed)
-ggsave_benvi("my_plot.png", p)
-
-# Save with custom dimensions
-ggsave_benvi("my_plot.png", p, width = 10, height = 6)
-
-# Save as PDF (uses default PDF device)
-ggsave_benvi("my_plot.pdf", p)
-} # }
+p <- ggplot2::ggplot(mtcars, ggplot2::aes(wt, mpg)) + ggplot2::geom_point()
+ggsave_benvi(tempfile(fileext = ".png"), plot = p)
+#> ✔ Using ragg device for high-quality PNG output
 ```

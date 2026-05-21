@@ -9,16 +9,15 @@ plot_area(
   data,
   x,
   y,
-  fill,
-  variable,
+  fill = NULL,
   zero = TRUE,
   order = TRUE,
-  palette = "qual_benvi",
+  pal_name = "qual_benvi",
   scale_name = "",
   scale_label = ggplot2::waiver(),
   text = FALSE,
   text_color = "gray20",
-  text_family = "Poppins",
+  text_family = getOption("theme_benvi.font_family", "sans"),
   text_size = 3,
   position = "stack",
   position_text = "identity"
@@ -43,13 +42,9 @@ plot_area(
 
 - fill:
 
-  Color for the area underneath the line
-
-- variable:
-
-  \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be used as grouping for the color groups. Should only be
-  used if `fill` is missing.
+  Fill color for the area. Either a color string (e.g., `"blue"`,
+  `"#021841"`) for a single static color, or a bare column name (without
+  quotes) to map a grouping variable to fill color.
 
 - zero:
 
@@ -61,7 +56,7 @@ plot_area(
   Logical indicating if the stacked areas should be ordered. Default
   behavior (`TRUE`) stacks the largest groups on top.
 
-- palette:
+- pal_name:
 
   String indicating the name of which palette to use.
 
@@ -83,7 +78,8 @@ plot_area(
 
 - text_family:
 
-  Font of the text label. Default is `"Poppins"`.
+  Font of the text label. Defaults to
+  `getOption("theme_benvi.font_family", "sans")`.
 
 - text_size:
 
@@ -100,3 +96,16 @@ plot_area(
 ## Value
 
 A ggplot2 plot
+
+## Examples
+
+``` r
+# Simple area chart
+sao_paulo <- subset(iqa, name_muni == "S\u00e3o Paulo")
+plot_area(data = sao_paulo, x = date, y = index)
+
+
+# Stacked area chart with fill mapping
+total <- subset(iqaiw, rooms == "Total")
+plot_area(data = total, x = date, y = index, fill = name_muni)
+```

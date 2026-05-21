@@ -37,14 +37,10 @@ A `ScaleContinuous` object that can be added to a `ggplot` object
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-if (require('ggplot2')) {
-  # Continuous color scale with sales data
-  ggplot(sales_report, aes(x = price_m2_listing,
-                           y = price_m2_contract,
-                           colour = price_m2_listing)) +
-    geom_point() +
-    scale_colour_benvi_c("benvi_blue")
-}
-} # }
+library(ggplot2)
+
+ggplot(mtcars, aes(x = wt, y = mpg, color = hp)) +
+  geom_point() +
+  scale_color_benvi_c("benvi_blue")
+
 ```

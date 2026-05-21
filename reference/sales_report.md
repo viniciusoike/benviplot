@@ -1,8 +1,8 @@
-# QuintoAndar Sales Report - Zone-Level Rental Data
+# QuintoAndar Sales Report
 
-Rental price data at the zone (region) level for major Brazilian cities.
-Contains both listing prices and actual contract prices, allowing
-comparison between asking prices and transaction prices.
+Sales price data at a region level for major Brazilian cities. Contains
+contract prices per square meter, allowing comparison across cities and
+zones.
 
 ## Usage
 
@@ -29,43 +29,28 @@ A data frame with 272 observations across multiple cities and zones:
 
   Name of the zone within the city
 
-- price_m2_listing:
-
-  Median listing price per square meter (R\$/m²)
-
-- price_m2_contract:
+- price_m2:
 
   Median contract price per square meter (R\$/m²)
 
 ## Source
 
-Benvi (Sales Report 2023-Q3).
+QuintoAndar (Sales Report 2020-Q1/2023-Q3).
+<https://publicfiles.data.quintoandar.com.br/sale_report/RelatorioCV_4T_2022.pdf>
 
 ## Details
 
 This dataset provides zone-level granularity, showing sales prices for
-specific regions within cities. The difference between
-`price_m2_listing` and `price_m2_contract` can indicate negotiation
-patterns or market dynamics.
+specific regions within cities.
 
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-# Compare listing vs contract prices
+# Compare contract prices across zones
 library(ggplot2)
 
-spo_sales <- subset(sales_report, name_muni == "São Paulo" & date == max(date))
-
-ggplot(spo_sales, aes(x = price_m2_listing, y = price_m2_contract)) +
-  geom_point(color = benvi_palette("benvi_blue")[3], size = 2) +
-  geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
-  labs(
-    title = "Listing vs Contract Prices by Zone",
-    subtitle = "São Paulo - Most Recent Month",
-    x = "Listing Price (R$/m²)",
-    y = "Contract Price (R$/m²)"
-  ) +
-  theme_benvi()
-} # }
+bhe_sales <- subset(sales_report, name_muni == "Belo Horizonte" & date == max(date))
+ggplot(bhe_sales, aes(x = price_m2, y = name_zone)) +
+geom_col(fill = benvi_palette("benvi_blue")[3]) +
+theme_benvi()
 ```

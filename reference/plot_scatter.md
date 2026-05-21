@@ -9,8 +9,7 @@ plot_scatter(
   data,
   x,
   y,
-  color,
-  variable,
+  color = NULL,
   fit = FALSE,
   fit_variable = FALSE,
   fit_method = "auto",
@@ -18,7 +17,7 @@ plot_scatter(
   fit_color = NULL,
   fit_ci = FALSE,
   zero = "none",
-  palette = "qual_benvi",
+  pal_name = "qual_benvi",
   scale_name = "",
   scale_label = ggplot2::waiver(),
   ...
@@ -43,13 +42,10 @@ plot_scatter(
 
 - color:
 
-  Color of the points
-
-- variable:
-
-  \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be used as grouping for the color groups. Should only be
-  used if `fill` is missing.
+  Color of the points. Either a color string (e.g., `"blue"`,
+  `"#021841"`) for a single static color, or a bare column name (without
+  quotes) to map a grouping variable to color. Continuous numeric
+  variables automatically use a continuous color scale.
 
 - fit:
 
@@ -87,7 +83,7 @@ plot_scatter(
   Draws axis lines. Must be one of `"x"`, `"y"`, `"both"`, or `"none"`
   (default).
 
-- palette:
+- pal_name:
 
   String indicating the name of which palette to use.
 
@@ -106,3 +102,14 @@ plot_scatter(
 ## Value
 
 A ggplot2 plot.
+
+## Examples
+
+``` r
+plot_scatter(data = mtcars, x = wt, y = mpg)
+
+
+# With regression line
+plot_scatter(data = mtcars, x = wt, y = mpg, fit = TRUE)
+#> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+```
