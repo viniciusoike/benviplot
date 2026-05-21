@@ -77,9 +77,14 @@
 #'
 #' # Plot index over time for all cities
 #' library(ggplot2)
-#' ggplot(iqaiw, aes(x = date, y = index, color = name_muni)) +
-#'   geom_line() +
-#'   scale_color_benvi_d(pal_name = "qual_6", name = "City") +
+#'
+#' iqaiw_rooms <- subset(iqaiw, rooms != "Total")
+#'
+#' ggplot(iqaiw_rooms, aes(x = date, y = acum12m, color = rooms)) +
+#'   geom_line(lwd = 0.5) +
+#'   geom_hline(yintercept = 0) +
+#'   scale_color_benvi_d(pal_name = "qual_6", name = "Rooms") +
+#'   facet_wrap(vars(name_muni), ncol = 3, scales = "free") +
 #'   labs(
 #'     title = "IQAIW: Rental Price Index",
 #'     x = "Date",
@@ -115,8 +120,8 @@
 #' # Compare contract prices across zones
 #' library(ggplot2)
 #'
-#' spo_sales <- subset(sales_report, name_muni == "S\u00e3o Paulo" & date == max(date))
-#' ggplot(spo_sales, aes(x = price_m2, y = name_zone)) +
+#' bhe_sales <- subset(sales_report, name_muni == "Belo Horizonte" & date == max(date))
+#' ggplot(bhe_sales, aes(x = price_m2, y = name_zone)) +
 #' geom_col(fill = benvi_palette("benvi_blue")[3]) +
 #' theme_benvi()
 "sales_report"

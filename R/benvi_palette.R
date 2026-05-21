@@ -78,15 +78,8 @@ pal_pal <- function(pal_name, direction) {
 
 #' Print a palette
 #'
-#' S3 method that displays a palette as a color swatch.
-#' @param x A palette object (character vector with class "palette").
-#' @param ... Further arguments (unused).
-#' @return Invisibly returns `x`, called for its side effect of plotting.
-#' @export
+#' @keywords internal
 #' @importFrom graphics image par
-#' @examples
-#' p <- benvi_palette("greens")
-#' print(p)
 print.palette <- function(x, ...) {
   n <- length(x)
   old <- par(mar = c(0.5, 0.5, 0.5, 0.5))

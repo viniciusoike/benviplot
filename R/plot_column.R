@@ -89,7 +89,11 @@ plot_column <- function(
         labels = scale_label
       )
   } else {
-    static_fill <- if (fill_type$type == "static_color") fill_type$value else "#021841"
+    static_fill <- if (fill_type$type == "static_color") {
+      fill_type$value
+    } else {
+      "#021841"
+    }
 
     p <-
       ggplot(

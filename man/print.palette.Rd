@@ -6,18 +6,7 @@
 \usage{
 \method{print}{palette}(x, ...)
 }
-\arguments{
-\item{x}{A palette object (character vector with class "palette").}
-
-\item{...}{Further arguments (unused).}
-}
-\value{
-Invisibly returns \code{x}, called for its side effect of plotting.
-}
 \description{
-S3 method that displays a palette as a color swatch.
+Print a palette
 }
-\examples{
-p <- benvi_palette("greens")
-print(p)
-}
+\keyword{internal}

@@ -55,9 +55,14 @@ str(iqaiw)
 
 # Plot index over time for all cities
 library(ggplot2)
-ggplot(iqaiw, aes(x = date, y = index, color = name_muni)) +
-  geom_line() +
-  scale_color_benvi_d(pal_name = "qual_6", name = "City") +
+
+iqaiw_rooms <- subset(iqaiw, rooms != "Total")
+
+ggplot(iqaiw_rooms, aes(x = date, y = acum12m, color = rooms)) +
+  geom_line(lwd = 0.5) +
+  geom_hline(yintercept = 0) +
+  scale_color_benvi_d(pal_name = "qual_6", name = "Rooms") +
+  facet_wrap(vars(name_muni), ncol = 3, scales = "free") +
   labs(
     title = "IQAIW: Rental Price Index",
     x = "Date",

@@ -36,8 +36,8 @@ specific regions within cities.
 # Compare contract prices across zones
 library(ggplot2)
 
-spo_sales <- subset(sales_report, name_muni == "S\u00e3o Paulo" & date == max(date))
-ggplot(spo_sales, aes(x = price_m2, y = name_zone)) +
+bhe_sales <- subset(sales_report, name_muni == "Belo Horizonte" & date == max(date))
+ggplot(bhe_sales, aes(x = price_m2, y = name_zone)) +
 geom_col(fill = benvi_palette("benvi_blue")[3]) +
 theme_benvi()
 }

@@ -33,9 +33,9 @@ library(benviplot)
 library(showtext)
 
 # Setup fonts for high-quality rendering
-font_add_google("Poppins", "Poppins")
-showtext_opts(dpi = 300)
-showtext_auto()
+# font_add_google("Poppins", "Poppins")
+# showtext_opts(dpi = 300)
+# showtext_auto()
 
 # Select colors from various benvi palettes to showcase diversity
 colors_showcase <- c(
