@@ -2,13 +2,11 @@ Package: benviplot
 Title: Color Palettes and 'ggplot2' Extensions for Data Visualization
 Version: 1.2.0
 Authors@R:
-    person("Vinicius", "Oike", , "viniciusoike@gmail.com", role = c("aut", "cre", "cph"))
+    person("Vinicius", "Oike", email = "viniciusoike@gmail.com", role = c("aut", "cre", "cph"))
 Description: Provides 'ggplot2' scale functions and a custom theme derived from the
     'Benvi' visual identity of QuintoAndar Group (discontinued in 2024). Offers
     qualitative, sequential, and diverging color palettes with both discrete and
-    continuous scale variants. Includes wrapper functions for common chart types
-    (line, column, scatter, area, and histogram) that apply consistent styling,
-    and ships datasets from the Brazilian real estate market for use in examples.
+    continuous scale variants.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en-US
