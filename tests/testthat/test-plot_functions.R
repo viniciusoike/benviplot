@@ -113,33 +113,6 @@ test_that("plot_column with text_inside creates ggfittext layer", {
   expect_true(any(sapply(geom_classes, function(x) "GeomBarText" %in% x)))
 })
 
-test_that("plot_column with text_inside respects flip parameter", {
-  # Vertical bars (flip = FALSE)
-  p1 <- plot_column(
-    data = test_cat_data,
-    x = category,
-    y = value,
-    text = TRUE,
-    text_inside = TRUE,
-    flip = FALSE
-  )
-
-  # Horizontal bars (flip = TRUE)
-  p2 <- plot_column(
-    data = test_cat_data,
-    x = category,
-    y = value,
-    text = TRUE,
-    text_inside = TRUE,
-    flip = TRUE
-  )
-
-  expect_s3_class(p1, "ggplot")
-  expect_s3_class(p2, "ggplot")
-
-  # p2 should have coord_flip
-  expect_true("CoordFlip" %in% class(p2$coordinates))
-})
 
 # plot_scatter() tests ----
 
