@@ -11,21 +11,32 @@
 #' font_status()
 font_status <- function() {
   systemfonts_available <- requireNamespace("systemfonts", quietly = TRUE)
-  poppins_registered <- tryCatch({
-    if (!systemfonts_available) return(FALSE)
-    registry <- systemfonts::registry_fonts()
-    has_registry <- nrow(registry) > 0 &&
-      any(grepl("Poppins", registry$family, ignore.case = TRUE))
-    if (has_registry) return(TRUE)
-    sys <- systemfonts::system_fonts()
-    any(grepl("Poppins", sys$family, ignore.case = TRUE))
-  }, error = function(e) FALSE)
+
+  poppins_source <- "none"
+  if (systemfonts_available) {
+    tryCatch({
+      registry <- systemfonts::registry_fonts()
+      if (nrow(registry) > 0 &&
+          any(grepl("Poppins", registry$family, ignore.case = TRUE))) {
+        poppins_source <- "registered"
+      } else {
+        sys <- systemfonts::system_fonts()
+        if (any(grepl("Poppins", sys$family, ignore.case = TRUE))) {
+          poppins_source <- "system"
+        }
+      }
+    }, error = function(e) NULL)
+  }
+
+  poppins_available <- poppins_source != "none"
   ragg_available <- requireNamespace("ragg", quietly = TRUE)
 
   cli::cli_h1("benviplot Font Status")
 
-  if (poppins_registered) {
+  if (poppins_source == "registered") {
     cli::cli_alert_success("Poppins font: {.strong registered} (bundled)")
+  } else if (poppins_source == "system") {
+    cli::cli_alert_success("Poppins font: {.strong available} (system)")
   } else if (!systemfonts_available) {
     cli::cli_alert_warning("Poppins font: {.strong not available}")
     cli::cli_alert_info(
@@ -48,11 +59,11 @@ font_status <- function() {
     cli::cli_alert_info("Install with: {.code install.packages('ragg')}")
   }
 
-  if (poppins_registered && ragg_available) {
+  if (poppins_available && ragg_available) {
     cli::cli_alert_success(
       "{.fn theme_benvi} will use Poppins automatically with ragg devices."
     )
-  } else if (poppins_registered && !ragg_available) {
+  } else if (poppins_available && !ragg_available) {
     cli::cli_alert_info(
       "Poppins is registered but only works with ragg devices."
     )
@@ -60,7 +71,7 @@ font_status <- function() {
   }
 
   invisible(list(
-    poppins_available = poppins_registered,
+    poppins_available = poppins_available,
     ragg_available = ragg_available
   ))
 }
