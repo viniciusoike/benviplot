@@ -23,3 +23,15 @@ register_bundled_poppins <- function(pkgname = "benviplot") {
 
   invisible(NULL)
 }
+
+poppins_is_registered <- function() {
+  tryCatch(
+    {
+      if (!requireNamespace("systemfonts", quietly = TRUE)) return(FALSE)
+      registry <- systemfonts::registry_fonts()
+      nrow(registry) > 0 &&
+        any(grepl("Poppins", registry$family, ignore.case = TRUE))
+    },
+    error = function(e) FALSE
+  )
+}

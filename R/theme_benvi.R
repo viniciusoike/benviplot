@@ -1,13 +1,21 @@
+default_font_family <- function() {
+  if (poppins_is_registered()) "Poppins" else "sans"
+}
+
 #' A theme for Benvi styled plots
 #'
 #' @description
 #' A ggplot2 base theme for Benvi styled plots.
 #'
 #' Poppins is bundled with the package and registered automatically on load
-#' (requires the `systemfonts` package). If `systemfonts` is not installed,
-#' the theme falls back to the system's default sans-serif font.
+#' (requires the `systemfonts` package). When Poppins is registered, the theme
+#' uses it by default. If `systemfonts` is not installed, the theme falls back
+#' to the system's default sans-serif font. Override the default by setting
+#' `options(theme_benvi.font_family = "sans")` or passing `base_family`
+#' directly.
 #'
-#' @param base_family Argument passed to [ggplot2::theme_minimal()]. Defaults to 'sans'.
+#' @param base_family Argument passed to [ggplot2::theme_minimal()]. Defaults
+#'   to `"Poppins"` when the bundled font is registered, `"sans"` otherwise.
 #' @param base_size Argument passed to [ggplot2::theme_minimal()]. Defaults to 10.
 #' @param background Logical. Adds an offwhite (creme) background to the plot.
 #'
@@ -33,12 +41,12 @@
 #'   labs(x = NULL, y = "Index (base = 100)", title = "IQAIW") +
 #'   theme_benvi(background = TRUE)
 theme_benvi <- function(
-  base_family = getOption("theme_benvi.font_family", "sans"),
+  base_family = getOption("theme_benvi.font_family", default_font_family()),
   base_size = 10,
   background = FALSE
 ) {
   font_family <- if (is.null(base_family)) {
-    getOption("theme_benvi.font_family", "sans")
+    getOption("theme_benvi.font_family", default_font_family())
   } else {
     base_family
   }

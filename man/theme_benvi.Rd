@@ -5,13 +5,14 @@
 \title{A theme for Benvi styled plots}
 \usage{
 theme_benvi(
-  base_family = getOption("theme_benvi.font_family", "sans"),
+  base_family = getOption("theme_benvi.font_family", default_font_family()),
   base_size = 10,
   background = FALSE
 )
 }
 \arguments{
-\item{base_family}{Argument passed to \code{\link[ggplot2:ggtheme]{ggplot2::theme_minimal()}}. Defaults to 'sans'.}
+\item{base_family}{Argument passed to \code{\link[ggplot2:ggtheme]{ggplot2::theme_minimal()}}. Defaults
+to \code{"Poppins"} when the bundled font is registered, \code{"sans"} otherwise.}
 
 \item{base_size}{Argument passed to \code{\link[ggplot2:ggtheme]{ggplot2::theme_minimal()}}. Defaults to 10.}
 
@@ -24,8 +25,11 @@ A ggplot2 theme object
 A ggplot2 base theme for Benvi styled plots.
 
 Poppins is bundled with the package and registered automatically on load
-(requires the \code{systemfonts} package). If \code{systemfonts} is not installed,
-the theme falls back to the system's default sans-serif font.
+(requires the \code{systemfonts} package). When Poppins is registered, the theme
+uses it by default. If \code{systemfonts} is not installed, the theme falls back
+to the system's default sans-serif font. Override the default by setting
+\code{options(theme_benvi.font_family = "sans")} or passing \code{base_family}
+directly.
 }
 \examples{
 library(ggplot2)

@@ -102,7 +102,7 @@ font_status <- function() {
   if (poppins_available) {
     cli::cli_alert_success("Poppins font: {.strong registered} (bundled)")
     cli::cli_alert_info(
-      "Enable with: {.code options(theme_benvi.font_family = 'Poppins')}"
+      "{.fn theme_benvi} will use Poppins automatically."
     )
   } else if (!systemfonts_available) {
     cli::cli_alert_warning("Poppins font: {.strong not available}")

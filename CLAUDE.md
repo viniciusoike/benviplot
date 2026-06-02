@@ -58,7 +58,7 @@ The package uses a centralized color palette system stored in `inst/extdata/`:
 - `benvi_colors.rds`: Named color definitions (e.g., "AzulQuinto", "Floresta", "Violeta")
 - `benvi_palette.rds`: Pre-built palette collections
 
-**`inst/fonts/`**: Full Poppins font family (18 `.ttf` files) bundled with the package. Registered automatically on load when `systemfonts` is available. Activate in the theme with `options(theme_benvi.font_family = "Poppins")`.
+**`inst/fonts/`**: Poppins font (4 weights: Regular, Bold, Italic, BoldItalic) bundled with the package. Registered automatically on load when `systemfonts` is available. `theme_benvi()` uses Poppins by default when registered; falls back to `"sans"` otherwise. Override with `options(theme_benvi.font_family = "sans")`.
 
 **Palette Generation** (`data-raw/cols_to_palette.R`):
 - Converts named colors to hex values via `get_colors()` and `get_hex()` functions
@@ -88,9 +88,9 @@ The package uses a centralized color palette system stored in `inst/extdata/`:
 - Both use British/American spelling variants (color/colour)
 
 **R/theme_benvi.R**:
-- `theme_benvi()`: Exported custom ggplot2 theme; reads `getOption("theme_benvi.font_family", "sans")` for the font family. To use Poppins: `options(theme_benvi.font_family = "Poppins")`.
+- `theme_benvi()`: Exported custom ggplot2 theme; uses Poppins when registered, falls back to `"sans"`. Override via `options(theme_benvi.font_family = ...)` or `base_family` argument.
 
-**R/fonts-modern.R** (font management):
+**R/fonts.R** (font management):
 - `check_poppins_installed()`: Internal — checks system fonts and registered fonts for Poppins
 - `install_poppins()`: Optional system-wide installation from Google Fonts; not needed since Poppins is bundled with the package
 - `font_status()`: Reports Poppins and ragg availability with recommendations
@@ -133,7 +133,7 @@ The package uses a centralized color palette system stored in `inst/extdata/`:
 1. **Palette lookup**: All palettes reference the internal `palette` object (loaded from `sysdata.rda`)
 2. **Color interpolation**: Sequential palettes use `colorRampPalette()` to create 9-step gradients
 3. **ggplot2 integration**: Scale functions use `discrete_scale()` and `scale_*_gradientn()` with custom palette generators
-4. **Font activation**: Poppins is bundled and auto-registered on load (requires `systemfonts`). Activate with `options(theme_benvi.font_family = "Poppins")`; falls back to "sans" otherwise
+4. **Font activation**: Poppins is bundled and auto-registered on load (requires `systemfonts`). `theme_benvi()` auto-detects registration and uses Poppins when available; falls back to `"sans"` otherwise
 5. **Error handling**: Validates palette names, color counts, and direction parameters via `cli::cli_abort()`
 
 ## Dependencies
