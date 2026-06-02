@@ -86,31 +86,25 @@ types.</p>
 </h3>
 <p><code>benviplot</code> bundles the Poppins font family and registers
 it automatically when the package loads (requires the
-<code>systemfonts</code> package). By default,
-<code><a href="../reference/theme_benvi.html">theme_benvi()</a></code> uses the system sans-serif font so nothing
-breaks on machines that lack <code>systemfonts</code> or use a base
-PDF/PostScript device.</p>
-<p>To activate Poppins, set the option once per session:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>theme_benvi.font_family <span class="op">=</span> <span class="st">"Poppins"</span><span class="op">)</span></span></code></pre></div>
-<p>To make this permanent across sessions, add the same line to your
-<code>~/.Rprofile</code>. You can open it with
-<code>usethis::edit_r_profile()</code>.</p>
+<code>systemfonts</code> package). When Poppins is registered,
+<code><a href="../reference/theme_benvi.html">theme_benvi()</a></code> uses it by default. Without
+<code>systemfonts</code>, the theme falls back to the system sans-serif
+font.</p>
 <p>For the best rendering quality with custom fonts, install the
 <code>ragg</code> package. When <code>ragg</code> is set as the graphics
 device (the default in RStudio and Positron), Poppins renders correctly
 in all output formats.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ragg"</span><span class="op">)</span></span></code></pre></div>
 <p>You can check your full font and device status at any time with:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/font_status.html">font_status</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="quick-start">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://viniciusoike.github.io/benviplot/">benviplot</a></span><span class="op">)</span></span></code></pre></div>
 <p>The core of the package is <code><a href="../reference/theme_benvi.html">theme_benvi()</a></code> combined with
@@ -119,7 +113,7 @@ ggplot2 chart a consistent look with minimal effort. In the example
 below, <code><a href="../reference/ggplot2-scales-discrete.html">scale_fill_benvi_d()</a></code> maps the discrete cylinder
 variable to the <code>"qual_8"</code> qualitative palette, while
 <code><a href="../reference/theme_benvi.html">theme_benvi()</a></code> handles the rest of the styling.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">wt</span>, y <span class="op">=</span> <span class="va">mpg</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>, size <span class="op">=</span> <span class="fl">3</span>, color <span class="op">=</span> <span class="st">"#000000"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/ggplot2-scales-discrete.html">scale_fill_benvi_d</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Cylinders"</span>, pal_name <span class="op">=</span> <span class="st">"qual_8"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -144,12 +138,12 @@ the nature of your variable.</p>
 <p><code><a href="../reference/show_palettes.html">show_palettes()</a></code> gives a visual overview of all available
 palettes. Calling it without arguments displays every palette in the
 package; pass a type name to narrow the output.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/show_palettes.html">show_palettes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>You can filter by type: <code>"theme"</code>,
 <code>"sequential"</code>, <code>"qualitative"</code>,
 <code>"city"</code>, or <code>"brand"</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/show_palettes.html">show_palettes</a></span><span class="op">(</span><span class="st">"sequential"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="getting-started_files/figure-html/show-seq-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
@@ -159,7 +153,7 @@ package; pass a type name to narrow the output.</p>
 <p><code><a href="../reference/benvi_palette.html">benvi_palette()</a></code> returns a named vector of hex codes.
 Printing it renders a color swatch in the console, which is useful for
 quick visual comparison.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Preview a palette</span></span>
 <span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_2"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "#C5C9BA" "#816242" "#F2C037" "#009850" "#466795" "#9A75B4" "#EA4E58"</span></span>
@@ -170,7 +164,7 @@ quick visual comparison.</p>
 <span><span class="co">#&gt; [1] "qual_2"</span></span></code></pre></div>
 <p>To use the colors outside of ggplot2 (e.g. in base R or as input to
 another package), coerce to a plain character vector.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get hex codes as a plain character vector</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"benvi_blue"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "#021841" "#192C50" "#2F405F" "#46546E" "#5D687D" "#737C8C" "#8A919C"</span></span>
@@ -178,7 +172,7 @@ another package), coerce to a plain character vector.</p>
 <p>Discrete palettes contain between 4 and 9 fixed colors. When you need
 more granularity, set <code>type = "continuous"</code> to interpolate an
 arbitrary number of colors along the palette gradient.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"seq_greens"</span>, n <span class="op">=</span> <span class="fl">20</span>, type <span class="op">=</span> <span class="st">"continuous"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "#245825" "#255929" "#275A2D" "#295C31" "#2A5D36" "#2C5F3B" "#2E613F"</span></span>
 <span><span class="co">#&gt;  [8] "#2F6243" "#316448" "#33664C" "#356751" "#376955" "#396B5A" "#3A6C5E"</span></span>
@@ -203,7 +197,7 @@ for discrete variables and <code>c</code> is for continuous ones. Both
 <p>Discrete scales map categorical variables to a qualitative or
 city-specific palette. The <code>pal_name</code> argument (or the first
 positional argument) selects which palette to use.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iqaiw_total</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">iqaiw</span>, <span class="va">rooms</span> <span class="op">==</span> <span class="st">"Total"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">iqaiw_total</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">index</span>, color <span class="op">=</span> <span class="va">name_muni</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -225,7 +219,7 @@ positional argument) selects which palette to use.</p>
 They are well suited for heatmaps, choropleths, and any visualization
 where a numeric variable needs a smooth color gradient. Use
 <code>direction = -1</code> to reverse the palette.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iqaiw_total</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">iqaiw_total</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">acum12m</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">iqaiw_total</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">name_muni</span>, fill <span class="op">=</span> <span class="va">acum12m</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -264,7 +258,7 @@ from scratch gives you full control.</p>
 <p><code><a href="../reference/plot_line.html">plot_line()</a></code> draws a single-series line chart. Pass
 <code>color</code> to map a grouping variable and get multiple lines
 with an automatic legend.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_line.html">plot_line</a></span><span class="op">(</span><span class="va">economics</span>, x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">uempmed</span><span class="op">)</span></span></code></pre></div>
 <p><img src="getting-started_files/figure-html/helper-line-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
@@ -275,7 +269,7 @@ with an automatic legend.</p>
 <code>text = TRUE</code> adds value labels above each bar; for bars with
 enough height, <code>text_inside = TRUE</code> places labels inside the
 bars instead (requires the <code>ggfittext</code> package).</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  cities <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"São Paulo"</span>,</span>
@@ -297,7 +291,7 @@ bars instead (requires the <code>ggfittext</code> package).</p>
 a scatter plot. A <code>color</code> argument maps a grouping variable
 to the point fill using a Benvi palette. Set <code>smooth = TRUE</code>
 to overlay a regression line.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span></span>
 <span>  <span class="va">mtcars</span>,</span>
 <span>  x <span class="op">=</span> <span class="va">wt</span>,</span>
@@ -314,7 +308,7 @@ to overlay a regression line.</p>
 <p>Because all helpers return <code>ggplot2</code> objects, you can
 extend them with additional layers, scales, or theme adjustments as you
 normally would.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_line.html">plot_line</a></span><span class="op">(</span><span class="va">economics</span>, x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">unemploy</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>se <span class="op">=</span> <span class="cn">FALSE</span>, color <span class="op">=</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"oranges"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
@@ -334,7 +328,7 @@ normally would.</p>
 <code><a href="../reference/benvi_palette.html">benvi_palette()</a></code> returns plain hex codes, you can use them
 anywhere that accepts color strings, including base R graphics,
 <code>lattice</code>, or any other plotting system.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"purples"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>

@@ -20,7 +20,7 @@ font_status()
 #> 
 #> ── benviplot Font Status ───────────────────────────────────────────────────────
 #> ✔ Poppins font: registered (bundled)
-#> ℹ Enable with: `options(theme_benvi.font_family = 'Poppins')`
+#> ℹ `theme_benvi()` will use Poppins automatically.
 #> ✔ ragg package: available
 #> ✔ Your setup is optimal for benviplot!
 ```

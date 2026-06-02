@@ -11,7 +11,6 @@ plot_column(
   y,
   fill = NULL,
   zero = TRUE,
-  flip = FALSE,
   text = FALSE,
   text_inside = FALSE,
   text_place = NULL,
@@ -57,10 +56,6 @@ plot_column(
   Logical indicating whether a horizontal line crossing the y = 0 axis
   should be plotted.
 
-- flip:
-
-  Logical indicating if plot should be flipped
-
 - text:
 
   Logical indicating if text labels should be plotted on column bars
@@ -75,7 +70,7 @@ plot_column(
 
   Placement of inside text. One of "top", "bottom", "left", "right",
   "centre"/"center". Only used when text_inside = TRUE. Defaults to
-  "centre" for vertical bars or "right" for flipped bars.
+  "centre".
 
 - text_padding:
 

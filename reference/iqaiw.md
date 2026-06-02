@@ -97,7 +97,7 @@ str(iqaiw)
 # Plot index over time for all cities
 library(ggplot2)
 
-iqaiw_rooms <- subset(iqaiw, rooms != "Total")
+iqaiw_rooms <- subset(iqaiw, rooms != "Total" & !is.na(acum12m))
 
 ggplot(iqaiw_rooms, aes(x = date, y = acum12m, color = rooms)) +
   geom_line(lwd = 0.5) +
@@ -110,7 +110,5 @@ ggplot(iqaiw_rooms, aes(x = date, y = acum12m, color = rooms)) +
     y = "Index (base = 100)"
   ) +
   theme_benvi()
-#> Warning: Removed 216 rows containing missing values or values outside the scale range
-#> (`geom_line()`).
 
 ```

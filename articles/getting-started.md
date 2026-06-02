@@ -23,20 +23,10 @@ remotes::install_github("viniciusoike/benviplot")
 
 `benviplot` bundles the Poppins font family and registers it
 automatically when the package loads (requires the `systemfonts`
-package). By default,
+package). When Poppins is registered,
 [`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md)
-uses the system sans-serif font so nothing breaks on machines that lack
-`systemfonts` or use a base PDF/PostScript device.
-
-To activate Poppins, set the option once per session:
-
-``` r
-
-options(theme_benvi.font_family = "Poppins")
-```
-
-To make this permanent across sessions, add the same line to your
-`~/.Rprofile`. You can open it with `usethis::edit_r_profile()`.
+uses it by default. Without `systemfonts`, the theme falls back to the
+system sans-serif font.
 
 For the best rendering quality with custom fonts, install the `ragg`
 package. When `ragg` is set as the graphics device (the default in

@@ -50,6 +50,12 @@ specific regions within cities.
 library(ggplot2)
 
 bhe_sales <- subset(sales_report, name_muni == "Belo Horizonte" & date == max(date))
+
+bhe_sales$name_zone <- factor(
+  bhe_sales$name_zone,
+  levels = bhe_sales$name_zone[order(bhe_sales$price_m2)]
+)
+
 ggplot(bhe_sales, aes(x = price_m2, y = name_zone)) +
 geom_col(fill = benvi_palette("benvi_blue")[3]) +
 theme_benvi()

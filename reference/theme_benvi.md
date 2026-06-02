@@ -3,14 +3,17 @@
 A ggplot2 base theme for Benvi styled plots.
 
 Poppins is bundled with the package and registered automatically on load
-(requires the `systemfonts` package). If `systemfonts` is not installed,
-the theme falls back to the system's default sans-serif font.
+(requires the `systemfonts` package). When Poppins is registered, the
+theme uses it by default. If `systemfonts` is not installed, the theme
+falls back to the system's default sans-serif font. Override the default
+by setting `options(theme_benvi.font_family = "sans")` or passing
+`base_family` directly.
 
 ## Usage
 
 ``` r
 theme_benvi(
-  base_family = getOption("theme_benvi.font_family", "sans"),
+  base_family = getOption("theme_benvi.font_family", default_font_family()),
   base_size = 10,
   background = FALSE
 )
@@ -22,7 +25,8 @@ theme_benvi(
 
   Argument passed to
   [`ggplot2::theme_minimal()`](https://ggplot2.tidyverse.org/reference/ggtheme.html).
-  Defaults to 'sans'.
+  Defaults to `"Poppins"` when the bundled font is registered, `"sans"`
+  otherwise.
 
 - base_size:
 
