@@ -29,7 +29,7 @@
 #'     x = "Date",
 #'     y = "Index (base = 100)"
 #'   ) +
-#'   theme_benvi()
+#'   theme_benvi(base_family = "sans")
 "iqa"
 
 #' QuintoAndar ImovelWeb Rental Index (IQAIW)
@@ -90,7 +90,7 @@
 #'     x = "Date",
 #'     y = "Index (base = 100)"
 #'   ) +
-#'   theme_benvi()
+#'   theme_benvi(base_family = "sans")
 #'
 "iqaiw"
 
@@ -129,5 +129,5 @@
 #'
 #' ggplot(bhe_sales, aes(x = price_m2, y = name_zone)) +
 #' geom_col(fill = benvi_palette("benvi_blue")[3]) +
-#' theme_benvi()
+#' theme_benvi(base_family = "sans")
 "sales_report"

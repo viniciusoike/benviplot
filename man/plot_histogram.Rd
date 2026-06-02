@@ -81,6 +81,7 @@ and works well across different distributions.
 }
 }
 \examples{
+\dontshow{.op <- options(theme_benvi.font_family = "sans")}
 set.seed(5)
 tbl <- data.frame(x = rnorm(n = 1000))
 
@@ -95,4 +96,5 @@ plot_histogram(data = tbl, x = x, method = "Rice")
 # Facet by rooms category
 spo <- subset(iqaiw, name_muni == "S\u00e3o Paulo" & rooms != "Total")
 plot_histogram(data = spo, x = index, facet = rooms)
+\dontshow{options(.op)}
 }

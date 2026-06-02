@@ -64,6 +64,7 @@ A ggplot2 plot
 Plot an area chart
 }
 \examples{
+\dontshow{.op <- options(theme_benvi.font_family = "sans")}
 # Simple area chart
 sao_paulo <- subset(iqa, name_muni == "S\u00e3o Paulo")
 plot_area(data = sao_paulo, x = date, y = index)
@@ -71,4 +72,5 @@ plot_area(data = sao_paulo, x = date, y = index)
 # Stacked area chart with fill mapping
 total <- subset(iqaiw, rooms == "Total")
 plot_area(data = total, x = date, y = index, fill = name_muni)
+\dontshow{options(.op)}
 }

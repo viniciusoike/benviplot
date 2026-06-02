@@ -45,6 +45,6 @@ bhe_sales$name_zone <- factor(
 
 ggplot(bhe_sales, aes(x = price_m2, y = name_zone)) +
 geom_col(fill = benvi_palette("benvi_blue")[3]) +
-theme_benvi()
+theme_benvi(base_family = "sans")
 }
 \keyword{datasets}

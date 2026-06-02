@@ -71,8 +71,10 @@ A ggplot2 plot.
 Plot a scatter chart
 }
 \examples{
+\dontshow{.op <- options(theme_benvi.font_family = "sans")}
 plot_scatter(data = mtcars, x = wt, y = mpg)
 
 # With regression line
 plot_scatter(data = mtcars, x = wt, y = mpg, fit = TRUE)
+\dontshow{options(.op)}
 }

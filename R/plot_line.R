@@ -19,6 +19,7 @@
 #' @importFrom ggplot2 ggplot aes geom_line geom_point geom_hline labs
 #'
 #' @examples
+#' \dontshow{.op <- options(theme_benvi.font_family = "sans")}
 #' # Single series
 #' sao_paulo <- subset(iqa, name_muni == "S\u00e3o Paulo")
 #' plot_line(data = sao_paulo, x = date, y = index)
@@ -26,6 +27,7 @@
 #' # Multiple series with color mapping
 #' total <- subset(iqaiw, rooms == "Total")
 #' plot_line(data = total, x = date, y = index, color = name_muni)
+#' \dontshow{options(.op)}
 plot_line <- function(
   data,
   x,

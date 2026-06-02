@@ -33,17 +33,21 @@
 #' @export
 #'
 #' @examples
+#' \dontshow{.op <- options(theme_benvi.font_family = "sans")}
 #' # Column chart by city at the latest date
 #' latest <- subset(iqa, date == max(iqa$date))
 #' plot_column(data = latest, x = name_muni, y = index)
 #'
 #' # With text labels above bars
 #' plot_column(data = latest, x = name_muni, y = index, text = TRUE)
+#' \dontshow{options(.op)}
 #'
 #' @examplesIf requireNamespace("ggfittext", quietly = TRUE)
+#' \dontshow{.op <- options(theme_benvi.font_family = "sans")}
 #' # With text labels inside bars
 #' latest <- subset(iqa, date == max(iqa$date))
 #' plot_column(data = latest, x = name_muni, y = index, text = TRUE, text_inside = TRUE)
+#' \dontshow{options(.op)}
 #'
 #' @importFrom ggplot2 ggplot aes geom_col geom_hline geom_text labs
 #' theme element_blank position_stack position_dodge

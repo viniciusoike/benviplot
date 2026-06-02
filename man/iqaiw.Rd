@@ -68,7 +68,7 @@ ggplot(iqaiw_rooms, aes(x = date, y = acum12m, color = rooms)) +
     x = "Date",
     y = "Index (base = 100)"
   ) +
-  theme_benvi()
+  theme_benvi(base_family = "sans")
 
 }
 \keyword{datasets}

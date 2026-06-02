@@ -83,16 +83,20 @@ A ggplot2 plot
 Plot a column chart
 }
 \examples{
+\dontshow{.op <- options(theme_benvi.font_family = "sans")}
 # Column chart by city at the latest date
 latest <- subset(iqa, date == max(iqa$date))
 plot_column(data = latest, x = name_muni, y = index)
 
 # With text labels above bars
 plot_column(data = latest, x = name_muni, y = index, text = TRUE)
+\dontshow{options(.op)}
 
 \dontshow{if (requireNamespace("ggfittext", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{.op <- options(theme_benvi.font_family = "sans")}
 # With text labels inside bars
 latest <- subset(iqa, date == max(iqa$date))
 plot_column(data = latest, x = name_muni, y = index, text = TRUE, text_inside = TRUE)
+\dontshow{options(.op)}
 \dontshow{\}) # examplesIf}
 }
