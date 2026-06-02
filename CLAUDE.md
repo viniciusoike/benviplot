@@ -58,7 +58,7 @@ The package uses a centralized color palette system stored in `inst/extdata/`:
 - `benvi_colors.rds`: Named color definitions (e.g., "AzulQuinto", "Floresta", "Violeta")
 - `benvi_palette.rds`: Pre-built palette collections
 
-**`inst/fonts/`**: Poppins font (4 weights: Regular, Bold, Italic, BoldItalic) bundled with the package. Registered automatically on load when `systemfonts` is available. `theme_benvi()` uses Poppins by default when registered; falls back to `"sans"` otherwise. Override with `options(theme_benvi.font_family = "sans")`.
+**`inst/fonts/`**: Poppins font (4 weights: Regular, Bold, Italic, BoldItalic) bundled with the package. Registered automatically on load when `systemfonts` is available. `theme_benvi()` defaults to `"Poppins"` when both `systemfonts` and `ragg` are available, `"sans"` otherwise. All runnable examples use `base_family = "sans"` or `\dontshow{options(theme_benvi.font_family = "sans")}` for CRAN compatibility. See `dev/font-management.md` for details on font management in R packages.
 
 **Palette Generation** (`data-raw/cols_to_palette.R`):
 - Converts named colors to hex values via `get_colors()` and `get_hex()` functions
@@ -133,7 +133,7 @@ The package uses a centralized color palette system stored in `inst/extdata/`:
 1. **Palette lookup**: All palettes reference the internal `palette` object (loaded from `sysdata.rda`)
 2. **Color interpolation**: Sequential palettes use `colorRampPalette()` to create 9-step gradients
 3. **ggplot2 integration**: Scale functions use `discrete_scale()` and `scale_*_gradientn()` with custom palette generators
-4. **Font activation**: Poppins is bundled and auto-registered on load (requires `systemfonts`). `theme_benvi()` auto-detects registration and uses Poppins when available; falls back to `"sans"` otherwise
+4. **Font activation**: Poppins is bundled and auto-registered on load (requires `systemfonts`). `theme_benvi()` uses Poppins by default when both `systemfonts` and `ragg` are available; falls back to `"sans"` otherwise. All examples force `"sans"` for CRAN compatibility since `R CMD check` uses base R devices that cannot render registered fonts
 5. **Error handling**: Validates palette names, color counts, and direction parameters via `cli::cli_abort()`
 
 ## Dependencies
