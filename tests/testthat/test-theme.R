@@ -61,20 +61,13 @@ test_that("theme_benvi can be combined with other theme elements", {
   expect_equal(p$theme$legend.position, "bottom")
 })
 
-test_that("check_poppins_installed returns logical", {
-  result <- check_poppins_installed()
-  expect_type(result, "logical")
-  expect_length(result, 1)
-})
-
 test_that("font_status returns information", {
-  # Should run without error and return invisibly
   expect_invisible(font_status())
 
   result <- font_status()
   expect_type(result, "list")
-  expect_named(result, c("poppins_installed", "ragg_available"))
-  expect_type(result$poppins_installed, "logical")
+  expect_named(result, c("poppins_available", "ragg_available"))
+  expect_type(result$poppins_available, "logical")
   expect_type(result$ragg_available, "logical")
 })
 

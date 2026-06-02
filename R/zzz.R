@@ -28,9 +28,15 @@ poppins_is_registered <- function() {
   tryCatch(
     {
       if (!requireNamespace("systemfonts", quietly = TRUE)) return(FALSE)
+
+      # Registered/bundled fonts only work with systemfonts-aware devices (ragg).
+      # Gate on ragg so that default_font_family() doesn't select Poppins when
+      # the likely device (base R PDF/PNG) can't render it.
       registry <- systemfonts::registry_fonts()
-      nrow(registry) > 0 &&
+      has_registered <- nrow(registry) > 0 &&
         any(grepl("Poppins", registry$family, ignore.case = TRUE))
+
+      has_registered && requireNamespace("ragg", quietly = TRUE)
     },
     error = function(e) FALSE
   )

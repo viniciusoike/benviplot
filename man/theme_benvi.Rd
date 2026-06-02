@@ -12,7 +12,9 @@ theme_benvi(
 }
 \arguments{
 \item{base_family}{Argument passed to \code{\link[ggplot2:ggtheme]{ggplot2::theme_minimal()}}. Defaults
-to \code{"Poppins"} when the bundled font is registered, \code{"sans"} otherwise.}
+to \code{"Poppins"} when the bundled font is registered and \code{ragg} is available,
+\code{"sans"} otherwise. Override globally with
+\code{options(theme_benvi.font_family = ...)}.}
 
 \item{base_size}{Argument passed to \code{\link[ggplot2:ggtheme]{ggplot2::theme_minimal()}}. Defaults to 10.}
 
@@ -24,27 +26,38 @@ A ggplot2 theme object
 \description{
 A ggplot2 base theme for Benvi styled plots.
 
-Poppins is bundled with the package and registered automatically on load
-(requires the \code{systemfonts} package). When Poppins is registered, the theme
-uses it by default. If \code{systemfonts} is not installed, the theme falls back
-to the system's default sans-serif font. Override the default by setting
-\code{options(theme_benvi.font_family = "sans")} or passing \code{base_family}
-directly.
+The Poppins font is bundled with the package and registered automatically on
+load when \code{systemfonts} is installed. When both \code{systemfonts} and \code{ragg} are
+available, the theme uses Poppins by default. Otherwise it falls back to the
+system's default sans-serif font.
+
+Registered fonts only work with systemfonts-aware devices (e.g.
+\link[ragg:agg_png]{ragg::agg_png}). Base R devices (PDF, PostScript) cannot render them. If you
+see font warnings when saving to PDF, pass \code{base_family = "sans"} or set
+\code{options(theme_benvi.font_family = "sans")}. See \code{\link[=font_status]{font_status()}} to check
+your setup.
 }
 \examples{
 library(ggplot2)
-# Single series for example
 series <- subset(iqaiw, name_muni == "S\u00e3o Paulo" & rooms == "Total")
 
-# Base theme
+# Base theme (using "sans" for portability)
 ggplot(series, aes(date, index)) +
   geom_line(color = benvi_palette("benvi_blue")[1], lwd = 1) +
   labs(x = NULL, y = "Index (base = 100)", title = "IQAIW") +
-  theme_benvi()
+  theme_benvi(base_family = "sans")
 
 # Optional offwhite (creme) background
 ggplot(series, aes(date, index)) +
   geom_line(color = benvi_palette("benvi_blue")[1], lwd = 1) +
   labs(x = NULL, y = "Index (base = 100)", title = "IQAIW") +
-  theme_benvi(background = TRUE)
+  theme_benvi(base_family = "sans", background = TRUE)
+
+\dontrun{
+# Use Poppins with a ragg device (requires systemfonts and ragg)
+ggplot(series, aes(date, index)) +
+  geom_line(color = benvi_palette("benvi_blue")[1], lwd = 1) +
+  labs(x = NULL, y = "Index (base = 100)", title = "IQAIW") +
+  theme_benvi(base_family = "Poppins")
+}
 }
