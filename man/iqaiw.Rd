@@ -56,7 +56,7 @@ str(iqaiw)
 # Plot index over time for all cities
 library(ggplot2)
 
-iqaiw_rooms <- subset(iqaiw, rooms != "Total")
+iqaiw_rooms <- subset(iqaiw, rooms != "Total" & !is.na(acum12m))
 
 ggplot(iqaiw_rooms, aes(x = date, y = acum12m, color = rooms)) +
   geom_line(lwd = 0.5) +

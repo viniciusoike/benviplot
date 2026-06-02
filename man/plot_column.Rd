@@ -10,7 +10,6 @@ plot_column(
   y,
   fill = NULL,
   zero = TRUE,
-  flip = FALSE,
   text = FALSE,
   text_inside = FALSE,
   text_place = NULL,
@@ -42,8 +41,6 @@ plot_column(
 \item{zero}{Logical indicating whether a horizontal line crossing the y = 0
 axis should be plotted.}
 
-\item{flip}{Logical indicating if plot should be flipped}
-
 \item{text}{Logical indicating if text labels should be plotted on column bars}
 
 \item{text_inside}{Logical indicating if text labels should be placed inside
@@ -52,7 +49,7 @@ When FALSE (default), text appears above/beside bars at fixed size.}
 
 \item{text_place}{Placement of inside text. One of "top", "bottom", "left",
 "right", "centre"/"center". Only used when text_inside = TRUE. Defaults to
-"centre" for vertical bars or "right" for flipped bars.}
+"centre".}
 
 \item{text_padding}{Padding around inside text as grid::unit(). Only used
 when text_inside = TRUE. Defaults to 1mm.}
