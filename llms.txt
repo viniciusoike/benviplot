@@ -32,20 +32,13 @@ remotes::install_github("viniciusoike/benviplot")
 ## Font Setup
 
 `benviplot` bundles the Poppins font family and registers it
-automatically on load (requires the `systemfonts` package). By default,
+automatically on load (requires the `systemfonts` package). When Poppins
+is registered,
 [`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md)
-uses the system sans-serif font so the package works on any rendering
-device without warnings.
+uses it by default. Without `systemfonts`, the theme falls back to the
+system sans-serif font.
 
-To enable Poppins, set the option once per session:
-
-``` r
-
-options(theme_benvi.font_family = "Poppins")
-```
-
-To make this permanent, add that line to your `~/.Rprofile`. For the
-best rendering quality, also install the `ragg` package:
+For the best rendering quality, also install the `ragg` package:
 
 ``` r
 
@@ -166,20 +159,13 @@ plot_column(sales, x = x, y = y, text = TRUE)
 
 ![](reference/figures/readme_plot_example_3.png)
 
-## Getting Help
-
-Visit <https://viniciusoike.github.io/benviplot/>
-
-## License
-
-MIT License. See
-[LICENSE.md](https://github.com/viniciusoike/benviplot/blob/master/LICENSE.md)
-for details.
+For more examples visit the [pacakge’s
+website](https://viniciusoike.github.io/benviplot/)
 
 ## Acknowledgments
 
-This package uses color schemes inspired by the discontinued Benvi
-brand. This is an independent project not affiliated with QuintoAndar.
+This package uses color schemes inspired by the Benvi brand. This is an
+independent project not affiliated with QuintoAndar.
 
 # Package index
 
@@ -231,8 +217,6 @@ Custom ggplot2 themes
 
 Font setup and status
 
-- [`install_poppins()`](https://viniciusoike.github.io/benviplot/reference/install_poppins.md)
-  : Install Poppins font system-wide from Google Fonts
 - [`font_status()`](https://viniciusoike.github.io/benviplot/reference/font_status.md)
   : Report benviplot font status
 

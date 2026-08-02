@@ -12,9 +12,9 @@
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="benviplot • Color Palettes for Data Visualization">
-<meta name="description" content="ggplot2 extensions and color palettes for creating quality graphics. Uses color schemes from the discontinued Benvi brand.
+<meta name="description" content="ggplot2 extensions and color palettes for creating quality graphics. Uses color schemes from the Benvi brand.
 ">
-<meta property="og:description" content="ggplot2 extensions and color palettes for creating quality graphics. Uses color schemes from the discontinued Benvi brand.
+<meta property="og:description" content="ggplot2 extensions and color palettes for creating quality graphics. Uses color schemes from the Benvi brand.
 ">
 </head>
 <body>
@@ -85,12 +85,9 @@
 <div class="section level2">
 <h2 id="font-setup">Font Setup<a class="anchor" aria-label="anchor" href="#font-setup"></a>
 </h2>
-<p><code>benviplot</code> bundles the Poppins font family and registers it automatically on load (requires the <code>systemfonts</code> package). By default, <code><a href="reference/theme_benvi.html">theme_benvi()</a></code> uses the system sans-serif font so the package works on any rendering device without warnings.</p>
-<p>To enable Poppins, set the option once per session:</p>
+<p><code>benviplot</code> bundles the Poppins font family and registers it automatically on load (requires the <code>systemfonts</code> package). When Poppins is registered, <code><a href="reference/theme_benvi.html">theme_benvi()</a></code> uses it by default. Without <code>systemfonts</code>, the theme falls back to the system sans-serif font.</p>
+<p>For the best rendering quality, also install the <code>ragg</code> package:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>theme_benvi.font_family <span class="op">=</span> <span class="st">"Poppins"</span><span class="op">)</span></span></code></pre></div>
-<p>To make this permanent, add that line to your <code>~/.Rprofile</code>. For the best rendering quality, also install the <code>ragg</code> package:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ragg"</span><span class="op">)</span></span></code></pre></div>
 <p>You can verify your current setup with <code><a href="reference/font_status.html">font_status()</a></code>.</p>
 </div>
@@ -98,7 +95,7 @@
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <p>Load the package along with ggplot2.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://viniciusoike.github.io/benviplot/">benviplot</a></span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -106,7 +103,7 @@
 <h2 id="color-palettes">Color palettes<a class="anchor" aria-label="anchor" href="#color-palettes"></a>
 </h2>
 <p>Color palettes can be visualized using <code>benvi_palette</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -120,7 +117,7 @@
 <li><code>scale_fill_benvi_d</code></li>
 </ul>
 <p>The package also supplies a generic <code><a href="reference/theme_benvi.html">theme_benvi()</a></code> function that works best if Poppins is available.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Rental price index for major cities</span></span>
 <span><span class="va">index_data</span> <span class="op">&lt;-</span> <span class="va">iqaiw</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
@@ -142,7 +139,7 @@
 <span>  <span class="fu"><a href="reference/theme_benvi.html">theme_benvi</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/readme_plot_example_1.png"></p>
 <p>When using a continuous scale the colors are interpolated.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Price per m2 by city over time</span></span>
 <span><span class="va">index_data</span> <span class="op">&lt;-</span> <span class="va">iqaiw</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
@@ -172,7 +169,7 @@
 <p><img src="reference/figures/readme_plot_example_2.png"></p>
 <p>The package features some generic <code>plot_</code> functions that help to create standard plots. These functions aim to be efficient, allowing for quick data exploration, while remaining polished enough to be used for reports.</p>
 <p>These functions usually include simple helper arguments like <code>text</code> in the case of <code>plot_column</code> that plots its value above the column.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">220</span>, <span class="fl">230</span>, <span class="fl">210</span>, <span class="fl">240</span>, <span class="fl">290</span><span class="op">)</span></span>
@@ -180,21 +177,12 @@
 <span></span>
 <span><span class="fu"><a href="reference/plot_column.html">plot_column</a></span><span class="op">(</span><span class="va">sales</span>, x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, text <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/readme_plot_example_3.png"></p>
-</div>
-<div class="section level2">
-<h2 id="getting-help">Getting Help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
-</h2>
-<p>Visit <a href="https://viniciusoike.github.io/benviplot/" class="uri">https://viniciusoike.github.io/benviplot/</a></p>
-</div>
-<div class="section level2">
-<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
-</h2>
-<p>MIT License. See <a href="https://github.com/viniciusoike/benviplot/blob/master/LICENSE.md" class="external-link">LICENSE.md</a> for details.</p>
+<p>For more examples visit the <a href="https://viniciusoike.github.io/benviplot/">pacakge’s website</a></p>
 </div>
 <div class="section level2">
 <h2 id="acknowledgments">Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
 </h2>
-<p>This package uses color schemes inspired by the discontinued Benvi brand. This is an independent project not affiliated with QuintoAndar.</p>
+<p>This package uses color schemes inspired by the Benvi brand. This is an independent project not affiliated with QuintoAndar.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -224,7 +212,8 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Vinicius Oike <br><small class="roles"> Author, maintainer, copyright holder </small>   </li>
+<li>Vinicius Oike <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0009-0005-8015-9189" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
@@ -233,9 +222,9 @@
 <ul class="list-unstyled">
 <li><a href="https://github.com/viniciusoike/benviplot/actions" class="external-link"><img src="https://github.com/viniciusoike/benviplot/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/viniciusoike/benviplot?branch=master" class="external-link"><img src="https://codecov.io/gh/viniciusoike/benviplot/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/viniciusoike/benviplot/actions" class="external-link"><img src="https://github.com/viniciusoike/benviplot/workflows/pkgdown/badge.svg" alt="pkgdown"></a></li>
 <li><a href="https://opensource.org/licenses/MIT" class="external-link"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
+<li><a href="https://viniciusoike.r-universe.dev/benviplot" class="external-link"><img src="https://viniciusoike.r-universe.dev/badges/benviplot" alt="R-universe"></a></li>
 </ul>
 </div>
 
@@ -248,7 +237,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

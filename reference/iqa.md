@@ -76,5 +76,5 @@ ggplot(iqa, aes(x = date, y = index, color = name_muni)) +
     x = "Date",
     y = "Index (base = 100)"
   ) +
-  theme_benvi()
+  theme_benvi(base_family = "sans")
 ```

@@ -48,8 +48,6 @@ Custom ggplot2 themes
 
 Font setup and status
 
-- [`install_poppins()`](https://viniciusoike.github.io/benviplot/reference/install_poppins.md)
-  : Install Poppins font system-wide from Google Fonts
 - [`font_status()`](https://viniciusoike.github.io/benviplot/reference/font_status.md)
   : Report benviplot font status
 

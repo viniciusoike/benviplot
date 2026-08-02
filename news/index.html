@@ -40,8 +40,7 @@
 <h3 id="breaking-changes-1-2-0">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-2-0"></a></h3>
 <ul><li>Removed functions deprecated since v1.1.x: <code>plot_line_trend()</code>, <code>plot_column_label()</code>, <code>pretty_number()</code>, <code>setup_benvi_fonts()</code>, and <code>get_poppins_variants()</code>.</li>
 <li>Removed utility functions <code>benvi_colors()</code>, <code>list_colors()</code>, and <code>list_palettes()</code>. Use <code><a href="../reference/show_palettes.html">show_palettes()</a></code> for palette exploration.</li>
-<li>
-<code><a href="../reference/check_poppins_installed.html">check_poppins_installed()</a></code> is now an internal function.</li>
+<li>Removed <code>install_poppins()</code> and <code>check_poppins_installed()</code>. Poppins is now bundled with the package and registered automatically on load, so no manual setup is needed. Use <code><a href="../reference/font_status.html">font_status()</a></code> to check availability.</li>
 <li>Reduced hard dependencies: <code>ggfittext</code> and <code>systemfonts</code> moved to Suggests; <code>forcats</code>, <code>lifecycle</code>, and <code>scales</code> removed from Imports.</li>
 </ul></div>
 <div class="section level3">
@@ -49,6 +48,13 @@
 <ul><li>
 <code><a href="../reference/show_palettes.html">show_palettes()</a></code> gains a <code>"diverging"</code> type and pattern-based name filtering.</li>
 <li>Scale functions now have a sensible default palette.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-1-2-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-2-0"></a></h3>
+<ul><li>
+<code><a href="../reference/format_num_br.html">format_num_br()</a></code> no longer returns scientific notation for large values. <code>format_num_br(1e5)</code> returned <code>"1e+05"</code> and now returns <code>"100.000"</code>.</li>
+<li>
+<code><a href="../reference/format_num_br.html">format_num_br()</a></code> no longer left-pads results with spaces when given a vector. <code>format_num_br(c(100, 1000))</code> returned <code>c("  100", "1.000")</code> and now returns <code>c("100", "1.000")</code>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="documentation-1-2-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-2-0"></a></h3>
@@ -96,16 +102,12 @@
 <div class="section level3">
 <h3 id="breaking-changes-1-1-0">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-1-0"></a></h3>
 <ul><li>Removed <code>showtext</code> and <code>sysfonts</code> dependencies.</li>
-<li>Removed <code>import_fonts()</code>. Use <code><a href="../reference/install_poppins.html">install_poppins()</a></code> instead.</li>
+<li>Removed <code>import_fonts()</code>.</li>
 <li>Removed automatic showtext initialization on package load.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="new-features-1-1-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-1-0"></a></h3>
 <ul><li>
-<code><a href="../reference/install_poppins.html">install_poppins()</a></code>: download and install Poppins system-wide (one-time setup).</li>
-<li>
-<code><a href="../reference/check_poppins_installed.html">check_poppins_installed()</a></code>: check if Poppins is available.</li>
-<li>
 <code><a href="../reference/font_status.html">font_status()</a></code>: report font setup status and recommendations.</li>
 <li>
 <code><a href="../reference/ggsave_benvi.html">ggsave_benvi()</a></code>: wrapper around <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave()</a></code> that uses the ragg device for PNG files when available; defaults to 300 DPI.</li>
@@ -186,7 +188,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

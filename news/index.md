@@ -11,8 +11,11 @@
   `list_palettes()`. Use
   [`show_palettes()`](https://viniciusoike.github.io/benviplot/reference/show_palettes.md)
   for palette exploration.
-- [`check_poppins_installed()`](https://viniciusoike.github.io/benviplot/reference/check_poppins_installed.md)
-  is now an internal function.
+- Removed `install_poppins()` and `check_poppins_installed()`. Poppins
+  is now bundled with the package and registered automatically on load,
+  so no manual setup is needed. Use
+  [`font_status()`](https://viniciusoike.github.io/benviplot/reference/font_status.md)
+  to check availability.
 - Reduced hard dependencies: `ggfittext` and `systemfonts` moved to
   Suggests; `forcats`, `lifecycle`, and `scales` removed from Imports.
 
@@ -21,6 +24,16 @@
 - [`show_palettes()`](https://viniciusoike.github.io/benviplot/reference/show_palettes.md)
   gains a `"diverging"` type and pattern-based name filtering.
 - Scale functions now have a sensible default palette.
+
+### Bug Fixes
+
+- [`format_num_br()`](https://viniciusoike.github.io/benviplot/reference/format_num_br.md)
+  no longer returns scientific notation for large values.
+  `format_num_br(1e5)` returned `"1e+05"` and now returns `"100.000"`.
+- [`format_num_br()`](https://viniciusoike.github.io/benviplot/reference/format_num_br.md)
+  no longer left-pads results with spaces when given a vector.
+  `format_num_br(c(100, 1000))` returned `c(" 100", "1.000")` and now
+  returns `c("100", "1.000")`.
 
 ### Documentation
 
@@ -79,17 +92,11 @@ eliminating DPI mismatch issues in font rendering.
 ### Breaking Changes
 
 - Removed `showtext` and `sysfonts` dependencies.
-- Removed `import_fonts()`. Use
-  [`install_poppins()`](https://viniciusoike.github.io/benviplot/reference/install_poppins.md)
-  instead.
+- Removed `import_fonts()`.
 - Removed automatic showtext initialization on package load.
 
 ### New Features
 
-- [`install_poppins()`](https://viniciusoike.github.io/benviplot/reference/install_poppins.md):
-  download and install Poppins system-wide (one-time setup).
-- [`check_poppins_installed()`](https://viniciusoike.github.io/benviplot/reference/check_poppins_installed.md):
-  check if Poppins is available.
 - [`font_status()`](https://viniciusoike.github.io/benviplot/reference/font_status.md):
   report font setup status and recommendations.
 - [`ggsave_benvi()`](https://viniciusoike.github.io/benviplot/reference/ggsave_benvi.md):

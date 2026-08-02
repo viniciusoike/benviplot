@@ -11,7 +11,7 @@ font_status()
 
 ## Value
 
-Invisibly returns a list with `poppins_installed` and `ragg_available`.
+Invisibly returns a list with `poppins_available` and `ragg_available`.
 
 ## Examples
 
@@ -20,7 +20,6 @@ font_status()
 #> 
 #> ── benviplot Font Status ───────────────────────────────────────────────────────
 #> ✔ Poppins font: registered (bundled)
-#> ℹ `theme_benvi()` will use Poppins automatically.
 #> ✔ ragg package: available
-#> ✔ Your setup is optimal for benviplot!
+#> ✔ `theme_benvi()` will use Poppins automatically with ragg devices.
 ```

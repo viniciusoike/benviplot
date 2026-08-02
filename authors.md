@@ -3,6 +3,11 @@
 ## Authors
 
 - **Vinicius Oike**. Author, maintainer, copyright holder.
+  [](https://orcid.org/0009-0005-8015-9189)
+
+- **The Poppins Project Authors**. Copyright holder.  
+  Poppins font (SIL Open Font License 1.1),
+  https://github.com/itfoundry/Poppins
 
 ## Citation
 

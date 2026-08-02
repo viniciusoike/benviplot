@@ -1,5 +1,6 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://viniciusoike.github.io/benviplot/404.html</loc></url>
+<url><loc>https://viniciusoike.github.io/benviplot/AGENTS.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/CLAUDE.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/DISCLAIMER.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/LICENSE-text.html</loc></url>
@@ -10,7 +11,6 @@
 <url><loc>https://viniciusoike.github.io/benviplot/index.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/news/index.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/benvi_palette.html</loc></url>
-<url><loc>https://viniciusoike.github.io/benviplot/reference/check_poppins_installed.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/font_status.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/format_num_br.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/get_hist_bw.html</loc></url>
@@ -18,7 +18,6 @@
 <url><loc>https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-discrete.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/ggsave_benvi.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/index.html</loc></url>
-<url><loc>https://viniciusoike.github.io/benviplot/reference/install_poppins.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/iqa.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/iqaiw.html</loc></url>
 <url><loc>https://viniciusoike.github.io/benviplot/reference/plot_area.html</loc></url>
