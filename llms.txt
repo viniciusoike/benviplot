@@ -159,7 +159,7 @@ plot_column(sales, x = x, y = y, text = TRUE)
 
 ![](reference/figures/readme_plot_example_3.png)
 
-For more examples visit the [pacakge’s
+For more examples visit the [package’s
 website](https://viniciusoike.github.io/benviplot/)
 
 ## Acknowledgments
