@@ -46,6 +46,24 @@ test_that("format_num_br handles vectors", {
   expect_length(result, 3)
 })
 
+test_that("format_num_br never uses scientific notation", {
+  # format() switches to scientific notation when it is shorter, which made
+  # format_num_br(1e5) return "1e+05"
+  expect_equal(format_num_br(100000), "100.000")
+  expect_equal(format_num_br(1e6), "1.000.000")
+  expect_equal(format_num_br(1e15), "1.000.000.000.000.000")
+  expect_false(any(grepl("e[+-]", format_num_br(10^(1:15)))))
+})
+
+test_that("format_num_br does not pad elements to a common width", {
+  # format() right-justifies to the widest element unless trim = TRUE, which
+  # left-padded shorter labels with spaces
+  result <- format_num_br(c(100, 1000, 10000))
+
+  expect_equal(result, c("100", "1.000", "10.000"))
+  expect_false(any(grepl("^\\s", result)))
+})
+
 test_that("format_num_br handles zero", {
   result <- format_num_br(0)
 

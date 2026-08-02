@@ -64,8 +64,16 @@ format_num_br <- function(x, digits = 1, percent = FALSE) {
 
   # Round number (note: digits can be negative)
   x <- round(x, digits = digits)
-  # Brazilian standard number formatting
-  x <- format(x, big.mark = ".", decimal.mark = ",")
+  # Brazilian standard number formatting. scientific = FALSE keeps large values
+  # readable ("100.000" rather than "1e+05"); trim = FALSE would left-pad every
+  # element to a common width, which is wrong for plot and table labels.
+  x <- format(
+    x,
+    big.mark = ".",
+    decimal.mark = ",",
+    scientific = FALSE,
+    trim = TRUE
+  )
   # Append % symbol if requested
   if (isTRUE(percent)) {
     x <- paste0(x, "%")

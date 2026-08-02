@@ -15,6 +15,14 @@
 - `show_palettes()` gains a `"diverging"` type and pattern-based name filtering.
 - Scale functions now have a sensible default palette.
 
+## Bug Fixes
+
+- `format_num_br()` no longer returns scientific notation for large values.
+  `format_num_br(1e5)` returned `"1e+05"` and now returns `"100.000"`.
+- `format_num_br()` no longer left-pads results with spaces when given a vector.
+  `format_num_br(c(100, 1000))` returned `c("  100", "1.000")` and now returns
+  `c("100", "1.000")`.
+
 ## Documentation
 
 - Reduced to a single vignette (`getting-started`); removed color-palettes, plot-functions,
