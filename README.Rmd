@@ -17,9 +17,9 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/viniciusoike/benviplot/workflows/R-CMD-check/badge.svg)](https://github.com/viniciusoike/benviplot/actions)
 [![Codecov test coverage](https://codecov.io/gh/viniciusoike/benviplot/branch/master/graph/badge.svg)](https://app.codecov.io/gh/viniciusoike/benviplot?branch=master)
-[![pkgdown](https://github.com/viniciusoike/benviplot/workflows/pkgdown/badge.svg)](https://github.com/viniciusoike/benviplot/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![R-universe](https://viniciusoike.r-universe.dev/badges/benviplot)](https://viniciusoike.r-universe.dev/benviplot)
 <!-- badges: end -->
 
 ## Overview
@@ -161,13 +161,7 @@ plot_column(sales, x = x, y = y, text = TRUE)
 
 ![](man/figures/readme_plot_example_3.png)
 
-## Getting Help
-
-Visit https://viniciusoike.github.io/benviplot/
-
-## License
-
-MIT License. See [LICENSE.md](https://github.com/viniciusoike/benviplot/blob/master/LICENSE.md) for details.
+For more examples visit the [pacakge's website](https://viniciusoike.github.io/benviplot/)
 
 ## Acknowledgments
 

@@ -8,11 +8,11 @@
 [![R-CMD-check](https://github.com/viniciusoike/benviplot/workflows/R-CMD-check/badge.svg)](https://github.com/viniciusoike/benviplot/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/viniciusoike/benviplot/branch/master/graph/badge.svg)](https://app.codecov.io/gh/viniciusoike/benviplot?branch=master)
-[![pkgdown](https://github.com/viniciusoike/benviplot/workflows/pkgdown/badge.svg)](https://github.com/viniciusoike/benviplot/actions)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![R-universe](https://viniciusoike.r-universe.dev/badges/benviplot)](https://viniciusoike.r-universe.dev/benviplot)
 <!-- badges: end -->
 
 ## Overview
@@ -45,18 +45,11 @@ remotes::install_github("viniciusoike/benviplot")
 ## Font Setup
 
 `benviplot` bundles the Poppins font family and registers it
-automatically on load (requires the `systemfonts` package). By default,
-`theme_benvi()` uses the system sans-serif font so the package works on
-any rendering device without warnings.
+automatically on load (requires the `systemfonts` package). When Poppins
+is registered, `theme_benvi()` uses it by default. Without
+`systemfonts`, the theme falls back to the system sans-serif font.
 
-To enable Poppins, set the option once per session:
-
-``` r
-options(theme_benvi.font_family = "Poppins")
-```
-
-To make this permanent, add that line to your `~/.Rprofile`. For the
-best rendering quality, also install the `ragg` package:
+For the best rendering quality, also install the `ragg` package:
 
 ``` r
 install.packages("ragg")
@@ -169,15 +162,8 @@ plot_column(sales, x = x, y = y, text = TRUE)
 
 ![](man/figures/readme_plot_example_3.png)
 
-## Getting Help
-
-Visit <https://viniciusoike.github.io/benviplot/>
-
-## License
-
-MIT License. See
-[LICENSE.md](https://github.com/viniciusoike/benviplot/blob/master/LICENSE.md)
-for details.
+For more examples visit the [pacakge’s
+website](https://viniciusoike.github.io/benviplot/)
 
 ## Acknowledgments
 
