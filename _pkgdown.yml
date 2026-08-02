@@ -63,7 +63,6 @@ reference:
   - title: Font Management
     desc: Font setup and status
     contents:
-    - install_poppins
     - font_status
 
   - title: Saving Plots

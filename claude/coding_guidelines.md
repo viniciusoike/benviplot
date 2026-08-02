@@ -804,7 +804,7 @@ Apply consistently across all `plot_*` functions.
 # Good - side effects / internet
 #' @examples
 #' \dontrun{
-#' install_poppins()
+#' download_external_data()
 #' }
 
 # Avoid - unnecessary wrapping of fast, self-contained examples
@@ -820,9 +820,9 @@ Apply consistently across all `plot_*` functions.
 - All `plot_*` functions (`plot_line`, `plot_column`, `plot_scatter`, `plot_area`, `plot_histogram`, `plot_add_xy`)
 - `theme_benvi()`, `benvi_palette()`, `show_palettes()`
 - Scale functions: `scale_color_benvi_d/c()`, `scale_fill_benvi_d/c()` and their `_colour_` aliases
-- User-facing utilities: `font_status()`, `install_poppins()`, `ggsave_benvi()`, `format_num_br()`
+- User-facing utilities: `font_status()`, `ggsave_benvi()`, `format_num_br()`
 
 **Do not export (mark with `@keywords internal`):**
 - `detect_aesthetic_type()`, `is_valid_color()`, `get_hist_bw()`
-- `register_bundled_poppins()`, `check_poppins_installed()`
+- `register_bundled_poppins()`
 - Any helper prefixed with `.`

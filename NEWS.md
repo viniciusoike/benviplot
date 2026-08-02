@@ -6,7 +6,9 @@
   `pretty_number()`, `setup_benvi_fonts()`, and `get_poppins_variants()`.
 - Removed utility functions `benvi_colors()`, `list_colors()`, and `list_palettes()`.
   Use `show_palettes()` for palette exploration.
-- `check_poppins_installed()` is now an internal function.
+- Removed `install_poppins()` and `check_poppins_installed()`. Poppins is now bundled
+  with the package and registered automatically on load, so no manual setup is needed.
+  Use `font_status()` to check availability.
 - Reduced hard dependencies: `ggfittext` and `systemfonts` moved to Suggests; `forcats`,
   `lifecycle`, and `scales` removed from Imports.
 
@@ -71,13 +73,11 @@ DPI mismatch issues in font rendering.
 ## Breaking Changes
 
 - Removed `showtext` and `sysfonts` dependencies.
-- Removed `import_fonts()`. Use `install_poppins()` instead.
+- Removed `import_fonts()`.
 - Removed automatic showtext initialization on package load.
 
 ## New Features
 
-- `install_poppins()`: download and install Poppins system-wide (one-time setup).
-- `check_poppins_installed()`: check if Poppins is available.
 - `font_status()`: report font setup status and recommendations.
 - `ggsave_benvi()`: wrapper around `ggsave()` that uses the ragg device for PNG files
   when available; defaults to 300 DPI.
