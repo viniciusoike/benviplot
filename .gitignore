@@ -6,10 +6,19 @@
 Rplots.pdf
 /doc/
 /Meta/
-Rplots.pdf
 docs/
 inst/doc
 README.html
 refs/
 
 /.quarto/
+
+# Build artifacts
+*.tar.gz
+*.Rcheck/
+
+# knitr figure output rendered outside man/figures
+/figure/
+
+# testthat failure dump
+tests/testthat/testthat-problems.rds

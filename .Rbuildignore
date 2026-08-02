@@ -20,3 +20,6 @@
 ^README\.html$
 ^cran-comments\.md$
 ^AGENTS\.md$
+\.DS_Store$
+^tests/testthat/testthat-problems\.rds$
+^.*\.tar\.gz$
