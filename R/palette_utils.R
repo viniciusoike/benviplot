@@ -27,18 +27,27 @@
 show_palettes <- function(type = "all", n = NULL) {
   all_names <- names(palette)
 
-  theme_pals <- c("grays", "browns", "yellows", "greens", "blues", "purples", "pinks", "oranges")
+  theme_pals <- c(
+    "grays",
+    "browns",
+    "yellows",
+    "greens",
+    "blues",
+    "purples",
+    "pinks",
+    "oranges"
+  )
   brand_pals <- c("basic", "benvi_blue", "benvi_purple")
 
   pal_names <- switch(
     type,
-    all         = all_names,
-    theme       = theme_pals,
-    sequential  = grep("^seq_",           all_names, value = TRUE),
-    qualitative = grep("^qual_",          all_names, value = TRUE),
-    diverging   = grep("^div_",           all_names, value = TRUE),
-    city        = grep("^(spo|rio|bhe)_", all_names, value = TRUE),
-    brand       = brand_pals,
+    all = all_names,
+    theme = theme_pals,
+    sequential = grep("^seq_", all_names, value = TRUE),
+    qualitative = grep("^qual_", all_names, value = TRUE),
+    diverging = grep("^div_", all_names, value = TRUE),
+    city = grep("^(spo|rio|bhe)_", all_names, value = TRUE),
+    brand = brand_pals,
     cli::cli_abort(c(
       "{.arg type} must be one of: {.val all}, {.val theme}, {.val sequential}, {.val qualitative}, {.val diverging}, {.val city}, or {.val brand}.",
       "x" = "You provided: {.val {type}}"
