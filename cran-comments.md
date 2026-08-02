@@ -21,7 +21,8 @@ This is the first submission of benviplot to CRAN.
 
 ## Bundled third-party files
 
-The package bundles the Poppins font family (18 .ttf files) in inst/fonts/.
+The package bundles the Poppins font family (4 .ttf files: Regular, Bold,
+Italic, and BoldItalic) in inst/fonts/.
 Poppins is licensed under the SIL Open Font License, Version 1.1.
 The license text is included in inst/fonts/OFL.txt and the copyright notice
 is documented in inst/COPYRIGHTS.
