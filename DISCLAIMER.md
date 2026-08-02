@@ -4,7 +4,7 @@
 
 ## Background
 
-Benvi was QuintoAndar's real estate platform brand that operated from 2022 to 2024, primarily serving the Mexican market. When the brand was discontinued and rebranded as Inmuebles24 Full in April 2024, this package preserved its publicly available color palettes and design system for the R community.
+Benvi is a real estate platform brand associated with QuintoAndar. This package makes its publicly available color palettes and design system usable from R.
 
 ## Independence
 
@@ -22,7 +22,7 @@ All code in this repository is original work by Vinicius Oike. The package provi
 
 ## Color Schemes
 
-The color palettes used in this package are based on publicly available design guidelines from the discontinued Benvi brand. These are used solely for data visualization purposes.
+The color palettes used in this package are based on publicly available design guidelines from the Benvi brand. These are used solely for data visualization purposes.
 
 ## License
 

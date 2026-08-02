@@ -181,5 +181,5 @@ for details.
 
 ## Acknowledgments
 
-This package uses color schemes inspired by the discontinued Benvi
-brand. This is an independent project not affiliated with QuintoAndar.
+This package uses color schemes inspired by the Benvi brand. This is an
+independent project not affiliated with QuintoAndar.

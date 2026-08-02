@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-`benviplot` provides color palettes and ggplot2 helper functions for exploratory data analysis. The color schemes are based on Benvi, a discontinued brand of the Brazilian proptech QuintoAndar[^1]. The package ships with a custom ggplot2 theme, a family of discrete and continuous color scales, and convenience wrappers for common chart types.
+`benviplot` provides color palettes and ggplot2 helper functions for exploratory data analysis. The color schemes are based on Benvi, a brand of the Brazilian proptech QuintoAndar[^1]. The package ships with a custom ggplot2 theme, a family of discrete and continuous color scales, and convenience wrappers for common chart types.
 
 [^1]: All color information used here is publicly available and this project is not affiliated with QuintoAndar.
 

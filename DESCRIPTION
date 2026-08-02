@@ -7,9 +7,8 @@ Authors@R: c(
     person("The Poppins Project Authors", role = "cph",
            comment = "Poppins font (SIL Open Font License 1.1), https://github.com/itfoundry/Poppins"))
 Description: Provides 'ggplot2' scale functions and a custom theme derived from the
-    'Benvi' visual identity of QuintoAndar Group (discontinued in 2024). Offers
-    qualitative, sequential, and diverging color palettes with both discrete and
-    continuous scale variants.
+    'Benvi' visual identity of QuintoAndar Group. Offers qualitative, sequential,
+    and diverging color palettes with both discrete and continuous scale variants.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en-US
