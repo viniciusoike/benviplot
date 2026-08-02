@@ -24,7 +24,6 @@ Imports:
     graphics,
     rlang
 Suggests:
-    curl,
     ggfittext,
     knitr,
     pkgdown,
