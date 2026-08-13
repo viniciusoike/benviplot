@@ -28,10 +28,6 @@ Sales price data at a region level for major Brazilian cities.
 Contains contract prices per square meter, allowing comparison across cities
 and zones.
 }
-\details{
-This dataset provides zone-level granularity, showing sales prices for
-specific regions within cities.
-}
 \examples{
 # Compare contract prices across zones
 library(ggplot2)
@@ -44,7 +40,8 @@ bhe_sales$name_zone <- factor(
 )
 
 ggplot(bhe_sales, aes(x = price_m2, y = name_zone)) +
-geom_col(fill = benvi_palette("benvi_blue")[3]) +
-theme_benvi(base_family = "sans")
+  geom_col(fill = benvi_palette("benvi_blue")[3]) +
+  labs(x = "Median price per m2 (R$)", y = NULL) +
+  theme_benvi(base_family = "sans")
 }
 \keyword{datasets}

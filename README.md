@@ -20,12 +20,12 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 `benviplot` provides color palettes and ggplot2 helpers for creating
 high quality graphics. The package includes:
 
-- **Color Palettes**: curated color schemes (Set, Qualitative,
-  Sequential palettes).
+- **Color Palettes**: theme, qualitative, sequential, and diverging
+  color schemes.
 - **ggplot2 Scales**: discrete and continuous scales for seamless
   ggplot2 integration.
 - **Plot Helpers**: wrapper functions for common visualizations.
-- **Custom Theme**: clean, professional theme with Poppins font support.
+- **Custom Theme**: a minimal theme that uses the bundled Poppins font.
 
 ## Installation
 
@@ -59,10 +59,12 @@ You can verify your current setup with `font_status()`.
 
 ## Usage
 
-Load the package along with ggplot2.
+Load the package along with ggplot2. The examples below also use dplyr
+for data manipulation.
 
 ``` r
 library(ggplot2)
+library(dplyr)
 library(benviplot)
 ```
 
@@ -95,7 +97,7 @@ index_data <- iqaiw |>
   )
 
 ggplot(index_data, aes(date, index, color = rooms)) +
-  geom_line(lwd = 0.7) +
+  geom_line(linewidth = 0.7) +
   facet_wrap(vars(name_muni)) +
   scale_color_benvi_d() +
   labs(
@@ -113,23 +115,23 @@ ggplot(index_data, aes(date, index, color = rooms)) +
 When using a continuous scale the colors are interpolated.
 
 ``` r
-# Price per m2 by city over time
+# Year-over-year change by city over time
 index_data <- iqaiw |>
   filter(
     rooms == "Total",
     between(date, as.Date("2023-01-01"), as.Date("2025-12-31"))
-  ) |>
-  mutate(xdate = lubridate::year(date) + (lubridate::month(date) - 1) / 12)
+  )
 
-ggplot(index_data, aes(x = xdate, y = name_muni, fill = acum12m * 100)) +
+ggplot(index_data, aes(x = date, y = name_muni, fill = acum12m * 100)) +
   geom_tile(height = 0.6, color = "gray90") +
   scale_fill_benvi_c(
     pal_name = "benvi_blue",
     name = "YoY Change (%)",
     direction = -1
   ) +
-  scale_x_continuous(
-    breaks = seq(2023, 2025, 1),
+  scale_x_date(
+    date_breaks = "1 year",
+    date_labels = "%Y",
     expand = expansion(0)
   ) +
   labs(x = NULL, y = NULL) +

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_line.R
 \name{plot_line}
 \alias{plot_line}
-\title{Title}
+\title{Plot a line chart}
 \usage{
 plot_line(
   data,
@@ -45,7 +45,7 @@ on the plot.}
 A ggplot2 plot
 }
 \description{
-Title
+Plot a line chart
 }
 \examples{
 \dontshow{.op <- options(theme_benvi.font_family = "sans")}
