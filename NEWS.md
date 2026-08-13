@@ -91,14 +91,13 @@ First official stable release.
 
 ## Overview
 
-- 36 curated color palettes organized by type (theme, sequential, qualitative, city, brand).
-- ggplot2 scale functions: `scale_color_benvi_d()`, `scale_fill_benvi_d()`,
-  `scale_color_benvi_c()`, `scale_fill_benvi_c()`.
-- Plot helpers: `plot_line()`, `plot_column()`, `plot_scatter()`, `plot_area()`,
-  `plot_histogram()`.
-- Custom theme `theme_benvi()` with Poppins font support.
-- Sample datasets: `iqa`, `iqaiw`.
-- 250 tests, pkgdown site, GitHub Actions CI/CD.
+- Added color palettes organized by type (theme, sequential, qualitative, city, brand).
+- Added ggplot2 scale functions `scale_color_benvi_d()`, `scale_fill_benvi_d()`,
+  `scale_color_benvi_c()`, and `scale_fill_benvi_c()`.
+- Added plot helpers `plot_line()`, `plot_column()`, `plot_scatter()`, `plot_area()`,
+  and `plot_histogram()`.
+- Added the `theme_benvi()` theme with Poppins font support.
+- Added the `iqa` and `iqaiw` datasets.
 
 ## Breaking Changes (from v0.9.x)
 

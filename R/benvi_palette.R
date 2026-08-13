@@ -1,10 +1,12 @@
-#' A color palette for Benvi.
+#' Get the colors of a Benvi palette
 #'
-#' Construction of the package is inspired by the [ghibli](https://github.com/ewenme/ghibli)
-#' package.
+#' Returns the hex codes of a named Benvi palette. Use [show_palettes()] to see
+#' the available palettes. The interface follows the
+#' [ghibli](https://github.com/ewenme/ghibli) package.
 #'
-#' @param pal_name Name of the palette. Defaults to "qual_2".
-#' @param n Number of colors desired. Sets have 4 colors, Qual have 8 colors.
+#' @param pal_name Name of the palette. Defaults to `"qual_2"`.
+#' @param n Number of colors desired. Theme palettes hold 4 colors, qualitative
+#' palettes 8, and sequential palettes 9. Defaults to the full palette.
 #' @param direction Either `1` or `-1`. If `-1` the palette will be reversed.
 #' @param type Either "continuous" or "discrete". Continuous automatically
 #' interpolates between the colors.
