@@ -37,6 +37,11 @@ jobs:
           extra-packages: any::pkgdown, local::.
           needs: website
 
+      # pkgdown renders every root-level .md and does not read .Rbuildignore.
+      # Drop the agent instruction files so they stay off the public site.
+      - name: Remove agent instruction files
+        run: rm -f CLAUDE.md AGENTS.md
+
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
         shell: Rscript {0}
