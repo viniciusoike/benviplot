@@ -59,8 +59,8 @@
 
 ## New Features
 
-- New dataset `sales_report`: zone-level rental price data with listing vs contract prices
-  (272 rows).
+- New dataset `sales_report`: zone-level median sale price per square meter for
+  Belo Horizonte, Rio de Janeiro, and São Paulo (272 rows).
 - `plot_scatter()` gains a `fit_color` parameter for custom trend line colors.
 - `theme_benvi()` now uses relative font sizes and adds plot margins for better spacing.
 
