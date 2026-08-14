@@ -209,6 +209,16 @@ test_that("plot_histogram respects palette parameter", {
   expect_s3_class(p, "ggplot")
 })
 
+test_that("plot_histogram only facets when facet is supplied", {
+  p_default <- plot_histogram(data = mtcars, x = mpg)
+  p_false <- plot_histogram(data = mtcars, x = mpg, facet = FALSE)
+  p_facet <- plot_histogram(data = mtcars, x = mpg, facet = cyl)
+
+  expect_s3_class(p_default$facet, "FacetNull")
+  expect_s3_class(p_false$facet, "FacetNull")
+  expect_s3_class(p_facet$facet, "FacetWrap")
+})
+
 # plot_add_xy() tests ----
 
 test_that("plot_add_xy adds axes to plot", {

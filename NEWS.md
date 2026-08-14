@@ -26,6 +26,8 @@
   `c("100", "1.000")`.
 - Registered the `print()` method for palette objects. `benvi_palette("greens")`
   printed hex codes and attributes at the console; it now draws the color swatches.
+- `plot_histogram()` no longer facets when `facet` is left at its default.
+  Passing the documented default explicitly built a panel for the literal `FALSE`.
 
 ## Documentation
 

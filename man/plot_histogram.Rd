@@ -15,7 +15,7 @@ plot_histogram(
   bins = NULL,
   method = "fd",
   density = FALSE,
-  facet = FALSE,
+  facet = NULL,
   ...
 )
 }
@@ -46,7 +46,8 @@ See Details for algorithm descriptions. Ignored when \code{bins} is specified.}
 
 \item{density}{Logical indicating if density should be plotted on y-axis.}
 
-\item{facet}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Optional variable to facet the graphics.}
+\item{facet}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Optional variable to facet
+the graphics. \code{NULL} (default) draws a single panel.}
 
 \item{...}{Additional parameters to \code{facet_wrap()}}
 }
