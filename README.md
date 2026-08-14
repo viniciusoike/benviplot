@@ -29,10 +29,10 @@ high quality graphics. The package includes:
 
 ## Installation
 
-Install the released version from CRAN:
+`benviplot` is not on CRAN yet. Install from R-universe:
 
 ``` r
-install.packages("benviplot")
+install.packages("benviplot", repos = "https://viniciusoike.r-universe.dev")
 ```
 
 Or install the development version from GitHub:
