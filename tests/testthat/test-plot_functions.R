@@ -199,14 +199,17 @@ test_that("plot_histogram works with different bandwidth methods", {
   expect_s3_class(p3, "ggplot")
 })
 
-test_that("plot_histogram respects palette parameter", {
+test_that("plot_histogram respects pal_name", {
   p <- plot_histogram(
     data = mtcars,
     x = mpg,
-    palette = "seq_greens"
+    fill = factor(cyl),
+    pal_name = "seq_greens"
   )
 
-  expect_s3_class(p, "ggplot")
+  fills <- unique(ggplot_build(p)$data[[1]]$fill)
+
+  expect_setequal(fills, as.character(benvi_palette("seq_greens", n = 3)))
 })
 
 test_that("plot_histogram only facets when facet is supplied", {
@@ -221,23 +224,74 @@ test_that("plot_histogram only facets when facet is supplied", {
 
 # plot_add_xy() tests ----
 
-test_that("plot_add_xy adds axes to plot", {
+test_that("plot_add_xy adds horizontal and vertical lines", {
   base_plot <- ggplot(mtcars, aes(x = wt - mean(wt), y = mpg - mean(mpg))) +
     geom_point()
 
-  p_both <- plot_add_xy(base_plot, type = "both")
-  p_x <- plot_add_xy(base_plot, type = "x")
-  p_y <- plot_add_xy(base_plot, type = "y")
-  p_none <- plot_add_xy(base_plot, type = "none")
+  p <- plot_add_xy(base_plot, type = "both")
 
-  expect_s3_class(p_both, "ggplot")
-  expect_s3_class(p_x, "ggplot")
-  expect_s3_class(p_y, "ggplot")
-  expect_s3_class(p_none, "ggplot")
+  expect_s3_class(p, "ggplot")
 
-  # Check that axes were added
-  expect_gt(length(p_both$layers), length(base_plot$layers))
-  expect_equal(length(p_none$layers), length(base_plot$layers))
+  # Should have added 2 layers (hline and vline)
+  expect_equal(length(p$layers), 3) # original + 2 new layers
+})
+
+test_that("plot_add_xy type='x' adds only horizontal line", {
+  base_plot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+    geom_point()
+
+  p <- plot_add_xy(base_plot, type = "x")
+
+  geom_classes <- sapply(p$layers, function(l) class(l$geom)[1])
+
+  expect_true("GeomHline" %in% geom_classes)
+  expect_false("GeomVline" %in% geom_classes)
+})
+
+test_that("plot_add_xy type='y' adds only vertical line", {
+  base_plot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+    geom_point()
+
+  p <- plot_add_xy(base_plot, type = "y")
+
+  geom_classes <- sapply(p$layers, function(l) class(l$geom)[1])
+
+  expect_true("GeomVline" %in% geom_classes)
+  expect_false("GeomHline" %in% geom_classes)
+})
+
+test_that("plot_add_xy type='none' adds no lines", {
+  base_plot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+    geom_point()
+
+  p <- plot_add_xy(base_plot, type = "none")
+
+  expect_equal(length(p$layers), length(base_plot$layers))
+})
+
+test_that("plot_add_xy preserves existing layers", {
+  base_plot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+    geom_point() +
+    geom_smooth(method = "lm", formula = y ~ x)
+
+  p <- plot_add_xy(base_plot, type = "both")
+
+  expect_equal(length(p$layers), length(base_plot$layers) + 2)
+})
+
+test_that("plot_add_xy works with faceted and themed plots", {
+  p <- ggplot(
+    mtcars,
+    aes(x = wt - mean(wt), y = mpg - mean(mpg), color = factor(cyl))
+  ) +
+    geom_point() +
+    facet_wrap(~gear) +
+    theme_benvi()
+
+  p_with_axes <- plot_add_xy(p, type = "both")
+
+  expect_s3_class(p_with_axes, "ggplot")
+  expect_no_error(ggplot_build(p_with_axes))
 })
 
 # Edge case tests ----
