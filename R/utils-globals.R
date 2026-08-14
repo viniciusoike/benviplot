@@ -4,9 +4,5 @@ utils::globalVariables(c(
   "ordered_fill",
   # plot_column
   "ytext",
-  "label",
-  # plot_line_trend
-  "ts_date",
-  "value",
-  "series_id"
+  "label"
 ))
