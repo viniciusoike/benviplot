@@ -1,3 +1,24 @@
+# benviplot 1.2.1
+
+## Breaking Changes
+
+- Removed the unimplemented `text`, `text_color`, `text_family`, `text_size`, and
+  `position_text` arguments from `plot_area()`. They were accepted and ignored.
+
+## Bug Fixes
+
+- Registered the `print()` method for palette objects. `benvi_palette("greens")`
+  printed hex codes and attributes at the console; it now draws the color swatches.
+- `plot_histogram()` no longer facets when `facet` is left at its default.
+  Passing the documented default explicitly built a panel for the literal `FALSE`.
+
+## Documentation
+
+- Installation instructions point at R-universe. The README offered a CRAN install
+  for a package that is not on CRAN.
+
+---
+
 # benviplot 1.2.0
 
 ## Breaking Changes
@@ -53,8 +74,8 @@
 
 ## New Features
 
-- New dataset `sales_report`: zone-level rental price data with listing vs contract prices
-  (272 rows).
+- New dataset `sales_report`: zone-level median sale price per square meter for
+  Belo Horizonte, Rio de Janeiro, and São Paulo (272 rows).
 - `plot_scatter()` gains a `fit_color` parameter for custom trend line colors.
 - `theme_benvi()` now uses relative font sizes and adds plot margins for better spacing.
 
@@ -91,14 +112,13 @@ First official stable release.
 
 ## Overview
 
-- 36 curated color palettes organized by type (theme, sequential, qualitative, city, brand).
-- ggplot2 scale functions: `scale_color_benvi_d()`, `scale_fill_benvi_d()`,
-  `scale_color_benvi_c()`, `scale_fill_benvi_c()`.
-- Plot helpers: `plot_line()`, `plot_column()`, `plot_scatter()`, `plot_area()`,
-  `plot_histogram()`.
-- Custom theme `theme_benvi()` with Poppins font support.
-- Sample datasets: `iqa`, `iqaiw`.
-- 250 tests, pkgdown site, GitHub Actions CI/CD.
+- Added color palettes organized by type (theme, sequential, qualitative, city, brand).
+- Added ggplot2 scale functions `scale_color_benvi_d()`, `scale_fill_benvi_d()`,
+  `scale_color_benvi_c()`, and `scale_fill_benvi_c()`.
+- Added plot helpers `plot_line()`, `plot_column()`, `plot_scatter()`, `plot_area()`,
+  and `plot_histogram()`.
+- Added the `theme_benvi()` theme with Poppins font support.
+- Added the `iqa` and `iqaiw` datasets.
 
 ## Breaking Changes (from v0.9.x)
 

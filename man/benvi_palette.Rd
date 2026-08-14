@@ -2,7 +2,7 @@
 % Please edit documentation in R/benvi_palette.R
 \name{benvi_palette}
 \alias{benvi_palette}
-\title{A color palette for Benvi.}
+\title{Get the colors of a Benvi palette}
 \usage{
 benvi_palette(
   pal_name = "qual_2",
@@ -12,9 +12,10 @@ benvi_palette(
 )
 }
 \arguments{
-\item{pal_name}{Name of the palette. Defaults to "qual_2".}
+\item{pal_name}{Name of the palette. Defaults to \code{"qual_2"}.}
 
-\item{n}{Number of colors desired. Sets have 4 colors, Qual have 8 colors.}
+\item{n}{Number of colors desired. Theme palettes hold 4 colors, qualitative
+palettes 8, and sequential palettes 9. Defaults to the full palette.}
 
 \item{direction}{Either \code{1} or \code{-1}. If \code{-1} the palette will be reversed.}
 
@@ -25,8 +26,9 @@ interpolates between the colors.}
 A vector of characters with color attribute
 }
 \description{
-Construction of the package is inspired by the \href{https://github.com/ewenme/ghibli}{ghibli}
-package.
+Returns the hex codes of a named Benvi palette. Use \code{\link[=show_palettes]{show_palettes()}} to see
+the available palettes. The interface follows the
+\href{https://github.com/ewenme/ghibli}{ghibli} package.
 }
 \examples{
 # Use default palette

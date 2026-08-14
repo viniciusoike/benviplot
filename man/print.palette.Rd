@@ -6,7 +6,16 @@
 \usage{
 \method{print}{palette}(x, ...)
 }
+\arguments{
+\item{x}{A \code{palette} object, as returned by \code{\link[=benvi_palette]{benvi_palette()}}.}
+
+\item{...}{Ignored.}
+}
+\value{
+\code{x}, invisibly.
+}
 \description{
-Print a palette
+Draws the palette colors as a strip of swatches on the current graphics
+device.
 }
 \keyword{internal}

@@ -93,7 +93,7 @@ The package organizes its palettes into several families: theme, sequential, qua
 show_palettes()
 ```
 
-You can filter by type: `"theme"`, `"sequential"`, `"qualitative"`, `"city"`, or `"brand"`.
+You can filter by type: `"theme"`, `"sequential"`, `"qualitative"`, `"diverging"`, `"city"`, or `"brand"`.
 
 ```{r show-seq}
 show_palettes("sequential")
@@ -158,8 +158,9 @@ ggplot(iqaiw_total, aes(x = date, y = name_muni, fill = acum12m * 100)) +
     name = "YoY Change (%)",
     direction = -1
   ) +
-  scale_x_continuous(
-    breaks = seq(2023, 2025, 1),
+  scale_x_date(
+    date_breaks = "1 year",
+    date_labels = "%Y",
     expand = expansion(0)
   ) +
   labs(x = NULL, y = NULL) +
@@ -204,7 +205,7 @@ plot_column(sales, x = cities, y = revenue, text = TRUE)
 
 ### Scatter plot
 
-`plot_scatter()` maps `x` and `y` to a scatter plot. A `color` argument maps a grouping variable to the point fill using a Benvi palette. Set `smooth = TRUE` to overlay a regression line.
+`plot_scatter()` maps `x` and `y` to a scatter plot. A `color` argument maps a grouping variable to the point color using a Benvi palette. Set `fit = TRUE` to overlay a regression line.
 
 ```{r helper-scatter}
 plot_scatter(
@@ -212,8 +213,9 @@ plot_scatter(
   x = wt,
   y = mpg,
   color = as.factor(cyl),
-  palette = "qual_5",
-  scale_name = "Cylinders"
+  pal_name = "qual_5",
+  scale_name = "Cylinders",
+  fit = TRUE
 )
 ```
 

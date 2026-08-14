@@ -163,3 +163,14 @@ test_that("print.palette method works", {
   # Should not error when printing (produces graphical output, not text)
   expect_no_error(print(pal))
 })
+
+test_that("print.palette is registered so dispatch reaches it", {
+  # Without the S3 registration, print() falls through to print.default and
+  # dumps hex codes to the console instead of drawing swatches.
+  expect_no_error(getS3method("print", "palette"))
+
+  pal <- benvi_palette("greens")
+
+  expect_output(print(pal), NA)
+  expect_identical(withVisible(print(pal))$visible, FALSE)
+})

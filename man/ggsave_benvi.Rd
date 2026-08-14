@@ -28,7 +28,7 @@ is installed, otherwise uses ggplot2's default device selection.}
 
 \item{units}{Units for width and height ("in", "cm", "mm", "px"). Default is "in".}
 
-\item{dpi}{DPI to use for raster graphics. Default is 300 for high quality.}
+\item{dpi}{DPI to use for raster graphics. Defaults to 300.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:ggsave]{ggplot2::ggsave()}}.}
 }
@@ -36,10 +36,10 @@ is installed, otherwise uses ggplot2's default device selection.}
 Invisibly returns the filename.
 }
 \description{
-A wrapper around \code{\link[ggplot2:ggsave]{ggplot2::ggsave()}} with smart defaults optimized for
-benviplot graphics. Automatically uses the ragg graphics device for PNG
-output when available, ensuring high-quality rendering with proper font
-support and no DPI issues.
+A wrapper around \code{\link[ggplot2:ggsave]{ggplot2::ggsave()}} that uses the ragg graphics device for
+PNG output. Registered fonts such as the bundled Poppins are only visible to
+systemfonts-aware devices, so ragg is what lets \code{theme_benvi()} render its
+font in saved files.
 
 If ragg is not installed, falls back to the default graphics device.
 }

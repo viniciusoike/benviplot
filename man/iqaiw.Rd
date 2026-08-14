@@ -35,16 +35,13 @@ the IQA index.
 }
 \section{Methodology}{
 
-Formally, the index is a hedonic double imputed index, controlling for quality
-changes using a flexible GAM specification with location variables. In this
-sense, the IQAIW is more theoretically sound than median stratified indices
-like FipeZap or the former IQA. The mixture of listings and contracts, however,
-lacks theoretical support and seems to be mainly driven by branding purposes.
+The index is a hedonic double imputed index. It controls for quality changes
+using a flexible GAM specification with location variables. The underlying
+sample mixes new rental contracts with online listings, so the index does not
+measure either source in isolation.
 
-The ImovelWeb brand was purchased by QuintoAndar in 2021-22 and the IQAIW
-symbolizes the merging of both brands. In other words, the original IQA could've
-been improved simply by adopting a hedonic methodology, without the need to
-mix data sources.
+QuintoAndar acquired the ImovelWeb brand in 2021-22, and the IQAIW name
+reflects the merger of the two brands.
 }
 
 \examples{
@@ -64,9 +61,9 @@ ggplot(iqaiw_rooms, aes(x = date, y = acum12m, color = rooms)) +
   scale_color_benvi_d(pal_name = "qual_6", name = "Rooms") +
   facet_wrap(vars(name_muni), ncol = 3, scales = "free") +
   labs(
-    title = "IQAIW: Rental Price Index",
+    title = "IQAIW: 12-month rental price change",
     x = "Date",
-    y = "Index (base = 100)"
+    y = "12-month change (decimal)"
   ) +
   theme_benvi(base_family = "sans")
 

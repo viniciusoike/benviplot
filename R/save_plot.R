@@ -1,10 +1,10 @@
 #' Save a ggplot with benviplot optimizations
 #'
 #' @description
-#' A wrapper around [ggplot2::ggsave()] with smart defaults optimized for
-#' benviplot graphics. Automatically uses the ragg graphics device for PNG
-#' output when available, ensuring high-quality rendering with proper font
-#' support and no DPI issues.
+#' A wrapper around [ggplot2::ggsave()] that uses the ragg graphics device for
+#' PNG output. Registered fonts such as the bundled Poppins are only visible to
+#' systemfonts-aware devices, so ragg is what lets `theme_benvi()` render its
+#' font in saved files.
 #'
 #' If ragg is not installed, falls back to the default graphics device.
 #'
@@ -15,7 +15,7 @@
 #'   is installed, otherwise uses ggplot2's default device selection.
 #' @param width,height Plot size in units. Defaults to 7 x 5 inches.
 #' @param units Units for width and height ("in", "cm", "mm", "px"). Default is "in".
-#' @param dpi DPI to use for raster graphics. Default is 300 for high quality.
+#' @param dpi DPI to use for raster graphics. Defaults to 300.
 #' @param ... Additional arguments passed to [ggplot2::ggsave()].
 #'
 #' @return Invisibly returns the filename.

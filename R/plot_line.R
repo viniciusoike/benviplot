@@ -1,4 +1,4 @@
-#' Title
+#' Plot a line chart
 #'
 #' @param data A data.frame type object.
 #' @param x <[`data-masked`][ggplot2::aes_eval]> Variable to be mapped on the x-axis.

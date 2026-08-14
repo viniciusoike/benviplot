@@ -16,7 +16,8 @@
 #'   `"fd"` (default), `"FD"`, `"Scott"`, `"Sturges"`, `"Rice"`, or `"sqrt"`.
 #'   See Details for algorithm descriptions. Ignored when `bins` is specified.
 #' @param density Logical indicating if density should be plotted on y-axis.
-#' @param facet <[`data-masked`][ggplot2::aes_eval]> Optional variable to facet the graphics.
+#' @param facet <[`data-masked`][ggplot2::aes_eval]> Optional variable to facet
+#'   the graphics. `NULL` (default) draws a single panel.
 #' @param ... Additional parameters to `facet_wrap()`
 #'
 #' @details
@@ -76,10 +77,15 @@ plot_histogram <- function(
   bins = NULL,
   method = "fd",
   density = FALSE,
-  facet = FALSE,
+  facet = NULL,
   ...
 ) {
   histBinsMethods <- c("sqrt", "Sturges", "Rice", "Scott", "FD", "fd")
+
+  facet_quo <- rlang::enquo(facet)
+  # FALSE was the former default and is still honoured as "no faceting"
+  has_facet <- !rlang::quo_is_null(facet_quo) &&
+    !identical(rlang::quo_get_expr(facet_quo), FALSE)
 
   fill_quo <- rlang::enquo(fill)
   fill_type <- detect_aesthetic_type(fill_quo, "fill", data)
@@ -129,8 +135,8 @@ plot_histogram <- function(
     p <- p + geom_hline(yintercept = 0)
   }
 
-  if (!missing(facet)) {
-    p <- p + facet_wrap(vars({{ facet }}), ...)
+  if (has_facet) {
+    p <- p + facet_wrap(vars(!!facet_quo), ...)
   }
 
   p <- p + theme_benvi()

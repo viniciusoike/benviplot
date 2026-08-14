@@ -25,7 +25,7 @@
 #'   geom_line() +
 #'   scale_color_benvi_d(pal_name = "qual_9", name = "City") +
 #'   labs(
-#'     title = "IQAIW: Rental Price Index",
+#'     title = "IQA: Rental Price Index",
 #'     x = "Date",
 #'     y = "Index (base = 100)"
 #'   ) +
@@ -43,16 +43,13 @@
 #' the IQA index.
 #'
 #' @section Methodology:
-#' Formally, the index is a hedonic double imputed index, controlling for quality
-#' changes using a flexible GAM specification with location variables. In this
-#' sense, the IQAIW is more theoretically sound than median stratified indices
-#' like FipeZap or the former IQA. The mixture of listings and contracts, however,
-#' lacks theoretical support and seems to be mainly driven by branding purposes.
+#' The index is a hedonic double imputed index. It controls for quality changes
+#' using a flexible GAM specification with location variables. The underlying
+#' sample mixes new rental contracts with online listings, so the index does not
+#' measure either source in isolation.
 #'
-#' The ImovelWeb brand was purchased by QuintoAndar in 2021-22 and the IQAIW
-#' symbolizes the merging of both brands. In other words, the original IQA could've
-#' been improved simply by adopting a hedonic methodology, without the need to
-#' mix data sources.
+#' QuintoAndar acquired the ImovelWeb brand in 2021-22, and the IQAIW name
+#' reflects the merger of the two brands.
 #'
 #' @format
 #' A data frame with 1,660 observations across 6 cities and multiple time periods:
@@ -86,9 +83,9 @@
 #'   scale_color_benvi_d(pal_name = "qual_6", name = "Rooms") +
 #'   facet_wrap(vars(name_muni), ncol = 3, scales = "free") +
 #'   labs(
-#'     title = "IQAIW: Rental Price Index",
+#'     title = "IQAIW: 12-month rental price change",
 #'     x = "Date",
-#'     y = "Index (base = 100)"
+#'     y = "12-month change (decimal)"
 #'   ) +
 #'   theme_benvi(base_family = "sans")
 #'
@@ -110,10 +107,6 @@
 #'   \item{price_m2}{Median contract price per square meter (R$/m²)}
 #' }
 #'
-#' @details
-#' This dataset provides zone-level granularity, showing sales prices for
-#' specific regions within cities.
-#'
 #' @source QuintoAndar (Sales Report 2020-Q1/2023-Q3). \url{https://publicfiles.data.quintoandar.com.br/sale_report/RelatorioCV_4T_2022.pdf}
 #'
 #' @examples
@@ -128,6 +121,7 @@
 #' )
 #'
 #' ggplot(bhe_sales, aes(x = price_m2, y = name_zone)) +
-#' geom_col(fill = benvi_palette("benvi_blue")[3]) +
-#' theme_benvi(base_family = "sans")
+#'   geom_col(fill = benvi_palette("benvi_blue")[3]) +
+#'   labs(x = "Median price per m2 (R$)", y = NULL) +
+#'   theme_benvi(base_family = "sans")
 "sales_report"

@@ -3,7 +3,7 @@
 #' Functions to use `ggplot2` scales with Benvi colors.
 #'
 #' @rdname ggplot2-scales-discrete
-#' @param pal_name Name of the palette. Defaults to "qual_benvi".
+#' @param pal_name Name of the palette. Defaults to `"qual_benvi"`.
 #' @param direction Either `1` or `-1`. If `-1` the palette will be reversed.
 #' @param ... additional arguments to pass to discrete_scale
 #'
@@ -67,7 +67,8 @@ scale_fill_benvi_d <- function(pal_name = "qual_benvi", direction = 1, ...) {
 #'
 #' @param ... Arguments to pass on to `ggplot2::scale_colour_gradientn()` or
 #' `ggplot2::scale_fill_gradientn()`
-#' @inheritParams benvi_palette
+#' @param pal_name Name of the palette. Defaults to `"benvi_blue"`.
+#' @param direction Either `1` or `-1`. If `-1` the palette will be reversed.
 #'
 #' @return A `ScaleContinuous` object that can be added to a `ggplot` object
 #'

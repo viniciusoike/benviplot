@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-`benviplot` is an R package that provides ggplot2 extensions with standardized color palettes and plotting functions. It uses color schemes from the Benvi brand (QuintoAndar Group). Current version: **1.2.0**.
+`benviplot` is an R package that provides ggplot2 extensions with standardized color palettes and plotting functions. It uses color schemes from the Benvi brand (QuintoAndar Group). Current version: **1.2.1**.
 
 ## Guidelines for writting
 These apply when writting text for documentation like README.md or vignettes.
@@ -64,10 +64,13 @@ The package uses a centralized color palette system stored in `inst/extdata/`:
 - Converts named colors to hex values via `get_colors()` and `get_hex()` functions
 - Creates palette sets organized by type:
   - **Theme palettes** (4 colors): grays, browns, yellows, greens, blues, purples, pinks, oranges
-  - **Qualitative palettes** (8 colors): qual_1 through qual_9
+  - **Qualitative palettes** (8 colors): qual_1 through qual_9, plus qual_benvi (6 colors), the default for every scale and `plot_*()` helper
   - **Sequential palettes** (9 colors): seq_grays, seq_browns, seq_yellows, seq_greens, seq_blues, seq_purples, seq_pinks, seq_oranges
+  - **Diverging palettes**: div_blue_muted, div_purple_muted
   - **City-specific palettes**: spo_seq, spo_div, spo_qual, rio_seq, rio_div, rio_qual, bhe_seq, bhe_div
   - **Brand palettes**: benvi_blue, benvi_purple, basic
+
+`show_palettes()` groups `div_*` under `type = "diverging"`; the city `*_div` palettes stay under `type = "city"`.
 
 ### Core Functions
 
@@ -124,7 +127,7 @@ The package uses a centralized color palette system stored in `inst/extdata/`:
 
 - `iqa`: QuintoAndar Rental Price Index (legacy, 96 rows, 6 columns)
 - `iqaiw`: IQAIW rental index for 6 cities, multiple rooms categories (1,660 rows)
-- `sales_report`: Zone-level rental data with listing vs contract prices (272 rows)
+- `sales_report`: Zone-level median sale price per m² for 3 cities (272 rows)
 
 ## Key Design Patterns
 

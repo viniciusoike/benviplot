@@ -33,12 +33,7 @@ plot_area <- function(
   pal_name = "qual_benvi",
   scale_name = "",
   scale_label = ggplot2::waiver(),
-  text = FALSE,
-  text_color = "gray20",
-  text_family = getOption("theme_benvi.font_family", "sans"),
-  text_size = 3,
-  position = "stack",
-  position_text = "identity"
+  position = "stack"
 ) {
   fill_quo <- rlang::enquo(fill)
   fill_type <- detect_aesthetic_type(fill_quo, "fill", data)
@@ -91,10 +86,6 @@ plot_area <- function(
 
   if (isTRUE(zero)) {
     p <- p + geom_hline(yintercept = 0)
-  }
-
-  if (isTRUE(text)) {
-    # work in progress
   }
 
   # Remove x-axis label and Benvi theme
