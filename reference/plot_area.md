@@ -15,12 +15,7 @@ plot_area(
   pal_name = "qual_benvi",
   scale_name = "",
   scale_label = ggplot2::waiver(),
-  text = FALSE,
-  text_color = "gray20",
-  text_family = getOption("theme_benvi.font_family", "sans"),
-  text_size = 3,
-  position = "stack",
-  position_text = "identity"
+  position = "stack"
 )
 ```
 
@@ -68,30 +63,9 @@ plot_area(
 
   String indicating fill legend labels.
 
-- text:
-
-  Logical indicating if text labels should be plotted on column bars
-
-- text_color:
-
-  Color of the text label. Default is `"gray20"`.
-
-- text_family:
-
-  Font of the text label. Defaults to
-  `getOption("theme_benvi.font_family", "sans")`.
-
-- text_size:
-
-  Size of the text label. Default is `3`.
-
 - position:
 
   Argument passed to `geom_area`.
-
-- position_text:
-
-  Argument passed on to `position` in `geom_text`.
 
 ## Value
 

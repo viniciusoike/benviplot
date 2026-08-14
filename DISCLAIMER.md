@@ -1,21 +1,14 @@
 # Disclaimer
 
-**IMPORTANT**: This is an unofficial, independent project created by
-Vinicius Oike and is not affiliated with, endorsed by, or connected to
-QuintoAndar in any way.
+`benviplot` is an independent project created by Vinicius Oike.
+QuintoAndar does not produce, endorse, or maintain it, and the author
+does not represent QuintoAndar.
 
 ## Background
 
 Benvi is a real estate platform brand associated with QuintoAndar. This
 package makes its publicly available color palettes and design system
 usable from R.
-
-## Independence
-
-- This package is **NOT** an official QuintoAndar product
-- This package is **NOT** endorsed by QuintoAndar
-- This package is **NOT** maintained by QuintoAndar
-- The package author (Vinicius Oike) is not representing QuintoAndar
 
 ## Original Work
 
@@ -40,7 +33,3 @@ For questions, issues, or contributions related to this package, please
 use the GitHub repository: - Issues:
 <https://github.com/viniciusoike/benviplot/issues> - Author: Vinicius
 Oike (<viniciusoike@gmail.com>)
-
-------------------------------------------------------------------------
-
-*Last Updated: October 5, 2025*

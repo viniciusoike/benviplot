@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -141,7 +141,8 @@ package; pass a type name to narrow the output.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/show_palettes.html">show_palettes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>You can filter by type: <code>"theme"</code>,
 <code>"sequential"</code>, <code>"qualitative"</code>,
-<code>"city"</code>, or <code>"brand"</code>.</p>
+<code>"diverging"</code>, <code>"city"</code>, or
+<code>"brand"</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/show_palettes.html">show_palettes</a></span><span class="op">(</span><span class="st">"sequential"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="getting-started_files/figure-html/show-seq-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
@@ -154,13 +155,8 @@ Printing it renders a color swatch in the console, which is useful for
 quick visual comparison.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Preview a palette</span></span>
-<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_2"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "#C5C9BA" "#816242" "#F2C037" "#009850" "#466795" "#9A75B4" "#EA4E58"</span></span>
-<span><span class="co">#&gt; [8] "#C64729"</span></span>
-<span><span class="co">#&gt; attr(,"class")</span></span>
-<span><span class="co">#&gt; [1] "palette"</span></span>
-<span><span class="co">#&gt; attr(,"pal_name")</span></span>
-<span><span class="co">#&gt; [1] "qual_2"</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"qual_2"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="getting-started_files/figure-html/view-palettes-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <p>To use the colors outside of ggplot2 (e.g. in base R or as input to
 another package), coerce to a plain character vector.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -172,14 +168,8 @@ another package), coerce to a plain character vector.</p>
 more granularity, set <code>type = "continuous"</code> to interpolate an
 arbitrary number of colors along the palette gradient.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"seq_greens"</span>, n <span class="op">=</span> <span class="fl">20</span>, type <span class="op">=</span> <span class="st">"continuous"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "#245825" "#255929" "#275A2D" "#295C31" "#2A5D36" "#2C5F3B" "#2E613F"</span></span>
-<span><span class="co">#&gt;  [8] "#2F6243" "#316448" "#33664C" "#356751" "#376955" "#396B5A" "#3A6C5E"</span></span>
-<span><span class="co">#&gt; [15] "#3C6E62" "#3E7067" "#3F716C" "#417370" "#437575" "#46777A"</span></span>
-<span><span class="co">#&gt; attr(,"class")</span></span>
-<span><span class="co">#&gt; [1] "palette"</span></span>
-<span><span class="co">#&gt; attr(,"pal_name")</span></span>
-<span><span class="co">#&gt; [1] "seq_greens"</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"seq_greens"</span>, n <span class="op">=</span> <span class="fl">20</span>, type <span class="op">=</span> <span class="st">"continuous"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="getting-started_files/figure-html/continuous-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -228,8 +218,9 @@ where a numeric variable needs a smooth color gradient. Use
 <span>    name <span class="op">=</span> <span class="st">"YoY Change (%)"</span>,</span>
 <span>    direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
-<span>    breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">2023</span>, <span class="fl">2025</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html" class="external-link">scale_x_date</a></span><span class="op">(</span></span>
+<span>    date_breaks <span class="op">=</span> <span class="st">"1 year"</span>,</span>
+<span>    date_labels <span class="op">=</span> <span class="st">"%Y"</span>,</span>
 <span>    expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
@@ -288,16 +279,17 @@ bars instead (requires the <code>ggfittext</code> package).</p>
 </h3>
 <p><code><a href="../reference/plot_scatter.html">plot_scatter()</a></code> maps <code>x</code> and <code>y</code> to
 a scatter plot. A <code>color</code> argument maps a grouping variable
-to the point fill using a Benvi palette. Set <code>smooth = TRUE</code>
-to overlay a regression line.</p>
+to the point color using a Benvi palette. Set <code>fit = TRUE</code> to
+overlay a regression line.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span></span>
 <span>  <span class="va">mtcars</span>,</span>
 <span>  x <span class="op">=</span> <span class="va">wt</span>,</span>
 <span>  y <span class="op">=</span> <span class="va">mpg</span>,</span>
 <span>  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>,</span>
-<span>  palette <span class="op">=</span> <span class="st">"qual_5"</span>,</span>
-<span>  scale_name <span class="op">=</span> <span class="st">"Cylinders"</span></span>
+<span>  pal_name <span class="op">=</span> <span class="st">"qual_5"</span>,</span>
+<span>  scale_name <span class="op">=</span> <span class="st">"Cylinders"</span>,</span>
+<span>  fit <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="getting-started_files/figure-html/helper-scatter-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>

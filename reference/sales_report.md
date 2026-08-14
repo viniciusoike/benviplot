@@ -38,11 +38,6 @@ A data frame with 272 observations across multiple cities and zones:
 QuintoAndar (Sales Report 2020-Q1/2023-Q3).
 <https://publicfiles.data.quintoandar.com.br/sale_report/RelatorioCV_4T_2022.pdf>
 
-## Details
-
-This dataset provides zone-level granularity, showing sales prices for
-specific regions within cities.
-
 ## Examples
 
 ``` r
@@ -57,6 +52,7 @@ bhe_sales$name_zone <- factor(
 )
 
 ggplot(bhe_sales, aes(x = price_m2, y = name_zone)) +
-geom_col(fill = benvi_palette("benvi_blue")[3]) +
-theme_benvi(base_family = "sans")
+  geom_col(fill = benvi_palette("benvi_blue")[3]) +
+  labs(x = "Median price per m2 (R$)", y = NULL) +
+  theme_benvi(base_family = "sans")
 ```

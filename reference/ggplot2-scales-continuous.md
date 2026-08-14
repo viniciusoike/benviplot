@@ -17,7 +17,7 @@ scale_fill_benvi_c(pal_name = "benvi_blue", direction = 1, ...)
 
 - pal_name:
 
-  Name of the palette. Defaults to "qual_2".
+  Name of the palette. Defaults to `"benvi_blue"`.
 
 - direction:
 

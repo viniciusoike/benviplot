@@ -5,7 +5,7 @@
 Access and customize color palettes
 
 - [`benvi_palette()`](https://viniciusoike.github.io/benviplot/reference/benvi_palette.md)
-  : A color palette for Benvi.
+  : Get the colors of a Benvi palette
 - [`show_palettes()`](https://viniciusoike.github.io/benviplot/reference/show_palettes.md)
   : Display all Benvi palettes
 
@@ -27,7 +27,7 @@ Color and fill scales for ggplot2
 Wrapper functions for common plot types
 
 - [`plot_line()`](https://viniciusoike.github.io/benviplot/reference/plot_line.md)
-  : Title
+  : Plot a line chart
 - [`plot_column()`](https://viniciusoike.github.io/benviplot/reference/plot_column.md)
   : Plot a column chart
 - [`plot_scatter()`](https://viniciusoike.github.io/benviplot/reference/plot_scatter.md)

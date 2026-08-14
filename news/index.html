@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,6 +34,23 @@
       <small>Source: <a href="https://github.com/viniciusoike/benviplot/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.1" id="benviplot-121">benviplot 1.2.1<a class="anchor" aria-label="anchor" href="#benviplot-121"></a></h2>
+<div class="section level3">
+<h3 id="breaking-changes-1-2-1">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-2-1"></a></h3>
+<ul><li>Removed the unimplemented <code>text</code>, <code>text_color</code>, <code>text_family</code>, <code>text_size</code>, and <code>position_text</code> arguments from <code><a href="../reference/plot_area.html">plot_area()</a></code>. They were accepted and ignored.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-1-2-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-2-1"></a></h3>
+<ul><li>Registered the <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method for palette objects. <code>benvi_palette("greens")</code> printed hex codes and attributes at the console; it now draws the color swatches.</li>
+<li>
+<code><a href="../reference/plot_histogram.html">plot_histogram()</a></code> no longer facets when <code>facet</code> is left at its default. Passing the documented default explicitly built a panel for the literal <code>FALSE</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-1-2-1">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-2-1"></a></h3>
+<ul><li>Installation instructions point at R-universe. The README offered a CRAN install for a package that is not on CRAN.</li>
+</ul><hr></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.0" id="benviplot-120">benviplot 1.2.0<a class="anchor" aria-label="anchor" href="#benviplot-120"></a></h2>
 <div class="section level3">
@@ -82,7 +99,7 @@
 <h2 class="pkg-version" data-toc-text="1.1.1" id="benviplot-111">benviplot 1.1.1<a class="anchor" aria-label="anchor" href="#benviplot-111"></a></h2>
 <div class="section level3">
 <h3 id="new-features-1-1-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-1-1"></a></h3>
-<ul><li>New dataset <code>sales_report</code>: zone-level rental price data with listing vs contract prices (272 rows).</li>
+<ul><li>New dataset <code>sales_report</code>: zone-level median sale price per square meter for Belo Horizonte, Rio de Janeiro, and São Paulo (272 rows).</li>
 <li>
 <code><a href="../reference/plot_scatter.html">plot_scatter()</a></code> gains a <code>fit_color</code> parameter for custom trend line colors.</li>
 <li>
@@ -120,12 +137,11 @@
 <p>First official stable release.</p>
 <div class="section level3">
 <h3 id="overview-1-0-0">Overview<a class="anchor" aria-label="anchor" href="#overview-1-0-0"></a></h3>
-<ul><li>36 curated color palettes organized by type (theme, sequential, qualitative, city, brand).</li>
-<li>ggplot2 scale functions: <code><a href="../reference/ggplot2-scales-discrete.html">scale_color_benvi_d()</a></code>, <code><a href="../reference/ggplot2-scales-discrete.html">scale_fill_benvi_d()</a></code>, <code><a href="../reference/ggplot2-scales-continuous.html">scale_color_benvi_c()</a></code>, <code><a href="../reference/ggplot2-scales-continuous.html">scale_fill_benvi_c()</a></code>.</li>
-<li>Plot helpers: <code><a href="../reference/plot_line.html">plot_line()</a></code>, <code><a href="../reference/plot_column.html">plot_column()</a></code>, <code><a href="../reference/plot_scatter.html">plot_scatter()</a></code>, <code><a href="../reference/plot_area.html">plot_area()</a></code>, <code><a href="../reference/plot_histogram.html">plot_histogram()</a></code>.</li>
-<li>Custom theme <code><a href="../reference/theme_benvi.html">theme_benvi()</a></code> with Poppins font support.</li>
-<li>Sample datasets: <code>iqa</code>, <code>iqaiw</code>.</li>
-<li>250 tests, pkgdown site, GitHub Actions CI/CD.</li>
+<ul><li>Added color palettes organized by type (theme, sequential, qualitative, city, brand).</li>
+<li>Added ggplot2 scale functions <code><a href="../reference/ggplot2-scales-discrete.html">scale_color_benvi_d()</a></code>, <code><a href="../reference/ggplot2-scales-discrete.html">scale_fill_benvi_d()</a></code>, <code><a href="../reference/ggplot2-scales-continuous.html">scale_color_benvi_c()</a></code>, and <code><a href="../reference/ggplot2-scales-continuous.html">scale_fill_benvi_c()</a></code>.</li>
+<li>Added plot helpers <code><a href="../reference/plot_line.html">plot_line()</a></code>, <code><a href="../reference/plot_column.html">plot_column()</a></code>, <code><a href="../reference/plot_scatter.html">plot_scatter()</a></code>, <code><a href="../reference/plot_area.html">plot_area()</a></code>, and <code><a href="../reference/plot_histogram.html">plot_histogram()</a></code>.</li>
+<li>Added the <code><a href="../reference/theme_benvi.html">theme_benvi()</a></code> theme with Poppins font support.</li>
+<li>Added the <code>iqa</code> and <code>iqaiw</code> datasets.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="breaking-changes-from-v09x-1-0-0">Breaking Changes (from v0.9.x)<a class="anchor" aria-label="anchor" href="#breaking-changes-from-v09x-1-0-0"></a></h3>

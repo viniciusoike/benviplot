@@ -1,6 +1,6 @@
-# Title
+# Plot a line chart
 
-Title
+Plot a line chart
 
 ## Usage
 

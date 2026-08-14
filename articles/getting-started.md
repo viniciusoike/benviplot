@@ -97,7 +97,7 @@ show_palettes()
 ```
 
 You can filter by type: `"theme"`, `"sequential"`, `"qualitative"`,
-`"city"`, or `"brand"`.
+`"diverging"`, `"city"`, or `"brand"`.
 
 ``` r
 
@@ -116,13 +116,9 @@ in the console, which is useful for quick visual comparison.
 
 # Preview a palette
 benvi_palette("qual_2")
-#> [1] "#C5C9BA" "#816242" "#F2C037" "#009850" "#466795" "#9A75B4" "#EA4E58"
-#> [8] "#C64729"
-#> attr(,"class")
-#> [1] "palette"
-#> attr(,"pal_name")
-#> [1] "qual_2"
 ```
+
+![](getting-started_files/figure-html/view-palettes-1.png)
 
 To use the colors outside of ggplot2 (e.g. in base R or as input to
 another package), coerce to a plain character vector.
@@ -142,14 +138,9 @@ number of colors along the palette gradient.
 ``` r
 
 benvi_palette("seq_greens", n = 20, type = "continuous")
-#>  [1] "#245825" "#255929" "#275A2D" "#295C31" "#2A5D36" "#2C5F3B" "#2E613F"
-#>  [8] "#2F6243" "#316448" "#33664C" "#356751" "#376955" "#396B5A" "#3A6C5E"
-#> [15] "#3C6E62" "#3E7067" "#3F716C" "#417370" "#437575" "#46777A"
-#> attr(,"class")
-#> [1] "palette"
-#> attr(,"pal_name")
-#> [1] "seq_greens"
 ```
+
+![](getting-started_files/figure-html/continuous-1.png)
 
 ## Using ggplot2 Scales
 
@@ -200,8 +191,9 @@ ggplot(iqaiw_total, aes(x = date, y = name_muni, fill = acum12m * 100)) +
     name = "YoY Change (%)",
     direction = -1
   ) +
-  scale_x_continuous(
-    breaks = seq(2023, 2025, 1),
+  scale_x_date(
+    date_breaks = "1 year",
+    date_labels = "%Y",
     expand = expansion(0)
   ) +
   labs(x = NULL, y = NULL) +
@@ -267,7 +259,7 @@ plot_column(sales, x = cities, y = revenue, text = TRUE)
 
 [`plot_scatter()`](https://viniciusoike.github.io/benviplot/reference/plot_scatter.md)
 maps `x` and `y` to a scatter plot. A `color` argument maps a grouping
-variable to the point fill using a Benvi palette. Set `smooth = TRUE` to
+variable to the point color using a Benvi palette. Set `fit = TRUE` to
 overlay a regression line.
 
 ``` r
@@ -277,8 +269,9 @@ plot_scatter(
   x = wt,
   y = mpg,
   color = as.factor(cyl),
-  palette = "qual_5",
-  scale_name = "Cylinders"
+  pal_name = "qual_5",
+  scale_name = "Cylinders",
+  fit = TRUE
 )
 ```
 

@@ -2,9 +2,11 @@
 
 A wrapper around
 [`ggplot2::ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html)
-with smart defaults optimized for benviplot graphics. Automatically uses
-the ragg graphics device for PNG output when available, ensuring
-high-quality rendering with proper font support and no DPI issues.
+that uses the ragg graphics device for PNG output. Registered fonts such
+as the bundled Poppins are only visible to systemfonts-aware devices, so
+ragg is what lets
+[`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md)
+render its font in saved files.
 
 If ragg is not installed, falls back to the default graphics device.
 
@@ -49,7 +51,7 @@ ggsave_benvi(
 
 - dpi:
 
-  DPI to use for raster graphics. Default is 300 for high quality.
+  DPI to use for raster graphics. Defaults to 300.
 
 - ...:
 

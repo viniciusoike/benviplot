@@ -16,7 +16,7 @@ plot_histogram(
   bins = NULL,
   method = "fd",
   density = FALSE,
-  facet = FALSE,
+  facet = NULL,
   ...
 )
 ```
@@ -73,7 +73,8 @@ plot_histogram(
 - facet:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Optional variable to facet the graphics.
+  Optional variable to facet the graphics. `NULL` (default) draws a
+  single panel.
 
 - ...:
 

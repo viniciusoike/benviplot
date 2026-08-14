@@ -72,7 +72,7 @@ ggplot(iqa, aes(x = date, y = index, color = name_muni)) +
   geom_line() +
   scale_color_benvi_d(pal_name = "qual_9", name = "City") +
   labs(
-    title = "IQAIW: Rental Price Index",
+    title = "IQA: Rental Price Index",
     x = "Date",
     y = "Index (base = 100)"
   ) +

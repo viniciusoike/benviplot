@@ -11,7 +11,7 @@ and online listings from QuintoAndar's listings (including ImovelWeb)."></head><
 
     <a class="navbar-brand me-2" href="../index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,15 +90,12 @@ the IQA index.</p>
     <h2 id="methodology">Methodology<a class="anchor" aria-label="anchor" href="#methodology"></a></h2>
 
 
-<p>Formally, the index is a hedonic double imputed index, controlling for quality
-changes using a flexible GAM specification with location variables. In this
-sense, the IQAIW is more theoretically sound than median stratified indices
-like FipeZap or the former IQA. The mixture of listings and contracts, however,
-lacks theoretical support and seems to be mainly driven by branding purposes.</p>
-<p>The ImovelWeb brand was purchased by QuintoAndar in 2021-22 and the IQAIW
-symbolizes the merging of both brands. In other words, the original IQA could've
-been improved simply by adopting a hedonic methodology, without the need to
-mix data sources.</p>
+<p>The index is a hedonic double imputed index. It controls for quality changes
+using a flexible GAM specification with location variables. The underlying
+sample mixes new rental contracts with online listings, so the index does not
+measure either source in isolation.</p>
+<p>QuintoAndar acquired the ImovelWeb brand in 2021-22, and the IQAIW name
+reflects the merger of the two brands.</p>
     </div>
 
     <div class="section level2">
@@ -136,9 +133,9 @@ mix data sources.</p>
 <span class="r-in"><span>  <span class="fu"><a href="ggplot2-scales-discrete.html">scale_color_benvi_d</a></span><span class="op">(</span>pal_name <span class="op">=</span> <span class="st">"qual_6"</span>, name <span class="op">=</span> <span class="st">"Rooms"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">name_muni</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">3</span>, scales <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    title <span class="op">=</span> <span class="st">"IQAIW: Rental Price Index"</span>,</span></span>
+<span class="r-in"><span>    title <span class="op">=</span> <span class="st">"IQAIW: 12-month rental price change"</span>,</span></span>
 <span class="r-in"><span>    x <span class="op">=</span> <span class="st">"Date"</span>,</span></span>
-<span class="r-in"><span>    y <span class="op">=</span> <span class="st">"Index (base = 100)"</span></span></span>
+<span class="r-in"><span>    y <span class="op">=</span> <span class="st">"12-month change (decimal)"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="theme_benvi.html">theme_benvi</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"sans"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="iqaiw-1.png" alt="" width="700" height="433"></span>

@@ -1,5 +1,30 @@
 # Changelog
 
+## benviplot 1.2.1
+
+### Breaking Changes
+
+- Removed the unimplemented `text`, `text_color`, `text_family`,
+  `text_size`, and `position_text` arguments from
+  [`plot_area()`](https://viniciusoike.github.io/benviplot/reference/plot_area.md).
+  They were accepted and ignored.
+
+### Bug Fixes
+
+- Registered the [`print()`](https://rdrr.io/r/base/print.html) method
+  for palette objects. `benvi_palette("greens")` printed hex codes and
+  attributes at the console; it now draws the color swatches.
+- [`plot_histogram()`](https://viniciusoike.github.io/benviplot/reference/plot_histogram.md)
+  no longer facets when `facet` is left at its default. Passing the
+  documented default explicitly built a panel for the literal `FALSE`.
+
+### Documentation
+
+- Installation instructions point at R-universe. The README offered a
+  CRAN install for a package that is not on CRAN.
+
+------------------------------------------------------------------------
+
 ## benviplot 1.2.0
 
 ### Breaking Changes
@@ -70,8 +95,8 @@
 
 ### New Features
 
-- New dataset `sales_report`: zone-level rental price data with listing
-  vs contract prices (272 rows).
+- New dataset `sales_report`: zone-level median sale price per square
+  meter for Belo Horizonte, Rio de Janeiro, and São Paulo (272 rows).
 - [`plot_scatter()`](https://viniciusoike.github.io/benviplot/reference/plot_scatter.md)
   gains a `fit_color` parameter for custom trend line colors.
 - [`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md)
@@ -115,24 +140,25 @@ First official stable release.
 
 ### Overview
 
-- 36 curated color palettes organized by type (theme, sequential,
+- Added color palettes organized by type (theme, sequential,
   qualitative, city, brand).
-- ggplot2 scale functions:
+- Added ggplot2 scale functions
   [`scale_color_benvi_d()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-discrete.md),
   [`scale_fill_benvi_d()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-discrete.md),
   [`scale_color_benvi_c()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-continuous.md),
+  and
   [`scale_fill_benvi_c()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-continuous.md).
-- Plot helpers:
+- Added plot helpers
   [`plot_line()`](https://viniciusoike.github.io/benviplot/reference/plot_line.md),
   [`plot_column()`](https://viniciusoike.github.io/benviplot/reference/plot_column.md),
   [`plot_scatter()`](https://viniciusoike.github.io/benviplot/reference/plot_scatter.md),
   [`plot_area()`](https://viniciusoike.github.io/benviplot/reference/plot_area.md),
+  and
   [`plot_histogram()`](https://viniciusoike.github.io/benviplot/reference/plot_histogram.md).
-- Custom theme
+- Added the
   [`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md)
-  with Poppins font support.
-- Sample datasets: `iqa`, `iqaiw`.
-- 250 tests, pkgdown site, GitHub Actions CI/CD.
+  theme with Poppins font support.
+- Added the `iqa` and `iqaiw` datasets.
 
 ### Breaking Changes (from v0.9.x)
 
