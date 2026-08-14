@@ -80,7 +80,15 @@ pal_pal <- function(pal_name, direction) {
 
 #' Print a palette
 #'
+#' Draws the palette colors as a strip of swatches on the current graphics
+#' device.
+#'
+#' @param x A `palette` object, as returned by [benvi_palette()].
+#' @param ... Ignored.
+#'
+#' @return `x`, invisibly.
 #' @keywords internal
+#' @export
 #' @importFrom graphics image par
 print.palette <- function(x, ...) {
   n <- length(x)
@@ -97,4 +105,6 @@ print.palette <- function(x, ...) {
     yaxt = "n",
     bty = "n"
   )
+
+  invisible(x)
 }

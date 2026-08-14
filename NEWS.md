@@ -24,6 +24,8 @@
 - `format_num_br()` no longer left-pads results with spaces when given a vector.
   `format_num_br(c(100, 1000))` returned `c("  100", "1.000")` and now returns
   `c("100", "1.000")`.
+- Registered the `print()` method for palette objects. `benvi_palette("greens")`
+  printed hex codes and attributes at the console; it now draws the color swatches.
 
 ## Documentation
 
