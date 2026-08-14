@@ -1,3 +1,24 @@
+# benviplot 1.2.1
+
+## Breaking Changes
+
+- Removed the unimplemented `text`, `text_color`, `text_family`, `text_size`, and
+  `position_text` arguments from `plot_area()`. They were accepted and ignored.
+
+## Bug Fixes
+
+- Registered the `print()` method for palette objects. `benvi_palette("greens")`
+  printed hex codes and attributes at the console; it now draws the color swatches.
+- `plot_histogram()` no longer facets when `facet` is left at its default.
+  Passing the documented default explicitly built a panel for the literal `FALSE`.
+
+## Documentation
+
+- Installation instructions point at R-universe. The README offered a CRAN install
+  for a package that is not on CRAN.
+
+---
+
 # benviplot 1.2.0
 
 ## Breaking Changes
@@ -11,8 +32,6 @@
   Use `font_status()` to check availability.
 - Reduced hard dependencies: `ggfittext` and `systemfonts` moved to Suggests; `forcats`,
   `lifecycle`, and `scales` removed from Imports.
-- Removed the unimplemented `text`, `text_color`, `text_family`, `text_size`, and
-  `position_text` arguments from `plot_area()`. They were accepted and ignored.
 
 ## New Features
 
@@ -26,10 +45,6 @@
 - `format_num_br()` no longer left-pads results with spaces when given a vector.
   `format_num_br(c(100, 1000))` returned `c("  100", "1.000")` and now returns
   `c("100", "1.000")`.
-- Registered the `print()` method for palette objects. `benvi_palette("greens")`
-  printed hex codes and attributes at the console; it now draws the color swatches.
-- `plot_histogram()` no longer facets when `facet` is left at its default.
-  Passing the documented default explicitly built a panel for the literal `FALSE`.
 
 ## Documentation
 

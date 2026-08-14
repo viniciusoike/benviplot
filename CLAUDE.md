@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-`benviplot` is an R package that provides ggplot2 extensions with standardized color palettes and plotting functions. It uses color schemes from the Benvi brand (QuintoAndar Group). Current version: **1.2.0**.
+`benviplot` is an R package that provides ggplot2 extensions with standardized color palettes and plotting functions. It uses color schemes from the Benvi brand (QuintoAndar Group). Current version: **1.2.1**.
 
 ## Guidelines for writting
 These apply when writting text for documentation like README.md or vignettes.
