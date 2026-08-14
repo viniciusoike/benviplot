@@ -11,6 +11,8 @@
   Use `font_status()` to check availability.
 - Reduced hard dependencies: `ggfittext` and `systemfonts` moved to Suggests; `forcats`,
   `lifecycle`, and `scales` removed from Imports.
+- Removed the unimplemented `text`, `text_color`, `text_family`, `text_size`, and
+  `position_text` arguments from `plot_area()`. They were accepted and ignored.
 
 ## New Features
 

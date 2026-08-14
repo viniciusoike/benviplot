@@ -14,12 +14,7 @@ plot_area(
   pal_name = "qual_benvi",
   scale_name = "",
   scale_label = ggplot2::waiver(),
-  text = FALSE,
-  text_color = "gray20",
-  text_family = getOption("theme_benvi.font_family", "sans"),
-  text_size = 3,
-  position = "stack",
-  position_text = "identity"
+  position = "stack"
 )
 }
 \arguments{
@@ -45,17 +40,7 @@ Default behavior (\code{TRUE}) stacks the largest groups on top.}
 
 \item{scale_label}{String indicating fill legend labels.}
 
-\item{text}{Logical indicating if text labels should be plotted on column bars}
-
-\item{text_color}{Color of the text label. Default is \code{"gray20"}.}
-
-\item{text_family}{Font of the text label. Defaults to \code{getOption("theme_benvi.font_family", "sans")}.}
-
-\item{text_size}{Size of the text label. Default is \code{3}.}
-
 \item{position}{Argument passed to \code{geom_area}.}
-
-\item{position_text}{Argument passed on to \code{position} in \code{geom_text}.}
 }
 \value{
 A ggplot2 plot
