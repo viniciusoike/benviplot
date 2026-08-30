@@ -4,7 +4,7 @@
 #' index, which has been superseded by the IQAIW (see \code{\link{iqaiw}}).
 #'
 #' @format
-#' A data frame with 96 observations and 6 variables:
+#' A data frame with 96 observations and 6 variables.
 #' \describe{
 #'   \item{date}{Date of the observation (first day of month)}
 #'   \item{name_muni}{Name of the municipality (city)}
@@ -14,6 +14,7 @@
 #'   \item{price_m2}{Estimated rental price per square meter (R$/m²)}
 #' }
 #' @source QuintoAndar
+#' @encoding UTF-8
 #' @examples
 #' # To visualize the dataset
 #' head(iqa)
@@ -36,27 +37,24 @@
 #'
 #' The IQAIW (Índice QuintoAndar ImovelWeb) is a rental index for major Brazilian
 #' cities. The index is based on both new rental contracts (managed by QuintoAndar)
-#' and online listings from QuintoAndar's listings (including ImovelWeb).
+#' and online listings published by QuintoAndar and ImovelWeb.
 #'
 #' The IQAIW was developed in 2023 and replaced the former IQA index. Given the
 #' change in methodology and data sources, the IQAIW is not directly comparable to
 #' the IQA index.
 #'
 #' @section Methodology:
-#' The index is a hedonic double imputed index. It controls for quality changes
-#' using a flexible GAM specification with location variables. The underlying
-#' sample mixes new rental contracts with online listings, so the index does not
+#' The index uses double imputation with a hedonic model. A generalized additive
+#' model (GAM) controls for property characteristics and location. The sample
+#' combines new rental contracts with online listings, so the index does not
 #' measure either source in isolation.
 #'
-#' QuintoAndar acquired the ImovelWeb brand in 2021-22, and the IQAIW name
-#' reflects the merger of the two brands.
-#'
 #' @format
-#' A data frame with 1,660 observations across 6 cities and multiple time periods:
+#' A data frame with 1,660 observations across six cities and multiple periods.
 #' \describe{
 #'   \item{date}{Date of the observation (first day of month)}
-#'   \item{name_muni}{Name of the municipality. One of: Belo Horizonte, Brasília,
-#'     Curitiba, Porto Alegre, Rio de Janeiro, São Paulo}
+#'   \item{name_muni}{Name of the municipality. Values include Belo Horizonte,
+#'     Brasília, Curitiba, Porto Alegre, Rio de Janeiro, and São Paulo}
 #'   \item{rooms}{Number of rooms in the property, or "Total" for city-level aggregate}
 #'   \item{index}{Rental price index, normalized to 100 at first observation per city}
 #'   \item{chg}{Monthly percent variation of the index (decimal form)}
@@ -65,6 +63,7 @@
 #' }
 #'
 #' @source \url{https://publicfiles.data.quintoandar.com.br/indice_quintoandar_imovelweb/index_quintoandar_imovelweb_serie.csv}
+#' @encoding UTF-8
 #'
 #' @examples
 #'
@@ -91,23 +90,22 @@
 #'
 "iqaiw"
 
-#' QuintoAndar Sales Report
+#' QuintoAndar sales report
 #'
-#' Sales price data at a region level for major Brazilian cities.
-#' Contains contract prices per square meter, allowing comparison across cities
-#' and zones.
+#' Contract prices per square meter at the zone level for major Brazilian
+#' cities.
 #'
-#' @format ## sales_report
-#' A data frame with 272 observations across multiple cities and zones:
+#' @format A data frame with 272 observations across multiple cities and zones.
 #' \describe{
 #'   \item{date}{Date of the observation (first day of month)}
-#'   \item{name_muni}{Name of the municipality (city). Includes: Belo Horizonte,
+#'   \item{name_muni}{Name of the municipality. Values include Belo Horizonte,
 #'     Rio de Janeiro, and São Paulo}
 #'   \item{name_zone}{Name of the zone within the city}
 #'   \item{price_m2}{Median contract price per square meter (R$/m²)}
 #' }
 #'
 #' @source QuintoAndar (Sales Report 2020-Q1/2023-Q3). \url{https://publicfiles.data.quintoandar.com.br/sale_report/RelatorioCV_4T_2022.pdf}
+#' @encoding UTF-8
 #'
 #' @examples
 #' # Compare contract prices across zones
@@ -122,6 +120,6 @@
 #'
 #' ggplot(bhe_sales, aes(x = price_m2, y = name_zone)) +
 #'   geom_col(fill = benvi_palette("benvi_blue")[3]) +
-#'   labs(x = "Median price per m2 (R$)", y = NULL) +
+#'   labs(x = "Median price per m² (R$)", y = NULL) +
 #'   theme_benvi(base_family = "sans")
 "sales_report"

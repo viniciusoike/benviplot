@@ -28,56 +28,58 @@ plot_column(
 )
 }
 \arguments{
-\item{data}{A data.frame type object}
+\item{data}{A data frame.}
 
-\item{x}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped in the x-axis.}
+\item{x}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable mapped to the x-axis.}
 
-\item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped in the y-axis.}
+\item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable mapped to the y-axis.}
 
 \item{fill}{Fill color for the columns. Either a color string (e.g.,
 \code{"blue"}, \code{"#021841"}) for a single static color, or a bare column name
 (without quotes) to map a grouping variable to fill color.}
 
-\item{zero}{Logical indicating whether a horizontal line crossing the y = 0
-axis should be plotted.}
+\item{zero}{Whether to draw a horizontal line at \code{y = 0}.}
 
-\item{text}{Logical indicating if text labels should be plotted on column bars}
+\item{text}{Whether to add value labels to the columns.}
 
-\item{text_inside}{Logical indicating if text labels should be placed inside
-bars (using ggfittext). When TRUE, text is auto-sized to fit inside bars.
-When FALSE (default), text appears above/beside bars at fixed size.}
+\item{text_inside}{Whether to place labels inside the columns with
+\code{ggfittext}. When \code{FALSE} (the default), labels use a fixed size and appear
+above or beside the columns.}
 
-\item{text_place}{Placement of inside text. One of "top", "bottom", "left",
-"right", "centre"/"center". Only used when text_inside = TRUE. Defaults to
-"centre".}
+\item{text_place}{Placement of labels inside the columns. Choose \code{"top"},
+\code{"bottom"}, \code{"left"}, \code{"right"}, \code{"centre"}, or \code{"center"}. Defaults to
+\code{"centre"} and applies only when \code{text_inside = TRUE}.}
 
-\item{text_padding}{Padding around inside text as grid::unit(). Only used
-when text_inside = TRUE. Defaults to 1mm.}
+\item{text_padding}{Padding around inside labels, supplied as a
+\code{\link[grid:unit]{grid::unit()}} object. Defaults to 1 mm and applies only when
+\code{text_inside = TRUE}.}
 
-\item{pal_name}{String indicating the name of which palette to use.}
+\item{pal_name}{Name of the palette.}
 
-\item{scale_name}{String indicating fill legend title.}
+\item{scale_name}{Fill legend title.}
 
-\item{scale_label}{String indicating fill legend labels.}
+\item{scale_label}{Fill legend labels.}
 
 \item{digits}{Number of digits to show in text labels.}
 
-\item{percent}{Logical indicating if a \% should be appended to text labels}
+\item{percent}{Whether to append a percent sign to text labels.}
 
 \item{text_color}{Color of the text label. Default is \code{"gray20"}.}
 
-\item{text_family}{Font of the text label. Defaults to \code{getOption("theme_benvi.font_family", "sans")}.}
+\item{text_family}{Font family for the text label. Defaults to
+\code{getOption("theme_benvi.font_family", "sans")}.}
 
 \item{text_size}{Size of the text label. Default is \code{3}.}
 
-\item{position_col}{Argument passed on to \code{position} in \code{geom_col}.}
+\item{position_col}{Position adjustment passed to \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}}.}
 
-\item{position_text}{Argument passed on to \code{position} in \code{geom_text}.}
+\item{position_text}{Position adjustment passed to \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}.}
 
-\item{...}{Further arguments for \code{geom_text}}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:geom_bar]{ggplot2::geom_col()}} or
+\code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}.}
 }
 \value{
-A ggplot2 plot
+A \code{ggplot} object.
 }
 \description{
 Plot a column chart

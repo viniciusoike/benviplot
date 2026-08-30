@@ -1,11 +1,13 @@
-#' Discrete scales to use for ggplot2
+#' Discrete Benvi color scales
 #'
-#' Functions to use `ggplot2` scales with Benvi colors.
+#' Map discrete values to colors from a Benvi palette.
 #'
 #' @rdname ggplot2-scales-discrete
 #' @param pal_name Name of the palette. Defaults to `"qual_benvi"`.
-#' @param direction Either `1` or `-1`. If `-1` the palette will be reversed.
-#' @param ... additional arguments to pass to discrete_scale
+#' @param direction Either `1` or `-1`. Use `-1` to reverse the palette.
+#' @param ... Additional arguments passed to [ggplot2::discrete_scale()].
+#'
+#' @return A discrete ggplot2 scale that can be added to a `ggplot` object.
 #'
 #' @examples
 #' library(ggplot2)
@@ -38,8 +40,6 @@ scale_colour_benvi_d <- function(pal_name = "qual_benvi", direction = 1, ...) {
 scale_color_benvi_d <- scale_colour_benvi_d
 
 
-#' @param pal_name Name of the palette.
-#' @param direction Either `1` or `-1`. If `-1` the palette will be reversed.
 #' @rdname ggplot2-scales-discrete
 #' @export
 #' @importFrom ggplot2 discrete_scale
@@ -59,18 +59,16 @@ scale_fill_benvi_d <- function(pal_name = "qual_benvi", direction = 1, ...) {
   )
 }
 
-#' Continuous scales to use for ggplot2
+#' Continuous Benvi color scales
 #'
-#' These functions provide the option to use Benvi colors inside continuous
-#' palettes with the `ggplot2` package.
+#' Map continuous values to colors interpolated from a Benvi palette.
 #'
-#'
-#' @param ... Arguments to pass on to `ggplot2::scale_colour_gradientn()` or
-#' `ggplot2::scale_fill_gradientn()`
+#' @param ... Additional arguments passed to
+#'   [ggplot2::scale_colour_gradientn()] or [ggplot2::scale_fill_gradientn()].
 #' @param pal_name Name of the palette. Defaults to `"benvi_blue"`.
-#' @param direction Either `1` or `-1`. If `-1` the palette will be reversed.
+#' @param direction Either `1` or `-1`. Use `-1` to reverse the palette.
 #'
-#' @return A `ScaleContinuous` object that can be added to a `ggplot` object
+#' @return A continuous ggplot2 scale that can be added to a `ggplot` object.
 #'
 #' @name ggplot2-scales-continuous
 #' @rdname ggplot2-scales-continuous

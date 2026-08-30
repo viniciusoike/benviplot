@@ -1,22 +1,24 @@
 #' Plot an area chart
+#'
 #' @inheritParams plot_column
 #' @param fill Fill color for the area. Either a color string (e.g., `"blue"`,
 #'   `"#021841"`) for a single static color, or a bare column name (without
 #'   quotes) to map a grouping variable to fill color.
-#' @param order Logical indicating if the stacked areas should be ordered.
-#' Default behavior (`TRUE`) stacks the largest groups on top.
-#' @param position Argument passed to `geom_area`.
+#' @param order Whether to order stacked areas by size. The default, `TRUE`,
+#'   places the largest groups on top.
+#' @param position Position adjustment passed to [ggplot2::geom_area()].
 #' @importFrom ggplot2 ggplot aes waiver geom_area geom_hline labs theme
 #' @importFrom dplyr mutate
 #' @importFrom stats reorder
 #'
-#' @return A ggplot2 plot
+#' @return A `ggplot` object.
 #' @export
+#' @encoding UTF-8
 #'
 #' @examples
 #' \dontshow{.op <- options(theme_benvi.font_family = "sans")}
 #' # Simple area chart
-#' sao_paulo <- subset(iqa, name_muni == "S\u00e3o Paulo")
+#' sao_paulo <- subset(iqa, name_muni == "São Paulo")
 #' plot_area(data = sao_paulo, x = date, y = index)
 #'
 #' # Stacked area chart with fill mapping

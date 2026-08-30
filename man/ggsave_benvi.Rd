@@ -2,7 +2,7 @@
 % Please edit documentation in R/save_plot.R
 \name{ggsave_benvi}
 \alias{ggsave_benvi}
-\title{Save a ggplot with benviplot optimizations}
+\title{Save a ggplot with benviplot defaults}
 \usage{
 ggsave_benvi(
   filename,
@@ -17,31 +17,32 @@ ggsave_benvi(
 }
 \arguments{
 \item{filename}{File name to create on disk. The file extension determines
-the graphics device (e.g., ".png", ".pdf", ".svg").}
+the graphics device (for example, \code{".png"}, \code{".pdf"}, or \code{".svg"}).}
 
 \item{plot}{Plot to save. Defaults to the last plot displayed.}
 
-\item{device}{Device to use. Defaults to "ragg" for PNG files if ragg package
-is installed, otherwise uses ggplot2's default device selection.}
+\item{device}{Graphics device. Uses \code{\link[ragg:agg_png]{ragg::agg_png()}} for PNG files when
+\code{ragg} is installed. Otherwise, uses ggplot2's default device.}
 
-\item{width, height}{Plot size in units. Defaults to 7 x 5 inches.}
+\item{width, height}{Plot size. Defaults to 7 by 5 inches.}
 
-\item{units}{Units for width and height ("in", "cm", "mm", "px"). Default is "in".}
+\item{units}{Units for width and height. Choose \code{"in"}, \code{"cm"}, \code{"mm"}, or
+\code{"px"}. Defaults to \code{"in"}.}
 
 \item{dpi}{DPI to use for raster graphics. Defaults to 300.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:ggsave]{ggplot2::ggsave()}}.}
 }
 \value{
-Invisibly returns the filename.
+\code{filename}, invisibly.
 }
 \description{
-A wrapper around \code{\link[ggplot2:ggsave]{ggplot2::ggsave()}} that uses the ragg graphics device for
+A wrapper around \code{\link[ggplot2:ggsave]{ggplot2::ggsave()}} that uses the \code{ragg} graphics device for
 PNG output. Registered fonts such as the bundled Poppins are only visible to
 systemfonts-aware devices, so ragg is what lets \code{theme_benvi()} render its
 font in saved files.
 
-If ragg is not installed, falls back to the default graphics device.
+If \code{ragg} is not installed, the function uses the default graphics device.
 }
 \examples{
 p <- ggplot2::ggplot(mtcars, ggplot2::aes(wt, mpg)) + ggplot2::geom_point()

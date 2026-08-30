@@ -1,69 +1,61 @@
 #' Plot a histogram chart
 #'
-#' @param data A data.frame type object
-#' @param x <[`data-masked`][ggplot2::aes_eval]> Indicates the numeric variable to be mapped
+#' @param data A data frame.
+#' @param x <[`data-masked`][ggplot2::aes_eval]> Numeric variable mapped to the
+#'   x-axis.
 #' @param color Color of the column border. Defaults to `"#FFFFFF"` (white).
 #' @param fill Fill color for the columns. Either a color string (e.g., `"blue"`,
 #'   `"#021841"`) for a single static color, or a bare column name (without
 #'   quotes) to map a grouping variable to fill color.
-#' @param pal_name String indicating the name of which palette to use when
-#'   `fill` is a variable mapping.
-#' @param scale_name String indicating fill legend title.
-#' @param zero Logical indicating if a horizontal (y = 0) line should be drawn
-#' on the plot.
+#' @param pal_name Name of the palette used when `fill` maps a variable.
+#' @param scale_name Fill legend title.
+#' @param zero Whether to draw a horizontal line at `y = 0`.
 #' @param bins Number of bins. When specified, overrides `method`.
-#' @param method Character specifying the binning algorithm. Must be one of:
-#'   `"fd"` (default), `"FD"`, `"Scott"`, `"Sturges"`, `"Rice"`, or `"sqrt"`.
-#'   See Details for algorithm descriptions. Ignored when `bins` is specified.
-#' @param density Logical indicating if density should be plotted on y-axis.
+#' @param method Binning method. Choose `"fd"` (the default), `"FD"`, `"Scott"`,
+#'   `"Sturges"`, `"Rice"`, or `"sqrt"`. See Details. Ignored when `bins` is
+#'   specified.
+#' @param density Whether to map density to the y-axis.
 #' @param facet <[`data-masked`][ggplot2::aes_eval]> Optional variable to facet
-#'   the graphics. `NULL` (default) draws a single panel.
-#' @param ... Additional parameters to `facet_wrap()`
+#'   the plot. `NULL` (the default) draws a single panel.
+#' @param ... Additional arguments passed to [ggplot2::facet_wrap()].
 #'
 #' @details
-#' ## Binning Methods
+#' ## Binning methods
 #'
-#' The `method` parameter controls which algorithm is used to compute the optimal
-#' bin width. Available methods:
+#' The `method` parameter controls how the function computes the bin width.
 #'
 #' \describe{
-#'   \item{`"fd"` or `"FD"`}{**Freedman-Diaconis rule** (default). Robust to
-#'     outliers, uses IQR. Formula: \eqn{2 * IQR / n^{1/3}}. Best for most
-#'     distributions.}
-#'   \item{`"Scott"`}{**Scott's rule**. Uses standard deviation. Formula:
-#'     \eqn{3 * sd / n^{1/3}}. Works well for normal-like distributions.}
-#'   \item{`"Sturges"`}{**Sturges' formula**. Simple logarithmic rule. Formula:
-#'     \eqn{k = \lceil log_2(n) \rceil} bins. Good for roughly normal data.}
-#'   \item{`"Rice"`}{**Rice rule**. Cube root based. Formula:
-#'     \eqn{k = \lceil 2n^{1/3} \rceil} bins. General purpose rule.}
-#'   \item{`"sqrt"`}{**Square root rule**. Formula: \eqn{k = \lceil \sqrt{n} \rceil}
-#'     bins. Simple, tends to oversmooth.}
+#'   \item{`"fd"` or `"FD"`}{Freedman-Diaconis rule. Uses the interquartile
+#'     range: \eqn{2 * IQR / n^{1/3}}.}
+#'   \item{`"Scott"`}{Scott's rule. The formula uses the standard deviation,
+#'     \eqn{3 * sd / n^{1/3}}.}
+#'   \item{`"Sturges"`}{Sturges' formula. Uses
+#'     \eqn{k = \lceil log_2(n) \rceil} bins.}
+#'   \item{`"Rice"`}{Rice rule. Uses
+#'     \eqn{k = \lceil 2n^{1/3} \rceil} bins.}
+#'   \item{`"sqrt"`}{Square-root rule. Uses
+#'     \eqn{k = \lceil \sqrt{n} \rceil} bins.}
 #' }
 #'
-#' When in doubt, use the default `"fd"` (Freedman-Diaconis), which is robust
-#' and works well across different distributions.
-#'
-#' @return A ggplot2 object
+#' @return A `ggplot` object.
 #' @export
+#' @encoding UTF-8
 #' @importFrom ggplot2 ggplot aes geom_histogram facet_wrap after_stat vars
 #' @importFrom rlang enquo
 #' @importFrom cli cli_abort
 #'
 #' @examples
 #' \dontshow{.op <- options(theme_benvi.font_family = "sans")}
-#' set.seed(5)
-#' tbl <- data.frame(x = rnorm(n = 1000))
-#'
 #' # Default parameters use Freedman-Diaconis
-#' plot_histogram(data = tbl, x = x)
+#' plot_histogram(data = mtcars, x = mpg)
 #' # Use bins to manually choose number of bins
-#' plot_histogram(data = tbl, x = x, bins = 50)
+#' plot_histogram(data = mtcars, x = mpg, bins = 10)
 #' # Example of alternative methods: square root and Rice
-#' plot_histogram(data = tbl, x = x, method = "sqrt")
-#' plot_histogram(data = tbl, x = x, method = "Rice")
+#' plot_histogram(data = mtcars, x = mpg, method = "sqrt")
+#' plot_histogram(data = mtcars, x = mpg, method = "Rice")
 #'
 #' # Facet by rooms category
-#' spo <- subset(iqaiw, name_muni == "S\u00e3o Paulo" & rooms != "Total")
+#' spo <- subset(iqaiw, name_muni == "São Paulo" & rooms != "Total")
 #' plot_histogram(data = spo, x = index, facet = rooms)
 #' \dontshow{options(.op)}
 plot_histogram <- function(
@@ -89,7 +81,11 @@ plot_histogram <- function(
 
   fill_quo <- rlang::enquo(fill)
   fill_type <- detect_aesthetic_type(fill_quo, "fill", data)
-  static_fill <- if (fill_type$type == "static_color") fill_type$value else "#021841"
+  static_fill <- if (fill_type$type == "static_color") {
+    fill_type$value
+  } else {
+    "#021841"
+  }
 
   # Build aes mapping
   if (fill_type$type == "variable_mapping") {
@@ -120,7 +116,10 @@ plot_histogram <- function(
   }
 
   # Build geom args and construct plot
-  base_args <- c(list(data = data, mapping = hist_mapping, color = color), bw_args)
+  base_args <- c(
+    list(data = data, mapping = hist_mapping, color = color),
+    bw_args
+  )
   if (fill_type$type != "variable_mapping") {
     base_args$fill <- static_fill
   }
@@ -149,10 +148,10 @@ plot_histogram <- function(
 #'
 #' @param x A numeric vector
 #' @param type Type of formula used
-#' @keywords internal
 #'
 #' @return An integer
 #' @importFrom stats IQR sd
+#' @noRd
 get_hist_bw <- function(x, type = "FD") {
   # Normalize type to uppercase for switch
   type <- toupper(type)

@@ -14,16 +14,16 @@ benvi_palette(
 \arguments{
 \item{pal_name}{Name of the palette. Defaults to \code{"qual_2"}.}
 
-\item{n}{Number of colors desired. Theme palettes hold 4 colors, qualitative
-palettes 8, and sequential palettes 9. Defaults to the full palette.}
+\item{n}{Number of colors to return. Defaults to the number of colors in the
+selected palette.}
 
-\item{direction}{Either \code{1} or \code{-1}. If \code{-1} the palette will be reversed.}
+\item{direction}{Either \code{1} or \code{-1}. Use \code{-1} to reverse the palette.}
 
-\item{type}{Either "continuous" or "discrete". Continuous automatically
-interpolates between the colors.}
+\item{type}{Either \code{"discrete"} or \code{"continuous"}. Continuous palettes
+interpolate between the available colors.}
 }
 \value{
-A vector of characters with color attribute
+A \code{palette} object containing hexadecimal color values.
 }
 \description{
 Returns the hex codes of a named Benvi palette. Use \code{\link[=show_palettes]{show_palettes()}} to see

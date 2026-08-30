@@ -1,35 +1,37 @@
 #' Plot a column chart
 #'
-#' @param data A data.frame type object
-#' @param x <[`data-masked`][ggplot2::aes_eval]> Variable to be mapped in the x-axis.
-#' @param y <[`data-masked`][ggplot2::aes_eval]> Variable to be mapped in the y-axis.
+#' @param data A data frame.
+#' @param x <[`data-masked`][ggplot2::aes_eval]> Variable mapped to the x-axis.
+#' @param y <[`data-masked`][ggplot2::aes_eval]> Variable mapped to the y-axis.
 #' @param fill Fill color for the columns. Either a color string (e.g.,
 #'   `"blue"`, `"#021841"`) for a single static color, or a bare column name
 #'   (without quotes) to map a grouping variable to fill color.
-#' @param zero Logical indicating whether a horizontal line crossing the y = 0
-#' axis should be plotted.
-#' @param text Logical indicating if text labels should be plotted on column bars
-#' @param text_inside Logical indicating if text labels should be placed inside
-#'   bars (using ggfittext). When TRUE, text is auto-sized to fit inside bars.
-#'   When FALSE (default), text appears above/beside bars at fixed size.
-#' @param text_place Placement of inside text. One of "top", "bottom", "left",
-#'   "right", "centre"/"center". Only used when text_inside = TRUE. Defaults to
-#'   "centre".
-#' @param text_padding Padding around inside text as grid::unit(). Only used
-#'   when text_inside = TRUE. Defaults to 1mm.
-#' @param pal_name String indicating the name of which palette to use.
-#' @param scale_name String indicating fill legend title.
-#' @param scale_label String indicating fill legend labels.
+#' @param zero Whether to draw a horizontal line at `y = 0`.
+#' @param text Whether to add value labels to the columns.
+#' @param text_inside Whether to place labels inside the columns with
+#'   `ggfittext`. When `FALSE` (the default), labels use a fixed size and appear
+#'   above or beside the columns.
+#' @param text_place Placement of labels inside the columns. Choose `"top"`,
+#'   `"bottom"`, `"left"`, `"right"`, `"centre"`, or `"center"`. Defaults to
+#'   `"centre"` and applies only when `text_inside = TRUE`.
+#' @param text_padding Padding around inside labels, supplied as a
+#'   [grid::unit()] object. Defaults to 1 mm and applies only when
+#'   `text_inside = TRUE`.
+#' @param pal_name Name of the palette.
+#' @param scale_name Fill legend title.
+#' @param scale_label Fill legend labels.
 #' @param digits Number of digits to show in text labels.
-#' @param percent Logical indicating if a % should be appended to text labels
+#' @param percent Whether to append a percent sign to text labels.
 #' @param text_color Color of the text label. Default is `"gray20"`.
-#' @param text_family Font of the text label. Defaults to `getOption("theme_benvi.font_family", "sans")`.
+#' @param text_family Font family for the text label. Defaults to
+#'   `getOption("theme_benvi.font_family", "sans")`.
 #' @param text_size Size of the text label. Default is `3`.
-#' @param position_col Argument passed on to `position` in `geom_col`.
-#' @param position_text Argument passed on to `position` in `geom_text`.
-#' @param ... Further arguments for `geom_text`
+#' @param position_col Position adjustment passed to [ggplot2::geom_col()].
+#' @param position_text Position adjustment passed to [ggplot2::geom_text()].
+#' @param ... Additional arguments passed to [ggplot2::geom_col()] or
+#'   [ggplot2::geom_text()].
 #'
-#' @return A ggplot2 plot
+#' @return A `ggplot` object.
 #' @export
 #'
 #' @examples

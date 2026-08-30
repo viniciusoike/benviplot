@@ -23,49 +23,48 @@ plot_scatter(
 )
 }
 \arguments{
-\item{data}{A data.frame type object}
+\item{data}{A data frame.}
 
-\item{x}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped in the x-axis.}
+\item{x}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable mapped to the x-axis.}
 
-\item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped in the y-axis.}
+\item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable mapped to the y-axis.}
 
 \item{color}{Color of the points. Either a color string (e.g., \code{"blue"},
 \code{"#021841"}) for a single static color, or a bare column name (without
 quotes) to map a grouping variable to color. Continuous numeric variables
 automatically use a continuous color scale.}
 
-\item{fit}{Logical indicating if a regression line should be plotted on top
-of the chart.}
+\item{fit}{Whether to draw a fitted line over the points.}
 
-\item{fit_variable}{Logical indicating if regression should be grouped.
-Defaults to \code{FALSE}.}
+\item{fit_variable}{Whether to fit separate lines for groups mapped to
+\code{color}. Defaults to \code{FALSE}.}
 
-\item{fit_method}{Type of model to generate regression line. See \code{geom_smooth}
-for more control and details. Defaults to \code{"auto"}.}
+\item{fit_method}{Smoothing method passed to \code{\link[ggplot2:geom_smooth]{ggplot2::geom_smooth()}}.
+Defaults to \code{"auto"}.}
 
-\item{fit_formula}{A formula for fit_method. See \code{geom_smooth}.}
+\item{fit_formula}{Formula passed to \code{\link[ggplot2:geom_smooth]{ggplot2::geom_smooth()}}.}
 
 \item{fit_color}{Color of the fitted regression line. Only applied when
 \code{fit_variable = FALSE}. When \code{NULL} (default), uses automatic color selection.
 When \code{fit_variable = TRUE}, the fit line colors are inherited from the
 grouping variable and this parameter is ignored.}
 
-\item{fit_ci}{Logical indicating if confidence interval should be plotted.
-Defaults to \code{FALSE} for less cluttered visualization.}
+\item{fit_ci}{Whether to draw the confidence interval around fitted lines.
+Defaults to \code{FALSE}.}
 
-\item{zero}{Draws axis lines. Must be one of \code{"x"}, \code{"y"}, \code{"both"}, or
-\code{"none"} (default).}
+\item{zero}{Axis lines to draw. Choose \code{"x"}, \code{"y"}, \code{"both"}, or \code{"none"}
+(the default).}
 
-\item{pal_name}{String indicating the name of which palette to use.}
+\item{pal_name}{Name of the palette.}
 
-\item{scale_name}{String indicating fill legend title.}
+\item{scale_name}{Fill legend title.}
 
-\item{scale_label}{String indicating fill legend labels.}
+\item{scale_label}{Fill legend labels.}
 
-\item{...}{Further arguments to \code{geom_point}}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 }
 \value{
-A ggplot2 plot.
+A \code{ggplot} object.
 }
 \description{
 Plot a scatter chart

@@ -10,8 +10,7 @@ template:
 home:
   title: benviplot • Color Palettes for Data Visualization
   description: >
-    ggplot2 extensions and color palettes for creating quality graphics.
-    Uses color schemes from the Benvi brand.
+    ggplot2 extensions and color palettes based on the Benvi brand.
 
 navbar:
   structure:
@@ -66,7 +65,7 @@ reference:
     - font_status
 
   - title: Saving Plots
-    desc: Export plots with optimal settings
+    desc: Save plots with ragg when available
     contents:
     - ggsave_benvi
 

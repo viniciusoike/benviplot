@@ -7,30 +7,25 @@
 format_num_br(x, digits = 1, percent = FALSE)
 }
 \arguments{
-\item{x}{A numeric vector}
+\item{x}{A numeric vector.}
 
 \item{digits}{Number of decimal places to include. Can be negative to round
 to tens, hundreds, etc.}
 
-\item{percent}{Logical indicating if \% symbol should be appended}
+\item{percent}{Whether to append a percent sign.}
 }
 \value{
-A character vector with formatted numbers
+A character vector containing the formatted numbers.
 }
 \description{
-Formats numbers using Brazilian locale conventions: period (.) as thousands
-separator and comma (,) as decimal separator. This is a convenient wrapper
-to both the \code{format} and \code{round} base functions to convert numeric vectors
-into character labels for tables or plots.
+Formats numbers with a period as the thousands separator and a comma as the
+decimal separator. The result is suitable for labels in tables and plots.
 }
 \details{
-Brazilian number formatting uses:
-\itemize{
-\item Thousands separator: \code{.} (period)
-\item Decimal separator: \verb{,} (comma)
-}
+Brazilian number formatting uses \code{.} as the thousands separator and \verb{,} as
+the decimal separator.
 
-For example, 1234567.89 becomes "1.234.567,9" (with digits = 1).
+For example, \code{1234567.89} becomes \code{"1.234.567,9"} when \code{digits = 1}.
 }
 \examples{
 # Basic formatting

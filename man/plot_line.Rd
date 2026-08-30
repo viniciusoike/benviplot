@@ -18,31 +18,30 @@ plot_line(
 )
 }
 \arguments{
-\item{data}{A data.frame type object.}
+\item{data}{A data frame.}
 
-\item{x}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped on the x-axis.}
+\item{x}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable mapped to the x-axis.}
 
-\item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable to be mapped on the y-axis.}
+\item{y}{<\code{\link[ggplot2:aes_eval]{data-masked}}> Variable mapped to the y-axis.}
 
 \item{color}{Color of the line. Either a color string (e.g., \code{"blue"},
 \code{"#021841"}) for a single static color, or a bare column name (without
 quotes) to map a grouping variable to color.}
 
-\item{zero}{Logical indicating if a horizontal line (y = 0) should be drawn
-on the plot.}
+\item{zero}{Whether to draw a horizontal line at \code{y = 0}.}
 
-\item{point}{Logical indicating if points should be drawn on top of line.}
+\item{point}{Whether to draw points over the line.}
 
-\item{pal_name}{String indicating which color palette to use.}
+\item{pal_name}{Name of the color palette.}
 
-\item{scale_name}{String indicating color legend title.}
+\item{scale_name}{Color legend title.}
 
-\item{scale_label}{String indicating color legend labels.}
+\item{scale_label}{Color legend labels.}
 
-\item{...}{Other arguments to ggplot2 function.}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:labs]{ggplot2::labs()}}.}
 }
 \value{
-A ggplot2 plot
+A \code{ggplot} object.
 }
 \description{
 Plot a line chart

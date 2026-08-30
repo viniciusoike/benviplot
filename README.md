@@ -17,39 +17,37 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 ## Overview
 
-`benviplot` provides color palettes and ggplot2 helpers for creating
-high quality graphics. The package includes:
+`benviplot` provides color palettes and ggplot2 helpers for consistent
+data visualizations. Its main features include the following.
 
-- **Color Palettes**: theme, qualitative, sequential, and diverging
-  color schemes.
-- **ggplot2 Scales**: discrete and continuous scales for seamless
-  ggplot2 integration.
-- **Plot Helpers**: wrapper functions for common visualizations.
-- **Custom Theme**: a minimal theme that uses the bundled Poppins font.
+- Theme, qualitative, sequential, and diverging color palettes
+- Discrete and continuous scales for ggplot2
+- Helper functions for common chart types
+- A minimal theme with optional support for the bundled Poppins font
 
 ## Installation
 
-`benviplot` is not on CRAN yet. Install from R-universe:
+`benviplot` is not on CRAN yet. Install it from R-universe.
 
 ``` r
 install.packages("benviplot", repos = "https://viniciusoike.r-universe.dev")
 ```
 
-Or install the development version from GitHub:
+Alternatively, install the development version from GitHub.
 
 ``` r
 # install.packages("remotes")
 remotes::install_github("viniciusoike/benviplot")
 ```
 
-## Font Setup
+## Font setup
 
-`benviplot` bundles the Poppins font family and registers it
-automatically on load (requires the `systemfonts` package). When Poppins
-is registered, `theme_benvi()` uses it by default. Without
-`systemfonts`, the theme falls back to the system sans-serif font.
+`benviplot` bundles the Poppins font family. When both `systemfonts` and
+`ragg` are available, the package registers Poppins and `theme_benvi()`
+uses it by default. Otherwise, the theme uses the system sans-serif
+font.
 
-For the best rendering quality, also install the `ragg` package:
+Install `ragg` to render Poppins in PNG files.
 
 ``` r
 install.packages("ragg")
@@ -70,7 +68,7 @@ library(benviplot)
 
 ## Color palettes
 
-Color palettes can be visualized using `benvi_palette`.
+Preview a color palette with `benvi_palette()`.
 
 ``` r
 benvi_palette()
@@ -78,15 +76,15 @@ benvi_palette()
 
 ## Plotting
 
-To use the colors in plots use one of the `scale_*_benvi_*` functions.
+Use one of the following scale functions to apply the palettes to a
+plot.
 
-- `scale_color_benvi_d`
-- `scale_color_benvi_c`
-- `scale_fill_benvi_c`
-- `scale_fill_benvi_d`
+- `scale_color_benvi_d()`
+- `scale_color_benvi_c()`
+- `scale_fill_benvi_c()`
+- `scale_fill_benvi_d()`
 
-The package also supplies a generic `theme_benvi()` function that works
-best if Poppins is available.
+Use `theme_benvi()` to apply the package theme.
 
 ``` r
 # Rental price index for major cities
@@ -145,27 +143,23 @@ ggplot(index_data, aes(x = date, y = name_muni, fill = acum12m * 100)) +
 
 ![](man/figures/readme_plot_example_2.png)
 
-The package features some generic `plot_` functions that help to create
-standard plots. These functions aim to be efficient, allowing for quick
-data exploration, while remaining polished enough to be used for
-reports.
-
-These functions usually include simple helper arguments like `text` in
-the case of `plot_column` that plots its value above the column.
+The `plot_*()` helpers create common charts for exploratory analysis.
+For example, `plot_column(text = TRUE)` adds value labels above the
+columns.
 
 ``` r
-sales <- data.frame(
-  x = factor(c(1, 2, 3, 4, 5, 6)),
-  y = c(200, 220, 230, 210, 240, 290)
+latest_sales <- subset(
+  sales_report,
+  name_muni == "Belo Horizonte" & date == max(date)
 )
 
-plot_column(sales, x = x, y = y, text = TRUE)
+plot_column(latest_sales, x = name_zone, y = price_m2, text = TRUE)
 ```
 
 ![](man/figures/readme_plot_example_3.png)
 
-For more examples visit the [package’s
-website](https://viniciusoike.github.io/benviplot/)
+For more examples, visit the [package
+website](https://viniciusoike.github.io/benviplot/).
 
 ## Acknowledgments
 

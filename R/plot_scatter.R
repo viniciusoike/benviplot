@@ -1,29 +1,29 @@
 #' Plot a scatter chart
+#'
 #' @inheritParams plot_column
 #' @param color Color of the points. Either a color string (e.g., `"blue"`,
 #'   `"#021841"`) for a single static color, or a bare column name (without
 #'   quotes) to map a grouping variable to color. Continuous numeric variables
 #'   automatically use a continuous color scale.
-#' @param fit Logical indicating if a regression line should be plotted on top
-#' of the chart.
-#' @param fit_variable Logical indicating if regression should be grouped.
-#' Defaults to `FALSE`.
-#' @param fit_method Type of model to generate regression line. See `geom_smooth`
-#' for more control and details. Defaults to `"auto"`.
-#' @param fit_formula A formula for fit_method. See `geom_smooth`.
+#' @param fit Whether to draw a fitted line over the points.
+#' @param fit_variable Whether to fit separate lines for groups mapped to
+#'   `color`. Defaults to `FALSE`.
+#' @param fit_method Smoothing method passed to [ggplot2::geom_smooth()].
+#'   Defaults to `"auto"`.
+#' @param fit_formula Formula passed to [ggplot2::geom_smooth()].
 #' @param fit_color Color of the fitted regression line. Only applied when
 #' `fit_variable = FALSE`. When `NULL` (default), uses automatic color selection.
 #' When `fit_variable = TRUE`, the fit line colors are inherited from the
 #' grouping variable and this parameter is ignored.
-#' @param fit_ci Logical indicating if confidence interval should be plotted.
-#' Defaults to `FALSE` for less cluttered visualization.
-#' @param zero Draws axis lines. Must be one of `"x"`, `"y"`, `"both"`, or
-#' `"none"` (default).
-#' @param pal_name String indicating the name of which palette to use.
-#' @param ... Further arguments to `geom_point`
+#' @param fit_ci Whether to draw the confidence interval around fitted lines.
+#'   Defaults to `FALSE`.
+#' @param zero Axis lines to draw. Choose `"x"`, `"y"`, `"both"`, or `"none"`
+#'   (the default).
+#' @param pal_name Name of the palette.
+#' @param ... Additional arguments passed to [ggplot2::geom_point()].
 #' @importFrom ggplot2 ggplot aes waiver geom_point geom_smooth
 #' @importFrom cli cli_abort
-#' @return A ggplot2 plot.
+#' @return A `ggplot` object.
 #' @export
 #'
 #' @examples
@@ -84,7 +84,11 @@ plot_scatter <- function(
         )
     }
   } else {
-    static_color <- if (color_type$type == "static_color") color_type$value else benvi_palette("benvi_blue", 1)
+    static_color <- if (color_type$type == "static_color") {
+      color_type$value
+    } else {
+      benvi_palette("benvi_blue", 1)
+    }
 
     p <- ggplot(data = data, aes(x = {{ x }}, y = {{ y }}))
     p <- plot_add_xy(p, type = zero)

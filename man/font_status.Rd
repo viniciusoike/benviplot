@@ -7,11 +7,11 @@
 font_status()
 }
 \value{
-Invisibly returns a list with \code{poppins_available} and \code{ragg_available}.
+A list with \code{poppins_available} and \code{ragg_available}, invisibly.
 }
 \description{
-Reports whether Poppins is available and whether the \code{ragg} graphics device
-is installed.
+Reports whether Poppins, \code{systemfonts}, and the \code{ragg} graphics device are
+available.
 }
 \examples{
 font_status()

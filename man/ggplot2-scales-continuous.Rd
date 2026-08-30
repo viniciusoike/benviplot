@@ -5,7 +5,7 @@
 \alias{scale_colour_benvi_c}
 \alias{scale_color_benvi_c}
 \alias{scale_fill_benvi_c}
-\title{Continuous scales to use for ggplot2}
+\title{Continuous Benvi color scales}
 \usage{
 scale_colour_benvi_c(pal_name = "benvi_blue", direction = 1, ...)
 
@@ -16,17 +16,16 @@ scale_fill_benvi_c(pal_name = "benvi_blue", direction = 1, ...)
 \arguments{
 \item{pal_name}{Name of the palette. Defaults to \code{"benvi_blue"}.}
 
-\item{direction}{Either \code{1} or \code{-1}. If \code{-1} the palette will be reversed.}
+\item{direction}{Either \code{1} or \code{-1}. Use \code{-1} to reverse the palette.}
 
-\item{...}{Arguments to pass on to \code{ggplot2::scale_colour_gradientn()} or
-\code{ggplot2::scale_fill_gradientn()}}
+\item{...}{Additional arguments passed to
+\code{\link[ggplot2:scale_gradient]{ggplot2::scale_colour_gradientn()}} or \code{\link[ggplot2:scale_gradient]{ggplot2::scale_fill_gradientn()}}.}
 }
 \value{
-A \code{ScaleContinuous} object that can be added to a \code{ggplot} object
+A continuous ggplot2 scale that can be added to a \code{ggplot} object.
 }
 \description{
-These functions provide the option to use Benvi colors inside continuous
-palettes with the \code{ggplot2} package.
+Map continuous values to colors interpolated from a Benvi palette.
 }
 \examples{
 library(ggplot2)

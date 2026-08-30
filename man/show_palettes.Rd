@@ -7,19 +7,19 @@
 show_palettes(type = "all", n = NULL)
 }
 \arguments{
-\item{type}{Character string specifying the palette type to display. One of:
-\code{"all"} (default), \code{"theme"}, \code{"sequential"}, \code{"qualitative"}, \code{"diverging"},
-\code{"city"}, or \code{"brand"}.}
+\item{type}{Palette type to display. Choose \code{"all"} (the default), \code{"theme"},
+\code{"sequential"}, \code{"qualitative"}, \code{"diverging"}, \code{"city"}, or \code{"brand"}.}
 
 \item{n}{Number of colors to display from each palette. If \code{NULL} (default),
-shows all colors in each palette.}
+displays every color in each palette.}
 }
 \value{
-Invisibly returns \code{NULL}. Called for its side effect of creating a plot.
+\code{NULL}, invisibly. This function is called for its plotting side
+effect.
 }
 \description{
-Visually displays all available Benvi palettes in a grid layout, modeled on
-\code{RColorBrewer::display.brewer.all()}. Optionally filter by palette type.
+Draws the available Benvi palettes in a grid. The layout follows
+\code{\link[RColorBrewer:ColorBrewer]{RColorBrewer::display.brewer.all()}}.
 }
 \examples{
 # Display all palettes

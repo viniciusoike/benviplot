@@ -1,10 +1,10 @@
 #' Report benviplot font status
 #'
 #' @description
-#' Reports whether Poppins is available and whether the `ragg` graphics device
-#' is installed.
+#' Reports whether Poppins, `systemfonts`, and the `ragg` graphics device are
+#' available.
 #'
-#' @return Invisibly returns a list with `poppins_available` and `ragg_available`.
+#' @return A list with `poppins_available` and `ragg_available`, invisibly.
 #' @export
 #'
 #' @examples
@@ -14,18 +14,23 @@ font_status <- function() {
 
   poppins_source <- "none"
   if (systemfonts_available) {
-    tryCatch({
-      registry <- systemfonts::registry_fonts()
-      if (nrow(registry) > 0 &&
-          any(grepl("Poppins", registry$family, ignore.case = TRUE))) {
-        poppins_source <- "registered"
-      } else {
-        sys <- systemfonts::system_fonts()
-        if (any(grepl("Poppins", sys$family, ignore.case = TRUE))) {
-          poppins_source <- "system"
+    tryCatch(
+      {
+        registry <- systemfonts::registry_fonts()
+        if (
+          nrow(registry) > 0 &&
+            any(grepl("Poppins", registry$family, ignore.case = TRUE))
+        ) {
+          poppins_source <- "registered"
+        } else {
+          sys <- systemfonts::system_fonts()
+          if (any(grepl("Poppins", sys$family, ignore.case = TRUE))) {
+            poppins_source <- "system"
+          }
         }
-      }
-    }, error = function(e) NULL)
+      },
+      error = function(e) NULL
+    )
   }
 
   poppins_available <- poppins_source != "none"

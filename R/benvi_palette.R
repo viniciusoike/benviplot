@@ -5,12 +5,12 @@
 #' [ghibli](https://github.com/ewenme/ghibli) package.
 #'
 #' @param pal_name Name of the palette. Defaults to `"qual_2"`.
-#' @param n Number of colors desired. Theme palettes hold 4 colors, qualitative
-#' palettes 8, and sequential palettes 9. Defaults to the full palette.
-#' @param direction Either `1` or `-1`. If `-1` the palette will be reversed.
-#' @param type Either "continuous" or "discrete". Continuous automatically
-#' interpolates between the colors.
-#' @return A vector of characters with color attribute
+#' @param n Number of colors to return. Defaults to the number of colors in the
+#'   selected palette.
+#' @param direction Either `1` or `-1`. Use `-1` to reverse the palette.
+#' @param type Either `"discrete"` or `"continuous"`. Continuous palettes
+#'   interpolate between the available colors.
+#' @return A `palette` object containing hexadecimal color values.
 #' @export
 #' @importFrom grDevices colorRampPalette rgb
 #' @importFrom cli cli_abort

@@ -4,7 +4,7 @@
 \alias{scale_colour_benvi_d}
 \alias{scale_color_benvi_d}
 \alias{scale_fill_benvi_d}
-\title{Discrete scales to use for ggplot2}
+\title{Discrete Benvi color scales}
 \usage{
 scale_colour_benvi_d(pal_name = "qual_benvi", direction = 1, ...)
 
@@ -13,14 +13,17 @@ scale_color_benvi_d(pal_name = "qual_benvi", direction = 1, ...)
 scale_fill_benvi_d(pal_name = "qual_benvi", direction = 1, ...)
 }
 \arguments{
-\item{pal_name}{Name of the palette.}
+\item{pal_name}{Name of the palette. Defaults to \code{"qual_benvi"}.}
 
-\item{direction}{Either \code{1} or \code{-1}. If \code{-1} the palette will be reversed.}
+\item{direction}{Either \code{1} or \code{-1}. Use \code{-1} to reverse the palette.}
 
-\item{...}{additional arguments to pass to discrete_scale}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:discrete_scale]{ggplot2::discrete_scale()}}.}
+}
+\value{
+A discrete ggplot2 scale that can be added to a \code{ggplot} object.
 }
 \description{
-Functions to use \code{ggplot2} scales with Benvi colors.
+Map discrete values to colors from a Benvi palette.
 }
 \examples{
 library(ggplot2)

@@ -2,18 +2,18 @@ default_font_family <- function() {
   if (poppins_is_registered()) "Poppins" else "sans"
 }
 
-#' A theme for Benvi styled plots
+#' A theme for Benvi-styled plots
 #'
 #' @description
-#' A ggplot2 base theme for Benvi styled plots.
+#' A ggplot2 base theme for Benvi-styled plots.
 #'
 #' The Poppins font is bundled with the package and registered automatically on
 #' load when `systemfonts` is installed. When both `systemfonts` and `ragg` are
 #' available, the theme uses Poppins by default. Otherwise it falls back to the
 #' system's default sans-serif font.
 #'
-#' Registered fonts only work with systemfonts-aware devices (e.g.
-#' [ragg::agg_png]). Base R devices (PDF, PostScript) cannot render them. If you
+#' Registered fonts only work with systemfonts-aware devices such as
+#' [ragg::agg_png()]. Base R devices (PDF and PostScript) cannot render them. If you
 #' see font warnings when saving to PDF, pass `base_family = "sans"` or set
 #' `options(theme_benvi.font_family = "sans")`. See [font_status()] to check
 #' your setup.
@@ -23,16 +23,17 @@ default_font_family <- function() {
 #'   `"sans"` otherwise. Override globally with
 #'   `options(theme_benvi.font_family = ...)`.
 #' @param base_size Argument passed to [ggplot2::theme_minimal()]. Defaults to 10.
-#' @param background Logical. Adds an offwhite (creme) background to the plot.
+#' @param background Whether to use an off-white background.
 #'
-#' @return A ggplot2 theme object
+#' @return A ggplot2 theme object.
 #' @importFrom ggplot2 %+replace% theme_minimal theme element_blank
 #' element_line element_rect element_text margin rel
 #' @export
+#' @encoding UTF-8
 #'
 #' @examples
 #' library(ggplot2)
-#' series <- subset(iqaiw, name_muni == "S\u00e3o Paulo" & rooms == "Total")
+#' series <- subset(iqaiw, name_muni == "São Paulo" & rooms == "Total")
 #'
 #' # Base theme (using "sans" for portability)
 #' ggplot(series, aes(date, index)) +

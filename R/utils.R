@@ -1,24 +1,21 @@
 #' Format numbers using Brazilian conventions
 #'
-#' @param x A numeric vector
+#' @param x A numeric vector.
 #' @param digits Number of decimal places to include. Can be negative to round
 #'   to tens, hundreds, etc.
-#' @param percent Logical indicating if % symbol should be appended
+#' @param percent Whether to append a percent sign.
 #'
 #' @description
-#' Formats numbers using Brazilian locale conventions: period (.) as thousands
-#' separator and comma (,) as decimal separator. This is a convenient wrapper
-#' to both the `format` and `round` base functions to convert numeric vectors
-#' into character labels for tables or plots.
+#' Formats numbers with a period as the thousands separator and a comma as the
+#' decimal separator. The result is suitable for labels in tables and plots.
 #'
 #' @details
-#' Brazilian number formatting uses:
-#' - Thousands separator: `.` (period)
-#' - Decimal separator: `,` (comma)
+#' Brazilian number formatting uses `.` as the thousands separator and `,` as
+#' the decimal separator.
 #'
-#' For example, 1234567.89 becomes "1.234.567,9" (with digits = 1).
+#' For example, `1234567.89` becomes `"1.234.567,9"` when `digits = 1`.
 #'
-#' @return A character vector with formatted numbers
+#' @return A character vector containing the formatted numbers.
 #' @importFrom cli cli_abort
 #' @export
 #'
