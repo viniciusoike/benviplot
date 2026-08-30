@@ -28,17 +28,17 @@ plot_scatter(
 
 - data:
 
-  A data.frame type object
+  A data frame.
 
 - x:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be mapped in the x-axis.
+  Variable mapped to the x-axis.
 
 - y:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be mapped in the y-axis.
+  Variable mapped to the y-axis.
 
 - color:
 
@@ -49,22 +49,23 @@ plot_scatter(
 
 - fit:
 
-  Logical indicating if a regression line should be plotted on top of
-  the chart.
+  Whether to draw a fitted line over the points.
 
 - fit_variable:
 
-  Logical indicating if regression should be grouped. Defaults to
-  `FALSE`.
+  Whether to fit separate lines for groups mapped to `color`. Defaults
+  to `FALSE`.
 
 - fit_method:
 
-  Type of model to generate regression line. See `geom_smooth` for more
-  control and details. Defaults to `"auto"`.
+  Smoothing method passed to
+  [`ggplot2::geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html).
+  Defaults to `"auto"`.
 
 - fit_formula:
 
-  A formula for fit_method. See `geom_smooth`.
+  Formula passed to
+  [`ggplot2::geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html).
 
 - fit_color:
 
@@ -75,33 +76,34 @@ plot_scatter(
 
 - fit_ci:
 
-  Logical indicating if confidence interval should be plotted. Defaults
-  to `FALSE` for less cluttered visualization.
+  Whether to draw the confidence interval around fitted lines. Defaults
+  to `FALSE`.
 
 - zero:
 
-  Draws axis lines. Must be one of `"x"`, `"y"`, `"both"`, or `"none"`
-  (default).
+  Axis lines to draw. Choose `"x"`, `"y"`, `"both"`, or `"none"` (the
+  default).
 
 - pal_name:
 
-  String indicating the name of which palette to use.
+  Name of the palette.
 
 - scale_name:
 
-  String indicating fill legend title.
+  Fill legend title.
 
 - scale_label:
 
-  String indicating fill legend labels.
+  Fill legend labels.
 
 - ...:
 
-  Further arguments to `geom_point`
+  Additional arguments passed to
+  [`ggplot2::geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html).
 
 ## Value
 
-A ggplot2 plot.
+A `ggplot` object.
 
 ## Examples
 

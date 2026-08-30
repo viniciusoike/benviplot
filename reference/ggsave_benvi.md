@@ -1,14 +1,15 @@
-# Save a ggplot with benviplot optimizations
+# Save a ggplot with benviplot defaults
 
 A wrapper around
 [`ggplot2::ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html)
-that uses the ragg graphics device for PNG output. Registered fonts such
-as the bundled Poppins are only visible to systemfonts-aware devices, so
-ragg is what lets
+that uses the `ragg` graphics device for PNG output. Registered fonts
+such as the bundled Poppins are only visible to systemfonts-aware
+devices, so ragg is what lets
 [`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md)
 render its font in saved files.
 
-If ragg is not installed, falls back to the default graphics device.
+If `ragg` is not installed, the function uses the default graphics
+device.
 
 ## Usage
 
@@ -30,7 +31,7 @@ ggsave_benvi(
 - filename:
 
   File name to create on disk. The file extension determines the
-  graphics device (e.g., ".png", ".pdf", ".svg").
+  graphics device (for example, `".png"`, `".pdf"`, or `".svg"`).
 
 - plot:
 
@@ -38,16 +39,19 @@ ggsave_benvi(
 
 - device:
 
-  Device to use. Defaults to "ragg" for PNG files if ragg package is
-  installed, otherwise uses ggplot2's default device selection.
+  Graphics device. Uses
+  [`ragg::agg_png()`](https://ragg.r-lib.org/reference/agg_png.html) for
+  PNG files when `ragg` is installed. Otherwise, uses ggplot2's default
+  device.
 
 - width, height:
 
-  Plot size in units. Defaults to 7 x 5 inches.
+  Plot size. Defaults to 7 by 5 inches.
 
 - units:
 
-  Units for width and height ("in", "cm", "mm", "px"). Default is "in".
+  Units for width and height. Choose `"in"`, `"cm"`, `"mm"`, or `"px"`.
+  Defaults to `"in"`.
 
 - dpi:
 
@@ -60,7 +64,7 @@ ggsave_benvi(
 
 ## Value
 
-Invisibly returns the filename.
+`filename`, invisibly.
 
 ## See also
 

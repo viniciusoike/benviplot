@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,15 +65,15 @@
 
 
 <dl><dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>A data.frame type object</p></dd>
+<dd><p>A data frame.</p></dd>
 
 
 <dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>&lt;<code><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html" class="external-link">data-masked</a></code>&gt; Variable to be mapped in the x-axis.</p></dd>
+<dd><p>&lt;<code><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html" class="external-link">data-masked</a></code>&gt; Variable mapped to the x-axis.</p></dd>
 
 
 <dt id="arg-y">y<a class="anchor" aria-label="anchor" href="#arg-y"></a></dt>
-<dd><p>&lt;<code><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html" class="external-link">data-masked</a></code>&gt; Variable to be mapped in the y-axis.</p></dd>
+<dd><p>&lt;<code><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html" class="external-link">data-masked</a></code>&gt; Variable mapped to the y-axis.</p></dd>
 
 
 <dt id="arg-color">color<a class="anchor" aria-label="anchor" href="#arg-color"></a></dt>
@@ -84,22 +84,21 @@ automatically use a continuous color scale.</p></dd>
 
 
 <dt id="arg-fit">fit<a class="anchor" aria-label="anchor" href="#arg-fit"></a></dt>
-<dd><p>Logical indicating if a regression line should be plotted on top
-of the chart.</p></dd>
+<dd><p>Whether to draw a fitted line over the points.</p></dd>
 
 
 <dt id="arg-fit-variable">fit_variable<a class="anchor" aria-label="anchor" href="#arg-fit-variable"></a></dt>
-<dd><p>Logical indicating if regression should be grouped.
-Defaults to <code>FALSE</code>.</p></dd>
+<dd><p>Whether to fit separate lines for groups mapped to
+<code>color</code>. Defaults to <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-fit-method">fit_method<a class="anchor" aria-label="anchor" href="#arg-fit-method"></a></dt>
-<dd><p>Type of model to generate regression line. See <code>geom_smooth</code>
-for more control and details. Defaults to <code>"auto"</code>.</p></dd>
+<dd><p>Smoothing method passed to <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">ggplot2::geom_smooth()</a></code>.
+Defaults to <code>"auto"</code>.</p></dd>
 
 
 <dt id="arg-fit-formula">fit_formula<a class="anchor" aria-label="anchor" href="#arg-fit-formula"></a></dt>
-<dd><p>A formula for fit_method. See <code>geom_smooth</code>.</p></dd>
+<dd><p>Formula passed to <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">ggplot2::geom_smooth()</a></code>.</p></dd>
 
 
 <dt id="arg-fit-color">fit_color<a class="anchor" aria-label="anchor" href="#arg-fit-color"></a></dt>
@@ -110,34 +109,34 @@ grouping variable and this parameter is ignored.</p></dd>
 
 
 <dt id="arg-fit-ci">fit_ci<a class="anchor" aria-label="anchor" href="#arg-fit-ci"></a></dt>
-<dd><p>Logical indicating if confidence interval should be plotted.
-Defaults to <code>FALSE</code> for less cluttered visualization.</p></dd>
+<dd><p>Whether to draw the confidence interval around fitted lines.
+Defaults to <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-zero">zero<a class="anchor" aria-label="anchor" href="#arg-zero"></a></dt>
-<dd><p>Draws axis lines. Must be one of <code>"x"</code>, <code>"y"</code>, <code>"both"</code>, or
-<code>"none"</code> (default).</p></dd>
+<dd><p>Axis lines to draw. Choose <code>"x"</code>, <code>"y"</code>, <code>"both"</code>, or <code>"none"</code>
+(the default).</p></dd>
 
 
 <dt id="arg-pal-name">pal_name<a class="anchor" aria-label="anchor" href="#arg-pal-name"></a></dt>
-<dd><p>String indicating the name of which palette to use.</p></dd>
+<dd><p>Name of the palette.</p></dd>
 
 
 <dt id="arg-scale-name">scale_name<a class="anchor" aria-label="anchor" href="#arg-scale-name"></a></dt>
-<dd><p>String indicating fill legend title.</p></dd>
+<dd><p>Fill legend title.</p></dd>
 
 
 <dt id="arg-scale-label">scale_label<a class="anchor" aria-label="anchor" href="#arg-scale-label"></a></dt>
-<dd><p>String indicating fill legend labels.</p></dd>
+<dd><p>Fill legend labels.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Further arguments to <code>geom_point</code></p></dd>
+<dd><p>Additional arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">ggplot2::geom_point()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A ggplot2 plot.</p>
+    <p>A <code>ggplot</code> object.</p>
     </div>
 
     <div class="section level2">

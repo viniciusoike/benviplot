@@ -1,6 +1,6 @@
-# Discrete scales to use for ggplot2
+# Discrete Benvi color scales
 
-Functions to use `ggplot2` scales with Benvi colors.
+Map discrete values to colors from a Benvi palette.
 
 ## Usage
 
@@ -16,15 +16,20 @@ scale_fill_benvi_d(pal_name = "qual_benvi", direction = 1, ...)
 
 - pal_name:
 
-  Name of the palette.
+  Name of the palette. Defaults to `"qual_benvi"`.
 
 - direction:
 
-  Either `1` or `-1`. If `-1` the palette will be reversed.
+  Either `1` or `-1`. Use `-1` to reverse the palette.
 
 - ...:
 
-  additional arguments to pass to discrete_scale
+  Additional arguments passed to
+  [`ggplot2::discrete_scale()`](https://ggplot2.tidyverse.org/reference/discrete_scale.html).
+
+## Value
+
+A discrete ggplot2 scale that can be added to a `ggplot` object.
 
 ## Examples
 

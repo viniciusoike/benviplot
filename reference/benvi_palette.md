@@ -24,21 +24,21 @@ benvi_palette(
 
 - n:
 
-  Number of colors desired. Theme palettes hold 4 colors, qualitative
-  palettes 8, and sequential palettes 9. Defaults to the full palette.
+  Number of colors to return. Defaults to the number of colors in the
+  selected palette.
 
 - direction:
 
-  Either `1` or `-1`. If `-1` the palette will be reversed.
+  Either `1` or `-1`. Use `-1` to reverse the palette.
 
 - type:
 
-  Either "continuous" or "discrete". Continuous automatically
-  interpolates between the colors.
+  Either `"discrete"` or `"continuous"`. Continuous palettes interpolate
+  between the available colors.
 
 ## Value
 
-A vector of characters with color attribute
+A `palette` object containing hexadecimal color values.
 
 ## Examples
 

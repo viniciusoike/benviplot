@@ -1,7 +1,7 @@
 # Report benviplot font status
 
-Reports whether Poppins is available and whether the `ragg` graphics
-device is installed.
+Reports whether Poppins, `systemfonts`, and the `ragg` graphics device
+are available.
 
 ## Usage
 
@@ -11,7 +11,7 @@ font_status()
 
 ## Value
 
-Invisibly returns a list with `poppins_available` and `ragg_available`.
+A list with `poppins_available` and `ragg_available`, invisibly.
 
 ## Examples
 

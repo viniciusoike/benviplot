@@ -1,9 +1,8 @@
 # Format numbers using Brazilian conventions
 
-Formats numbers using Brazilian locale conventions: period (.) as
-thousands separator and comma (,) as decimal separator. This is a
-convenient wrapper to both the `format` and `round` base functions to
-convert numeric vectors into character labels for tables or plots.
+Formats numbers with a period as the thousands separator and a comma as
+the decimal separator. The result is suitable for labels in tables and
+plots.
 
 ## Usage
 
@@ -15,7 +14,7 @@ format_num_br(x, digits = 1, percent = FALSE)
 
 - x:
 
-  A numeric vector
+  A numeric vector.
 
 - digits:
 
@@ -24,21 +23,18 @@ format_num_br(x, digits = 1, percent = FALSE)
 
 - percent:
 
-  Logical indicating if % symbol should be appended
+  Whether to append a percent sign.
 
 ## Value
 
-A character vector with formatted numbers
+A character vector containing the formatted numbers.
 
 ## Details
 
-Brazilian number formatting uses:
+Brazilian number formatting uses `.` as the thousands separator and `,`
+as the decimal separator.
 
-- Thousands separator: `.` (period)
-
-- Decimal separator: `,` (comma)
-
-For example, 1234567.89 becomes "1.234.567,9" (with digits = 1).
+For example, `1234567.89` becomes `"1.234.567,9"` when `digits = 1`.
 
 ## Examples
 

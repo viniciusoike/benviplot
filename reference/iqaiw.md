@@ -2,8 +2,8 @@
 
 The IQAIW (Índice QuintoAndar ImovelWeb) is a rental index for major
 Brazilian cities. The index is based on both new rental contracts
-(managed by QuintoAndar) and online listings from QuintoAndar's listings
-(including ImovelWeb).
+(managed by QuintoAndar) and online listings published by QuintoAndar
+and ImovelWeb.
 
 ## Usage
 
@@ -13,8 +13,8 @@ iqaiw
 
 ## Format
 
-A data frame with 1,660 observations across 6 cities and multiple time
-periods:
+A data frame with 1,660 observations across six cities and multiple
+periods.
 
 - date:
 
@@ -22,8 +22,8 @@ periods:
 
 - name_muni:
 
-  Name of the municipality. One of: Belo Horizonte, Brasília, Curitiba,
-  Porto Alegre, Rio de Janeiro, São Paulo
+  Name of the municipality. Values include Belo Horizonte, Brasília,
+  Curitiba, Porto Alegre, Rio de Janeiro, and São Paulo
 
 - rooms:
 
@@ -57,13 +57,10 @@ comparable to the IQA index.
 
 ## Methodology
 
-The index is a hedonic double imputed index. It controls for quality
-changes using a flexible GAM specification with location variables. The
-underlying sample mixes new rental contracts with online listings, so
-the index does not measure either source in isolation.
-
-QuintoAndar acquired the ImovelWeb brand in 2021-22, and the IQAIW name
-reflects the merger of the two brands.
+The index uses double imputation with a hedonic model. A generalized
+additive model (GAM) controls for property characteristics and location.
+The sample combines new rental contracts with online listings, so the
+index does not measure either source in isolation.
 
 ## Examples
 

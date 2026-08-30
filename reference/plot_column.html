@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,15 +70,15 @@
 
 
 <dl><dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>A data.frame type object</p></dd>
+<dd><p>A data frame.</p></dd>
 
 
 <dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>&lt;<code><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html" class="external-link">data-masked</a></code>&gt; Variable to be mapped in the x-axis.</p></dd>
+<dd><p>&lt;<code><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html" class="external-link">data-masked</a></code>&gt; Variable mapped to the x-axis.</p></dd>
 
 
 <dt id="arg-y">y<a class="anchor" aria-label="anchor" href="#arg-y"></a></dt>
-<dd><p>&lt;<code><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html" class="external-link">data-masked</a></code>&gt; Variable to be mapped in the y-axis.</p></dd>
+<dd><p>&lt;<code><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html" class="external-link">data-masked</a></code>&gt; Variable mapped to the y-axis.</p></dd>
 
 
 <dt id="arg-fill">fill<a class="anchor" aria-label="anchor" href="#arg-fill"></a></dt>
@@ -88,41 +88,41 @@
 
 
 <dt id="arg-zero">zero<a class="anchor" aria-label="anchor" href="#arg-zero"></a></dt>
-<dd><p>Logical indicating whether a horizontal line crossing the y = 0
-axis should be plotted.</p></dd>
+<dd><p>Whether to draw a horizontal line at <code>y = 0</code>.</p></dd>
 
 
 <dt id="arg-text">text<a class="anchor" aria-label="anchor" href="#arg-text"></a></dt>
-<dd><p>Logical indicating if text labels should be plotted on column bars</p></dd>
+<dd><p>Whether to add value labels to the columns.</p></dd>
 
 
 <dt id="arg-text-inside">text_inside<a class="anchor" aria-label="anchor" href="#arg-text-inside"></a></dt>
-<dd><p>Logical indicating if text labels should be placed inside
-bars (using ggfittext). When TRUE, text is auto-sized to fit inside bars.
-When FALSE (default), text appears above/beside bars at fixed size.</p></dd>
+<dd><p>Whether to place labels inside the columns with
+<code>ggfittext</code>. When <code>FALSE</code> (the default), labels use a fixed size and appear
+above or beside the columns.</p></dd>
 
 
 <dt id="arg-text-place">text_place<a class="anchor" aria-label="anchor" href="#arg-text-place"></a></dt>
-<dd><p>Placement of inside text. One of "top", "bottom", "left",
-"right", "centre"/"center". Only used when text_inside = TRUE. Defaults to
-"centre".</p></dd>
+<dd><p>Placement of labels inside the columns. Choose <code>"top"</code>,
+<code>"bottom"</code>, <code>"left"</code>, <code>"right"</code>, <code>"centre"</code>, or <code>"center"</code>. Defaults to
+<code>"centre"</code> and applies only when <code>text_inside = TRUE</code>.</p></dd>
 
 
 <dt id="arg-text-padding">text_padding<a class="anchor" aria-label="anchor" href="#arg-text-padding"></a></dt>
-<dd><p>Padding around inside text as grid::unit(). Only used
-when text_inside = TRUE. Defaults to 1mm.</p></dd>
+<dd><p>Padding around inside labels, supplied as a
+<code><a href="https://rdrr.io/r/grid/unit.html" class="external-link">grid::unit()</a></code> object. Defaults to 1 mm and applies only when
+<code>text_inside = TRUE</code>.</p></dd>
 
 
 <dt id="arg-pal-name">pal_name<a class="anchor" aria-label="anchor" href="#arg-pal-name"></a></dt>
-<dd><p>String indicating the name of which palette to use.</p></dd>
+<dd><p>Name of the palette.</p></dd>
 
 
 <dt id="arg-scale-name">scale_name<a class="anchor" aria-label="anchor" href="#arg-scale-name"></a></dt>
-<dd><p>String indicating fill legend title.</p></dd>
+<dd><p>Fill legend title.</p></dd>
 
 
 <dt id="arg-scale-label">scale_label<a class="anchor" aria-label="anchor" href="#arg-scale-label"></a></dt>
-<dd><p>String indicating fill legend labels.</p></dd>
+<dd><p>Fill legend labels.</p></dd>
 
 
 <dt id="arg-digits">digits<a class="anchor" aria-label="anchor" href="#arg-digits"></a></dt>
@@ -130,7 +130,7 @@ when text_inside = TRUE. Defaults to 1mm.</p></dd>
 
 
 <dt id="arg-percent">percent<a class="anchor" aria-label="anchor" href="#arg-percent"></a></dt>
-<dd><p>Logical indicating if a % should be appended to text labels</p></dd>
+<dd><p>Whether to append a percent sign to text labels.</p></dd>
 
 
 <dt id="arg-text-color">text_color<a class="anchor" aria-label="anchor" href="#arg-text-color"></a></dt>
@@ -138,7 +138,8 @@ when text_inside = TRUE. Defaults to 1mm.</p></dd>
 
 
 <dt id="arg-text-family">text_family<a class="anchor" aria-label="anchor" href="#arg-text-family"></a></dt>
-<dd><p>Font of the text label. Defaults to <code>getOption("theme_benvi.font_family", "sans")</code>.</p></dd>
+<dd><p>Font family for the text label. Defaults to
+<code>getOption("theme_benvi.font_family", "sans")</code>.</p></dd>
 
 
 <dt id="arg-text-size">text_size<a class="anchor" aria-label="anchor" href="#arg-text-size"></a></dt>
@@ -146,20 +147,21 @@ when text_inside = TRUE. Defaults to 1mm.</p></dd>
 
 
 <dt id="arg-position-col">position_col<a class="anchor" aria-label="anchor" href="#arg-position-col"></a></dt>
-<dd><p>Argument passed on to <code>position</code> in <code>geom_col</code>.</p></dd>
+<dd><p>Position adjustment passed to <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">ggplot2::geom_col()</a></code>.</p></dd>
 
 
 <dt id="arg-position-text">position_text<a class="anchor" aria-label="anchor" href="#arg-position-text"></a></dt>
-<dd><p>Argument passed on to <code>position</code> in <code>geom_text</code>.</p></dd>
+<dd><p>Position adjustment passed to <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">ggplot2::geom_text()</a></code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Further arguments for <code>geom_text</code></p></dd>
+<dd><p>Additional arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">ggplot2::geom_col()</a></code> or
+<code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">ggplot2::geom_text()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A ggplot2 plot</p>
+    <p>A <code>ggplot</code> object.</p>
     </div>
 
     <div class="section level2">

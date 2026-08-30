@@ -11,7 +11,7 @@ ghibli package."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,22 +64,22 @@ the available palettes. The interface follows the
 
 
 <dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
-<dd><p>Number of colors desired. Theme palettes hold 4 colors, qualitative
-palettes 8, and sequential palettes 9. Defaults to the full palette.</p></dd>
+<dd><p>Number of colors to return. Defaults to the number of colors in the
+selected palette.</p></dd>
 
 
 <dt id="arg-direction">direction<a class="anchor" aria-label="anchor" href="#arg-direction"></a></dt>
-<dd><p>Either <code>1</code> or <code>-1</code>. If <code>-1</code> the palette will be reversed.</p></dd>
+<dd><p>Either <code>1</code> or <code>-1</code>. Use <code>-1</code> to reverse the palette.</p></dd>
 
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
-<dd><p>Either "continuous" or "discrete". Continuous automatically
-interpolates between the colors.</p></dd>
+<dd><p>Either <code>"discrete"</code> or <code>"continuous"</code>. Continuous palettes
+interpolate between the available colors.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A vector of characters with color attribute</p>
+    <p>A <code>palette</code> object containing hexadecimal color values.</p>
     </div>
 
     <div class="section level2">

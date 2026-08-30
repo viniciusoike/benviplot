@@ -1,5 +1,15 @@
 # Changelog
 
+## benviplot 1.2.2
+
+### Documentation
+
+- Revised the README, vignette, and function reference for clearer API
+  descriptions, accurate font guidance, consistent examples, and
+  explicit UTF-8 metadata.
+
+------------------------------------------------------------------------
+
 ## benviplot 1.2.1
 
 ### Breaking Changes

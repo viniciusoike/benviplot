@@ -12,7 +12,7 @@ iqa
 
 ## Format
 
-A data frame with 96 observations and 6 variables:
+A data frame with 96 observations and 6 variables.
 
 - date:
 

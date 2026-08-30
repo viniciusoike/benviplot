@@ -25,12 +25,12 @@ plot_histogram(
 
 - data:
 
-  A data.frame type object
+  A data frame.
 
 - x:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Indicates the numeric variable to be mapped
+  Numeric variable mapped to the x-axis.
 
 - color:
 
@@ -44,17 +44,15 @@ plot_histogram(
 
 - pal_name:
 
-  String indicating the name of which palette to use when `fill` is a
-  variable mapping.
+  Name of the palette used when `fill` maps a variable.
 
 - scale_name:
 
-  String indicating fill legend title.
+  Fill legend title.
 
 - zero:
 
-  Logical indicating if a horizontal (y = 0) line should be drawn on the
-  plot.
+  Whether to draw a horizontal line at `y = 0`.
 
 - bins:
 
@@ -62,83 +60,73 @@ plot_histogram(
 
 - method:
 
-  Character specifying the binning algorithm. Must be one of: `"fd"`
-  (default), `"FD"`, `"Scott"`, `"Sturges"`, `"Rice"`, or `"sqrt"`. See
-  Details for algorithm descriptions. Ignored when `bins` is specified.
+  Binning method. Choose `"fd"` (the default), `"FD"`, `"Scott"`,
+  `"Sturges"`, `"Rice"`, or `"sqrt"`. See Details. Ignored when `bins`
+  is specified.
 
 - density:
 
-  Logical indicating if density should be plotted on y-axis.
+  Whether to map density to the y-axis.
 
 - facet:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Optional variable to facet the graphics. `NULL` (default) draws a
+  Optional variable to facet the plot. `NULL` (the default) draws a
   single panel.
 
 - ...:
 
-  Additional parameters to
-  [`facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html)
+  Additional arguments passed to
+  [`ggplot2::facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html).
 
 ## Value
 
-A ggplot2 object
+A `ggplot` object.
 
 ## Details
 
-### Binning Methods
+### Binning methods
 
-The `method` parameter controls which algorithm is used to compute the
-optimal bin width. Available methods:
+The `method` parameter controls how the function computes the bin width.
 
 - `"fd"` or `"FD"`:
 
-  **Freedman-Diaconis rule** (default). Robust to outliers, uses IQR.
-  Formula: \\2 \* IQR / n^{1/3}\\. Best for most distributions.
+  Freedman-Diaconis rule. Uses the interquartile range: \\2 \* IQR /
+  n^{1/3}\\.
 
 - `"Scott"`:
 
-  **Scott's rule**. Uses standard deviation. Formula: \\3 \* sd /
-  n^{1/3}\\. Works well for normal-like distributions.
+  Scott's rule. The formula uses the standard deviation, \\3 \* sd /
+  n^{1/3}\\.
 
 - `"Sturges"`:
 
-  **Sturges' formula**. Simple logarithmic rule. Formula: \\k = \lceil
-  log_2(n) \rceil\\ bins. Good for roughly normal data.
+  Sturges' formula. Uses \\k = \lceil log_2(n) \rceil\\ bins.
 
 - `"Rice"`:
 
-  **Rice rule**. Cube root based. Formula: \\k = \lceil 2n^{1/3}
-  \rceil\\ bins. General purpose rule.
+  Rice rule. Uses \\k = \lceil 2n^{1/3} \rceil\\ bins.
 
 - `"sqrt"`:
 
-  **Square root rule**. Formula: \\k = \lceil \sqrt{n} \rceil\\ bins.
-  Simple, tends to oversmooth.
-
-When in doubt, use the default `"fd"` (Freedman-Diaconis), which is
-robust and works well across different distributions.
+  Square-root rule. Uses \\k = \lceil \sqrt{n} \rceil\\ bins.
 
 ## Examples
 
 ``` r
-set.seed(5)
-tbl <- data.frame(x = rnorm(n = 1000))
-
 # Default parameters use Freedman-Diaconis
-plot_histogram(data = tbl, x = x)
+plot_histogram(data = mtcars, x = mpg)
 
 # Use bins to manually choose number of bins
-plot_histogram(data = tbl, x = x, bins = 50)
+plot_histogram(data = mtcars, x = mpg, bins = 10)
 
 # Example of alternative methods: square root and Rice
-plot_histogram(data = tbl, x = x, method = "sqrt")
+plot_histogram(data = mtcars, x = mpg, method = "sqrt")
 
-plot_histogram(data = tbl, x = x, method = "Rice")
+plot_histogram(data = mtcars, x = mpg, method = "Rice")
 
 
 # Facet by rooms category
-spo <- subset(iqaiw, name_muni == "S\u00e3o Paulo" & rooms != "Total")
+spo <- subset(iqaiw, name_muni == "São Paulo" & rooms != "Total")
 plot_histogram(data = spo, x = index, facet = rooms)
 ```

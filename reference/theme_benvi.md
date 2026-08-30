@@ -1,6 +1,6 @@
-# A theme for Benvi styled plots
+# A theme for Benvi-styled plots
 
-A ggplot2 base theme for Benvi styled plots.
+A ggplot2 base theme for Benvi-styled plots.
 
 The Poppins font is bundled with the package and registered
 automatically on load when `systemfonts` is installed. When both
@@ -8,10 +8,10 @@ automatically on load when `systemfonts` is installed. When both
 default. Otherwise it falls back to the system's default sans-serif
 font.
 
-Registered fonts only work with systemfonts-aware devices (e.g.
-[ragg::agg_png](https://ragg.r-lib.org/reference/agg_png.html)). Base R
-devices (PDF, PostScript) cannot render them. If you see font warnings
-when saving to PDF, pass `base_family = "sans"` or set
+Registered fonts only work with systemfonts-aware devices such as
+[`ragg::agg_png()`](https://ragg.r-lib.org/reference/agg_png.html). Base
+R devices (PDF and PostScript) cannot render them. If you see font
+warnings when saving to PDF, pass `base_family = "sans"` or set
 `options(theme_benvi.font_family = "sans")`. See
 [`font_status()`](https://viniciusoike.github.io/benviplot/reference/font_status.md)
 to check your setup.
@@ -44,17 +44,17 @@ theme_benvi(
 
 - background:
 
-  Logical. Adds an offwhite (creme) background to the plot.
+  Whether to use an off-white background.
 
 ## Value
 
-A ggplot2 theme object
+A ggplot2 theme object.
 
 ## Examples
 
 ``` r
 library(ggplot2)
-series <- subset(iqaiw, name_muni == "S\u00e3o Paulo" & rooms == "Total")
+series <- subset(iqaiw, name_muni == "São Paulo" & rooms == "Total")
 
 # Base theme (using "sans" for portability)
 ggplot(series, aes(date, index)) +

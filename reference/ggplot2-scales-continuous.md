@@ -1,7 +1,6 @@
-# Continuous scales to use for ggplot2
+# Continuous Benvi color scales
 
-These functions provide the option to use Benvi colors inside continuous
-palettes with the `ggplot2` package.
+Map continuous values to colors interpolated from a Benvi palette.
 
 ## Usage
 
@@ -21,18 +20,18 @@ scale_fill_benvi_c(pal_name = "benvi_blue", direction = 1, ...)
 
 - direction:
 
-  Either `1` or `-1`. If `-1` the palette will be reversed.
+  Either `1` or `-1`. Use `-1` to reverse the palette.
 
 - ...:
 
-  Arguments to pass on to
+  Additional arguments passed to
   [`ggplot2::scale_colour_gradientn()`](https://ggplot2.tidyverse.org/reference/scale_gradient.html)
   or
-  [`ggplot2::scale_fill_gradientn()`](https://ggplot2.tidyverse.org/reference/scale_gradient.html)
+  [`ggplot2::scale_fill_gradientn()`](https://ggplot2.tidyverse.org/reference/scale_gradient.html).
 
 ## Value
 
-A `ScaleContinuous` object that can be added to a `ggplot` object
+A continuous ggplot2 scale that can be added to a `ggplot` object.
 
 ## Examples
 

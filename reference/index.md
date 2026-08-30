@@ -16,11 +16,11 @@ Color and fill scales for ggplot2
 - [`scale_colour_benvi_c()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-continuous.md)
   [`scale_color_benvi_c()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-continuous.md)
   [`scale_fill_benvi_c()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-continuous.md)
-  : Continuous scales to use for ggplot2
+  : Continuous Benvi color scales
 - [`scale_colour_benvi_d()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-discrete.md)
   [`scale_color_benvi_d()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-discrete.md)
   [`scale_fill_benvi_d()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-discrete.md)
-  : Discrete scales to use for ggplot2
+  : Discrete Benvi color scales
 
 ## Plot Helper Functions
 
@@ -42,7 +42,7 @@ Wrapper functions for common plot types
 Custom ggplot2 themes
 
 - [`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md)
-  : A theme for Benvi styled plots
+  : A theme for Benvi-styled plots
 
 ## Font Management
 
@@ -53,10 +53,10 @@ Font setup and status
 
 ## Saving Plots
 
-Export plots with optimal settings
+Save plots with ragg when available
 
 - [`ggsave_benvi()`](https://viniciusoike.github.io/benviplot/reference/ggsave_benvi.md)
-  : Save a ggplot with benviplot optimizations
+  : Save a ggplot with benviplot defaults
 
 ## Utilities
 
@@ -74,4 +74,4 @@ Example datasets
 - [`iqaiw`](https://viniciusoike.github.io/benviplot/reference/iqaiw.md)
   : QuintoAndar ImovelWeb Rental Index (IQAIW)
 - [`sales_report`](https://viniciusoike.github.io/benviplot/reference/sales_report.md)
-  : QuintoAndar Sales Report
+  : QuintoAndar sales report

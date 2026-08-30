@@ -33,17 +33,17 @@ plot_column(
 
 - data:
 
-  A data.frame type object
+  A data frame.
 
 - x:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be mapped in the x-axis.
+  Variable mapped to the x-axis.
 
 - y:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be mapped in the y-axis.
+  Variable mapped to the y-axis.
 
 - fill:
 
@@ -53,41 +53,41 @@ plot_column(
 
 - zero:
 
-  Logical indicating whether a horizontal line crossing the y = 0 axis
-  should be plotted.
+  Whether to draw a horizontal line at `y = 0`.
 
 - text:
 
-  Logical indicating if text labels should be plotted on column bars
+  Whether to add value labels to the columns.
 
 - text_inside:
 
-  Logical indicating if text labels should be placed inside bars (using
-  ggfittext). When TRUE, text is auto-sized to fit inside bars. When
-  FALSE (default), text appears above/beside bars at fixed size.
+  Whether to place labels inside the columns with `ggfittext`. When
+  `FALSE` (the default), labels use a fixed size and appear above or
+  beside the columns.
 
 - text_place:
 
-  Placement of inside text. One of "top", "bottom", "left", "right",
-  "centre"/"center". Only used when text_inside = TRUE. Defaults to
-  "centre".
+  Placement of labels inside the columns. Choose `"top"`, `"bottom"`,
+  `"left"`, `"right"`, `"centre"`, or `"center"`. Defaults to `"centre"`
+  and applies only when `text_inside = TRUE`.
 
 - text_padding:
 
-  Padding around inside text as grid::unit(). Only used when text_inside
-  = TRUE. Defaults to 1mm.
+  Padding around inside labels, supplied as a
+  [`grid::unit()`](https://rdrr.io/r/grid/unit.html) object. Defaults to
+  1 mm and applies only when `text_inside = TRUE`.
 
 - pal_name:
 
-  String indicating the name of which palette to use.
+  Name of the palette.
 
 - scale_name:
 
-  String indicating fill legend title.
+  Fill legend title.
 
 - scale_label:
 
-  String indicating fill legend labels.
+  Fill legend labels.
 
 - digits:
 
@@ -95,7 +95,7 @@ plot_column(
 
 - percent:
 
-  Logical indicating if a % should be appended to text labels
+  Whether to append a percent sign to text labels.
 
 - text_color:
 
@@ -103,7 +103,7 @@ plot_column(
 
 - text_family:
 
-  Font of the text label. Defaults to
+  Font family for the text label. Defaults to
   `getOption("theme_benvi.font_family", "sans")`.
 
 - text_size:
@@ -112,19 +112,24 @@ plot_column(
 
 - position_col:
 
-  Argument passed on to `position` in `geom_col`.
+  Position adjustment passed to
+  [`ggplot2::geom_col()`](https://ggplot2.tidyverse.org/reference/geom_bar.html).
 
 - position_text:
 
-  Argument passed on to `position` in `geom_text`.
+  Position adjustment passed to
+  [`ggplot2::geom_text()`](https://ggplot2.tidyverse.org/reference/geom_text.html).
 
 - ...:
 
-  Further arguments for `geom_text`
+  Additional arguments passed to
+  [`ggplot2::geom_col()`](https://ggplot2.tidyverse.org/reference/geom_bar.html)
+  or
+  [`ggplot2::geom_text()`](https://ggplot2.tidyverse.org/reference/geom_text.html).
 
 ## Value
 
-A ggplot2 plot
+A `ggplot` object.
 
 ## Examples
 

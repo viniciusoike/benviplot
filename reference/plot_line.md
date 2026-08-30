@@ -23,17 +23,17 @@ plot_line(
 
 - data:
 
-  A data.frame type object.
+  A data frame.
 
 - x:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be mapped on the x-axis.
+  Variable mapped to the x-axis.
 
 - y:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be mapped on the y-axis.
+  Variable mapped to the y-axis.
 
 - color:
 
@@ -43,32 +43,32 @@ plot_line(
 
 - zero:
 
-  Logical indicating if a horizontal line (y = 0) should be drawn on the
-  plot.
+  Whether to draw a horizontal line at `y = 0`.
 
 - point:
 
-  Logical indicating if points should be drawn on top of line.
+  Whether to draw points over the line.
 
 - pal_name:
 
-  String indicating which color palette to use.
+  Name of the color palette.
 
 - scale_name:
 
-  String indicating color legend title.
+  Color legend title.
 
 - scale_label:
 
-  String indicating color legend labels.
+  Color legend labels.
 
 - ...:
 
-  Other arguments to ggplot2 function.
+  Additional arguments passed to
+  [`ggplot2::labs()`](https://ggplot2.tidyverse.org/reference/labs.html).
 
 ## Value
 
-A ggplot2 plot
+A `ggplot` object.
 
 ## Examples
 

@@ -12,9 +12,9 @@
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="benviplot • Color Palettes for Data Visualization">
-<meta name="description" content="ggplot2 extensions and color palettes for creating quality graphics. Uses color schemes from the Benvi brand.
+<meta name="description" content="ggplot2 extensions and color palettes based on the Benvi brand.
 ">
-<meta property="og:description" content="ggplot2 extensions and color palettes for creating quality graphics. Uses color schemes from the Benvi brand.
+<meta property="og:description" content="ggplot2 extensions and color palettes based on the Benvi brand.
 ">
 </head>
 <body>
@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,34 +59,30 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><code>benviplot</code> provides color palettes and ggplot2 helpers for creating high quality graphics. The package includes:</p>
+<p><code>benviplot</code> provides color palettes and ggplot2 helpers for consistent data visualizations. Its main features include the following.</p>
 <ul>
-<li>
-<strong>Color Palettes</strong>: theme, qualitative, sequential, and diverging color schemes.</li>
-<li>
-<strong>ggplot2 Scales</strong>: discrete and continuous scales for seamless ggplot2 integration.</li>
-<li>
-<strong>Plot Helpers</strong>: wrapper functions for common visualizations.</li>
-<li>
-<strong>Custom Theme</strong>: a minimal theme that uses the bundled Poppins font.</li>
+<li>Theme, qualitative, sequential, and diverging color palettes</li>
+<li>Discrete and continuous scales for ggplot2</li>
+<li>Helper functions for common chart types</li>
+<li>A minimal theme with optional support for the bundled Poppins font</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p><code>benviplot</code> is not on CRAN yet. Install from R-universe:</p>
+<p><code>benviplot</code> is not on CRAN yet. Install it from R-universe.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"benviplot"</span>, repos <span class="op">=</span> <span class="st">"https://viniciusoike.r-universe.dev"</span><span class="op">)</span></span></code></pre></div>
-<p>Or install the development version from GitHub:</p>
+<p>Alternatively, install the development version from GitHub.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"viniciusoike/benviplot"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="font-setup">Font Setup<a class="anchor" aria-label="anchor" href="#font-setup"></a>
+<h2 id="font-setup">Font setup<a class="anchor" aria-label="anchor" href="#font-setup"></a>
 </h2>
-<p><code>benviplot</code> bundles the Poppins font family and registers it automatically on load (requires the <code>systemfonts</code> package). When Poppins is registered, <code><a href="reference/theme_benvi.html">theme_benvi()</a></code> uses it by default. Without <code>systemfonts</code>, the theme falls back to the system sans-serif font.</p>
-<p>For the best rendering quality, also install the <code>ragg</code> package:</p>
+<p><code>benviplot</code> bundles the Poppins font family. When both <code>systemfonts</code> and <code>ragg</code> are available, the package registers Poppins and <code><a href="reference/theme_benvi.html">theme_benvi()</a></code> uses it by default. Otherwise, the theme uses the system sans-serif font.</p>
+<p>Install <code>ragg</code> to render Poppins in PNG files.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ragg"</span><span class="op">)</span></span></code></pre></div>
 <p>You can verify your current setup with <code><a href="reference/font_status.html">font_status()</a></code>.</p>
@@ -103,21 +99,21 @@
 <div class="section level2">
 <h2 id="color-palettes">Color palettes<a class="anchor" aria-label="anchor" href="#color-palettes"></a>
 </h2>
-<p>Color palettes can be visualized using <code>benvi_palette</code>.</p>
+<p>Preview a color palette with <code><a href="reference/benvi_palette.html">benvi_palette()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="plotting">Plotting<a class="anchor" aria-label="anchor" href="#plotting"></a>
 </h2>
-<p>To use the colors in plots use one of the <code>scale_*_benvi_*</code> functions.</p>
+<p>Use one of the following scale functions to apply the palettes to a plot.</p>
 <ul>
-<li><code>scale_color_benvi_d</code></li>
-<li><code>scale_color_benvi_c</code></li>
-<li><code>scale_fill_benvi_c</code></li>
-<li><code>scale_fill_benvi_d</code></li>
+<li><code><a href="reference/ggplot2-scales-discrete.html">scale_color_benvi_d()</a></code></li>
+<li><code><a href="reference/ggplot2-scales-continuous.html">scale_color_benvi_c()</a></code></li>
+<li><code><a href="reference/ggplot2-scales-continuous.html">scale_fill_benvi_c()</a></code></li>
+<li><code><a href="reference/ggplot2-scales-discrete.html">scale_fill_benvi_d()</a></code></li>
 </ul>
-<p>The package also supplies a generic <code><a href="reference/theme_benvi.html">theme_benvi()</a></code> function that works best if Poppins is available.</p>
+<p>Use <code><a href="reference/theme_benvi.html">theme_benvi()</a></code> to apply the package theme.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Rental price index for major cities</span></span>
 <span><span class="va">index_data</span> <span class="op">&lt;-</span> <span class="va">iqaiw</span> <span class="op">|&gt;</span></span>
@@ -168,17 +164,16 @@
 <span>    panel.grid <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/readme_plot_example_2.png"></p>
-<p>The package features some generic <code>plot_</code> functions that help to create standard plots. These functions aim to be efficient, allowing for quick data exploration, while remaining polished enough to be used for reports.</p>
-<p>These functions usually include simple helper arguments like <code>text</code> in the case of <code>plot_column</code> that plots its value above the column.</p>
+<p>The <code>plot_*()</code> helpers create common charts for exploratory analysis. For example, <code>plot_column(text = TRUE)</code> adds value labels above the columns.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">220</span>, <span class="fl">230</span>, <span class="fl">210</span>, <span class="fl">240</span>, <span class="fl">290</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">latest_sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span></span>
+<span>  <span class="va">sales_report</span>,</span>
+<span>  <span class="va">name_muni</span> <span class="op">==</span> <span class="st">"Belo Horizonte"</span> <span class="op">&amp;</span> <span class="va">date</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/plot_column.html">plot_column</a></span><span class="op">(</span><span class="va">sales</span>, x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, text <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/plot_column.html">plot_column</a></span><span class="op">(</span><span class="va">latest_sales</span>, x <span class="op">=</span> <span class="va">name_zone</span>, y <span class="op">=</span> <span class="va">price_m2</span>, text <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/readme_plot_example_3.png"></p>
-<p>For more examples visit the <a href="https://viniciusoike.github.io/benviplot/">package’s website</a></p>
+<p>For more examples, visit the <a href="https://viniciusoike.github.io/benviplot/">package website</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="acknowledgments">Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
