@@ -1,44 +1,40 @@
-# Discrete Benvi color scales
+# Discrete scales to use for ggplot2
 
-Map discrete values to colors from a Benvi palette.
+Functions to use `ggplot2` scales with Benvi colors.
 
 ## Usage
 
 ``` r
-scale_colour_benvi_d(pal_name = "qual_benvi", direction = 1, ...)
+scale_colour_benvi_d(pal_name, direction = 1, ...)
 
-scale_color_benvi_d(pal_name = "qual_benvi", direction = 1, ...)
+scale_color_benvi_d(pal_name, direction = 1, ...)
 
-scale_fill_benvi_d(pal_name = "qual_benvi", direction = 1, ...)
+scale_fill_benvi_d(pal_name, direction = 1, ...)
 ```
 
 ## Arguments
 
 - pal_name:
 
-  Name of the palette. Defaults to `"qual_benvi"`.
+  Name of the palette.
 
 - direction:
 
-  Either `1` or `-1`. Use `-1` to reverse the palette.
+  Either `1` or `-1`. If `-1` the palette will be reversed.
 
 - ...:
 
-  Additional arguments passed to
-  [`ggplot2::discrete_scale()`](https://ggplot2.tidyverse.org/reference/discrete_scale.html).
-
-## Value
-
-A discrete ggplot2 scale that can be added to a `ggplot` object.
+  additional arguments to pass to discrete_scale
 
 ## Examples
 
 ``` r
-library(ggplot2)
-# Discrete color scale with rental index data
-iqaiw_total <- subset(iqaiw, rooms == "Total")
-ggplot(iqaiw_total, aes(x = date, y = index, colour = name_muni)) +
-  geom_line() +
-  scale_color_benvi_d("qual_benvi")
+
+if (require('ggplot2')) {
+
+  ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+    geom_point() +
+    scale_color_benvi_d("qual_9")
+}
 
 ```

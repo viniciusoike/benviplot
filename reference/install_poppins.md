@@ -1,11 +1,11 @@
-# Install Poppins font system-wide from Google Fonts
+# Install Poppins font from Google Fonts
 
-Downloads and installs the Poppins font family from Google Fonts for
-system-wide use. This is optional — `benviplot` already bundles Poppins
-and registers it automatically on package load.
+Downloads and installs the Poppins font family from Google Fonts to your
+system. This is a one-time operation that makes the font available to
+all R sessions and graphics devices.
 
-Requires an internet connection. After a system-wide installation, the
-font is available outside of R as well.
+**Note:** This function requires an internet connection and may require
+administrative privileges on some systems.
 
 ## Usage
 
@@ -22,6 +22,7 @@ otherwise.
 
 ``` r
 if (FALSE) { # \dontrun{
+# Install Poppins font (requires internet connection)
 install_poppins()
 } # }
 ```

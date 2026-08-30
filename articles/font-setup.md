@@ -10,60 +10,88 @@ outputs.
 
 ### Why We Changed
 
-The previous system (\<=v1.0.0) used the `showtext` package, which had a
-DPI mismatch problem. As a result, users had to adjust
-`showtext_opts(dpi = ...)` settings before exporting plots, and output
-varied unpredictably across different devices and IDEs. Changing the DPI
-settings would also affect the resolution of the plots inside the
-RStudio Plots pane, making for a less than ideal user experience.
+The previous system (v1.0.0) used the `showtext` package, which had a
+notorious DPI mismatch problem:
 
-The new system fixes these issues. The only trade-off is that Poppins
-must be installed locally. Installing Poppins, however, is simple and
-free. Additionally, if Poppins is not available, the system will fall
-back to system “sans” font and will still render correctly at any
-resolution.
+- Text would render at different sizes in RStudio vs saved plots
+- Users had to constantly adjust `showtext_opts(dpi = ...)` settings
+- Output varied unpredictably across different devices
+- No reliable one-size-fits-all solution
 
-## Installation
+**The new system fixes all of this.** By using systemfonts and ragg, you
+get:
 
-The optimal setup requires: 1) installing Poppins; and 2) installing the
-`ragg` package. For RStudio users, an additional step is required to set
-AGG as the default graphics device.
+✅ **Consistent output** - Same rendering in RStudio, ggsave(), and R
+Markdown ✅ **No DPI issues** - Text renders correctly at any resolution
+✅ **Better quality** - Superior anti-aliasing and text rendering ✅
+**Simpler workflow** - One-time font installation, no per-session setup
+✅ **Faster** - Better performance than showtext
 
-#### Install Poppins Font
+## Quick Start: One-Command Setup
 
-The most reliable way to install Poppins is to get it from Google Fonts.
+The easiest way to set up fonts for benviplot is to run one command:
+
+``` r
+
+library(benviplot)
+
+# One-time setup - installs Poppins and provides RStudio configuration guidance
+setup_benvi_fonts()
+```
+
+This function will:
+
+1.  Download and install the Poppins font to your system
+2.  Check if ragg is installed (recommended for best quality)
+3.  Provide instructions for configuring RStudio
+
+After running this once, you’re done! The fonts will work in all R
+sessions.
+
+## Detailed Installation
+
+### Install Poppins Font
+
+#### Option 1: Automatic Installation (Recommended)
+
+``` r
+
+# Install Poppins font from Google Fonts
+benviplot::install_poppins()
+```
+
+This downloads and installs Poppins system-wide. You only need to do
+this once per computer.
+
+#### Option 2: Manual Installation
+
+You can also install Poppins manually:
 
 1.  Go to [Google Fonts -
     Poppins](https://fonts.google.com/specimen/Poppins)
 2.  Click “Download family”
 3.  Extract the ZIP file
-4.  Install the fonts
+4.  Install the fonts:
+    - **Windows**: Right-click each .ttf file → “Install”
+    - **macOS**: Double-click each .ttf file → “Install Font”
+    - **Linux**: Copy .ttf files to `~/.fonts/` or use your system’s
+      font manager
 
-Remember to restart R to make the fonts available.
+After manual installation, restart R to make the fonts available.
 
-An alternative way to install Poppins is to run
-[`install_poppins()`](https://viniciusoike.github.io/benviplot/reference/install_poppins.md).
-This function might not work on all systems, however.
+### Install ragg (Optional but Recommended)
 
-``` r
-# Install Poppins font from Google Fonts
-benviplot::install_poppins()
-```
-
-#### Install ragg
-
-For the best graphics quality, install the `ragg` package.
+For the best graphics quality, install the `ragg` package:
 
 ``` r
+
 install.packages("ragg")
 ```
 
-Remember to restart R and/or your IDE to make sure everything works as
-intended.
+The ragg package provides high-quality graphics devices with excellent
+text rendering.
 
-------------------------------------------------------------------------
-
-#### Configure RStudio (Optional)
+## Configure RStudio (Optional)
 
 To use ragg as the default graphics device in RStudio:
 
@@ -73,47 +101,36 @@ To use ragg as the default graphics device in RStudio:
 
 This ensures all plots in the RStudio Plots pane use ragg for rendering.
 
-------------------------------------------------------------------------
-
-#### Quick Start: One-Command Setup
-
-An alternative, but still experimental way to set up fonts for benviplot
-is to run
-[`setup_benvi_fonts()`](https://viniciusoike.github.io/benviplot/reference/setup_benvi_fonts.md).
-
-``` r
-library(benviplot)
-
-# One-time setup - installs Poppins and provides RStudio configuration guidance
-setup_benvi_fonts()
-```
-
-This function will:
-
-1.  Download and install the Poppins font to your system.
-2.  Check if `ragg` is installed (recommended for best quality).
-3.  Provide instructions for configuring RStudio.
-
-### Check Your Setup
+## Check Your Setup
 
 Use
 [`font_status()`](https://viniciusoike.github.io/benviplot/reference/font_status.md)
 to check your current configuration:
 
 ``` r
+
 font_status()
 ```
 
-## Using benviplot with Poppins
+This will report:
+
+- Whether Poppins is installed
+- Whether ragg is available
+- Recommendations for optimal setup
+
+## Using benviplot with Fonts
 
 ### Theme Behavior
 
 The
 [`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md)
-function automatically detects whether Poppins is installed. If it’s not
-installed, it falls back to system “sans” font.
+function automatically detects whether Poppins is installed:
+
+- **If Poppins is installed**: Uses Poppins for all text
+- **If Poppins is not installed**: Falls back to system “sans” font
 
 ``` r
+
 library(ggplot2)
 library(benviplot)
 
@@ -123,12 +140,92 @@ ggplot(mtcars, aes(wt, mpg)) +
   theme_benvi()  # Automatically uses Poppins or fallback
 ```
 
-### Using Other Fonts
+You’ll see a one-time message if Poppins isn’t installed, suggesting
+installation.
 
-While benviplot is designed for Poppins, you can use any system font
-with the systemfonts framework.
+### Saving Plots
+
+Use
+[`ggsave_benvi()`](https://viniciusoike.github.io/benviplot/reference/ggsave_benvi.md)
+for optimized plot saving:
 
 ``` r
+
+p <- ggplot(mtcars, aes(wt, mpg)) +
+  geom_point() +
+  theme_benvi()
+
+# Automatically uses ragg for PNG if available
+ggsave_benvi("my_plot.png", p, width = 8, height = 6)
+
+# Works with any format
+ggsave_benvi("my_plot.pdf", p, width = 8, height = 6)
+```
+
+[`ggsave_benvi()`](https://viniciusoike.github.io/benviplot/reference/ggsave_benvi.md)
+automatically:
+
+- Uses ragg device for PNG files (if ragg is installed)
+- Sets DPI to 300 for high quality
+- Provides consistent output across platforms
+
+You can still use regular
+[`ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html), but
+[`ggsave_benvi()`](https://viniciusoike.github.io/benviplot/reference/ggsave_benvi.md)
+provides better defaults.
+
+## Troubleshooting
+
+### “Poppins font not found” Message
+
+If you see this message when using
+[`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md):
+
+1.  Install Poppins:
+    [`install_poppins()`](https://viniciusoike.github.io/benviplot/reference/install_poppins.md)
+2.  Restart R
+3.  Try again
+
+### Font Looks Different
+
+If the font doesn’t look like Poppins:
+
+``` r
+
+# Check if Poppins is actually installed
+check_poppins_installed()
+
+# If FALSE, install it
+install_poppins()
+```
+
+### ragg Not Working in RStudio
+
+1.  Ensure ragg is installed: `install.packages("ragg")`
+2.  Configure RStudio: Tools → Global Options → General → Graphics →
+    Backend: AGG
+3.  Restart RStudio
+
+### Text Still Has Size Issues
+
+The new system eliminates DPI issues, but if you’re still seeing
+problems:
+
+1.  Ensure you’re using benviplot v1.1.0 or later:
+    `packageVersion("benviplot")`
+2.  Check that you’re not loading the old showtext package
+3.  Use
+    [`ggsave_benvi()`](https://viniciusoike.github.io/benviplot/reference/ggsave_benvi.md)
+    instead of base
+    [`ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html)
+
+## Advanced: Using Other Fonts
+
+While benviplot is designed for Poppins, you can use any system font
+with the systemfonts framework:
+
+``` r
+
 # List all available system fonts
 systemfonts::system_fonts()
 
@@ -140,11 +237,78 @@ ggplot(mtcars, aes(wt, mpg)) +
   theme(text = element_text(family = "Roboto"))  # Override font
 ```
 
+For more advanced font management, see the [systemfonts
+documentation](https://systemfonts.r-lib.org/).
+
+## Migration from v1.0.0
+
+If you’re upgrading from benviplot v1.0.0:
+
+### What Changed
+
+- ❌ **Removed**: `showtext` and `sysfonts` packages
+- ❌ **Removed**: `import_fonts()` function (replaced with
+  [`install_poppins()`](https://viniciusoike.github.io/benviplot/reference/install_poppins.md))
+- ✅ **Added**: Modern systemfonts-based font management
+- ✅ **Added**: New functions:
+  [`install_poppins()`](https://viniciusoike.github.io/benviplot/reference/install_poppins.md),
+  [`setup_benvi_fonts()`](https://viniciusoike.github.io/benviplot/reference/setup_benvi_fonts.md),
+  [`font_status()`](https://viniciusoike.github.io/benviplot/reference/font_status.md),
+  [`ggsave_benvi()`](https://viniciusoike.github.io/benviplot/reference/ggsave_benvi.md)
+
+### Migration Steps
+
+1.  Remove old showtext code from your scripts:
+
+``` r
+
+# OLD (v1.0.0) - DELETE THIS
+library(showtext)
+showtext_auto()
+import_fonts()
+
+# NEW (v1.1.0) - One-time setup
+setup_benvi_fonts()
+```
+
+2.  Install Poppins system-wide (one time):
+
+``` r
+
+install_poppins()
+```
+
+3.  Optionally install ragg for best quality:
+
+``` r
+
+install.packages("ragg")
+```
+
+4.  Update your plotting code (optional):
+
+``` r
+
+# OLD
+ggsave("plot.png", dpi = 300)
+
+# NEW (recommended)
+ggsave_benvi("plot.png")  # Smart defaults
+```
+
+That’s it! Your plots will now render consistently without any DPI
+issues.
+
 ## Summary
 
-The new font system in benviplot v1.1.0 aims to provide a better user
-experience.
+The new font system in benviplot v1.1.0 provides a dramatically better
+user experience:
 
-- **No DPI issues**: Consistent rendering at any resolution.
-- **Better quality**: Superior text rendering with ragg.
-- **Simpler code**: No per-session font loading required.
+- **One-time setup**: Install fonts to your system once
+- **No DPI issues**: Consistent rendering at any resolution
+- **Better quality**: Superior text rendering with ragg
+- **Simpler code**: No per-session font loading required
+
+For most users, running
+[`setup_benvi_fonts()`](https://viniciusoike.github.io/benviplot/reference/setup_benvi_fonts.md)
+once is all you need!

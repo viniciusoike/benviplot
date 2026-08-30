@@ -1,6 +1,6 @@
-# Plot a line chart
+# Title
 
-Plot a line chart
+Title
 
 ## Usage
 
@@ -9,7 +9,8 @@ plot_line(
   data,
   x,
   y,
-  color = NULL,
+  color,
+  variable,
   zero = TRUE,
   point = FALSE,
   pal_name,
@@ -23,62 +24,60 @@ plot_line(
 
 - data:
 
-  A data frame.
+  A data.frame type object.
 
 - x:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable mapped to the x-axis.
+  Variable to be mapped on the x-axis.
 
 - y:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable mapped to the y-axis.
+  Variable to be mapped on the y-axis.
 
 - color:
 
-  Color of the line. Either a color string (e.g., `"blue"`, `"#021841"`)
-  for a single static color, or a bare column name (without quotes) to
-  map a grouping variable to color.
+  Indicates the color of the line. Should only be used in the absence of
+  `variable`.
+
+- variable:
+
+  \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
+  Indicates the grouping variable for color groups.
 
 - zero:
 
-  Whether to draw a horizontal line at `y = 0`.
+  Logical indicating if a horizontal line (y = 0) should be drawn on the
+  plot.
 
 - point:
 
-  Whether to draw points over the line.
+  Logical indicating if points should be drawn on top of line.
 
 - pal_name:
 
-  Name of the color palette.
+  String indicating which color palette to use.
 
 - scale_name:
 
-  Color legend title.
+  String indicating color legend title.
 
 - scale_label:
 
-  Color legend labels.
+  String indicating color legend labels.
 
 - ...:
 
-  Additional arguments passed to
-  [`ggplot2::labs()`](https://ggplot2.tidyverse.org/reference/labs.html).
+  Other arguments to ggplot2 function.
 
 ## Value
 
-A `ggplot` object.
+A ggplot2 plot
 
 ## Examples
 
 ``` r
-# Single series
-sao_paulo <- subset(iqa, name_muni == "S\u00e3o Paulo")
-plot_line(data = sao_paulo, x = date, y = index)
-
-
-# Multiple series with color mapping
-total <- subset(iqaiw, rooms == "Total")
-plot_line(data = total, x = date, y = index, color = name_muni)
+sales <- data.frame(time = 2000:2005, value = c(10, 5, 6, 8, 11, 4))
+plot_line(data = sales, x = time, y = value)
 ```

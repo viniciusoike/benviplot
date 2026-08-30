@@ -1,10 +1,6 @@
-# Column plot with text labels (Deprecated)
+# Column plot with text labels
 
-**\[deprecated\]**
-
-`plot_column_label()` has been deprecated in favor of enhanced
-[`plot_column()`](https://viniciusoike.github.io/benviplot/reference/plot_column.md).
-Use `plot_column(text = TRUE, text_inside = TRUE, flip = TRUE)` instead.
+Column plot with text labels
 
 ## Usage
 
@@ -19,7 +15,7 @@ plot_column_label(
   zero = TRUE,
   flip = TRUE,
   fill_guide = "none",
-  palette = "qual_benvi",
+  palette = "qual_9",
   text_color = "white",
   text_family = "sans",
   text_size = 4,
@@ -100,30 +96,13 @@ plot_column_label(
 
 A ggplot2 plot
 
-## Details
-
-### Migration Guide
-
-The functionality of `plot_column_label()` is now available in
-[`plot_column()`](https://viniciusoike.github.io/benviplot/reference/plot_column.md)
-with the `text_inside` parameter:
-
-    # Old (deprecated):
-    plot_column_label(df, x = category, y = value, flip = TRUE)
-
-    # New (recommended):
-    plot_column(df, x = category, y = value,
-                text = TRUE, text_inside = TRUE, flip = TRUE)
-
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-# Use plot_column() instead
 df <- data.frame(
-  cat = c("A", "B", "C"),
-  value = c(11257, 9874, 8991)
+  house_region = c("Vila Mariana", "Moema", "Bela Vista"),
+  price_m2_sold = c(11257.12, 9874.54, 8991.38)
 )
-plot_column(df, x = cat, y = value, text = TRUE, text_inside = TRUE, flip = TRUE)
-} # }
+
+plot_column_label(df, x = house_region, y = price_m2_sold, fill = "#633758")
 ```

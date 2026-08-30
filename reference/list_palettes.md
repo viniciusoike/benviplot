@@ -36,16 +36,14 @@ A character vector of palette names.
 ``` r
 # List all palettes
 list_palettes()
-#>  [1] "grays"            "browns"           "yellows"          "greens"          
-#>  [5] "blues"            "purples"          "pinks"            "oranges"         
-#>  [9] "seq_grays"        "seq_browns"       "seq_yellows"      "seq_greens"      
-#> [13] "seq_blues"        "seq_purples"      "seq_pinks"        "seq_oranges"     
-#> [17] "qual_1"           "qual_2"           "qual_3"           "qual_4"          
-#> [21] "qual_5"           "qual_6"           "qual_7"           "qual_8"          
-#> [25] "qual_9"           "qual_benvi"       "spo_seq"          "spo_div"         
-#> [29] "spo_qual"         "rio_seq"          "rio_div"          "rio_qual"        
-#> [33] "bhe_seq"          "bhe_div"          "benvi_blue"       "benvi_purple"    
-#> [37] "div_blue_muted"   "div_purple_muted" "basic"           
+#>  [1] "grays"        "browns"       "yellows"      "greens"       "blues"       
+#>  [6] "purples"      "pinks"        "oranges"      "seq_grays"    "seq_browns"  
+#> [11] "seq_yellows"  "seq_greens"   "seq_blues"    "seq_purples"  "seq_pinks"   
+#> [16] "seq_oranges"  "qual_1"       "qual_2"       "qual_3"       "qual_4"      
+#> [21] "qual_5"       "qual_6"       "qual_7"       "qual_8"       "qual_9"      
+#> [26] "spo_seq"      "spo_div"      "spo_qual"     "rio_seq"      "rio_div"     
+#> [31] "rio_qual"     "bhe_seq"      "bhe_div"      "benvi_blue"   "benvi_purple"
+#> [36] "basic"       
 
 # List theme palettes
 list_palettes("theme")

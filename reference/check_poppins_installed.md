@@ -1,8 +1,7 @@
-# Check if Poppins font is available
+# Check if Poppins font is installed on the system
 
-Checks whether the Poppins font family is available, either registered
-from the bundled copies (via `.onLoad`) or installed system-wide.
-Returns `FALSE` silently if the `systemfonts` package is not installed.
+Checks whether the Poppins font family is available on the system by
+querying installed system fonts.
 
 ## Usage
 
@@ -12,4 +11,11 @@ check_poppins_installed()
 
 ## Value
 
-Logical: `TRUE` if Poppins is available, `FALSE` otherwise.
+Logical value: `TRUE` if Poppins is installed, `FALSE` otherwise.
+
+## Examples
+
+``` r
+check_poppins_installed()
+#> [1] FALSE
+```

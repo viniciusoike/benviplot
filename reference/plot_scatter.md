@@ -9,15 +9,15 @@ plot_scatter(
   data,
   x,
   y,
-  color = NULL,
+  color,
+  variable,
   fit = FALSE,
   fit_variable = FALSE,
   fit_method = "auto",
   fit_formula = NULL,
-  fit_color = NULL,
   fit_ci = FALSE,
   zero = "none",
-  pal_name = "qual_benvi",
+  palette = "qual_9",
   scale_name = "",
   scale_label = ggplot2::waiver(),
   ...
@@ -28,90 +28,73 @@ plot_scatter(
 
 - data:
 
-  A data frame.
+  A data.frame type object
 
 - x:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable mapped to the x-axis.
+  Variable to be mapped in the x-axis.
 
 - y:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable mapped to the y-axis.
+  Variable to be mapped in the y-axis.
 
 - color:
 
-  Color of the points. Either a color string (e.g., `"blue"`,
-  `"#021841"`) for a single static color, or a bare column name (without
-  quotes) to map a grouping variable to color. Continuous numeric
-  variables automatically use a continuous color scale.
+  Color of the points
+
+- variable:
+
+  \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
+  Variable to be used as grouping for the color groups. Should only be
+  used if `fill` is missing.
 
 - fit:
 
-  Whether to draw a fitted line over the points.
+  Logical indicating if a regression line should be plotted on top of
+  the chart.
 
 - fit_variable:
 
-  Whether to fit separate lines for groups mapped to `color`. Defaults
-  to `FALSE`.
+  Logical indicating if regression should be grouped. Defaults to
+  `FALSE`.
 
 - fit_method:
 
-  Smoothing method passed to
-  [`ggplot2::geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html).
-  Defaults to `"auto"`.
+  Type of model to generate regression line. See `geom_smooth` for more
+  control and details. Defaults to `"auto"`.
 
 - fit_formula:
 
-  Formula passed to
-  [`ggplot2::geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html).
-
-- fit_color:
-
-  Color of the fitted regression line. Only applied when
-  `fit_variable = FALSE`. When `NULL` (default), uses automatic color
-  selection. When `fit_variable = TRUE`, the fit line colors are
-  inherited from the grouping variable and this parameter is ignored.
+  A formula for fit_method. See `geom_smooth`.
 
 - fit_ci:
 
-  Whether to draw the confidence interval around fitted lines. Defaults
-  to `FALSE`.
+  Logical indicating if confidence interval should be plotted. Defaults
+  to `FALSE` for less cluttered visualization.
 
 - zero:
 
-  Axis lines to draw. Choose `"x"`, `"y"`, `"both"`, or `"none"` (the
-  default).
+  Draws axis lines. Must be one of `"x"`, `"y"`, `"both"`, or `"none"`
+  (default).
 
-- pal_name:
+- palette:
 
-  Name of the palette.
+  String indicating the name of which palette to use.
 
 - scale_name:
 
-  Fill legend title.
+  String indicating fill legend title.
 
 - scale_label:
 
-  Fill legend labels.
+  String indicating fill legend labels.
 
 - ...:
 
-  Additional arguments passed to
-  [`ggplot2::geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html).
+  Further arguments to `geom_point`
 
 ## Value
 
-A `ggplot` object.
-
-## Examples
-
-``` r
-plot_scatter(data = mtcars, x = wt, y = mpg)
-
-
-# With regression line
-plot_scatter(data = mtcars, x = wt, y = mpg, fit = TRUE)
-#> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
-```
+A ggplot2 plot.

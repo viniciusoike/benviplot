@@ -1,6 +1,7 @@
 # Plot Helper Functions
 
 ``` r
+
 library(ggplot2)
 library(benviplot)
 ```
@@ -22,16 +23,16 @@ layers, modify themes, and customize freely.
 
 Most plot functions share these parameters:
 
-| Parameter     | Description                     | Default                                                           |
-|---------------|---------------------------------|-------------------------------------------------------------------|
-| `data`        | A data.frame or tibble          | Required                                                          |
-| `x`           | Variable for x-axis             | Required                                                          |
-| `y`           | Variable for y-axis             | Required                                                          |
-| `variable`    | Grouping variable for colors    | Optional                                                          |
-| `palette`     | Palette name (e.g., “qual_5”)   | Function-specific                                                 |
-| `scale_name`  | Legend title                    | `""`                                                              |
-| `scale_label` | Legend labels                   | [`waiver()`](https://ggplot2.tidyverse.org/reference/waiver.html) |
-| `color`       | Single color (when no grouping) | Auto                                                              |
+| Parameter | Description | Default |
+|----|----|----|
+| `data` | A data.frame or tibble | Required |
+| `x` | Variable for x-axis | Required |
+| `y` | Variable for y-axis | Required |
+| `variable` | Grouping variable for colors | Optional |
+| `palette` | Palette name (e.g., “qual_5”) | Function-specific |
+| `scale_name` | Legend title | `""` |
+| `scale_label` | Legend labels | [`waiver()`](https://ggplot2.tidyverse.org/reference/waiver.html) |
+| `color` | Single color (when no grouping) | Auto |
 
 ## plot_line()
 
@@ -40,8 +41,9 @@ Create line charts for time series and trends.
 ### Basic Usage
 
 ``` r
-# Simple line chart - rental price index
-plot_line(iqa, x = date, y = index)
+
+# Simple line chart
+plot_line(economics, x = date, y = unemploy)
 ```
 
 ![](plot-functions_files/figure-html/line-basic-1.png)
@@ -49,18 +51,18 @@ plot_line(iqa, x = date, y = index)
 ### Multiple Lines
 
 ``` r
+
 # Filter for demonstration
-index_subset <- subset(
-  iqaiw,
-  rooms == "Total" & name_muni %in% c("São Paulo", "Rio de Janeiro", "Belo Horizonte")
-)
+library(dplyr)
+housing_subset <- txhousing |>
+  filter(city %in% c("Austin", "Houston", "Dallas"))
 
 plot_line(
-  index_subset,
+  housing_subset,
   x = date,
-  y = index,
-  variable = name_muni,
-  pal_name = "qual_benvi",
+  y = sales,
+  variable = city,
+  palette = "purples",
   scale_name = "City"
 )
 ```
@@ -70,6 +72,7 @@ plot_line(
 ### With Points
 
 ``` r
+
 # Sample data
 monthly_sales <- data.frame(
   month = 1:12,
@@ -94,6 +97,7 @@ Create bar/column charts for categorical comparisons.
 ### Basic Bar Chart
 
 ``` r
+
 # Sample data
 products <- data.frame(
   product = c("A", "B", "C", "D", "E"),
@@ -108,6 +112,7 @@ plot_column(products, x = product, y = sales)
 ### With Value Labels
 
 ``` r
+
 # Show values on bars
 plot_column(products, x = product, y = sales, text = TRUE)
 ```
@@ -117,6 +122,7 @@ plot_column(products, x = product, y = sales, text = TRUE)
 ### Grouped Bars
 
 ``` r
+
 # Data with groups
 quarterly <- data.frame(
   quarter = rep(c("Q1", "Q2", "Q3", "Q4"), each = 3),
@@ -149,9 +155,8 @@ Create scatter plots to visualize relationships between variables.
 ### Basic Scatter
 
 ``` r
-# Listing vs contract prices
-spo_latest <- subset(sales_report, name_muni == "São Paulo" & date == max(date))
-plot_scatter(spo_latest, x = price_m2_listing, y = price_m2_contract)
+
+plot_scatter(mtcars, x = wt, y = mpg)
 ```
 
 ![](plot-functions_files/figure-html/scatter-basic-1.png)
@@ -159,15 +164,14 @@ plot_scatter(spo_latest, x = price_m2_listing, y = price_m2_contract)
 ### With Groups
 
 ``` r
-# Compare listing vs contract by city
-latest_sales <- subset(sales_report, date == max(date))
+
 plot_scatter(
-  latest_sales,
-  x = price_m2_listing,
-  y = price_m2_contract,
-  variable = name_muni,
-  palette = "qual_benvi",
-  scale_name = "City"
+  mtcars,
+  x = wt,
+  y = mpg,
+  variable = as.factor(cyl),
+  palette = "qual_5",
+  scale_name = "Cylinders"
 )
 ```
 
@@ -176,10 +180,11 @@ plot_scatter(
 ### With Trend Line
 
 ``` r
+
 plot_scatter(
-  spo_latest,
-  x = price_m2_listing,
-  y = price_m2_contract,
+  mtcars,
+  x = wt,
+  y = mpg,
   fit = TRUE,
   fit_method = "lm"
 )
@@ -190,16 +195,17 @@ plot_scatter(
 ### Grouped Trend Lines
 
 ``` r
+
 plot_scatter(
-  latest_sales,
-  x = price_m2_listing,
-  y = price_m2_contract,
-  variable = name_muni,
+  mtcars,
+  x = wt,
+  y = mpg,
+  variable = as.factor(cyl),
   fit = TRUE,
   fit_variable = TRUE,
   fit_method = "lm",
-  palette = "qual_benvi",
-  scale_name = "City"
+  palette = "oranges",
+  scale_name = "Cylinders"
 )
 ```
 
@@ -208,6 +214,7 @@ plot_scatter(
 ### With Axis Lines
 
 ``` r
+
 # Create sample data with negative values
 scatter_data <- data.frame(
   x = rnorm(50, 0, 2),
@@ -234,9 +241,10 @@ Create area charts for showing cumulative values or proportions.
 ### Basic Area Chart
 
 ``` r
-# Rental price index over time
-plot_area(iqa, x = date, y = index) +
-  labs(y = "Index (base = 100)")
+
+# Economic data over time
+plot_area(economics, x = date, y = unemploy / 1000) +
+  labs(y = "Unemployed (millions)")
 ```
 
 ![](plot-functions_files/figure-html/area-basic-1.png)
@@ -244,6 +252,7 @@ plot_area(iqa, x = date, y = index) +
 ### Stacked Area
 
 ``` r
+
 # Sample data
 time_series <- data.frame(
   year = rep(2010:2020, 3),
@@ -279,9 +288,8 @@ Create histograms to visualize distributions.
 ### Basic Histogram
 
 ``` r
-# Distribution of rental prices per m2
-iqaiw_total <- subset(iqaiw, rooms == "Total")
-plot_histogram(iqaiw_total, x = price_m2)
+
+plot_histogram(mtcars, x = mpg)
 ```
 
 ![](plot-functions_files/figure-html/histogram-basic-1.png)
@@ -289,22 +297,23 @@ plot_histogram(iqaiw_total, x = price_m2)
 ### With Custom Bins
 
 ``` r
-plot_histogram(iqaiw_total, x = price_m2, bins = 20)
+
+plot_histogram(mtcars, x = mpg, bins = 15)
 ```
 
 ![](plot-functions_files/figure-html/histogram-bins-1.png)
 
-### With Faceting
+### With Grouping
 
 ``` r
-# Distribution by city (using faceting is clearer than stacking for histograms)
+
 plot_histogram(
-  iqaiw_total,
-  x = price_m2,
-  facet = name_muni,
-  ncol = 3
-) +
-  labs(subtitle = "Rental price distribution by city")
+  mtcars,
+  x = mpg,
+  variable = as.factor(cyl),
+  palette = "purples",
+  scale_name = "Cylinders"
+)
 ```
 
 ![](plot-functions_files/figure-html/histogram-groups-1.png)
@@ -312,8 +321,9 @@ plot_histogram(
 ### Different Binning Methods
 
 ``` r
+
 # Using Freedman-Diaconis rule
-plot_histogram(iqaiw_total, x = price_m2, method = "fd") +
+plot_histogram(mtcars, x = mpg, bw = "fd") +
   labs(subtitle = "Freedman-Diaconis binwidth")
 ```
 
@@ -333,18 +343,19 @@ plot_histogram(iqaiw_total, x = price_m2, method = "fd") +
 All plot functions return ggplot objects, so you can add layers:
 
 ``` r
-plot_line(iqa, x = date, y = index) +
+
+plot_line(economics, x = date, y = unemploy / 1000) +
   geom_smooth(
     method = "loess",
     se = FALSE,
-    color = benvi_palette("benvi_purple")[3],
+    color = benvi_palette("browns")[2],
     linewidth = 1.5
   ) +
   labs(
-    title = "Rio de Janeiro Rental Price Index",
+    title = "US Unemployment Over Time",
     subtitle = "With smoothed trend line",
     x = "Year",
-    y = "Index (base = 100)"
+    y = "Unemployed (millions)"
   )
 ```
 
@@ -353,21 +364,22 @@ plot_line(iqa, x = date, y = index) +
 ### Customizing Aesthetics
 
 ``` r
+
 plot_scatter(
-  latest_sales,
-  x = price_m2_listing,
-  y = price_m2_contract,
-  variable = name_muni,
-  palette = "qual_benvi",
-  scale_name = "City",
+  mtcars,
+  x = wt,
+  y = mpg,
+  variable = as.factor(cyl),
+  palette = "qual_7",
+  scale_name = "Cylinders",
   size = 4,  # Passed to geom_point via ...
   alpha = 0.7
 ) +
   labs(
-    title = "Listing vs Contract Prices by City",
+    title = "Fuel Efficiency Analysis",
     subtitle = "Custom size and transparency",
-    x = "Listing Price (R$/m²)",
-    y = "Contract Price (R$/m²)"
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon"
   )
 ```
 
@@ -376,9 +388,10 @@ plot_scatter(
 ### Faceting
 
 ``` r
-plot_scatter(latest_sales, x = price_m2_listing, y = price_m2_contract) +
-  facet_wrap(~ name_muni) +
-  labs(title = "Listing vs Contract Prices by City")
+
+plot_scatter(mtcars, x = wt, y = mpg) +
+  facet_wrap(~ cyl, labeller = label_both) +
+  labs(title = "MPG vs Weight by Cylinder Count")
 ```
 
 ![](plot-functions_files/figure-html/advanced-facet-1.png)
@@ -386,6 +399,7 @@ plot_scatter(latest_sales, x = price_m2_listing, y = price_m2_contract) +
 ### Combining Helper Functions with Manual ggplot2
 
 ``` r
+
 # Start with helper function, then customize extensively
 plot_column(products, x = product, y = sales) +
   geom_hline(
@@ -434,10 +448,11 @@ with a helper and customize with ggplot2 layers!
 ### Custom Colors Without `variable`
 
 ``` r
-# Use specific benvi color
-my_color <- benvi_palette("benvi_blue")[3]
 
-plot_line(iqa, x = date, y = index, color = my_color) +
+# Use specific benvi color
+my_color <- benvi_palette("rio_qual")[3]
+
+plot_line(economics, x = date, y = unemploy, color = my_color) +
   labs(title = "Custom Color Line Chart")
 ```
 
@@ -446,14 +461,15 @@ plot_line(iqa, x = date, y = index, color = my_color) +
 ### Custom Legend
 
 ``` r
+
 plot_scatter(
-  latest_sales,
-  x = price_m2_listing,
-  y = price_m2_contract,
-  variable = name_muni,
+  mtcars,
+  x = wt,
+  y = mpg,
+  variable = as.factor(cyl),
   palette = "purples",
-  scale_name = "City",
-  scale_label = c("BH", "RJ", "SP")
+  scale_name = "Number of\nCylinders",
+  scale_label = c("Four", "Six", "Eight")
 ) +
   theme(legend.position = "bottom")
 ```
@@ -463,6 +479,7 @@ plot_scatter(
 ### Adding Titles and Labels
 
 ``` r
+
 plot_column(products, x = product, y = sales, text = TRUE) +
   labs(
     title = "Q4 Product Sales Performance",
@@ -495,9 +512,10 @@ plot_column(products, x = product, y = sales, text = TRUE) +
 When using `variable`, keep groups ≤ 7 for readability:
 
 ``` r
-# Good: 2 groups
-index_few <- subset(index_subset, name_muni %in% c("São Paulo", "Rio de Janeiro"))
-plot_line(index_few, x = date, y = index, variable = name_muni, pal_name = "yellows")
+
+# Good: 3 groups
+housing_few <- housing_subset |> filter(city %in% c("Austin", "Houston"))
+plot_line(housing_few, x = date, y = sales, variable = city, palette = "yellows")
 ```
 
 ![](plot-functions_files/figure-html/tips-colors-1.png)
@@ -510,10 +528,11 @@ plot_line(index_few, x = date, y = index, variable = name_muni, pal_name = "yell
 ### 4. Always Label Your Axes
 
 ``` r
-plot_scatter(spo_latest, x = price_m2_listing, y = price_m2_contract) +
+
+plot_scatter(mtcars, x = wt, y = mpg) +
   labs(
-    x = "Listing Price (R$/m²)",
-    y = "Contract Price (R$/m²)"
+    x = "Vehicle Weight (1000 lbs)",
+    y = "Fuel Efficiency (miles per gallon)"
   )
 ```
 
@@ -527,13 +546,13 @@ plot_scatter(spo_latest, x = price_m2_listing, y = price_m2_contract) +
 
 ## Function Reference Summary
 
-| Function                                                                                   | Best For             | Key Feature              |
-|--------------------------------------------------------------------------------------------|----------------------|--------------------------|
-| [`plot_line()`](https://viniciusoike.github.io/benviplot/reference/plot_line.md)           | Time series, trends  | `point` parameter        |
-| [`plot_column()`](https://viniciusoike.github.io/benviplot/reference/plot_column.md)       | Category comparisons | `text` labels            |
-| [`plot_scatter()`](https://viniciusoike.github.io/benviplot/reference/plot_scatter.md)     | Correlations         | `fit` trend lines        |
-| [`plot_area()`](https://viniciusoike.github.io/benviplot/reference/plot_area.md)           | Cumulative values    | Stacked areas            |
-| [`plot_histogram()`](https://viniciusoike.github.io/benviplot/reference/plot_histogram.md) | Distributions        | Multiple binning methods |
+| Function | Best For | Key Feature |
+|----|----|----|
+| [`plot_line()`](https://viniciusoike.github.io/benviplot/reference/plot_line.md) | Time series, trends | `point` parameter |
+| [`plot_column()`](https://viniciusoike.github.io/benviplot/reference/plot_column.md) | Category comparisons | `text` labels |
+| [`plot_scatter()`](https://viniciusoike.github.io/benviplot/reference/plot_scatter.md) | Correlations | `fit` trend lines |
+| [`plot_area()`](https://viniciusoike.github.io/benviplot/reference/plot_area.md) | Cumulative values | Stacked areas |
+| [`plot_histogram()`](https://viniciusoike.github.io/benviplot/reference/plot_histogram.md) | Distributions | Multiple binning methods |
 
 ## Troubleshooting
 
@@ -542,6 +561,7 @@ plot_scatter(spo_latest, x = price_m2_listing, y = price_m2_contract) +
 Ensure you’re using unquoted column names:
 
 ``` r
+
 # Correct
 plot_line(data, x = date, y = value)
 
@@ -554,13 +574,14 @@ plot_line(data, x = "date", y = "value")
 When using `variable`, ensure it’s a factor or categorical:
 
 ``` r
-# Ensure categorical variables are factors if needed
+
+# Convert numeric to factor
 plot_scatter(
-  latest_sales,
-  x = price_m2_listing,
-  y = price_m2_contract,
-  variable = name_muni,  # Already character/factor
-  palette = "qual_benvi"
+  mtcars,
+  x = wt,
+  y = mpg,
+  variable = as.factor(cyl),  # Convert to factor!
+  palette = "qual_3"
 )
 ```
 
@@ -571,6 +592,7 @@ plot_scatter(
 Check that palette exists and has enough colors:
 
 ``` r
+
 # View available colors
 benvi_palette("qual_5")
 

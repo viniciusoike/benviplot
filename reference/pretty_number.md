@@ -1,11 +1,8 @@
-# Format a number as a label (Deprecated)
+# Format a number as a label
 
-**\[deprecated\]**
-
-`pretty_number()` has been renamed to
-[`format_num_br()`](https://viniciusoike.github.io/benviplot/reference/format_num_br.md)
-for clarity. The new name better reflects that this function uses
-Brazilian number formatting conventions.
+This is a convenient wrapper to both the `format` and the `round` base
+functions to convert a numeric vector into a character of labels for
+tables or plots.
 
 ## Usage
 
@@ -21,22 +18,24 @@ pretty_number(x, digits = 1, percent = FALSE)
 
 - digits:
 
-  Number of decimal places to include. Can be negative to round to tens,
-  hundreds, etc.
+  Number of decimal cases to include
 
 - percent:
 
-  Logical indicating if % symbol should be appended
+  Logical indicating if % should be pasted
 
 ## Value
 
-A character vector with formatted numbers
+A character vector
 
 ## Examples
 
 ``` r
-# Use format_num_br() instead
 x <- 1235134.123
-format_num_br(x)
+pretty_number(x)
 #> [1] "1.235.134"
+pretty_number(x, digits = 3)
+#> [1] "1.235.134"
+pretty_number(x, digits = 1, percent = TRUE)
+#> [1] "1.235.134%"
 ```

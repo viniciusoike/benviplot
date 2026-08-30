@@ -1,6 +1,7 @@
 # Themes and Styling
 
 ``` r
+
 library(ggplot2)
 library(benviplot)
 ```
@@ -29,14 +30,14 @@ Simply add
 to any ggplot:
 
 ``` r
-spo_latest <- subset(sales_report, name_muni == "São Paulo" & date == max(date))
-ggplot(spo_latest, aes(x = price_m2_listing, y = price_m2_contract)) +
-  geom_point(color = benvi_palette("benvi_blue")[3], size = 3) +
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = benvi_palette("purples")[1], size = 3) +
   labs(
-    title = "Listing vs Contract Prices",
+    title = "Fuel Efficiency vs. Weight",
     subtitle = "Using theme_benvi()",
-    x = "Listing Price (R$/m²)",
-    y = "Contract Price (R$/m²)"
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon"
   ) +
   theme_benvi()
 ```
@@ -46,6 +47,7 @@ ggplot(spo_latest, aes(x = price_m2_listing, y = price_m2_contract)) +
 ### Comparing with Default Theme
 
 ``` r
+
 # Create base plot
 p <- ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
   geom_point(size = 3) +
@@ -70,6 +72,7 @@ p1
 ![](themes-and-styling_files/figure-html/compare-themes-1.png)
 
 ``` r
+
 p2
 ```
 
@@ -88,8 +91,9 @@ uses the **Poppins** font with carefully chosen sizes:
 - **Caption**: 6pt, dark gray
 
 ``` r
-ggplot(iqa, aes(x = date, y = index)) +
-  geom_line(color = benvi_palette("benvi_blue")[1], linewidth = 1) +
+
+ggplot(economics, aes(x = date, y = unemploy / 1000)) +
+  geom_line(color = benvi_palette("browns")[1], linewidth = 1) +
   labs(
     title = "Title: Clear and Prominent",
     subtitle = "Subtitle: Provides additional context",
@@ -107,6 +111,7 @@ ggplot(iqa, aes(x = date, y = index)) +
 Only major grid lines are shown for cleaner appearance:
 
 ``` r
+
 # With theme_benvi (major grid only)
 ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
   geom_boxplot(fill = benvi_palette("greens")[1]) +
@@ -121,6 +126,7 @@ ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
 Default legend position is on top for better readability:
 
 ``` r
+
 ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
   geom_point(size = 3) +
   scale_color_benvi_d(pal_name = "purples", name = "Cylinders") +
@@ -142,6 +148,7 @@ installed to your system once and work across all R sessions.
 Install Poppins font to your system:
 
 ``` r
+
 # Recommended: Complete setup in one command
 setup_benvi_fonts()
 
@@ -160,6 +167,7 @@ automatically falls back to your system’s default font. You’ll see a
 one-time message suggesting installation:
 
 ``` r
+
 # Works even without Poppins installed
 ggplot(mtcars, aes(wt, mpg)) +
   geom_point() +
@@ -173,6 +181,7 @@ ggplot(mtcars, aes(wt, mpg)) +
 Verify your font setup:
 
 ``` r
+
 # Check if Poppins is installed
 check_poppins_installed()
 
@@ -186,6 +195,7 @@ Override the default font family with
 [`theme()`](https://ggplot2.tidyverse.org/reference/theme.html):
 
 ``` r
+
 ggplot(mtcars, aes(wt, mpg)) +
   geom_point() +
   theme_benvi() +
@@ -197,6 +207,7 @@ ggplot(mtcars, aes(wt, mpg)) +
 For optimal text rendering quality:
 
 ``` r
+
 install.packages("ragg")
 
 # Then configure RStudio:
@@ -216,6 +227,7 @@ is a starting point. Customize it with additional
 ### Change Legend Position
 
 ``` r
+
 ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
   geom_point(size = 3) +
   scale_color_benvi_d(pal_name = "oranges", name = "Cylinders") +
@@ -229,6 +241,7 @@ ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
 ### Adjust Text Sizes
 
 ``` r
+
 ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_point(color = benvi_palette("yellows")[1], size = 3) +
   labs(
@@ -249,6 +262,7 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 ### Rotate Axis Labels
 
 ``` r
+
 products <- data.frame(
   product = c("Product A", "Product B", "Product C", "Product D"),
   sales = c(120, 200, 150, 180)
@@ -266,6 +280,7 @@ ggplot(products, aes(x = product, y = sales)) +
 ### Remove Grid Lines
 
 ``` r
+
 ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_point(color = benvi_palette("rio_qual")[1], size = 3) +
   labs(title = "No Grid Lines") +
@@ -281,6 +296,7 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 ### Add Background Color
 
 ``` r
+
 ggplot(economics, aes(x = date, y = unemploy)) +
   geom_area(fill = benvi_palette("seq_purples")[5], alpha = 0.7) +
   labs(title = "Custom Background Color") +
@@ -305,17 +321,16 @@ ggplot(economics, aes(x = date, y = unemploy)) +
 6.  **Clean, minimal design**
 
 ``` r
+
 # Sample data
-index_subset <- subset(
-  iqaiw,
-  rooms == "Total" & name_muni %in% c("São Paulo", "Rio de Janeiro", "Belo Horizonte")
-)
+housing_subset <- txhousing |>
+  dplyr::filter(city %in% c("Austin", "Houston", "Dallas"))
 
 # Publication-ready plot
-ggplot(index_subset, aes(x = date, y = index, color = name_muni)) +
+ggplot(housing_subset, aes(x = date, y = median / 1000, color = city)) +
   geom_line(linewidth = 1.2) +
   scale_color_benvi_d(
-    pal_name = "qual_benvi",
+    pal_name = "purples",
     name = "City"
   ) +
   labs(
@@ -337,6 +352,7 @@ ggplot(index_subset, aes(x = date, y = index, color = name_muni)) +
 ### Faceted Plot
 
 ``` r
+
 ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_point(color = benvi_palette("qual_5")[1], size = 2) +
   geom_smooth(
@@ -369,6 +385,7 @@ Build on
 to create your own theme:
 
 ``` r
+
 # Define custom theme
 theme_presentation <- function() {
   theme_benvi() +
@@ -406,6 +423,7 @@ ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
 ### Theme for Reports
 
 ``` r
+
 theme_report <- function() {
   theme_benvi() +
     theme(
@@ -440,6 +458,7 @@ ggplot(economics, aes(x = date, y = uempmed)) +
 Always use benvi scales with benvi theme for consistency:
 
 ``` r
+
 ggplot(mtcars, aes(x = factor(cyl), y = mpg, fill = factor(cyl))) +
   geom_boxplot(show.legend = FALSE) +
   scale_fill_benvi_d(pal_name = "pinks") +  # benvi scale
@@ -463,6 +482,7 @@ which automatically uses the ragg graphics device for high-quality
 output:
 
 ``` r
+
 p <- ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_point(color = benvi_palette("purples")[1], size = 3) +
   labs(title = "Fuel Efficiency") +
@@ -482,6 +502,7 @@ inches) - Consistent output across platforms
 ### For Print
 
 ``` r
+
 # High-resolution for publication
 ggsave_benvi("plot.png", p, width = 7, height = 5)
 ```
@@ -489,6 +510,7 @@ ggsave_benvi("plot.png", p, width = 7, height = 5)
 ### For Presentations
 
 ``` r
+
 # Larger size for slides
 ggsave_benvi("slide.png", p, width = 10, height = 6)
 ```
@@ -496,6 +518,7 @@ ggsave_benvi("slide.png", p, width = 10, height = 6)
 ### For Web
 
 ``` r
+
 # Standard web resolution
 ggsave_benvi("web_plot.png", p, width = 8, height = 5)
 ```
@@ -507,6 +530,7 @@ You can still use regular
 preferred:
 
 ``` r
+
 ggsave("plot.png", p, width = 7, height = 5, dpi = 300)
 ```
 
@@ -515,6 +539,7 @@ ggsave("plot.png", p, width = 7, height = 5, dpi = 300)
 ### Color Considerations
 
 ``` r
+
 # Use patterns in addition to colors
 ggplot(mtcars, aes(x = factor(cyl), y = mpg, fill = factor(cyl))) +
   geom_violin(show.legend = FALSE) +
@@ -534,6 +559,7 @@ ggplot(mtcars, aes(x = factor(cyl), y = mpg, fill = factor(cyl))) +
 Ensure text is readable:
 
 ``` r
+
 # Good contrast between text and background
 ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_point(size = 3, color = benvi_palette("browns")[1]) +
@@ -556,6 +582,7 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 When including plots in documents, always add alt text:
 
 ``` r
+
 # In RMarkdown, use fig.alt
 # ```{r, fig.alt="Scatter plot showing negative correlation between weight and MPG"}
 # plot here
@@ -567,6 +594,7 @@ When including plots in documents, always add alt text:
 ### Minimal Plot
 
 ``` r
+
 ggplot(economics, aes(x = date, y = unemploy)) +
   geom_line(color = benvi_palette("browns")[1], linewidth = 1) +
   theme_benvi() +
@@ -583,6 +611,7 @@ ggplot(economics, aes(x = date, y = unemploy)) +
 ### Data-Focused (No Decorations)
 
 ``` r
+
 ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_point(size = 3, color = benvi_palette("rio_qual")[1]) +
   theme_benvi() +
@@ -598,6 +627,7 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 ### Highlighted Plot
 
 ``` r
+
 # Emphasize one series
 mtcars_highlight <- mtcars
 mtcars_highlight$highlight <- ifelse(mtcars$cyl == 6, "Six", "Other")

@@ -3,39 +3,28 @@
 This file provides guidance to Claude Code (claude.ai/code) when working
 with code in this repository.
 
+# How to perform tasks
+
+When asked to perform tasks related to this repository, please follow
+these guidelines:
+
+- Make step-by-step detailed plans before writing code.
+- Go through each task methodically, don’t skip steps, don’t cut
+  corners.
+- When writing code, remember to check claude/coding_guidelines.md for
+  best practices.
+- When writing code, remember to consider all other necessary changes:
+  function documentation, examples, tests, vignettes, README, etc.
+- After making changes, run devtools::check() to ensure everything
+  works. If there are errors, fix them. If everything is OK, commit and
+  push to GitHub.
+
 ## Overview
 
 `benviplot` is an R package that provides ggplot2 extensions with
-standardized color palettes and plotting functions. It uses color
-schemes from the Benvi brand (QuintoAndar Group). Current version:
-**1.2.0**.
-
-## Guidelines for writting
-
-These apply when writting text for documentation like README.md or
-vignettes.
-
-- Avoid ending sentences with a colon.
-- Avoid emojis (e.g 🎯, 📊, etc.)
-
-## Writing documentation
-
-This applies to vignettes, examples and tutorial-material.
-
-- Always use UTF-8 encoding in documentation and inside datasets. Avoid
-  UTF-8 and convert only inside actual code.
-- Avoid piping into ggplot or plot calls.
-- When writing short examples, use `subset` when possible to avoid the
-  need to call `dplyr`.
-- Make examples as simple as possible. Leave complex use cases for
-  vignettes.
-- Add comments to code but be terse and always comment above the code
-  (never to the right).
-- Always use datasets shipped with this package (`iqa`, `iqaiw`,
-  `sales_report`) or default R datasets (`mtcars`, `iris`).
-- When writing long-form content like vignettes, reuse the same dataset
-  several times. This makes it easier for the user to focus on the
-  visualizations and not on data manipulation.
+standardized color palettes and plotting functions for Benvi
+(QuintoAndar Group). It includes custom color palettes, themes, and
+helper plot functions.
 
 ## Development Commands
 
@@ -65,6 +54,7 @@ The README.md is generated from README.Rmd:
 
 ``` r
 
+# Render README
 rmarkdown::render("README.Rmd")
 ```
 
@@ -77,42 +67,33 @@ The package uses a centralized color palette system stored in
 “AzulQuinto”, “Floresta”, “Violeta”) - `benvi_palette.rds`: Pre-built
 palette collections
 
-**`inst/fonts/`**: Poppins font (4 weights: Regular, Bold, Italic,
-BoldItalic) bundled with the package. Registered automatically on load
-when `systemfonts` is available.
-[`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md)
-defaults to `"Poppins"` when both `systemfonts` and `ragg` are
-available, `"sans"` otherwise. All runnable examples use
-`base_family = "sans"` or
-`\dontshow{options(theme_benvi.font_family = "sans")}` for CRAN
-compatibility. See `dev/font-management.md` for details on font
-management in R packages.
-
 **Palette Generation** (`data-raw/cols_to_palette.R`): - Converts named
 colors to hex values via `get_colors()` and `get_hex()` functions -
 Creates palette sets organized by type: - **Theme palettes** (4 colors):
 grays, browns, yellows, greens, blues, purples, pinks, oranges -
-**Qualitative palettes** (8 colors): qual_1 through qual_9 -
-**Sequential palettes** (9 colors): seq_grays, seq_browns, seq_yellows,
-seq_greens, seq_blues, seq_purples, seq_pinks, seq_oranges -
-**City-specific palettes**: spo_seq, spo_div, spo_qual, rio_seq,
-rio_div, rio_qual, bhe_seq, bhe_div - **Brand palettes**: benvi_blue,
-benvi_purple, basic
+**Qualitative palettes** (8 colors): qual_1, qual_2, qual_3, qual_4,
+qual_5, qual_6, qual_7, qual_8, qual_9 - **Sequential palettes** (9
+colors): seq_grays, seq_browns, seq_yellows, seq_greens, seq_blues,
+seq_purples, seq_pinks, seq_oranges - **City-specific palettes**:
+spo_seq, spo_div, spo_qual, rio_seq, rio_div, rio_qual, bhe_seq,
+bhe_div - **Brand palettes**: benvi_blue, benvi_purple, basic
 
 ### Core Functions
 
 **R/benvi_palette.R**: - `benvi_palette(pal_name, n, direction, type)`:
 Main palette accessor - Returns hex colors from named palettes -
 Supports discrete (exact colors) and continuous (interpolated) modes -
-Can reverse palettes with `direction = -1` - `pal_pal()`: Internal
-factory function for creating palette generators -
-[`print.palette()`](https://viniciusoike.github.io/benviplot/reference/print.palette.md):
-S3 method for visualizing palettes
+Can reverse palettes with `direction = -1` - `pal_pal()`: Factory
+function for creating palette generators - `print.palette()`: S3 method
+for visualizing palettes
 
-**R/palette_utils.R**: - `show_palettes(type, n)`: Visual display of all
-palettes (like RColorBrewer::display.brewer.all()). `type` is one of
-`"all"`, `"theme"`, `"sequential"`, `"qualitative"`, `"diverging"`,
-`"city"`, `"brand"`.
+**R/palette_utils.R**: - `benvi_colors(color_names)`: Get hex codes for
+individual named colors or list all color names - `list_palettes(type)`:
+List available palette names, filterable by type (“all”, “theme”,
+“sequential”, “qualitative”, “city”, “brand”) -
+[`list_colors()`](https://viniciusoike.github.io/benviplot/reference/list_colors.md):
+List all 36 available Benvi color names - `show_palettes(type, n)`:
+Visual display of all palettes (like RColorBrewer::display.brewer.all())
 
 **R/benvi_scales.R**: - Discrete scales:
 [`scale_color_benvi_d()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-discrete.md),
@@ -124,61 +105,32 @@ Both use British/American spelling variants (color/colour)
 
 **R/theme_benvi.R**: -
 [`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md):
-Exported custom ggplot2 theme; uses Poppins when registered, falls back
-to `"sans"`. Override via `options(theme_benvi.font_family = ...)` or
-`base_family` argument.
+Custom ggplot2 theme with Poppins font - White background, minimal grid
+lines, legend on top - Uses `showtext` package for custom font rendering
 
-**R/fonts.R** (font management): -
-[`font_status()`](https://viniciusoike.github.io/benviplot/reference/font_status.md):
-Reports Poppins and ragg availability with recommendations
+\*\*R/plot\_\*.R\*\*: - Wrapper functions:
+[`plot_line()`](https://viniciusoike.github.io/benviplot/reference/plot_line.md),
+[`plot_column()`](https://viniciusoike.github.io/benviplot/reference/plot_column.md),
+[`plot_scatter()`](https://viniciusoike.github.io/benviplot/reference/plot_scatter.md),
+[`plot_area()`](https://viniciusoike.github.io/benviplot/reference/plot_area.md),
+[`plot_histogram()`](https://viniciusoike.github.io/benviplot/reference/plot_histogram.md) -
+Each accepts a `variable` argument to map to color/fill aesthetics -
+Some include helper features (e.g.,
+[`plot_column()`](https://viniciusoike.github.io/benviplot/reference/plot_column.md)
+has `text = TRUE` to show values)
 
-**R/zzz.R**: - `.onLoad()`: Auto-registers the bundled Poppins font via
-[`systemfonts::register_font()`](https://systemfonts.r-lib.org/reference/register_font.html)
-when `systemfonts` is installed - `register_bundled_poppins()`: Internal
-— resolves font paths from `inst/fonts/` and registers the font
+### Font Management
 
-**R/save_plot.R**: -
-[`ggsave_benvi()`](https://viniciusoike.github.io/benviplot/reference/ggsave_benvi.md):
-Wrapper around
-[`ggplot2::ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html)
-that uses ragg device for PNG when available
-
-\*\*R/plot\_\*.R\*\* — wrapper functions (active): -
-[`plot_line()`](https://viniciusoike.github.io/benviplot/reference/plot_line.md):
-Line chart -
-[`plot_column()`](https://viniciusoike.github.io/benviplot/reference/plot_column.md):
-Column/bar chart (includes text labels, inside text via ggfittext) -
-[`plot_scatter()`](https://viniciusoike.github.io/benviplot/reference/plot_scatter.md):
-Scatter plot with optional regression line -
-[`plot_area()`](https://viniciusoike.github.io/benviplot/reference/plot_area.md):
-Area chart -
-[`plot_histogram()`](https://viniciusoike.github.io/benviplot/reference/plot_histogram.md):
-Histogram
-
-**R/utils.R**: -
-[`format_num_br()`](https://viniciusoike.github.io/benviplot/reference/format_num_br.md):
-Format numbers with Brazilian locale (period thousands, comma decimal)
-
-**R/utils-globals.R**: Global variable bindings for tidy eval
-(suppresses R CMD check notes)
-
-**R/plot_scatter.R** also contains: - `plot_add_xy()`: Internal — helper
-to add axis lines to a plot
+The package depends on `showtext` and optionally `sysfonts` for the
+Poppins font: - `R/fonts.R`: Contains `import_fonts()` function -
+`R/showtext.R`: Auto-loads showtext on package load - Font must be
+available via Google Fonts or installed locally
 
 ### Internal Data
 
-- `R/data.R`: Documents exported datasets (`iqa`, `iqaiw`,
-  `sales_report`)
-- `R/sysdata.rda`: Internal `palette` and `benvi_colors_data` objects
-  used throughout
-
-### Datasets
-
-- `iqa`: QuintoAndar Rental Price Index (legacy, 96 rows, 6 columns)
-- `iqaiw`: IQAIW rental index for 6 cities, multiple rooms categories
-  (1,660 rows)
-- `sales_report`: Zone-level rental data with listing vs contract prices
-  (272 rows)
+- `R/data.R`: Documents exported dataset (`iqa`)
+- `R/sysdata.rda`: Contains internal `palette` object used by
+  [`benvi_palette()`](https://viniciusoike.github.io/benviplot/reference/benvi_palette.md)
 
 ## Key Design Patterns
 
@@ -189,25 +141,5 @@ to add axis lines to a plot
     to create 9-step gradients
 3.  **ggplot2 integration**: Scale functions use `discrete_scale()` and
     `scale_*_gradientn()` with custom palette generators
-4.  **Font activation**: Poppins is bundled and auto-registered on load
-    (requires `systemfonts`).
-    [`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md)
-    uses Poppins by default when both `systemfonts` and `ragg` are
-    available; falls back to `"sans"` otherwise. All examples force
-    `"sans"` for CRAN compatibility since `R CMD check` uses base R
-    devices that cannot render registered fonts
-5.  **Error handling**: Validates palette names, color counts, and
-    direction parameters via
-    [`cli::cli_abort()`](https://cli.r-lib.org/reference/cli_abort.html)
-
-## Dependencies
-
-**Imports** (hard): cli, dplyr (\>= 1.1.0), ggplot2 (\>= 4.0.0),
-graphics, rlang
-
-**Suggests** (optional): ggfittext, knitr, pkgdown, ragg, rmarkdown,
-systemfonts, testthat (\>= 3.0.0)
-
-Note: `ggfittext` is only needed for `plot_column(text_inside = TRUE)`.
-`systemfonts` is needed for auto-registering the bundled Poppins font on
-load; without it the theme defaults to “sans”.
+4.  **Error handling**: Validates palette names, color counts, and
+    direction parameters

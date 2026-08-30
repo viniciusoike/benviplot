@@ -1,45 +1,49 @@
-# Continuous Benvi color scales
+# Continuous scales to use for ggplot2
 
-Map continuous values to colors interpolated from a Benvi palette.
+These functions provide the option to use Benvi colors inside continuous
+palettes with the `ggplot2` package.
 
 ## Usage
 
 ``` r
-scale_colour_benvi_c(pal_name = "benvi_blue", direction = 1, ...)
+scale_colour_benvi_c(pal_name, direction = 1, ...)
 
-scale_color_benvi_c(pal_name = "benvi_blue", direction = 1, ...)
+scale_color_benvi_c(pal_name, direction = 1, ...)
 
-scale_fill_benvi_c(pal_name = "benvi_blue", direction = 1, ...)
+scale_fill_benvi_c(pal_name, direction = 1, ...)
 ```
 
 ## Arguments
 
 - pal_name:
 
-  Name of the palette. Defaults to `"benvi_blue"`.
+  Name of the palette. Defaults to "qual_2".
 
 - direction:
 
-  Either `1` or `-1`. Use `-1` to reverse the palette.
+  Either `1` or `-1`. If `-1` the palette will be reversed.
 
 - ...:
 
-  Additional arguments passed to
+  Arguments to pass on to
   [`ggplot2::scale_colour_gradientn()`](https://ggplot2.tidyverse.org/reference/scale_gradient.html)
   or
-  [`ggplot2::scale_fill_gradientn()`](https://ggplot2.tidyverse.org/reference/scale_gradient.html).
+  [`ggplot2::scale_fill_gradientn()`](https://ggplot2.tidyverse.org/reference/scale_gradient.html)
 
 ## Value
 
-A continuous ggplot2 scale that can be added to a `ggplot` object.
+A `ScaleContinuous` object that can be added to a `ggplot` object
 
 ## Examples
 
 ``` r
-library(ggplot2)
 
-ggplot(mtcars, aes(x = wt, y = mpg, color = hp)) +
-  geom_point() +
-  scale_color_benvi_c("benvi_blue")
+if (require('ggplot2')) {
+
+  ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Petal.Length)) +
+    geom_point() +
+    scale_colour_benvi_c("qual_9")
+}
+#> Loading required package: ggplot2
 
 ```

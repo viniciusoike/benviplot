@@ -1,14 +1,9 @@
 # Color Palettes in benviplot
 
 ``` r
+
 library(ggplot2)
 library(benviplot)
-
-# Prepare data subsets used throughout examples
-index_subset <- subset(
-  iqaiw,
-  rooms == "Total" & name_muni %in% c("São Paulo", "Rio de Janeiro", "Belo Horizonte")
-)
 ```
 
 ## Introduction
@@ -27,8 +22,6 @@ intended use:
 - **Qualitative Palettes** (8 colors): Larger categorical datasets
 - **Sequential Palettes** (9 colors): Continuous/ordered data
 - **City-Specific Palettes**: Themed palettes for Brazilian cities
-- **Benvi Brand Palettes**: Benvi-focused colors (qual_benvi,
-  div_blue_muted, div_purple_muted)
 - **Index Palettes**: Specialized single-color scales
 
 ## Basic Palettes
@@ -36,6 +29,7 @@ intended use:
 Three fundamental palettes with 3 colors each:
 
 ``` r
+
 # Basic palette (3 colors)
 benvi_palette("basic")
 ```
@@ -47,6 +41,7 @@ benvi_palette("basic")
 **Example**:
 
 ``` r
+
 data <- data.frame(
   category = c("Low", "Medium", "High"),
   value = c(23, 45, 32)
@@ -67,6 +62,7 @@ Eight themed palettes, each with 4 carefully selected colors. Ideal for
 small categorical datasets.
 
 ``` r
+
 # Display all theme palettes
 theme_names <- c("grays", "browns", "yellows", "greens", "blues", "purples", "pinks", "oranges")
 
@@ -83,6 +79,7 @@ need strong color contrast - Professional presentations
 **Example**:
 
 ``` r
+
 # Sample data with 4 regions
 regions <- data.frame(
   region = c("North", "South", "East", "West"),
@@ -104,6 +101,7 @@ Nine palettes with 8 distinct colors each. Designed for larger
 categorical datasets where you need many distinguishable colors.
 
 ``` r
+
 # Display all Qualitative palettes
 qual_names <- paste0("qual_", 1:9)
 
@@ -120,15 +118,15 @@ visualizations with many categories - Dashboards and multi-series charts
 **Example**:
 
 ``` r
-# Use rental data with multiple cities
-iqaiw_total <- subset(iqaiw, rooms == "Total")
-ggplot(iqaiw_total, aes(x = date, y = index, color = name_muni)) +
-  geom_line(linewidth = 1) +
-  scale_color_benvi_d(pal_name = "qual_3", name = "City") +
+
+# Use mtcars with multiple groups
+ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(carb))) +
+  geom_point(size = 3) +
+  scale_color_benvi_d(pal_name = "qual_3", name = "Carburetors") +
   labs(
-    title = "Rental Price Index by City",
-    x = NULL,
-    y = "Index (base = 100)"
+    title = "MPG vs Weight by Carburetor Count",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon"
   ) +
   theme_benvi()
 ```
@@ -141,6 +139,7 @@ Eight gradient palettes with 9 colors each, transitioning from light to
 dark. Perfect for continuous or ordered data.
 
 ``` r
+
 # Display all Sequential palettes
 seq_names <- c("seq_grays", "seq_browns", "seq_yellows", "seq_greens", "seq_blues", "seq_purples", "seq_pinks", "seq_oranges")
 
@@ -158,6 +157,7 @@ progression/intensity matters
 **Example**:
 
 ``` r
+
 # Create a heatmap
 set.seed(123)
 heatmap_data <- expand.grid(
@@ -187,18 +187,21 @@ qualitative, sequential, and diverging variants.
 ### São Paulo Palettes
 
 ``` r
+
 benvi_palette("spo_seq")
 ```
 
 ![](color-palettes_files/figure-html/spo-palettes-1.png)
 
 ``` r
+
 benvi_palette("spo_div")
 ```
 
 ![](color-palettes_files/figure-html/spo-palettes-2.png)
 
 ``` r
+
 benvi_palette("spo_qual")
 ```
 
@@ -207,18 +210,21 @@ benvi_palette("spo_qual")
 ### Rio de Janeiro Palettes
 
 ``` r
+
 benvi_palette("rio_seq")
 ```
 
 ![](color-palettes_files/figure-html/rio-palettes-1.png)
 
 ``` r
+
 benvi_palette("rio_div")
 ```
 
 ![](color-palettes_files/figure-html/rio-palettes-2.png)
 
 ``` r
+
 benvi_palette("rio_qual")
 ```
 
@@ -227,12 +233,14 @@ benvi_palette("rio_qual")
 ### Belo Horizonte Palettes
 
 ``` r
+
 benvi_palette("bhe_seq")
 ```
 
 ![](color-palettes_files/figure-html/bhe-palettes-1.png)
 
 ``` r
+
 benvi_palette("bhe_div")
 ```
 
@@ -245,6 +253,7 @@ aesthetics
 **Example**:
 
 ``` r
+
 # Sample city data
 city_data <- data.frame(
   district = c("Centro", "Zona Sul", "Zona Norte", "Zona Oeste"),
@@ -265,87 +274,12 @@ ggplot(city_data, aes(x = district, y = price, fill = district)) +
 
 ![](color-palettes_files/figure-html/city-example-1.png)
 
-## Benvi Brand Palettes
-
-New palettes emphasizing Benvi’s brand identity with blues and purples.
-
-### qual_benvi
-
-A qualitative palette combining Benvi’s signature colors - perfect as
-the default for multi-group visualizations:
-
-``` r
-benvi_palette("qual_benvi")
-```
-
-![](color-palettes_files/figure-html/qual-benvi-1.png)
-
-**When to use**: As the new default for categorical data visualization,
-especially in Benvi-branded materials.
-
-**Example**:
-
-``` r
-ggplot(iqaiw_total, aes(x = date, y = index, color = name_muni)) +
-  geom_line(linewidth = 1) +
-  scale_color_benvi_d(pal_name = "qual_benvi", name = "City") +
-  labs(
-    title = "Rental Price Index - Benvi Brand Colors",
-    x = NULL,
-    y = "Index"
-  ) +
-  theme_benvi()
-```
-
-![](color-palettes_files/figure-html/qual-benvi-example-1.png)
-
-### div_blue_muted & div_purple_muted
-
-Diverging/muted palettes for subtle comparisons or neutral
-visualizations:
-
-``` r
-benvi_palette("div_blue_muted")
-```
-
-![](color-palettes_files/figure-html/div-muted-1.png)
-
-``` r
-benvi_palette("div_purple_muted")
-```
-
-![](color-palettes_files/figure-html/div-muted-2.png)
-
-**When to use**: - Diverging data around a neutral midpoint - Subtle,
-professional visualizations - When you need softer color contrasts
-
-**Example**:
-
-``` r
-# Simple example with three categories
-simple_data <- data.frame(
-  category = c("Below Target", "At Target", "Above Target"),
-  count = c(15, 25, 20)
-)
-
-ggplot(simple_data, aes(x = category, y = count, fill = category)) +
-  geom_col(show.legend = FALSE) +
-  scale_fill_manual(values = benvi_palette("div_blue_muted")) +
-  labs(
-    title = "Performance Distribution",
-    x = NULL,
-    y = "Count"
-  ) +
-  theme_benvi()
-```
-
-![](color-palettes_files/figure-html/div-muted-example-1.png)
-
 ## Index Palettes
 
 Specialized single-color gradients for index visualizations.
 
 ``` r
+
 # Blue index
 benvi_palette("benvi_blue")
 ```
@@ -353,6 +287,7 @@ benvi_palette("benvi_blue")
 ![](color-palettes_files/figure-html/index-palettes-1.png)
 
 ``` r
+
 
 # Purple index
 benvi_palette("benvi_purple")
@@ -366,6 +301,7 @@ dashboards - When you want monochromatic emphasis
 **Example**:
 
 ``` r
+
 # Stock index over time
 index_data <- data.frame(
   date = seq.Date(as.Date("2020-01-01"), as.Date("2024-12-31"), by = "month"),
@@ -392,6 +328,7 @@ ggplot(index_data, aes(x = date, y = index)) +
 Any palette can be reversed using `direction = -1`:
 
 ``` r
+
 # Original
 benvi_palette("seq_purples")
 ```
@@ -399,6 +336,7 @@ benvi_palette("seq_purples")
 ![](color-palettes_files/figure-html/reverse-1.png)
 
 ``` r
+
 
 # Reversed
 benvi_palette("seq_purples", direction = -1)
@@ -409,6 +347,7 @@ benvi_palette("seq_purples", direction = -1)
 This is useful when you want dark-to-light instead of light-to-dark:
 
 ``` r
+
 ggplot(heatmap_data, aes(x = x, y = y, fill = value)) +
   geom_tile() +
   scale_fill_benvi_c(pal_name = "seq_purples", direction = -1, name = "Value") +
@@ -427,14 +366,15 @@ ggplot(heatmap_data, aes(x = x, y = y, fill = value)) +
 Get individual colors from a palette:
 
 ``` r
+
 # Get the 3rd color from Qual5
 my_color <- benvi_palette("qual_5")[3]
 my_color
 #> [1] "#9A75B4"
 
 # Use in a plot
-ggplot(iqa, aes(x = date, y = index)) +
-  geom_line(color = my_color, linewidth = 1) +
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = my_color, size = 3) +
   labs(title = "Using a Single Extracted Color") +
   theme_benvi()
 ```
@@ -446,6 +386,7 @@ ggplot(iqa, aes(x = date, y = index)) +
 For discrete palettes, request fewer colors:
 
 ``` r
+
 # Get only 4 colors from an 8-color palette
 benvi_palette("qual_7", n = 4)
 ```
@@ -455,6 +396,7 @@ benvi_palette("qual_7", n = 4)
 For continuous palettes, interpolate any number:
 
 ``` r
+
 # Interpolate to get 15 colors
 benvi_palette("seq_yellows", n = 15, type = "continuous")
 ```
@@ -466,6 +408,7 @@ benvi_palette("seq_yellows", n = 15, type = "continuous")
 Mix colors from different palettes for custom schemes:
 
 ``` r
+
 # Create custom palette from multiple sources
 custom_colors <- c(
   benvi_palette("greens")[1],
@@ -505,15 +448,16 @@ When choosing palettes, consider:
 - **Use labels**: Don’t rely solely on color to convey information
 
 ``` r
-# Example with both color and line type
-ggplot(index_subset, aes(x = date, y = index, color = name_muni, linetype = name_muni)) +
-  geom_line(linewidth = 1) +
-  scale_color_benvi_d(pal_name = "purples", name = "City") +
-  scale_linetype_manual(values = c("solid", "dashed", "dotted"), name = "City") +
+
+# Example with both color and shape
+ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl), shape = as.factor(cyl))) +
+  geom_point(size = 3) +
+  scale_color_benvi_d(pal_name = "purples", name = "Cylinders") +
+  scale_shape_manual(values = c(16, 17, 15), name = "Cylinders") +
   labs(
-    title = "Using Color AND Line Type for Accessibility",
-    x = NULL,
-    y = "Index"
+    title = "Using Color AND Shape for Accessibility",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon"
   ) +
   theme_benvi()
 ```
@@ -524,20 +468,21 @@ ggplot(index_subset, aes(x = date, y = index, color = name_muni, linetype = name
 
 Quick reference for choosing the right palette:
 
-| Data Type           | Palette Type  | Examples                     | Color Count      |
-|---------------------|---------------|------------------------------|------------------|
-| 2-3 categories      | Basic         | basic                        | 3                |
-| 2-4 categories      | Theme         | grays, browns, yellows, etc. | 4                |
-| 5-8 categories      | Qualitative   | qual_1, qual_2, …, qual_9    | 8                |
-| Continuous data     | Sequential    | seq_grays, seq_blues, etc.   | 9 (interpolated) |
-| Geographic (cities) | City-specific | spo\_*, rio\_*, bhe\_\*      | 4-8              |
-| Single metric       | Brand         | benvi_blue, benvi_purple     | 9                |
+| Data Type | Palette Type | Examples | Color Count |
+|----|----|----|----|
+| 2-3 categories | Basic | basic | 3 |
+| 2-4 categories | Theme | grays, browns, yellows, etc. | 4 |
+| 5-8 categories | Qualitative | qual_1, qual_2, …, qual_9 | 8 |
+| Continuous data | Sequential | seq_grays, seq_blues, etc. | 9 (interpolated) |
+| Geographic (cities) | City-specific | spo\_*, rio\_*, bhe\_\* | 4-8 |
+| Single metric | Brand | benvi_blue, benvi_purple | 9 |
 
 ## Complete Palette Gallery
 
 Here’s a quick visual reference of all available palettes:
 
 ``` r
+
 # Create a function to display palette swatches
 show_palette_grid <- function(palette_names, title) {
   n_pals <- length(palette_names)
@@ -571,6 +516,7 @@ show_palette_grid(c("grays", "browns", "yellows", "greens", "blues", "purples", 
 ![](color-palettes_files/figure-html/gallery-1.png)
 
 ``` r
+
 # Display Qualitative palettes
 show_palette_grid(paste0("qual_", 1:9), "Qualitative Palettes")
 ```
@@ -578,6 +524,7 @@ show_palette_grid(paste0("qual_", 1:9), "Qualitative Palettes")
 ![](color-palettes_files/figure-html/gallery-qual-1.png)
 
 ``` r
+
 # Display Sequential palettes
 show_palette_grid(c("seq_grays", "seq_browns", "seq_yellows", "seq_greens", "seq_blues", "seq_purples", "seq_pinks", "seq_oranges"), "Sequential Palettes")
 ```

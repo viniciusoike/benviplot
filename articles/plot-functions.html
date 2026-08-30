@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Plot Helper Functions • benviplot</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Poppins-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Poppins-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Plot Helper Functions">
@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">benviplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +65,7 @@
       <h1>Plot Helper Functions</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/viniciusoike/benviplot/blob/master/vignettes/plot-functions.Rmd" class="external-link"><code>vignettes/plot-functions.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/viniciusoike/benviplot/blob/v1.1.0/vignettes/plot-functions.Rmd" class="external-link"><code>vignettes/plot-functions.Rmd</code></a></small>
       <div class="d-none name"><code>plot-functions.Rmd</code></div>
     </div>
 
@@ -154,8 +154,8 @@ layers, modify themes, and customize freely.</p>
 <h3 id="basic-usage">Basic Usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Simple line chart - rental price index</span></span>
-<span><span class="fu"><a href="../reference/plot_line.html">plot_line</a></span><span class="op">(</span><span class="va">iqa</span>, x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">index</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Simple line chart</span></span>
+<span><span class="fu"><a href="../reference/plot_line.html">plot_line</a></span><span class="op">(</span><span class="va">economics</span>, x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">unemploy</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/line-basic-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
@@ -163,17 +163,16 @@ layers, modify themes, and customize freely.</p>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter for demonstration</span></span>
-<span><span class="va">index_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span></span>
-<span>  <span class="va">iqaiw</span>,</span>
-<span>  <span class="va">rooms</span> <span class="op">==</span> <span class="st">"Total"</span> <span class="op">&amp;</span> <span class="va">name_muni</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"São Paulo"</span>, <span class="st">"Rio de Janeiro"</span>, <span class="st">"Belo Horizonte"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="va">housing_subset</span> <span class="op">&lt;-</span> <span class="va">txhousing</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">city</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Austin"</span>, <span class="st">"Houston"</span>, <span class="st">"Dallas"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/plot_line.html">plot_line</a></span><span class="op">(</span></span>
-<span>  <span class="va">index_subset</span>,</span>
+<span>  <span class="va">housing_subset</span>,</span>
 <span>  x <span class="op">=</span> <span class="va">date</span>,</span>
-<span>  y <span class="op">=</span> <span class="va">index</span>,</span>
-<span>  variable <span class="op">=</span> <span class="va">name_muni</span>,</span>
-<span>  pal_name <span class="op">=</span> <span class="st">"qual_benvi"</span>,</span>
+<span>  y <span class="op">=</span> <span class="va">sales</span>,</span>
+<span>  variable <span class="op">=</span> <span class="va">city</span>,</span>
+<span>  palette <span class="op">=</span> <span class="st">"purples"</span>,</span>
 <span>  scale_name <span class="op">=</span> <span class="st">"City"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/line-groups-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
@@ -276,24 +275,20 @@ variables.</p>
 <h3 id="basic-scatter">Basic Scatter<a class="anchor" aria-label="anchor" href="#basic-scatter"></a>
 </h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Listing vs contract prices</span></span>
-<span><span class="va">spo_latest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">sales_report</span>, <span class="va">name_muni</span> <span class="op">==</span> <span class="st">"São Paulo"</span> <span class="op">&amp;</span> <span class="va">date</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span><span class="va">spo_latest</span>, x <span class="op">=</span> <span class="va">price_m2_listing</span>, y <span class="op">=</span> <span class="va">price_m2_contract</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span><span class="va">mtcars</span>, x <span class="op">=</span> <span class="va">wt</span>, y <span class="op">=</span> <span class="va">mpg</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/scatter-basic-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="with-groups">With Groups<a class="anchor" aria-label="anchor" href="#with-groups"></a>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Compare listing vs contract by city</span></span>
-<span><span class="va">latest_sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">sales_report</span>, <span class="va">date</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span></span>
-<span>  <span class="va">latest_sales</span>,</span>
-<span>  x <span class="op">=</span> <span class="va">price_m2_listing</span>,</span>
-<span>  y <span class="op">=</span> <span class="va">price_m2_contract</span>,</span>
-<span>  variable <span class="op">=</span> <span class="va">name_muni</span>,</span>
-<span>  palette <span class="op">=</span> <span class="st">"qual_benvi"</span>,</span>
-<span>  scale_name <span class="op">=</span> <span class="st">"City"</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span></span>
+<span>  <span class="va">mtcars</span>,</span>
+<span>  x <span class="op">=</span> <span class="va">wt</span>,</span>
+<span>  y <span class="op">=</span> <span class="va">mpg</span>,</span>
+<span>  variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>,</span>
+<span>  palette <span class="op">=</span> <span class="st">"qual_5"</span>,</span>
+<span>  scale_name <span class="op">=</span> <span class="st">"Cylinders"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/scatter-groups-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
@@ -302,9 +297,9 @@ variables.</p>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span></span>
-<span>  <span class="va">spo_latest</span>,</span>
-<span>  x <span class="op">=</span> <span class="va">price_m2_listing</span>,</span>
-<span>  y <span class="op">=</span> <span class="va">price_m2_contract</span>,</span>
+<span>  <span class="va">mtcars</span>,</span>
+<span>  x <span class="op">=</span> <span class="va">wt</span>,</span>
+<span>  y <span class="op">=</span> <span class="va">mpg</span>,</span>
 <span>  fit <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  fit_method <span class="op">=</span> <span class="st">"lm"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -315,15 +310,15 @@ variables.</p>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span></span>
-<span>  <span class="va">latest_sales</span>,</span>
-<span>  x <span class="op">=</span> <span class="va">price_m2_listing</span>,</span>
-<span>  y <span class="op">=</span> <span class="va">price_m2_contract</span>,</span>
-<span>  variable <span class="op">=</span> <span class="va">name_muni</span>,</span>
+<span>  <span class="va">mtcars</span>,</span>
+<span>  x <span class="op">=</span> <span class="va">wt</span>,</span>
+<span>  y <span class="op">=</span> <span class="va">mpg</span>,</span>
+<span>  variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>,</span>
 <span>  fit <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  fit_variable <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  fit_method <span class="op">=</span> <span class="st">"lm"</span>,</span>
-<span>  palette <span class="op">=</span> <span class="st">"qual_benvi"</span>,</span>
-<span>  scale_name <span class="op">=</span> <span class="st">"City"</span></span>
+<span>  palette <span class="op">=</span> <span class="st">"oranges"</span>,</span>
+<span>  scale_name <span class="op">=</span> <span class="st">"Cylinders"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/scatter-fit-groups-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
@@ -370,9 +365,9 @@ variables.</p>
 <h3 id="basic-area-chart">Basic Area Chart<a class="anchor" aria-label="anchor" href="#basic-area-chart"></a>
 </h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Rental price index over time</span></span>
-<span><span class="fu"><a href="../reference/plot_area.html">plot_area</a></span><span class="op">(</span><span class="va">iqa</span>, x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">index</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Index (base = 100)"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Economic data over time</span></span>
+<span><span class="fu"><a href="../reference/plot_area.html">plot_area</a></span><span class="op">(</span><span class="va">economics</span>, x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">unemploy</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Unemployed (millions)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/area-basic-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
@@ -419,30 +414,27 @@ variables.</p>
 <h3 id="basic-histogram">Basic Histogram<a class="anchor" aria-label="anchor" href="#basic-histogram"></a>
 </h3>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Distribution of rental prices per m2</span></span>
-<span><span class="va">iqaiw_total</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">iqaiw</span>, <span class="va">rooms</span> <span class="op">==</span> <span class="st">"Total"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/plot_histogram.html">plot_histogram</a></span><span class="op">(</span><span class="va">iqaiw_total</span>, x <span class="op">=</span> <span class="va">price_m2</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_histogram.html">plot_histogram</a></span><span class="op">(</span><span class="va">mtcars</span>, x <span class="op">=</span> <span class="va">mpg</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/histogram-basic-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="with-custom-bins">With Custom Bins<a class="anchor" aria-label="anchor" href="#with-custom-bins"></a>
 </h3>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_histogram.html">plot_histogram</a></span><span class="op">(</span><span class="va">iqaiw_total</span>, x <span class="op">=</span> <span class="va">price_m2</span>, bins <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_histogram.html">plot_histogram</a></span><span class="op">(</span><span class="va">mtcars</span>, x <span class="op">=</span> <span class="va">mpg</span>, bins <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/histogram-bins-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
-<h3 id="with-faceting">With Faceting<a class="anchor" aria-label="anchor" href="#with-faceting"></a>
+<h3 id="with-grouping">With Grouping<a class="anchor" aria-label="anchor" href="#with-grouping"></a>
 </h3>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Distribution by city (using faceting is clearer than stacking for histograms)</span></span>
-<span><span class="fu"><a href="../reference/plot_histogram.html">plot_histogram</a></span><span class="op">(</span></span>
-<span>  <span class="va">iqaiw_total</span>,</span>
-<span>  x <span class="op">=</span> <span class="va">price_m2</span>,</span>
-<span>  facet <span class="op">=</span> <span class="va">name_muni</span>,</span>
-<span>  ncol <span class="op">=</span> <span class="fl">3</span></span>
-<span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">"Rental price distribution by city"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_histogram.html">plot_histogram</a></span><span class="op">(</span></span>
+<span>  <span class="va">mtcars</span>,</span>
+<span>  x <span class="op">=</span> <span class="va">mpg</span>,</span>
+<span>  variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>,</span>
+<span>  palette <span class="op">=</span> <span class="st">"purples"</span>,</span>
+<span>  scale_name <span class="op">=</span> <span class="st">"Cylinders"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/histogram-groups-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
@@ -450,7 +442,7 @@ variables.</p>
 </h3>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Using Freedman-Diaconis rule</span></span>
-<span><span class="fu"><a href="../reference/plot_histogram.html">plot_histogram</a></span><span class="op">(</span><span class="va">iqaiw_total</span>, x <span class="op">=</span> <span class="va">price_m2</span>, method <span class="op">=</span> <span class="st">"fd"</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="../reference/plot_histogram.html">plot_histogram</a></span><span class="op">(</span><span class="va">mtcars</span>, x <span class="op">=</span> <span class="va">mpg</span>, bw <span class="op">=</span> <span class="st">"fd"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">"Freedman-Diaconis binwidth"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/histogram-bw-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
@@ -479,18 +471,18 @@ variables.</p>
 </h3>
 <p>All plot functions return ggplot objects, so you can add layers:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_line.html">plot_line</a></span><span class="op">(</span><span class="va">iqa</span>, x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">index</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_line.html">plot_line</a></span><span class="op">(</span><span class="va">economics</span>, x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">unemploy</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span></span>
 <span>    method <span class="op">=</span> <span class="st">"loess"</span>,</span>
 <span>    se <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>    color <span class="op">=</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"benvi_purple"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>,</span>
+<span>    color <span class="op">=</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"browns"</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
 <span>    linewidth <span class="op">=</span> <span class="fl">1.5</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"Rio de Janeiro Rental Price Index"</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"US Unemployment Over Time"</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="st">"With smoothed trend line"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Year"</span>,</span>
-<span>    y <span class="op">=</span> <span class="st">"Index (base = 100)"</span></span>
+<span>    y <span class="op">=</span> <span class="st">"Unemployed (millions)"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/advanced-layers-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
@@ -499,20 +491,20 @@ variables.</p>
 </h3>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span></span>
-<span>  <span class="va">latest_sales</span>,</span>
-<span>  x <span class="op">=</span> <span class="va">price_m2_listing</span>,</span>
-<span>  y <span class="op">=</span> <span class="va">price_m2_contract</span>,</span>
-<span>  variable <span class="op">=</span> <span class="va">name_muni</span>,</span>
-<span>  palette <span class="op">=</span> <span class="st">"qual_benvi"</span>,</span>
-<span>  scale_name <span class="op">=</span> <span class="st">"City"</span>,</span>
+<span>  <span class="va">mtcars</span>,</span>
+<span>  x <span class="op">=</span> <span class="va">wt</span>,</span>
+<span>  y <span class="op">=</span> <span class="va">mpg</span>,</span>
+<span>  variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>,</span>
+<span>  palette <span class="op">=</span> <span class="st">"qual_7"</span>,</span>
+<span>  scale_name <span class="op">=</span> <span class="st">"Cylinders"</span>,</span>
 <span>  size <span class="op">=</span> <span class="fl">4</span>,  <span class="co"># Passed to geom_point via ...</span></span>
 <span>  alpha <span class="op">=</span> <span class="fl">0.7</span></span>
 <span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"Listing vs Contract Prices by City"</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"Fuel Efficiency Analysis"</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="st">"Custom size and transparency"</span>,</span>
-<span>    x <span class="op">=</span> <span class="st">"Listing Price (R$/m²)"</span>,</span>
-<span>    y <span class="op">=</span> <span class="st">"Contract Price (R$/m²)"</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Weight (1000 lbs)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Miles per Gallon"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/advanced-custom-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
@@ -520,9 +512,9 @@ variables.</p>
 <h3 id="faceting">Faceting<a class="anchor" aria-label="anchor" href="#faceting"></a>
 </h3>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span><span class="va">latest_sales</span>, x <span class="op">=</span> <span class="va">price_m2_listing</span>, y <span class="op">=</span> <span class="va">price_m2_contract</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">name_muni</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Listing vs Contract Prices by City"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span><span class="va">mtcars</span>, x <span class="op">=</span> <span class="va">wt</span>, y <span class="op">=</span> <span class="va">mpg</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">cyl</span>, labeller <span class="op">=</span> <span class="va">label_both</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"MPG vs Weight by Cylinder Count"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/advanced-facet-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
@@ -586,9 +578,9 @@ can always start with a helper and customize with ggplot2 layers!</p>
 </h3>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use specific benvi color</span></span>
-<span><span class="va">my_color</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"benvi_blue"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="va">my_color</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/benvi_palette.html">benvi_palette</a></span><span class="op">(</span><span class="st">"rio_qual"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/plot_line.html">plot_line</a></span><span class="op">(</span><span class="va">iqa</span>, x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">index</span>, color <span class="op">=</span> <span class="va">my_color</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="../reference/plot_line.html">plot_line</a></span><span class="op">(</span><span class="va">economics</span>, x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">unemploy</span>, color <span class="op">=</span> <span class="va">my_color</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Custom Color Line Chart"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/custom-single-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
@@ -597,13 +589,13 @@ can always start with a helper and customize with ggplot2 layers!</p>
 </h3>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span></span>
-<span>  <span class="va">latest_sales</span>,</span>
-<span>  x <span class="op">=</span> <span class="va">price_m2_listing</span>,</span>
-<span>  y <span class="op">=</span> <span class="va">price_m2_contract</span>,</span>
-<span>  variable <span class="op">=</span> <span class="va">name_muni</span>,</span>
+<span>  <span class="va">mtcars</span>,</span>
+<span>  x <span class="op">=</span> <span class="va">wt</span>,</span>
+<span>  y <span class="op">=</span> <span class="va">mpg</span>,</span>
+<span>  variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>,</span>
 <span>  palette <span class="op">=</span> <span class="st">"purples"</span>,</span>
-<span>  scale_name <span class="op">=</span> <span class="st">"City"</span>,</span>
-<span>  scale_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BH"</span>, <span class="st">"RJ"</span>, <span class="st">"SP"</span><span class="op">)</span></span>
+<span>  scale_name <span class="op">=</span> <span class="st">"Number of\nCylinders"</span>,</span>
+<span>  scale_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Four"</span>, <span class="st">"Six"</span>, <span class="st">"Eight"</span><span class="op">)</span></span>
 <span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/custom-legend-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
@@ -652,9 +644,9 @@ can always start with a helper and customize with ggplot2 layers!</p>
 <p>When using <code>variable</code>, keep groups ≤ 7 for
 readability:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Good: 2 groups</span></span>
-<span><span class="va">index_few</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">index_subset</span>, <span class="va">name_muni</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"São Paulo"</span>, <span class="st">"Rio de Janeiro"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/plot_line.html">plot_line</a></span><span class="op">(</span><span class="va">index_few</span>, x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">index</span>, variable <span class="op">=</span> <span class="va">name_muni</span>, pal_name <span class="op">=</span> <span class="st">"yellows"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Good: 3 groups</span></span>
+<span><span class="va">housing_few</span> <span class="op">&lt;-</span> <span class="va">housing_subset</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">city</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Austin"</span>, <span class="st">"Houston"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_line.html">plot_line</a></span><span class="op">(</span><span class="va">housing_few</span>, x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">sales</span>, variable <span class="op">=</span> <span class="va">city</span>, palette <span class="op">=</span> <span class="st">"yellows"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/tips-colors-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
@@ -673,10 +665,10 @@ palettes</li>
 <h3 id="always-label-your-axes">4. Always Label Your Axes<a class="anchor" aria-label="anchor" href="#always-label-your-axes"></a>
 </h3>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span><span class="va">spo_latest</span>, x <span class="op">=</span> <span class="va">price_m2_listing</span>, y <span class="op">=</span> <span class="va">price_m2_contract</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span><span class="va">mtcars</span>, x <span class="op">=</span> <span class="va">wt</span>, y <span class="op">=</span> <span class="va">mpg</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    x <span class="op">=</span> <span class="st">"Listing Price (R$/m²)"</span>,</span>
-<span>    y <span class="op">=</span> <span class="st">"Contract Price (R$/m²)"</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Vehicle Weight (1000 lbs)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Fuel Efficiency (miles per gallon)"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/tips-labels-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
@@ -754,13 +746,13 @@ palettes</li>
 <p>When using <code>variable</code>, ensure it’s a factor or
 categorical:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Ensure categorical variables are factors if needed</span></span>
+<code class="sourceCode R"><span><span class="co"># Convert numeric to factor</span></span>
 <span><span class="fu"><a href="../reference/plot_scatter.html">plot_scatter</a></span><span class="op">(</span></span>
-<span>  <span class="va">latest_sales</span>,</span>
-<span>  x <span class="op">=</span> <span class="va">price_m2_listing</span>,</span>
-<span>  y <span class="op">=</span> <span class="va">price_m2_contract</span>,</span>
-<span>  variable <span class="op">=</span> <span class="va">name_muni</span>,  <span class="co"># Already character/factor</span></span>
-<span>  palette <span class="op">=</span> <span class="st">"qual_benvi"</span></span>
+<span>  <span class="va">mtcars</span>,</span>
+<span>  x <span class="op">=</span> <span class="va">wt</span>,</span>
+<span>  y <span class="op">=</span> <span class="va">mpg</span>,</span>
+<span>  variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>,  <span class="co"># Convert to factor!</span></span>
+<span>  palette <span class="op">=</span> <span class="st">"qual_3"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot-functions_files/figure-html/troubleshoot-factor-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
@@ -821,7 +813,7 @@ with R</a></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
