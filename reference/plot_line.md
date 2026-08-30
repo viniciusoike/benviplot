@@ -1,6 +1,6 @@
-# Title
+# Plot a line chart
 
-Title
+Plot a line chart
 
 ## Usage
 
@@ -9,8 +9,7 @@ plot_line(
   data,
   x,
   y,
-  color,
-  variable,
+  color = NULL,
   zero = TRUE,
   point = FALSE,
   pal_name,
@@ -24,60 +23,62 @@ plot_line(
 
 - data:
 
-  A data.frame type object.
+  A data frame.
 
 - x:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be mapped on the x-axis.
+  Variable mapped to the x-axis.
 
 - y:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be mapped on the y-axis.
+  Variable mapped to the y-axis.
 
 - color:
 
-  Indicates the color of the line. Should only be used in the absence of
-  `variable`.
-
-- variable:
-
-  \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Indicates the grouping variable for color groups.
+  Color of the line. Either a color string (e.g., `"blue"`, `"#021841"`)
+  for a single static color, or a bare column name (without quotes) to
+  map a grouping variable to color.
 
 - zero:
 
-  Logical indicating if a horizontal line (y = 0) should be drawn on the
-  plot.
+  Whether to draw a horizontal line at `y = 0`.
 
 - point:
 
-  Logical indicating if points should be drawn on top of line.
+  Whether to draw points over the line.
 
 - pal_name:
 
-  String indicating which color palette to use.
+  Name of the color palette.
 
 - scale_name:
 
-  String indicating color legend title.
+  Color legend title.
 
 - scale_label:
 
-  String indicating color legend labels.
+  Color legend labels.
 
 - ...:
 
-  Other arguments to ggplot2 function.
+  Additional arguments passed to
+  [`ggplot2::labs()`](https://ggplot2.tidyverse.org/reference/labs.html).
 
 ## Value
 
-A ggplot2 plot
+A `ggplot` object.
 
 ## Examples
 
 ``` r
-sales <- data.frame(time = 2000:2005, value = c(10, 5, 6, 8, 11, 4))
-plot_line(data = sales, x = time, y = value)
+# Single series
+sao_paulo <- subset(iqa, name_muni == "S\u00e3o Paulo")
+plot_line(data = sao_paulo, x = date, y = index)
+
+
+# Multiple series with color mapping
+total <- subset(iqaiw, rooms == "Total")
+plot_line(data = total, x = date, y = index, color = name_muni)
 ```

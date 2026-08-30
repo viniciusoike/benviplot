@@ -1,9 +1,7 @@
 # Display all Benvi palettes
 
-Visually displays all available Benvi palettes in a grid layout, similar
-to
+Draws the available Benvi palettes in a grid. The layout follows
 [`RColorBrewer::display.brewer.all()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html).
-Optionally filter by palette type.
 
 ## Usage
 
@@ -15,20 +13,18 @@ show_palettes(type = "all", n = NULL)
 
 - type:
 
-  Character string specifying the palette type to display. One of:
-  `"all"` (default), `"theme"`, `"sequential"`, `"qualitative"`,
-  `"city"`, or `"brand"`. See
-  [`list_palettes()`](https://viniciusoike.github.io/benviplot/reference/list_palettes.md)
-  for details.
+  Palette type to display. Choose `"all"` (the default), `"theme"`,
+  `"sequential"`, `"qualitative"`, `"diverging"`, `"city"`, or
+  `"brand"`.
 
 - n:
 
   Number of colors to display from each palette. If `NULL` (default),
-  shows all colors in each palette.
+  displays every color in each palette.
 
 ## Value
 
-Invisibly returns `NULL`. Called for its side effect of creating a plot.
+`NULL`, invisibly. This function is called for its plotting side effect.
 
 ## Examples
 

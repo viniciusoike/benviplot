@@ -1,6 +1,8 @@
-# A color palette for Benvi.
+# Get the colors of a Benvi palette
 
-Construction of the package is inspired by the
+Returns the hex codes of a named Benvi palette. Use
+[`show_palettes()`](https://viniciusoike.github.io/benviplot/reference/show_palettes.md)
+to see the available palettes. The interface follows the
 [ghibli](https://github.com/ewenme/ghibli) package.
 
 ## Usage
@@ -18,24 +20,25 @@ benvi_palette(
 
 - pal_name:
 
-  Name of the palette. Defaults to "qual_2".
+  Name of the palette. Defaults to `"qual_2"`.
 
 - n:
 
-  Number of colors desired. Sets have 4 colors, Qual have 8 colors.
+  Number of colors to return. Defaults to the number of colors in the
+  selected palette.
 
 - direction:
 
-  Either `1` or `-1`. If `-1` the palette will be reversed.
+  Either `1` or `-1`. Use `-1` to reverse the palette.
 
 - type:
 
-  Either "continuous" or "discrete". Continuous automatically
-  interpolates between the colors.
+  Either `"discrete"` or `"continuous"`. Continuous palettes interpolate
+  between the available colors.
 
 ## Value
 
-A vector of characters with color attribute
+A `palette` object containing hexadecimal color values.
 
 ## Examples
 

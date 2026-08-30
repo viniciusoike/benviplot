@@ -1,220 +1,165 @@
 # benviplot ![benviplot logo](reference/figures/logo_cropped.png)
 
-> **DISCLAIMER**: This is an unofficial, independent project created by
-> Vinicius Oike and is **NOT** affiliated with, endorsed by, or
-> connected to QuintoAndar in any way. Benvi was a former brand of
-> QuintoAndar that was discontinued in 2024. This package uses publicly
-> available color schemes from that period for data visualization
-> purposes. See
-> [DISCLAIMER.md](https://viniciusoike.github.io/benviplot/DISCLAIMER.md)
-> for details.
-
 ## Overview
 
-`benviplot` provides color palettes and ggplot2 helpers for creating
-high quality graphics. The package includes:
+`benviplot` provides color palettes and ggplot2 helpers for consistent
+data visualizations. Its main features include the following.
 
-- **Color Palettes**: curated color schemes (Set, Qualitative,
-  Sequential palettes).
-- **ggplot2 Scales**: discrete and continuous scales for seamless
-  ggplot2 integration.
-- **Plot Helpers**: wrapper functions for common visualizations.
-- **Custom Theme**: clean, professional theme with Poppins font support.
+- Theme, qualitative, sequential, and diverging color palettes
+- Discrete and continuous scales for ggplot2
+- Helper functions for common chart types
+- A minimal theme with optional support for the bundled Poppins font
 
 ## Installation
 
-You can install benviplot from GitHub.
+`benviplot` is not on CRAN yet. Install it from R-universe.
 
 ``` r
 
-# Install remotes if needed
-# install.packages("remotes")
+install.packages("benviplot", repos = "https://viniciusoike.r-universe.dev")
+```
 
-# Install benviplot from GitHub
+Alternatively, install the development version from GitHub.
+
+``` r
+
+# install.packages("remotes")
 remotes::install_github("viniciusoike/benviplot")
 ```
 
+## Font setup
+
+`benviplot` bundles the Poppins font family. When both `systemfonts` and
+`ragg` are available, the package registers Poppins and
+[`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md)
+uses it by default. Otherwise, the theme uses the system sans-serif
+font.
+
+Install `ragg` to render Poppins in PNG files.
+
+``` r
+
+install.packages("ragg")
+```
+
+You can verify your current setup with
+[`font_status()`](https://viniciusoike.github.io/benviplot/reference/font_status.md).
+
 ## Usage
 
-Load the package along with ggplot2.
+Load the package along with ggplot2. The examples below also use dplyr
+for data manipulation.
 
 ``` r
 
 library(ggplot2)
+library(dplyr)
 library(benviplot)
 ```
 
 ## Color palettes
 
-Color palettes can be visualized using `benvi_palette`. The default
-palette is “qual_2”.
+Preview a color palette with
+[`benvi_palette()`](https://viniciusoike.github.io/benviplot/reference/benvi_palette.md).
 
 ``` r
 
-# Default palette (qual_2)
 benvi_palette()
 ```
 
-![](reference/figures/README-unnamed-chunk-4-1.svg)
-
-Colors follow Benvi reports guidelines that are tailored for specific
-cities.
-
-``` r
-
-# Specify a different palette
-benvi_palette("rio_qual")
-```
-
-![](reference/figures/README-unnamed-chunk-5-1.svg)
-
 ## Plotting
 
-To use the colors in plots use one of the `scale_*_benvi_*` functions.
+Use one of the following scale functions to apply the palettes to a
+plot.
 
-- `scale_color_benvi_d`
-- `scale_color_benvi_c`
-- `scale_fill_benvi_c`
-- `scale_fill_benvi_d`
+- [`scale_color_benvi_d()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-discrete.md)
+- [`scale_color_benvi_c()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-continuous.md)
+- [`scale_fill_benvi_c()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-continuous.md)
+- [`scale_fill_benvi_d()`](https://viniciusoike.github.io/benviplot/reference/ggplot2-scales-discrete.md)
 
-The pacakge also supplies a generic
+Use
 [`theme_benvi()`](https://viniciusoike.github.io/benviplot/reference/theme_benvi.md)
-function that works best if Poppins is available.
+to apply the package theme.
 
 ``` r
 
-ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
-  geom_point(size = 2, alpha = 0.8) +
-  geom_smooth(color = benvi_palette("seq_oranges")[1], se = FALSE) +
-  scale_color_benvi_d(pal_name = "qual_9", name = "Cylinders") +
+# Rental price index for major cities
+index_data <- iqaiw |>
+  filter(
+    rooms %in% c("1", "2"),
+    between(date, as.Date("2023-01-01"), as.Date("2025-12-31"))
+  )
+
+ggplot(index_data, aes(date, index, color = rooms)) +
+  geom_line(linewidth = 0.7) +
+  facet_wrap(vars(name_muni)) +
+  scale_color_benvi_d() +
   labs(
-    title = "A Benvi styled plot",
-    subtitle = "Fontface is defined as Poppins using showtext",
-    x = "Weight (tons)",
-    y = "Miles per gallon",
-    caption = "Poppins font is downloaded using sysfonts::font_add_google or locally.") +
+    title = "IQAIW Rental Index by City",
+    x = NULL,
+    y = "Index (base = 100)",
+    color = "Rooms",
+    caption = "Source: IQAIW (benviplot)"
+  ) +
   theme_benvi()
-#> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 ```
 
-![](reference/figures/README-unnamed-chunk-6-1.svg)
+![](reference/figures/readme_plot_example_1.png)
 
 When using a continuous scale the colors are interpolated.
 
 ``` r
 
-housing <- subset(txhousing, city %in% c("Austin", "Houston", "Dallas"))
+# Year-over-year change by city over time
+index_data <- iqaiw |>
+  filter(
+    rooms == "Total",
+    between(date, as.Date("2023-01-01"), as.Date("2025-12-31"))
+  )
 
-ggplot(housing, aes(x = date, y = city, fill = median / 1e3)) +
-  geom_tile(height = 0.8) +
-  scale_fill_benvi_c(pal_name = "greens", name = "Median House\nPrice (thous. $)") +
-  scale_x_continuous(expand = expansion(0)) +
+ggplot(index_data, aes(x = date, y = name_muni, fill = acum12m * 100)) +
+  geom_tile(height = 0.6, color = "gray90") +
+  scale_fill_benvi_c(
+    pal_name = "benvi_blue",
+    name = "YoY Change (%)",
+    direction = -1
+  ) +
+  scale_x_date(
+    date_breaks = "1 year",
+    date_labels = "%Y",
+    expand = expansion(0)
+  ) +
   labs(x = NULL, y = NULL) +
   theme_benvi() +
   theme(
     legend.title = element_text(hjust = 0.5, vjust = 0.75),
     axis.text = element_text(size = 12),
     panel.grid = element_blank()
-    )
+  )
 ```
 
-![](reference/figures/README-unnamed-chunk-7-1.svg)
+![](reference/figures/readme_plot_example_2.png)
 
-Finally, the package features some generic `plot_` functions that help
-to create standard plots. These functions aim to be efficient, allowing
-for quick data exploration, while remaining polished enough to be used
-for reports.
+The `plot_*()` helpers create common charts for exploratory analysis.
+For example, `plot_column(text = TRUE)` adds value labels above the
+columns.
 
 ``` r
 
-plot_line(economics, x = date, y = uempmed)
-```
-
-![](reference/figures/README-unnamed-chunk-8-1.svg)
-
-These functions usually include simple helper arguments like `text` in
-the case of `plot_column` that plots its value above the column.
-
-``` r
-
-sales <- data.frame(
-  x = factor(c(1, 2, 3, 4, 5, 6)),
-  y = c(200, 220, 230, 210, 240, 290)
+latest_sales <- subset(
+  sales_report,
+  name_muni == "Belo Horizonte" & date == max(date)
 )
 
-plot_column(sales, x = x, y = y, text = TRUE)
+plot_column(latest_sales, x = name_zone, y = price_m2, text = TRUE)
 ```
 
-![](reference/figures/README-unnamed-chunk-9-1.svg)
+![](reference/figures/readme_plot_example_3.png)
 
-The final example shows the variable argument which replaces the
-`aes(fill = ...)` or `aes(color = ...)` in each function.
-
-``` r
-
-plot_scatter(
-  mtcars, wt, mpg,
-  variable = as.factor(cyl),
-  fit = TRUE,
-  fit_method = "auto",
-  scale_name = "Cylinders")
-#> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
-```
-
-![](reference/figures/README-unnamed-chunk-10-1.svg)
-
-## Available Palettes
-
-The package includes several palette families:
-
-- **Theme Palettes** (grays, browns, yellows, greens, blues, purples,
-  pinks, oranges): 4-color palettes for basic visualizations
-- **Qualitative Palettes** (qual_1 through qual_9): 8-color palettes for
-  categorical data
-- **Sequential Palettes** (seq_grays, seq_browns, etc.): 9-color
-  gradients for continuous data
-- **City-specific**: Special palettes for São Paulo, Rio, and Belo
-  Horizonte (spo\_*, rio\_*, bhe\_\*)
-- **Brand Colors**: Specialized color scales (benvi_blue, benvi_purple,
-  basic)
-
-View all available palettes by calling
-[`benvi_palette()`](https://viniciusoike.github.io/benviplot/reference/benvi_palette.md)
-with different palette names, or use
-[`list_palettes()`](https://viniciusoike.github.io/benviplot/reference/list_palettes.md)
-to see all options.
-
-### Fonts
-
-The package uses the **Poppins** font from Google Fonts. On first use,
-the package will automatically download the font. An internet connection
-is required for initial setup.
-
-If you encounter font issues, manually import/download fonts.
-
-``` r
-
-# Usually works
-benviplot::import_fonts()
-# But, the only fail-proof option is to download and install locally
-# https://fonts.google.com
-```
-
-## Getting Help
-
-- **Documentation**: Access via `?benviplot` or visit
-  <https://viniciusoike.github.io/benviplot/>
-- **Issues**: Report bugs at
-  <https://github.com/viniciusoike/benviplot/issues>
-- **Questions**: Open a discussion on GitHub
-
-## License
-
-MIT License. See
-[LICENSE.md](https://viniciusoike.github.io/benviplot/LICENSE.md) for
-details.
+For more examples, visit the [package
+website](https://viniciusoike.github.io/benviplot/).
 
 ## Acknowledgments
 
-This package uses color schemes inspired by the discontinued Benvi
-brand. This is an independent project not affiliated with QuintoAndar.
+This package uses color schemes inspired by the Benvi brand. This is an
+independent project not affiliated with QuintoAndar.

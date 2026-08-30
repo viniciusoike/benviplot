@@ -9,12 +9,14 @@ plot_histogram(
   data,
   x,
   color = "#FFFFFF",
-  fill = "#3957BD",
+  fill = NULL,
+  pal_name = "qual_benvi",
+  scale_name = "",
   zero = TRUE,
   bins = NULL,
   method = "fd",
   density = FALSE,
-  facet = FALSE,
+  facet = NULL,
   ...
 )
 ```
@@ -23,75 +25,108 @@ plot_histogram(
 
 - data:
 
-  A data.frame type object
+  A data frame.
 
 - x:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Indicates the numeric variable to be mapped
+  Numeric variable mapped to the x-axis.
 
 - color:
 
-  Color of the line of column.
+  Color of the column border. Defaults to `"#FFFFFF"` (white).
 
 - fill:
 
-  Color of the inner part of the column.
+  Fill color for the columns. Either a color string (e.g., `"blue"`,
+  `"#021841"`) for a single static color, or a bare column name (without
+  quotes) to map a grouping variable to fill color.
+
+- pal_name:
+
+  Name of the palette used when `fill` maps a variable.
+
+- scale_name:
+
+  Fill legend title.
 
 - zero:
 
-  Logical indicating if a horizontal (y = 0) line should be drawn on the
-  plot.
+  Whether to draw a horizontal line at `y = 0`.
 
 - bins:
 
-  Number of bins.
+  Number of bins. When specified, overrides `method`.
 
 - method:
 
-  Character indicating an algorithm to compute optimal number of bins.
-  See details. Overridden by bins. Defaults to `method = "fd"`.
+  Binning method. Choose `"fd"` (the default), `"FD"`, `"Scott"`,
+  `"Sturges"`, `"Rice"`, or `"sqrt"`. See Details. Ignored when `bins`
+  is specified.
 
 - density:
 
-  Logical indicating if density should be plotted on y-axis.
+  Whether to map density to the y-axis.
 
 - facet:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Optional variable to facet the graphics.
+  Optional variable to facet the plot. `NULL` (the default) draws a
+  single panel.
 
 - ...:
 
-  Additional parameters to
-  [`facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html)
+  Additional arguments passed to
+  [`ggplot2::facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html).
 
 ## Value
 
-A ggplot2 object
+A `ggplot` object.
+
+## Details
+
+### Binning methods
+
+The `method` parameter controls how the function computes the bin width.
+
+- `"fd"` or `"FD"`:
+
+  Freedman-Diaconis rule. Uses the interquartile range: \\2 \* IQR /
+  n^{1/3}\\.
+
+- `"Scott"`:
+
+  Scott's rule. The formula uses the standard deviation, \\3 \* sd /
+  n^{1/3}\\.
+
+- `"Sturges"`:
+
+  Sturges' formula. Uses \\k = \lceil log_2(n) \rceil\\ bins.
+
+- `"Rice"`:
+
+  Rice rule. Uses \\k = \lceil 2n^{1/3} \rceil\\ bins.
+
+- `"sqrt"`:
+
+  Square-root rule. Uses \\k = \lceil \sqrt{n} \rceil\\ bins.
 
 ## Examples
 
 ``` r
-set.seed(5)
-tbl <- data.frame(x = rnorm(n = 1000))
-
 # Default parameters use Freedman-Diaconis
-plot_histogram(data = tbl, x = x)
+plot_histogram(data = mtcars, x = mpg)
 
 # Use bins to manually choose number of bins
-plot_histogram(data = tbl, x = x, bins = 50)
+plot_histogram(data = mtcars, x = mpg, bins = 10)
 
 # Example of alternative methods: square root and Rice
-plot_histogram(data = tbl, x = x, method = "sqrt")
+plot_histogram(data = mtcars, x = mpg, method = "sqrt")
 
-plot_histogram(data = tbl, x = x, method = "Rice")
+plot_histogram(data = mtcars, x = mpg, method = "Rice")
 
 
-# To compare multiple groups use facet
-tbl <- data.frame(
-city = rep(c("A", "B", "C"), each.out = 500),
-x = c(rnorm(500), runif(500), rexp(500))
-)
-plot_histogram(data = tbl, x = x, facet = city, density = TRUE)
+# Facet by rooms category
+spo <- subset(iqaiw, name_muni == "São Paulo" & rooms != "Total")
+plot_histogram(data = spo, x = index, facet = rooms)
 ```

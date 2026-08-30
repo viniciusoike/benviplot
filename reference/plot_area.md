@@ -9,19 +9,13 @@ plot_area(
   data,
   x,
   y,
-  fill,
-  variable,
+  fill = NULL,
   zero = TRUE,
   order = TRUE,
-  palette = "qual_9",
+  pal_name = "qual_benvi",
   scale_name = "",
   scale_label = ggplot2::waiver(),
-  text = FALSE,
-  text_color = "gray20",
-  text_family = "Poppins",
-  text_size = 3,
-  position = "stack",
-  position_text = "identity"
+  position = "stack"
 )
 ```
 
@@ -29,74 +23,63 @@ plot_area(
 
 - data:
 
-  A data.frame type object
+  A data frame.
 
 - x:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be mapped in the x-axis.
+  Variable mapped to the x-axis.
 
 - y:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be mapped in the y-axis.
+  Variable mapped to the y-axis.
 
 - fill:
 
-  Color for the area underneath the line
-
-- variable:
-
-  \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be used as grouping for the color groups. Should only be
-  used if `fill` is missing.
+  Fill color for the area. Either a color string (e.g., `"blue"`,
+  `"#021841"`) for a single static color, or a bare column name (without
+  quotes) to map a grouping variable to fill color.
 
 - zero:
 
-  Logical indicating whether a horizontal line crossing the y = 0 axis
-  should be plotted.
+  Whether to draw a horizontal line at `y = 0`.
 
 - order:
 
-  Logical indicating if the stacked areas should be ordered. Default
-  behavior (`TRUE`) stacks the largest groups on top.
+  Whether to order stacked areas by size. The default, `TRUE`, places
+  the largest groups on top.
 
-- palette:
+- pal_name:
 
-  String indicating the name of which palette to use.
+  Name of the palette.
 
 - scale_name:
 
-  String indicating fill legend title.
+  Fill legend title.
 
 - scale_label:
 
-  String indicating fill legend labels.
-
-- text:
-
-  Logical indicating if text labels should be plotted above column bars
-
-- text_color:
-
-  Color of the text label. Default is `"gray20"`.
-
-- text_family:
-
-  Font of the text label. Default is `"Poppins"`.
-
-- text_size:
-
-  Size of the text label. Default is `3`.
+  Fill legend labels.
 
 - position:
 
-  Argument passed to `geom_area`.
-
-- position_text:
-
-  Argument passed on to `position` in `geom_text`.
+  Position adjustment passed to
+  [`ggplot2::geom_area()`](https://ggplot2.tidyverse.org/reference/geom_ribbon.html).
 
 ## Value
 
-A ggplot2 plot
+A `ggplot` object.
+
+## Examples
+
+``` r
+# Simple area chart
+sao_paulo <- subset(iqa, name_muni == "São Paulo")
+plot_area(data = sao_paulo, x = date, y = index)
+
+
+# Stacked area chart with fill mapping
+total <- subset(iqaiw, rooms == "Total")
+plot_area(data = total, x = date, y = index, fill = name_muni)
+```

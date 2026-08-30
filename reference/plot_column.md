@@ -9,18 +9,19 @@ plot_column(
   data,
   x,
   y,
-  fill,
-  variable,
+  fill = NULL,
   zero = TRUE,
-  flip = FALSE,
   text = FALSE,
-  palette = "qual_9",
+  text_inside = FALSE,
+  text_place = NULL,
+  text_padding = NULL,
+  pal_name = "qual_benvi",
   scale_name = "",
   scale_label = ggplot2::waiver(),
   digits = 0,
   percent = FALSE,
   text_color = "gray20",
-  text_family = "Poppins",
+  text_family = getOption("theme_benvi.font_family", "sans"),
   text_size = 3,
   position_col = "stack",
   position_text = position_col,
@@ -32,52 +33,61 @@ plot_column(
 
 - data:
 
-  A data.frame type object
+  A data frame.
 
 - x:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be mapped in the x-axis.
+  Variable mapped to the x-axis.
 
 - y:
 
   \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be mapped in the y-axis.
+  Variable mapped to the y-axis.
 
 - fill:
 
-  Color for the columns. Should only be used if `variable` is missing.
-
-- variable:
-
-  \<[`data-masked`](https://ggplot2.tidyverse.org/reference/aes_eval.html)\>
-  Variable to be used as grouping for the color groups. Should only be
-  used if `fill` is missing.
+  Fill color for the columns. Either a color string (e.g., `"blue"`,
+  `"#021841"`) for a single static color, or a bare column name (without
+  quotes) to map a grouping variable to fill color.
 
 - zero:
 
-  Logical indicating whether a horizontal line crossing the y = 0 axis
-  should be plotted.
-
-- flip:
-
-  Logical indicating if plot should be flipped
+  Whether to draw a horizontal line at `y = 0`.
 
 - text:
 
-  Logical indicating if text labels should be plotted above column bars
+  Whether to add value labels to the columns.
 
-- palette:
+- text_inside:
 
-  String indicating the name of which palette to use.
+  Whether to place labels inside the columns with `ggfittext`. When
+  `FALSE` (the default), labels use a fixed size and appear above or
+  beside the columns.
+
+- text_place:
+
+  Placement of labels inside the columns. Choose `"top"`, `"bottom"`,
+  `"left"`, `"right"`, `"centre"`, or `"center"`. Defaults to `"centre"`
+  and applies only when `text_inside = TRUE`.
+
+- text_padding:
+
+  Padding around inside labels, supplied as a
+  [`grid::unit()`](https://rdrr.io/r/grid/unit.html) object. Defaults to
+  1 mm and applies only when `text_inside = TRUE`.
+
+- pal_name:
+
+  Name of the palette.
 
 - scale_name:
 
-  String indicating fill legend title.
+  Fill legend title.
 
 - scale_label:
 
-  String indicating fill legend labels.
+  Fill legend labels.
 
 - digits:
 
@@ -85,7 +95,7 @@ plot_column(
 
 - percent:
 
-  Logical indicating if a % should be appended to text labels
+  Whether to append a percent sign to text labels.
 
 - text_color:
 
@@ -93,7 +103,8 @@ plot_column(
 
 - text_family:
 
-  Font of the text label. Default is `"Poppins"`.
+  Font family for the text label. Defaults to
+  `getOption("theme_benvi.font_family", "sans")`.
 
 - text_size:
 
@@ -101,25 +112,38 @@ plot_column(
 
 - position_col:
 
-  Argument passed on to `position` in `geom_col`.
+  Position adjustment passed to
+  [`ggplot2::geom_col()`](https://ggplot2.tidyverse.org/reference/geom_bar.html).
 
 - position_text:
 
-  Argument passed on to `position` in `geom_text`.
+  Position adjustment passed to
+  [`ggplot2::geom_text()`](https://ggplot2.tidyverse.org/reference/geom_text.html).
 
 - ...:
 
-  Further arguments for `geom_text`
+  Additional arguments passed to
+  [`ggplot2::geom_col()`](https://ggplot2.tidyverse.org/reference/geom_bar.html)
+  or
+  [`ggplot2::geom_text()`](https://ggplot2.tidyverse.org/reference/geom_text.html).
 
 ## Value
 
-A ggplot2 plot
+A `ggplot` object.
 
 ## Examples
 
 ``` r
-df <- data.frame(cat = factor(c("A", "B", "C")), value = c(5, 7, 3))
-plot_column(data = df, x = cat, y = value)
-#> ℹ Poppins font not found. Using system default font instead.
-#> ℹ Install Poppins with: `benviplot::install_poppins()`
+# Column chart by city at the latest date
+latest <- subset(iqa, date == max(iqa$date))
+plot_column(data = latest, x = name_muni, y = index)
+
+
+# With text labels above bars
+plot_column(data = latest, x = name_muni, y = index, text = TRUE)
+
+
+# With text labels inside bars
+latest <- subset(iqa, date == max(iqa$date))
+plot_column(data = latest, x = name_muni, y = index, text = TRUE, text_inside = TRUE)
 ```
