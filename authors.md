@@ -12,7 +12,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/viniciusoike/benviplot/blob/v1.2.2/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/viniciusoike/benviplot/blob/master/DESCRIPTION)
 
 Oike V (2026). *benviplot: Color Palettes and 'ggplot2' Extensions for
 Data Visualization*. R package version 1.2.2,
